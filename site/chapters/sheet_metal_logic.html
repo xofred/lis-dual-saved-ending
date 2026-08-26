@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>敲鐵皮邏輯 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+  </nav>
+</header>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 081 章 · 校園與公路(二)</div>
+  <h1>敲鐵皮邏輯</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、術語死機</h2>
+<p>Maya/Blender 3D 建模課上,Warren 自告奮勇擔任 Chloe 的輔導員,結果前三十分鐘,直接演變成一場極客學術與街頭思維的災難碰撞。</p>
+<p>「Chloe,」Warren 推了推眼鏡,語速飛快,滔滔不絕,「你必須理解法線貼圖的頂點向量空間,利用布爾運算對多邊形拓撲結構進行非破壞性網格細分——」</p>
+<p>Chloe 聽得雙眼放空,握著數位筆的手,幾乎要把數位板捅出一個洞,抓狂地扯著自己的頭髮。</p>
+<p>「說人話!格雷厄姆!」她崩潰地喊,「什麼多邊形拓撲?老娘只想造個車輪轂,為什麼你的軟體一直在給我彈紅色警告?!」</p>
+<h2>二、市井粗鄙化覺醒</h2>
+<p>被 Chloe 折磨得滿頭大汗、瀕臨崩潰的 Warren,終於徹底破防。</p>
+<p>他一把扯掉衛衣帽子,擼起袖子,猛地拍在桌子上,語氣和用詞瞬間切換成純粹的「廢品場機修工黑話」。</p>
+<p>「聽著,Price!」他吼道,「把妳腦子裡那些微積分全扔了!」</p>
+<p>「這破模型,就跟妳在廢品場拼發動機一模一樣!點,就是妳的螺絲釘!線,就是焊條走線!面,就是妳皮卡上的鐵皮!」</p>
+<p>「妳現在搞出來的這個『非流形幾何』,說白了,就是妳把四塊爛鐵皮強行焊在同一個軸承上,中間還留了個漏油的窟窿!妳發動機不炸膛誰炸膛?!」</p>
+<p>「現在,拿起妳的電焊槍——也就是擠出工具——給老子沿著這條軸,把鐵皮敲直了!」</p>
+<h2>三、瞬間開竅</h2>
+<p>聽到「螺絲釘、焊條和鐵皮」的一瞬間,Chloe 迷茫的眼神,瞬間亮起一道綠光。</p>
+<p>「早這麼說不就結了?!」她猛地坐直身體,「妳早說 Extrude 就是拉鐵皮、Bevel 就是打磨倒角嘛!」</p>
+<p>她嘴裡叼著口香糖,雙手在鍵盤和快捷鍵上打得噼啪作響,那股熟悉的、屬於「敲鐵皮邏輯」的專注勁頭,徹底接管了她的大腦。</p>
+<p>短短二十分鐘內,她徒手捏出了一個極具重工業蒸汽龐克風格的精準 V8 引擎 3D 模型,拓撲布線乾淨得像教科書範本。</p>
+<h2>四、終局的反轉</h2>
+<p>課堂結束時,Whitfield 老師站在 Chloe 的螢幕前,看著那座充滿柴油暴力美學的引擎模型,驚訝得說不出話,最終給了全班最高分。</p>
+<p>Chloe 拍了拍癱在椅子上、正狂灌可樂的 Warren 的肩膀,咧嘴大笑。</p>
+<p>「幹得漂亮,格雷厄姆,」她語氣裡帶著少見的真心讚賞,「看來你小子骨子裡不是個只懂算術的書呆子,去修車廠當個二把手,我看行。」</p>
+<p>Warren 灌完最後一口可樂,虛脫地舉起手比了個大拇指,聲音沙啞:「下次麻煩妳先學會基本術語,我的嗓子都快喊啞了。」</p>
+<p>「這不是有你嘛,」Chloe 毫不客氣地聳肩,「翻譯官。」</p>
+<p>Max 站在一旁,端著拍立得,笑著按下快門,把 Warren 翻著白眼、卻依然比著大拇指的這一幕,定格成了這堂課最具歷史意義的紀念畫面。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="film_fellowship.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="old_school_pilgrimage.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>圖鑑惡搞事件 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+  </nav>
+</header>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 109 章 · Victoria與Kate</div>
+  <h1>圖鑑惡搞事件</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、義賣圖鑑的心血</h2>
+<p>Kate 耗費數週心血,由 Victoria 贊助頂級紙張印製的《阿卡迪亞灣微距植物圖鑑》義賣冊,終於印刷完成,剛在校園中庭擺出樣品,準備隔天正式義賣。</p>
+<p>前面幾頁,全是極致唯美聖潔的畫面——晨露折射下的洋甘菊、半透明的紫羅蘭花脈,每一張都精緻得像藝術品。</p>
+<h2>二、驚悚的翻頁</h2>
+<p>翻到第七頁時,畫風忽然驟變。</p>
+<p>一張用微距鏡頭拍得纖毫畢現的照片赫然出現——手掌上厚實的老繭、虎口被扳手磨破後結痂的傷疤,以及食指關節上那個褪色的骷髏紋身特寫。</p>
+<p>下面的圖註,被人偷偷改成了:</p>
+<p><strong>「黑斑雜草(學名:Priceus Punkus),生長於機油與廢鐵堆,極具侵略性,請勿隨意澆水。」</strong></p>
+<h2>三、三方狂怒</h2>
+<p>Kate 捧著圖鑑,眼眶瞬間泛紅,嘴唇微微發抖。</p>
+<p>「Chloe……」她的聲音帶著哭腔,「這是要給流浪動物收容所募捐的嚴肅圖鑑啊!」</p>
+<p>Victoria 湊過來看清那頁內容,臉色瞬間陰沉下來——她花了幾千美元用高克重純棉紙印製的畫冊,精確到毫米的版面網格,居然被硬生生塞進一張黑機油手的特寫照。</p>
+<p>「Price!」她怒吼一聲,直接把手裡的名牌手袋甩給助理,轉身抄起旁邊一根用來支撐番茄藤的園藝竹竿,「妳毀了我的版面!老娘今天要把妳的手指拆下來當花肥!」</p>
+<p>連一向護著 Chloe 的 Max,這次也毫不猶豫地站到了對立面。她迅速把相機掛回胸前,捲起手裡的硬紙筒,語氣裡帶著罕見的嚴肅。</p>
+<p>「Chloe,」她說,「這次妳真的太過分了。連我都救不了妳。」</p>
+<h2>四、天台大逃亡</h2>
+<p>Chloe 嘴裡叼著一根未點燃的煙,見狀撒腿就跑,繞著天台的溫室花架瘋狂逃竄,一邊跑一邊試圖狡辯。</p>
+<p>「冷靜點!姑娘們!」她怪叫著,聲音裡帶著毫不心虛的振振有詞,「這叫人與自然的後現代對比!粗糙的人類痕跡,與脆弱的植物共生!這很有批判性好不好?!」</p>
+<p>「批判妳個頭!」Victoria 舉著竹竿窮追不捨,高跟鞋踩在木棧道上發出急促的咯咯聲響。</p>
+<p>Kate 也顧不上平時的溫柔矜持,抄起澆花用的小噴壺,加入了這場追逐,壺嘴瞄準的每一下,都精準地噴向 Chloe 的後腦勺。</p>
+<p>Max 則舉著捲起的硬紙筒,從另一個方向包抄過去,堵住了 Chloe 想要逃竄的退路。</p>
+<h2>五、四面楚歌</h2>
+<p>Chloe 最終被逼進溫室花架旁的死角,前有 Max 的紙筒,後有 Victoria 的竹竿,頭頂還不斷被 Kate 的冷水噴壺無情澆灌。</p>
+<p>「唔啊!」她抱著腦袋,一邊求饒一邊還嘴硬地嘟囔,「輕點輕點!老娘錯了行了吧!下次改用鉛筆偷偷寫,絕對不會被發現!」</p>
+<p>「這是重點嗎!」Kate、Victoria 和 Max 三人異口同聲地怒吼。</p>
+<p>Chloe 蹲在花架下,渾身濕透,腦袋上被 Max 的紙筒敲出幾個包,連連討饒,終於徹底放棄了那套「後現代批判藝術」的說辭,乖乖舉起雙手投降。</p>
+<p>「行了行了,」她喘著氣,語氣裡帶著徹底的認栽,「明天重印,錢我出。」</p>
+<p>Victoria 這才收起竹竿,居高臨下地哼了一聲:「這還差不多。」</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="macro_magic_rooftop.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="afternoon_tea_showdown.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

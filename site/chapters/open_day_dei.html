@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>開放日前夕 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+  </nav>
+</header>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 037 章 · 旅館連環案</div>
+  <h1>開放日前夕</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、燒錢的AI</h2>
+<p>Chloe 和 Max 拿著那張財務文件的照片,直奔 Kenji 家——結果一進門,就看到本該冷靜自持的機房大神,此刻正整個人趴在書桌上,面前的電腦螢幕顯示著一串刺眼的紅色數字。</p>
+<p>「你這是……」Chloe 一臉困惑,「跟我上次一樣的姿勢?」</p>
+<p>「別提了,」Kenji 有氣無力地抬起頭,聲音裡帶著罕見的頹喪,「我這陣子為了處理旅館案的線索,用了太多 AI 圖像放大和分析工具跑批次任務,token 燒得比我想像中兇猛太多。」他指著螢幕上的帳單截圖,「這個月的花費,已經快把我攢了半年的零用錢掏空了。」</p>
+<p>Chloe 湊過去看了眼那串數字,忍不住吹了聲口哨:「所以說,查案還得先破產?」</p>
+<p>「先別灰心,」她拍拍他的肩膀,語氣裡少見地帶著點鼓勵,「你上次幫我媽升級的收銀庫存系統,效果好到她這季度都省下一大筆人力成本,我媽開心得不得了,說要從季度獎金裡撥一筆給你當謝禮,具體數字還在跟會計那邊算。」</p>
+<p>Kenji 愣了一下,精神稍微振作了些:「……真的?」</p>
+<p>「我媽這人,」Chloe 聳肩,「摳歸摳,但該給的絕對不會少。」</p>
+<hr />
+<h2>二、放大</h2>
+<p>打起精神後,Kenji 把 Max 帶來的那張照片掃描進電腦,調出一套專門的 AI 影像增強工具,輸入了幾個參數,開始運算。</p>
+<p>「這張照片本身解析度不高,」他一邊操作一邊解釋,「但如果角度和焦距夠穩定,配合演算法補足細節,理論上能還原出原本肉眼看不清的資訊。」</p>
+<p>螢幕上的圖像逐漸從模糊的色塊,一點一點清晰起來——那疊被壓在桌角的匯款單文件,終於顯現出完整的內容。抬頭印著「Cascade Ridge Federal Credit Union」的字樣,底下是一組帳戶編號:<strong>4471-0293-8856</strong>,收款方欄位上,潦草地簽著一個縮寫——「<strong>R. H.</strong>」。幾筆匯款記錄按日期排列,金額大小不一,從幾百到上萬美元都有,最上面一筆日期,赫然是他們去旅館取材前不到兩週。</p>
+<p>「這數字,」Max 湊近盯著螢幕,「是真的,還是 AI 自己腦補出來的?」</p>
+<p>「這是個好問題,」Kenji 點頭,調出另一個驗證視窗,「我特地跑了一次核對——銀行帳戶編號都有固定的格式規則,像是特定的校驗碼演算法。」他指著螢幕上跳出的驗證結果,「4471-0293-8856 這組數字通過了 ABA 路由校驗,不是 AI 隨機生成的亂碼,是真實存在、符合規則的帳戶號碼。而且『Cascade Ridge』這家信用合作社確實存在,總部在鄰州,不是我編出來的。」</p>
+<p>三人盯著螢幕,一時都沒說話。</p>
+<p>「R. H.,」Chloe 喃喃念出那個縮寫,「會是他的名字縮寫嗎?」</p>
+<p>「有可能,」Kenji 說,「但光憑這兩個字母,範圍還是太大,查不出具體是誰。」</p>
+<p>「這下,」Chloe 打破沉默,「我們手上真的有實錘了。」</p>
+<hr />
+<h2>三、找誰</h2>
+<p>「我們應該馬上交給警方。」Max 說。</p>
+<p>Kenji 卻皺起眉,語氣少見地凝重:「先別急。」</p>
+<p>「怎麼了?」</p>
+<p>「你們還記得證物室那次被入侵的新聞嗎?」Kenji 敲了敲桌面,「那個人能神不知鬼不覺地潛入警局內部,破壞跟自己案子有關的證物——這代表兩種可能,要嘛他個人能力強到能繞過所有保全系統,要嘛,警局內部有他的眼線,或者他本人以前就是圈內人,清楚怎麼鑽漏洞。」</p>
+<p>Max 臉色一沉:「你是說,我們把證據交上去,搞不好又會被銷毀?」</p>
+<p>「不排除這個可能,」Kenji 語氣謹慎,「我建議先私下找 Leon。他是我們信得過的人,而且他自己就在辦這個案子,讓他決定接下來怎麼處理最保險——至少不會直接交給一個可能有問題的系統。」</p>
+<p>Chloe 點頭表示同意:「那就先聯繫 Leon,反正他還躺在醫院裡,正好方便當面說清楚。」</p>
+<hr />
+<h2>四、開放日</h2>
+<p>轉眼到了校園開放日。</p>
+<p>Wells 校長一大早就在校門口迎接前來參觀的家長和媒體,笑容燦爛得幾乎能反光,身邊跟著一群精心打扮、儀容整潔的學生代表,準備展現布萊克威爾「最佳形象」。</p>
+<p>Chloe 卻反其道而行——她這天特意翻出衣櫃裡最破舊、磨損最誇張的一件外套,袖口脫線、下擺還有幾個明顯的破洞,配上刻意弄亂的頭髮和一雙沾滿油漆漬的舊靴子,整個人活脫脫像是剛從垃圾堆裡爬出來,擺明了就是要來搗亂。</p>
+<p>Max 忍不住舉起相機,對著這身「傑作」猛拍了幾張:「妳這是要幹嘛,故意氣死 Victoria?」</p>
+<p>「就是要讓她看看,」Chloe 昂首闊步地走進校園,毫不掩飾臉上的挑釁笑容,「什麼叫『真實』的布萊克威爾學生。」</p>
+<p>果不其然,Victoria 一眼就注意到了她,臉色瞬間垮下來,快步走向 Wells 校長,壓低聲音急促地告狀:「校長,您看看那邊——」</p>
+<p>Wells 校長順著她指的方向看去,臉色也跟著沉了幾分,眼看就要當眾發作。</p>
+<p>就在這時,藝術老師 Ms. Whitfield 眼疾手快地擠了過來,一臉「靈光一閃」的興奮表情,搶在校長開口前先聲奪人。</p>
+<p>「校長,您看,」她指著 Chloe 那身破爛造型,語氣熱切,「這正好是這幾年教育界最流行的 DEI 理念的最佳體現啊!展現多元背景、包容不同風格的學生形象,不刻意追求單一標準的『完美』——這才是真正有深度的教育理念,遠比一排整整齊齊、千篇一律的學生照片有說服力多了!」</p>
+<p>Wells 校長臉上的怒氣,以肉眼可見的速度消散,取而代之的是一種恍然大悟的驚喜。</p>
+<p>「妳說得對,」他摸著下巴,喃喃自語,「多元、包容……這個角度確實很有想法。」他招手叫來隨行的攝影師,「來,把這位同學也拍進今天的宣傳照裡,標題就用……『布萊克威爾:擁抱每一種真實』。」</p>
+<p>Victoria 站在一旁,一臉難以置信地看著這場鬧劇,張了張嘴,最終什麼都沒能說出口。</p>
+<p>Chloe 站在鏡頭前,配合地擺出一個誇張的表情,渾然沒想到自己這身「搗亂裝」,最後竟又一次陰錯陽差地,變成了 Wells 校長政績宣傳的一部分。</p>
+<p>Max 站在旁邊,舉著相機,笑得肩膀直抖。</p>
+<p>「妳這運氣,」她小聲對 Chloe 說,「是不是走到哪都能自動變成新聞素材?」</p>
+<p>「閉嘴,」Chloe 從牙縫裡擠出這句話,臉上的表情在鏡頭前維持著,眼神卻死死瞪向一旁得意洋洋的 Wells 校長,「快拍完,我想脫了這身乞丐裝。」</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="darkroom_clue.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="careful_investigation.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

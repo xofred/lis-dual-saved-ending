@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雙鯨餐廳的不速之客 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+  </nav>
+</header>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 020 章 · 背景與序曲</div>
+  <h1>雙鯨餐廳的不速之客</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/diner_tycoon_visit.jpeg" alt="雙鯨餐廳的不速之客" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <p>那天雙鯨餐廳生意本來很普通,直到門口忽然停了三輛黑色休旅車,擋住了半條街。</p>
+<p>Joyce 端著咖啡壺,隔著窗戶看那陣仗,愣在原地:「這是……犯罪集團還是政府在拍片?」</p>
+<p>門被推開,先進來的是四五個穿著黑西裝、戴著墨鏡的隨扈,眼神像雷達一樣掃過餐廳每個角落,包括天花板上那盞晃來晃去的老舊吊燈。緊接著,一個西裝筆挺、頭髮梳得一絲不苟、笑容大到有點誇張的男人昂首闊步走進來——他是這一區正在拉票的州議員候選人,自封「人民的聲音」,競選看板上印著他比讚的巨大頭像,已經在鎮上豎了快一個月。</p>
+<p>「就是這家!」他張開雙臂,聲音洪亮得整間餐廳都聽得見,「我聽說阿卡迪亞灣『最誠實』的早餐都在這裡!各位鄉親,今天我要跟大家一起,吃一頓最『真實』的美式早餐!」</p>
+<p>隨扈立刻散開,一個站在門口,一個開始檢查廚房通道——動作生疏得讓人尷尬。</p>
+<p>正在後廚洗碗的 David 從窗口探出頭,眉頭皺得能夾死蒼蠅。他看著那個檢查廚房出口的隨扈,忍不住開口:「你這個站位,側翼完全暴露,而且你剛才走過去的時候,腳步聲比我孫子玩具兵還大聲。」</p>
+<p>隨扈愣住,回頭看他一眼,不知道該不該理會這個突然指點江山的廚房大叔。</p>
+<p>「還有,」David 擦著手走出來,職業病完全壓不住,「你們的車停得亂七八糟,萬一要緊急撤離,三輛車全部堵在同一個出口,這叫什麼佈署?」</p>
+<p>議員本人倒是聽見了,轉頭朝 David 露出一個燦爛到過分的笑容,伸手就要握手:「這位先生說得太對了!看看,這就是真正在地的智慧!你一定當過兵吧,我這輩子最尊敬的就是軍人!」</p>
+<p>「……」David 面無表情地跟他握了下手,沒接話。</p>
+<hr />
+<p>議員大步走到吧檯前,一屁股坐下,自顧自地拿起菜單翻了兩下,又豪邁地扔回桌上。</p>
+<p>「不用看了,」他對著全餐廳的人朗聲說,「我要跟這裡『最地道』的招牌來一份!鬆餅、培根、黑咖啡——就這些!簡單樸實,跟我一樣!」</p>
+<p>Chloe 正好端著一盤剛做好的餐點經過,聽到這句話,腳步頓了一下。</p>
+<p>「先生,」她把盤子放到隔壁桌,轉頭看他,「你這身西裝多少錢?」</p>
+<p>議員愣了一下:「呃——這個不重要,重要的是——」</p>
+<p>「你那三台休旅車,一台大概比我爸留給我這輛破皮卡貴上十倍吧。」Chloe 抱著手臂,語氣一如既往地不客氣,「你剛才說跟我們一樣樸實?先生,我媽在這裡端了十五年的盤子,你上次自己端盤子是什麼時候?」</p>
+<p>餐廳裡瞬間安靜下來,隨扈的手不自覺地往腰間摸了一下,又硬生生停住。</p>
+<p>Joyce 在吧檯後面倒吸一口氣,想開口喊女兒,又不知道該怎麼收場,只能維持著那個職業性的、有點僵硬的微笑站在原地。</p>
+<p>議員愣住兩秒,餐廳裡的氣氛凝結得能聽見咖啡機滴水的聲音。</p>
+<p>然後——他大笑出聲,笑得整個人往後仰,拍著大腿。</p>
+<p>「哈!」他指著 Chloe,「這位小姐,說得太好了!太犀利了!我喜歡!」他掏出皮夾,抽出一張百元大鈔拍在桌上,「這個小費給妳,妳讓我想起我年輕的時候——雖然我從來沒端過盤子,但精神上,我懂那種辛苦!」</p>
+<p>Chloe看著那張鈔票,又看看他,一臉「這人到底哪來的邏輯迴路」的表情,最後還是把錢收進圍裙口袋。</p>
+<p>「……謝了,大言不慚先生。」</p>
+<p>「叫我什麼都行!」議員絲毫不介意,反而更加得意,「只要是誠實的稱呼我都收下!」</p>
+<hr />
+<p>早餐吃完,議員心情顯然極好,拍拍圓滾滾的肚子站起來,環顧四周,忽然注意到坐在角落、一直拿著拍立得偷拍全程的 Max。</p>
+<p>「這位攝影師!」他朝 Max 招手,「妳的鏡頭很敏銳啊,剛才那段對話,拍下來了嗎?」</p>
+<p>Max 舉起相機,有點不好意思地笑了笑:「拍了一部分。」</p>
+<p>「那可不夠!」議員大手一揮,朝身後的隨扈喊道,「叫官方攝影師過來,今天這頓早餐太有意義了,必須留個影!」</p>
+<p>於是一名扛著專業相機的隨行攝影師被叫了過來,議員直接張開雙臂,一手攬過站在旁邊發愣的 Chloe,一手朝廚房喊:「這位老兵先生,你也來!還有這位美麗的老闆娘!」</p>
+<p>David 被硬拉過來,站姿依然挺得跟站崗一樣筆直;Joyce 只好放下咖啡壺,理了理圍裙,擠出那個標準的服務業微笑走過來;Max 被推著站到 Chloe 旁邊,兩人都有點尷尬地僵在那裡,不知道手該往哪擺。</p>
+<p>「來!笑一個!」議員笑得比誰都燦爛,那種毫無保留、彷彿全世界都是他主場的表情,一隻手比著大拇指,另一隻手緊緊摟著 Chloe 和 David 的肩膀,活像個剛打完勝仗、志得意滿的船長。</p>
+<p>快門按下的瞬間——</p>
+<p>Chloe 的表情僵硬得像被抓去拍證件照,嘴角勉強扯出一個弧度;Max 站在她旁邊,笑容也有點言不由衷,眼神飄向鏡頭外,顯然還在納悶自己怎麼被捲進這張合照裡;David 依舊面無表情,像是在站崗而不是拍照;只有 Joyce,維持著那個訓練有素、看不出真實情緒的職業微笑,彷彿在說「這頓早餐總共多少錢,麻煩先結一下」。</p>
+<p>而站在正中間的議員,笑得像剛從遠航歸來、找到傳說寶藏的船長,燦爛得幾乎要把整張照片的曝光度都搶走。</p>
+<hr />
+<p>車隊離開後,雙鯨餐廳恢復了平靜。Chloe 抽出那張百元大鈔,在手指間轉了轉。</p>
+<p>「所以,」她把鈔票拍在吧檯上,「我們今天到底是被誰打劫了?」</p>
+<p>「妳嘴那麼賤還能拿到小費,」Max 舉著剛沖洗出來的照片,一臉哭笑不得地看著上面四個表情各異的人,「這大概是本世紀最玄學的公關危機處理。」</p>
+<p>David 走過來,看了一眼照片,難得評論了一句:「這人不懂戰術佈署,但危機處理能力……算了,不予置評。」</p>
+<p>Joyce 端著咖啡壺經過,瞥了一眼那張合照,笑著搖搖頭:「把它貼到布告欄上吧,算是雙鯨餐廳這個月最離譜的紀念品。」</p>
+<p>Chloe 看著照片裡自己那張僵硬的臉,又看看笑得沒心沒肺的議員,忍不住嘖了一聲。</p>
+<p>「下次再有這種人進來,」她把鈔票收進口袋,「我要收兩倍嘴賤稅。」</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="bonus_scene_quiet_moment.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="dnd_campaign.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

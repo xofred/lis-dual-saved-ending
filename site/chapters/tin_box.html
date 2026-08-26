@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鐵皮盒子 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+  </nav>
+</header>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 017 章 · 背景與序曲</div>
+  <h1>鐵皮盒子</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/tin_box.jpeg" alt="鐵皮盒子" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、粗暴的開箱</h2>
+<p>離開公墓後,兩人沒有直接開車回家,而是把皮卡停在海邊一處僻靜的觀景點,爬上車斗坐下。</p>
+<p>Chloe 盯著手裡那個泛黃鏽蝕的鐵皮盒子看了好一會兒,終究還是沒耐性慢慢摳開卡死的鎖扣——她直接從夾克內袋摸出那把隨身的折疊刀,刀尖撬進盒蓋縫隙,「嘎吱」一聲,硬生生把生鏽的搭扣撬斷。</p>
+<p>盒蓋彈開,裡面的東西七零八落地散落在車斗的毯子上——幾串褪色的塑膠珠子手鏈、一條斷了搭扣的銀質羽毛項鍊、一盒抽了一半、早已過期的薄荷菸,還有幾張邊角沾著唇印痕跡的便利貼。</p>
+<p>在盒子最底層,壓著幾張從未貼過郵票、顯然沒有真正寄出去的明信片。</p>
+<p>Chloe 皺著眉,一張一張抽出來翻看。</p>
+<h2>二、第一張:虛榮的自薦信</h2>
+<p>第一張明信片,字跡張揚潦草,寫給洛杉磯某個選角經紀人的自薦草稿——滿篇都是關於逃離阿卡迪亞灣、成為好萊塢巨星的野心勃勃,甚至把自己包裝成「來自俄勒岡的神秘文藝少女」,連出生年份都刻意少寫了兩歲。</p>
+<p>Chloe 嗤笑一聲,語氣裡帶著一絲又氣又想笑的複雜情緒。</p>
+<p>「哈,看看這個,」她把明信片舉給 Max 看,「這女人滿嘴跑火車的本事,死了都沒變過——連自己歲數都能謊報,真是把『虛榮』刻進骨子裡了。」</p>
+<h2>三、第二張:危險的曖昧</h2>
+<p>第二張,是寫給一個不知名外地富家男的調情留言,字裡行間全是曖昧不清的拉扯,約定要在某個音樂節私下見面。</p>
+<p>Chloe 的表情瞬間沉了下來,手指用力到把那張卡紙捏出深深的折痕。</p>
+<p>「該死,」她咬著牙,聲音發抖,「她到底背著我,跟多少人許過『一起逃跑』的鬼話?Frank、我、現在還多了個洛杉磯的混蛋——」</p>
+<p>她的呼吸開始不穩,一時說不出更多的話,只是死死盯著那張明信片上陌生的字跡。</p>
+<h2>四、第三張:寫給自己的告白</h2>
+<p>最底層,壓著最後一張明信片——背面印著加州一號公路的夕陽照片,正面是 Rachel 那手潦草凌亂的字跡。</p>
+<blockquote>
+<p><em>Chloe,我知道你又在車庫生悶氣了。原諒我最近的瘋狂和秘密……但我發誓,等我搞定這最後一筆錢和門路,副駕駛的位子永遠是留給你的。別恨我,我們一定會衝出去的。——R</em></p>
+</blockquote>
+<p>Chloe 的手開始劇烈發抖。</p>
+<p>原本武裝起來的所有尖刺和憤怒,在這一瞬間,徹底崩潰了。</p>
+<h2>五、崩潰</h2>
+<p>「這算什麼,」她的聲音破碎,眼淚毫無預警地大顆大顆砸落在手背上,「人情?遺產?一堆謊言裡,硬要包一顆糖給我?」</p>
+<p>她一把將前兩張明信片揉成一團,狠狠砸進車斗底部,雙手抱住頭,劇烈地喘息著。</p>
+<p>「她怎麼能這麼混蛋,」她哽咽著,幾乎喊了出來,「利用所有人,腳踏好幾條船,說著逃跑的鬼話騙遍全世界——結果對我說的那些,居然也是真的?她怎麼能……怎麼能就這麼死了!」</p>
+<p>Max 沒有說任何一句「別哭了」或「看開點」的廢話。</p>
+<p>她只是安靜地蹲下身,把地上那兩張被揉皺的明信片一張一張撿起來,仔仔細細地撫平,又把那條斷了搭扣的羽毛項鍊重新放回鐵盒裡。</p>
+<p>然後,她坐到 Chloe 身邊,伸手緊緊摟住那具正在劇烈顫抖的肩膀,把頭靠在她耳邊,聲音很輕,卻異常堅定。</p>
+<p>「她是一場風暴,Chloe。」她輕聲說,「但妳已經從這場風暴裡,走出來了。」</p>
+<h2>六、抉擇</h2>
+<p>Chloe 哭了很久,肩膀一下一下地抽動,直到那股積壓多年的情緒,終於發洩得差不多了,才慢慢平靜下來。</p>
+<p>她抬起頭,用袖子狠狠抹了把臉,目光落在那兩張被撫平、卻依然帶著皺痕的明信片上,又落在那張寫給自己的最後一封告白上,陷入了短暫的猶豫。</p>
+<p>「燒了它們,」她喃喃自語,像是在問 Max,又像是在問自己,「會不會,就等於把她這個人,也一起抹掉了?」</p>
+<p>Max 沒有替她做決定,只是靜靜地陪著她坐著,任由她自己去想清楚。</p>
+<p>過了許久,Chloe 終於從口袋裡摸出那個舊 Zippo 打火機,擦出一簇火苗。</p>
+<p>「不會,」她低聲回答了自己的問題,語氣裡帶著一種塵埃落定般的釋然,「因為真正重要的部分,我已經記住了。」</p>
+<p>她把那張寫給洛杉磯經紀人的自薦信,還有那張寫滿曖昧調情的留言,一併點燃,看著紙張在冷冽的海風中,一點一點蜷曲、發黑,化為灰燼,飄散在夜色裡。</p>
+<h2>七、留下的部分</h2>
+<p>那條斷了搭扣的羽毛項鍊,和那張寫給自己的、唯一一張真心的告白,被 Chloe 重新鎖進鐵盒,小心地塞進皮卡工具箱最底層的夾層裡。</p>
+<p>她擦乾鼻涕,跳下車斗,拉開駕駛座車門,轉頭望向還坐在原地的 Max,露出一個雖然眼眶通紅、卻無比輕鬆的笑容。</p>
+<p>「拆完了,」她說,聲音還帶著點鼻音,卻透著一種久違的、卸下重擔般的輕快,「老娘的人情債,這下總算徹底清了。」</p>
+<p>她朝副駕駛座的方向,伸出手。</p>
+<p>「Maxine,坐上來。」</p>
+<p>Max 笑著握住她的手,爬進車裡。</p>
+<p>皮卡的引擎發動,朝著阿卡迪亞灣的方向,緩緩駛入沉沉的夜色。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="father_grave.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="couch_night_lis2.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>
