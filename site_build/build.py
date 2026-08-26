@@ -113,6 +113,10 @@ if __name__ == "__main__":
     files = sorted([f for f in os.listdir(SRC_DIR) if f.endswith(".md")])
     print(f"共找到 {len(files)} 個章節檔案")
 
+    # 章節 slug 集合,用來過濾素材:只有檔名(去副檔名)對得上某章節的
+    # 圖片/音樂才會被複製進 site/,資料夾裡其餘不相干的檔案一律跳過
+    slugs = {slugify(f) for f in files}
+
     from templates import BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, render_player
 
     os.makedirs(CHAPTERS_DIR, exist_ok=True)
@@ -128,22 +132,28 @@ if __name__ == "__main__":
     os.makedirs(SONGS_DIR, exist_ok=True)
 
     if images_src:
-        copied = 0
+        copied = skipped = 0
         for fname in os.listdir(images_src):
-            if fname.lower().endswith(tuple(IMAGE_EXTS)):
+            stem, ext = os.path.splitext(fname)
+            if ext.lower() in IMAGE_EXTS and stem in slugs:
                 shutil.copy(os.path.join(images_src, fname), os.path.join(IMAGES_DIR, fname))
                 copied += 1
-        print(f"已從 {images_src} 複製 {copied} 張圖片到 site/images/")
+            elif ext.lower() in IMAGE_EXTS:
+                skipped += 1
+        print(f"已從 {images_src} 複製 {copied} 張圖片到 site/images/(跳過 {skipped} 張跟章節對不上的)")
     else:
         print(f"警告:找不到圖片來源資料夾(嘗試過 {IMAGES_SOURCE_CANDIDATES}),跳過圖片複製")
 
     if songs_src:
-        copied = 0
+        copied = skipped = 0
         for fname in os.listdir(songs_src):
-            if fname.lower().endswith(tuple(AUDIO_EXTS)):
+            stem, ext = os.path.splitext(fname)
+            if ext.lower() in AUDIO_EXTS and stem in slugs:
                 shutil.copy(os.path.join(songs_src, fname), os.path.join(SONGS_DIR, fname))
                 copied += 1
-        print(f"已從 {songs_src} 複製 {copied} 首歌曲到 site/songs/")
+            elif ext.lower() in AUDIO_EXTS:
+                skipped += 1
+        print(f"已從 {songs_src} 複製 {copied} 首歌曲到 site/songs/(跳過 {skipped} 首跟章節對不上的)")
     else:
         print(f"警告:找不到音樂來源資料夾(嘗試過 {SONGS_SOURCE_CANDIDATES}),跳過音樂複製")
 
