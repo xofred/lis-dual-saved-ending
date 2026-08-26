@@ -9,7 +9,7 @@
 ```
 site_build/                    ← 建置腳本所在目錄（原始碼，不是網站本身）
 ├── build.py                   ← 主建置腳本，跑這個檔案會產生整個網站
-├── templates.py                ← HTML 共用片段（導覽列、蝴蝶動畫、頁尾）
+├── templates.py                ← HTML 共用片段（導覽列、蝴蝶動畫、播放器、頁尾）
 ├── style.css                  ← 全站樣式表
 └── titles.txt                 ← 建置過程中暫存用的檔案，可忽略
 
@@ -18,23 +18,23 @@ ordered/                       ← 章節原始檔資料夾（輸入）
 ├── 002_xxx.md
 └── ...                        ← 每個檔案開頭必須是 "# 章節標題" 這一行
 
-site/                          ← 建置後的成品（輸出，這就是要部署的東西）
+Images/                        ← 章節插圖素材(來源,不在 site/ 裡),檔名對應章節 slug
+songs/                         ← 章節配樂素材(來源),檔名對應章節 slug
+Polaroids/                     ← 拍立得照片素材(來源),檔名對應章節 slug,可多張
+
+site/                          ← 建置後的成品（輸出，這就是要部署的東西，整個由 build.py 產生）
 ├── index.html                 ← 首頁，自動產生的分區目錄
+├── polaroids.html              ← 拍立得相簿頁,列出全站所有拍立得照片
 ├── style.css
-├── images/                    ← 你手動放進去的插圖，檔名要對應章節 slug
-│   ├── bedroom_lua.jpeg
-│   └── ...
-├── songs/                     ← 你手動放進去的配樂，檔名要對應章節 slug
-│   ├── bedroom_lua.mp3
-│   └── ...
+├── images/                    ← 從 Images/ 複製過來(只複製有對應章節的檔案)
+├── songs/                     ← 從 songs/ 複製過來(只複製有對應章節的檔案)
+├── polaroids/                 ← 從 Polaroids/ 複製過來(只複製有對應章節的檔案)
 └── chapters/
     ├── xxx.html                ← 每章一個獨立頁面
     └── ...
 ```
 
-**這兩個媒體資料夾（`images/` `songs/`）是唯一的例外**——雖然它們也在 `site/` 底下，但建置腳本**不會**動它們（不會清空也不會覆蓋），可以放心把素材直接放在這裡管理，跟其他自動生成的 HTML 檔案不一樣。
-
-**重要**：`site/` 資料夾是**每次跑 `build.py` 都會被覆蓋重建**的產物，不要手動改這裡面的檔案——改了下次建置會被洗掉。要改內容，永遠是去改 `ordered/` 裡的 `.md` 原始檔，或改 `build.py` / `templates.py` / `style.css` 這幾個原始碼檔案。
+**重要**：`site/` 整個資料夾都是**每次跑 `build.py` 就會重新產生**的產物（已加進 `.gitignore`，不進版控），包括 `site/images` `site/songs` `site/polaroids` 這三個媒體子資料夾也是——它們是建置時從專案根目錄的 `Images/` `songs/` `Polaroids/` 複製過來的，不是素材真正的家。**要新增/修改素材，永遠是去改根目錄的 `Images/` `songs/` `Polaroids/`，或改 `ordered/` 裡的 `.md` 原始檔，或改 `build.py` / `templates.py` / `style.css` 這幾個原始碼檔案**，改完重新跑一次建置就好，不要手動改 `site/` 底下的任何東西。
 
 ---
 
@@ -82,29 +82,35 @@ SECTIONS = [
 
 ---
 
-## 六、音樂與插圖已經是自動偵測機制
+## 六、音樂、插圖、拍立得照片都是自動偵測機制
 
-不需要改 `.md` 原始檔，也不需要寫 front matter。系統會在建置時，自動去 `site/images/` 和 `site/songs/` 這兩個資料夾裡，找有沒有跟章節 slug 同名的檔案，找到就自動嵌入，找不到就顯示「尚未配圖 / 尚未配樂」的提示。
+不需要改 `.md` 原始檔，也不需要寫 front matter。系統會在建置時，自動去專案根目錄的 `Images/`、`songs/`、`Polaroids/` 這三個資料夾裡，找有沒有跟章節 slug 同名的檔案，找到就複製進 `site/` 並自動嵌入，找不到就顯示「尚未配圖 / 尚未配樂」的提示（拍立得沒有就直接不顯示該欄位）。
 
 ### 命名規則（唯一需要注意的地方）
 
 檔名必須跟章節的 slug **完全一致**，只是換副檔名：
 
 ```
-ordered/023_bedroom_lua.md          ← 章節原始檔，slug 是 bedroom_lua
-site/images/bedroom_lua.jpeg        ← 自動配對成功
-site/songs/bedroom_lua.mp3          ← 自動配對成功
+ordered/023_bedroom_lua.md      ← 章節原始檔，slug 是 bedroom_lua
+Images/bedroom_lua.jpeg         ← 插圖，自動配對成功
+songs/bedroom_lua.mp3           ← 配樂，自動配對成功
+Polaroids/bedroom_lua.jpeg      ← 拍立得照片(第 1 張),自動配對成功
+Polaroids/bedroom_lua_2.jpeg    ← 同一章的第 2 張拍立得,加 _2 _3... 後綴
 ```
 
 支援的副檔名：
-- 圖片：`.jpeg` `.jpg` `.png` `.webp`
+- 圖片、拍立得照片：`.jpeg` `.jpg` `.png` `.webp`
 - 音樂：`.mp3` `.m4a` `.ogg` `.wav`
 
 如果檔名對不上（比如歌曲取了一個跟章節無關的名字），系統就抓不到，該章節會顯示「尚未配樂」。**目前唯一的解法是把檔案改名成對應章節的 slug**，沒有額外的對應表機制。
 
 ### 資料夾位置
 
-素材放在 `site/images/` 和 `site/songs/` 底下就行，這兩個資料夾**不會被建置腳本清空或覆蓋**——`build.py` 只會在裡面找檔案，不會刪除任何東西，所以可以放心把素材直接堆在這兩個資料夾裡，跑幾次 `python3 build.py` 都不影響已經放進去的圖片和音樂。
+素材放在專案根目錄的 `Images/`、`songs/`、`Polaroids/` 底下就行（不是 `site/` 裡面，`site/` 是建置產物）。`build.py` 只會把「檔名對得上某章節 slug」的檔案複製進 `site/images` `site/songs` `site/polaroids`，跟任何章節都對不上的檔案會被跳過、不進 `site/`，可以放心把素材原始檔（包含改名前的舊版本）都留在這三個來源資料夾裡管理。
+
+### 拍立得相簿
+
+除了會顯示在對應章節頁面之外，全站所有拍立得照片還會彙整成一個獨立的「拍立得相簿」頁面（`site/polaroids.html`，導覽列上有連結），依章節順序排列，點一張照片會跳回它所屬的章節頁。
 
 ### 之後如果想做「檔名對不上也能手動指定」
 

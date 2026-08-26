@@ -17,7 +17,8 @@ import markdown as md_lib
 #   ├── ordered/         ← 章節原始檔
 #   ├── Images/           ← 你放插圖的地方(注意大寫I,配合實際使用習慣)
 #   ├── songs/            ← 你放配樂的地方
-#   ├── site/             ← 建置輸出(images/ songs/ 會在建置時自動從上面複製過來)
+#   ├── Polaroids/        ← 你放拍立得照片的地方,一章可以有好幾張
+#   ├── site/             ← 建置輸出(images/ songs/ polaroids/ 會在建置時自動從上面複製過來)
 #   └── site_build/       ← 這支腳本所在的資料夾
 #       ├── build.py
 #       ├── templates.py
@@ -30,11 +31,13 @@ OUT_DIR = os.path.join(PROJECT_ROOT, "site")
 CHAPTERS_DIR = os.path.join(OUT_DIR, "chapters")
 IMAGES_DIR = os.path.join(OUT_DIR, "images")
 SONGS_DIR = os.path.join(OUT_DIR, "songs")
+POLAROIDS_DIR = os.path.join(OUT_DIR, "polaroids")
 
 # 素材來源資料夾(專案根目錄下,不在 site/ 裡面)
 # 依序嘗試這些資料夾名稱,兼容大小寫習慣不一致的情況
 IMAGES_SOURCE_CANDIDATES = ["Images", "images"]
 SONGS_SOURCE_CANDIDATES = ["songs", "Songs"]
+POLAROIDS_SOURCE_CANDIDATES = ["Polaroids", "polaroids"]
 
 
 def find_source_dir(candidates):
@@ -58,6 +61,40 @@ def find_media(slug, media_dir, exts):
         if os.path.isfile(os.path.join(media_dir, candidate)):
             return candidate
     return None
+
+
+def polaroid_index(stem, slug):
+    """判斷檔名(去副檔名)是否屬於某章節的拍立得照片:
+    slug.ext 是第 1 張,slug_2.ext slug_3.ext... 是額外的張數。
+    是的話回傳序號,不是回傳 None。"""
+    if stem == slug:
+        return 1
+    m = re.match(r"^" + re.escape(slug) + r"_(\d+)$", stem)
+    return int(m.group(1)) if m else None
+
+
+def find_polaroids(slug, media_dir, exts):
+    """回傳某章節所有拍立得照片檔名,依序號排序;一張都沒有回傳空列表。"""
+    if not os.path.isdir(media_dir):
+        return []
+    found = []
+    for fname in os.listdir(media_dir):
+        stem, ext = os.path.splitext(fname)
+        if ext.lower() not in exts:
+            continue
+        idx = polaroid_index(stem, slug)
+        if idx is not None:
+            found.append((idx, fname))
+    found.sort(key=lambda t: t[0])
+    return [fname for _, fname in found]
+
+
+def polaroid_matches_any_slug(stem, slugs):
+    """建置時過濾用:檔名是否屬於任何一個章節的拍立得照片(含 _2 _3... 額外張數)。"""
+    if stem in slugs:
+        return True
+    m = re.match(r"^(.+)_(\d+)$", stem)
+    return bool(m and m.group(1) in slugs)
 
 # 六大篇章分區,對應之前排定的順序區間 (檔名數字範圍, 含頭含尾)
 SECTIONS = [
@@ -124,12 +161,15 @@ if __name__ == "__main__":
     # 複製 CSS
     shutil.copy(os.path.join(os.path.dirname(__file__), "style.css"), os.path.join(OUT_DIR, "style.css"))
 
-    # ---- 複製素材:從專案根目錄的 Images/ songs/ 複製進 site/images site/songs ----
+    # ---- 複製素材:從專案根目錄的 Images/ songs/ Polaroids/ 複製進
+    # site/images site/songs site/polaroids ----
     images_src = find_source_dir(IMAGES_SOURCE_CANDIDATES)
     songs_src = find_source_dir(SONGS_SOURCE_CANDIDATES)
+    polaroids_src = find_source_dir(POLAROIDS_SOURCE_CANDIDATES)
 
     os.makedirs(IMAGES_DIR, exist_ok=True)
     os.makedirs(SONGS_DIR, exist_ok=True)
+    os.makedirs(POLAROIDS_DIR, exist_ok=True)
 
     if images_src:
         copied = skipped = 0
@@ -157,6 +197,19 @@ if __name__ == "__main__":
     else:
         print(f"警告:找不到音樂來源資料夾(嘗試過 {SONGS_SOURCE_CANDIDATES}),跳過音樂複製")
 
+    if polaroids_src:
+        copied = skipped = 0
+        for fname in os.listdir(polaroids_src):
+            stem, ext = os.path.splitext(fname)
+            if ext.lower() in IMAGE_EXTS and polaroid_matches_any_slug(stem, slugs):
+                shutil.copy(os.path.join(polaroids_src, fname), os.path.join(POLAROIDS_DIR, fname))
+                copied += 1
+            elif ext.lower() in IMAGE_EXTS:
+                skipped += 1
+        print(f"已從 {polaroids_src} 複製 {copied} 張拍立得照片到 site/polaroids/(跳過 {skipped} 張跟章節對不上的)")
+    else:
+        print(f"警告:找不到拍立得來源資料夾(嘗試過 {POLAROIDS_SOURCE_CANDIDATES}),跳過拍立得複製")
+
     chapters = []  # 收集每章 metadata,供首頁與導覽使用
     for f in files:
         num = parse_chapter_num(f)
@@ -172,6 +225,7 @@ if __name__ == "__main__":
             "raw": text,
             "image_file": find_media(slug, IMAGES_DIR, IMAGE_EXTS),
             "audio_file": find_media(slug, SONGS_DIR, AUDIO_EXTS),
+            "polaroid_files": find_polaroids(slug, POLAROIDS_DIR, IMAGE_EXTS),
         })
 
     chapters.sort(key=lambda c: c["num"])
@@ -182,6 +236,13 @@ if __name__ == "__main__":
         for c in chapters if c["audio_file"]
     ]
     print(f"播放清單共 {len(playlist)} 首歌")
+
+    # 全站拍立得相簿:按章節順序,收錄每章的每一張拍立得照片
+    all_polaroids = [
+        {"title": c["title"], "slug": c["slug"], "file": f}
+        for c in chapters for f in c["polaroid_files"]
+    ]
+    print(f"拍立得相簿共 {len(all_polaroids)} 張照片")
 
     # ---------- 產生每一章的頁面 ----------
     for i, ch in enumerate(chapters):
@@ -225,6 +286,21 @@ if __name__ == "__main__":
                 '<div class="media-item media-placeholder">'
                 '<span class="slot-label">📷 插圖</span>尚未配圖'
                 '</div>'
+            )
+
+        polaroid_files = ch["polaroid_files"]
+        if polaroid_files:
+            polaroid_cards = "".join(
+                f'<div class="polaroid-card" style="--rot: {(-4 + (i % 5) * 2)}deg">'
+                f'<img src="../polaroids/{f}" alt="{ch["title"]} 拍立得照片" loading="lazy">'
+                f'</div>'
+                for i, f in enumerate(polaroid_files)
+            )
+            media_parts.append(
+                f'<div class="media-item media-polaroids">'
+                f'<span class="slot-label">🖼 拍立得</span>'
+                f'<div class="polaroid-strip">{polaroid_cards}</div>'
+                f'</div>'
             )
 
         media_html = f'<div class="media-slot">{"".join(media_parts)}</div>'
@@ -317,5 +393,44 @@ if __name__ == "__main__":
         out.write(index_html)
 
     print("首頁已產生:index.html")
+
+    # ---------- 產生拍立得相簿頁 ----------
+    if all_polaroids:
+        gallery_cards = "\n".join(
+            f'''<a class="gallery-card" href="chapters/{p['slug']}.html">
+                  <div class="polaroid-card polaroid-card-lg" style="--rot: {(-4 + (i % 5) * 2)}deg">
+                    <img src="polaroids/{p['file']}" alt="{p['title']} 拍立得照片" loading="lazy">
+                    <div class="polaroid-caption">{p['title']}</div>
+                  </div>
+                </a>'''
+            for i, p in enumerate(all_polaroids)
+        )
+        gallery_body = f'<div class="gallery-grid">{gallery_cards}</div>'
+    else:
+        gallery_body = '<p class="gallery-empty">目前還沒有拍立得照片。</p>'
+
+    gallery_content = f"""
+<main class="gallery-page">
+  <div class="gallery-hero">
+    <div class="eyebrow">POLAROID ARCHIVE</div>
+    <h1>拍立得相簿</h1>
+    <p class="subtitle">散落在故事裡的{len(all_polaroids)}張快照,點一張回到它出現的章節</p>
+  </div>
+  {gallery_body}
+</main>
+"""
+    gallery_html = HTML_SHELL.format(
+        title="拍立得相簿 · 雙保結局同人合集",
+        root="",
+        butterfly=BUTTERFLY_SVG,
+        header=HEADER.format(root=""),
+        player=render_player("", playlist),
+        content=gallery_content,
+        footer=FOOTER,
+    )
+    with open(os.path.join(OUT_DIR, "polaroids.html"), "w", encoding="utf-8") as out:
+        out.write(gallery_html)
+
+    print("拍立得相簿已產生:polaroids.html")
     print(f"\n完成！網站輸出於: {OUT_DIR}")
 

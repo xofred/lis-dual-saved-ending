@@ -39,6 +39,7 @@ HEADER = """
   <a href="{root}index.html" class="brand">雙保結局 · 拍立得檔案</a>
   <nav>
     <a href="{root}index.html">目錄</a>
+    <a href="{root}polaroids.html">拍立得相簿</a>
   </nav>
 </header>
 """
