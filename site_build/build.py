@@ -113,7 +113,7 @@ if __name__ == "__main__":
     files = sorted([f for f in os.listdir(SRC_DIR) if f.endswith(".md")])
     print(f"共找到 {len(files)} 個章節檔案")
 
-    from templates import BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL
+    from templates import BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, render_player
 
     os.makedirs(CHAPTERS_DIR, exist_ok=True)
 
@@ -165,6 +165,13 @@ if __name__ == "__main__":
         })
 
     chapters.sort(key=lambda c: c["num"])
+
+    # 全站播放清單:按章節順序,只收錄真的有配樂的章節(不是佔位)
+    playlist = [
+        {"title": c["title"], "file": c["audio_file"]}
+        for c in chapters if c["audio_file"]
+    ]
+    print(f"播放清單共 {len(playlist)} 首歌")
 
     # ---------- 產生每一章的頁面 ----------
     for i, ch in enumerate(chapters):
@@ -235,6 +242,7 @@ if __name__ == "__main__":
             root="../",
             butterfly=BUTTERFLY_SVG,
             header=HEADER.format(root="../"),
+            player=render_player("../", playlist),
             content=content,
             footer=FOOTER,
         )
@@ -291,6 +299,7 @@ if __name__ == "__main__":
         root="",
         butterfly=BUTTERFLY_SVG,
         header=HEADER.format(root=""),
+        player=render_player("", playlist),
         content=index_content,
         footer=FOOTER,
     )
