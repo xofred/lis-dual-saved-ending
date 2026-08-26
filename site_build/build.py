@@ -97,6 +97,18 @@ def slugify(filename):
     return base
 
 
+def render_badges(ch):
+    """首頁卡片用:章節有實際插圖/配樂(不是佔位)才顯示對應徽章"""
+    parts = []
+    if ch.get("image_file"):
+        parts.append('<span class="badge badge-image" title="有插圖">📷</span>')
+    if ch.get("audio_file"):
+        parts.append('<span class="badge badge-audio" title="有配樂">♪</span>')
+    if not parts:
+        return ""
+    return f'<div class="ch-badges">{"".join(parts)}</div>'
+
+
 if __name__ == "__main__":
     files = sorted([f for f in os.listdir(SRC_DIR) if f.endswith(".md")])
     print(f"共找到 {len(files)} 個章節檔案")
@@ -148,6 +160,8 @@ if __name__ == "__main__":
             "slug": slug,
             "section": get_section(num),
             "raw": text,
+            "image_file": find_media(slug, IMAGES_DIR, IMAGE_EXTS),
+            "audio_file": find_media(slug, SONGS_DIR, AUDIO_EXTS),
         })
 
     chapters.sort(key=lambda c: c["num"])
@@ -164,9 +178,8 @@ if __name__ == "__main__":
         prev_link = f'<a href="{prev_ch["slug"]}.html">← 上一章</a>' if prev_ch else '<a class="disabled">← 上一章</a>'
         next_link = f'<a href="{next_ch["slug"]}.html">下一章 →</a>' if next_ch else '<a class="disabled">下一章 →</a>'
 
-        # ---- 自動偵測是否有對應的圖片/音樂檔案 ----
-        image_file = find_media(ch["slug"], IMAGES_DIR, IMAGE_EXTS)
-        audio_file = find_media(ch["slug"], SONGS_DIR, AUDIO_EXTS)
+        image_file = ch["image_file"]
+        audio_file = ch["audio_file"]
 
         media_parts = []
         if audio_file:
@@ -236,6 +249,7 @@ if __name__ == "__main__":
         section_chapters = [c for c in chapters if lo <= c["num"] <= hi]
         cards = "\n".join(
             f'''<a class="chapter-card" href="chapters/{c['slug']}.html">
+                  {render_badges(c)}
                   <div class="ch-num">{c['num']:03d}</div>
                   <div class="ch-title">{c['title']}</div>
                 </a>'''
