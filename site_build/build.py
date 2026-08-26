@@ -135,12 +135,14 @@ def slugify(filename):
 
 
 def render_badges(ch):
-    """首頁卡片用:章節有實際插圖/配樂(不是佔位)才顯示對應徽章"""
+    """首頁卡片用:章節有實際插圖/配樂/拍立得(不是佔位)才顯示對應徽章"""
     parts = []
     if ch.get("image_file"):
         parts.append('<span class="badge badge-image" title="有插圖">📷</span>')
     if ch.get("audio_file"):
         parts.append('<span class="badge badge-audio" title="有配樂">♪</span>')
+    if ch.get("polaroid_files"):
+        parts.append('<span class="badge badge-polaroid" title="有拍立得照片">🖼</span>')
     if not parts:
         return ""
     return f'<div class="ch-badges">{"".join(parts)}</div>'
