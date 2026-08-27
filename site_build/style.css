@@ -413,7 +413,9 @@ a { color: inherit; text-decoration: none; }
 .polaroid-card img {
   display: block;
   width: 100%;
-  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
 }
 
 /* 正文排版 */
