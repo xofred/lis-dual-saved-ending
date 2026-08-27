@@ -283,6 +283,20 @@
   var idx = 0;
   var lastFocus = null;
   var slides = [];
+  var developTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 模擬拍立得顯影:打開時完整顯影(~1s),左右切換時只做快速淡入
+  function playDevelop(mode) {
+    imgEl.classList.remove('developing', 'developing-quick');
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    imgEl.classList.add(mode === 'full' ? 'developing' : 'developing-quick');
+    clearTimeout(developTimer);
+    developTimer = setTimeout(function() {
+      imgEl.classList.remove('developing', 'developing-quick');
+    }, mode === 'full' ? 1200 : 500);
+  }
 
   // 收集頁面上所有拍立得:章節頁的 .polaroid-card,以及相簿頁包在 <a> 裡的大卡
   [].forEach.call(document.querySelectorAll('.polaroid-card'), function(card) {
@@ -305,9 +319,15 @@
 
   if (!slides.length) return;
 
-  function render() {
+  function render(mode) {
     var s = slides[idx];
-    imgEl.src = s.src;
+    var changed = imgEl.getAttribute('src') !== s.src;
+    if (changed) imgEl.src = s.src;
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playDevelop(mode);
+    } else {
+      imgEl.onload = function() { playDevelop(mode); };
+    }
     var parts = [];
     if (s.caption) parts.push('<span class="lightbox-title"></span>');
     if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
@@ -329,7 +349,7 @@
   function open(i) {
     idx = i;
     lastFocus = document.activeElement;
-    render();
+    render('full');
     box.removeAttribute('hidden');
     box.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -341,6 +361,9 @@
     box.setAttribute('hidden', '');
     box.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    clearTimeout(developTimer);
+    imgEl.classList.remove('developing', 'developing-quick');
+    imgEl.onload = null;
     imgEl.removeAttribute('src');
     document.removeEventListener('keydown', onKey);
     if (lastFocus && lastFocus.focus) lastFocus.focus();
@@ -348,7 +371,7 @@
 
   function step(d) {
     idx = (idx + d + slides.length) % slides.length;
-    render();
+    render('quick');
   }
 
   function onKey(e) {

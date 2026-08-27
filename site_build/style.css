@@ -660,6 +660,25 @@ a:focus-visible {
   border-radius: 2px;
   touch-action: pinch-zoom;
 }
+
+/* 拍立得顯影:打開時完整顯影,左右切換時快速淡入 */
+@keyframes polaroid-develop {
+  0%   { filter: contrast(0.35) brightness(1.55) saturate(0.15) sepia(0.45); opacity: 0.1; }
+  35%  { opacity: 1; }
+  55%  { filter: contrast(0.72) brightness(1.15) saturate(0.55) sepia(0.22); }
+  100% { filter: none; opacity: 1; }
+}
+@keyframes polaroid-develop-quick {
+  0%   { filter: saturate(0.4) brightness(1.15); opacity: 0.25; }
+  100% { filter: none; opacity: 1; }
+}
+.lightbox-img.developing { animation: polaroid-develop 1.05s ease-out both; }
+.lightbox-img.developing-quick { animation: polaroid-develop-quick 0.34s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox-img.developing,
+  .lightbox-img.developing-quick { animation: none; }
+}
 .lightbox-caption {
   display: flex;
   flex-wrap: wrap;
