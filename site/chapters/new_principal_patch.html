@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新官上任(補丁篇) · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 006 章 · 背景與序曲</div>
+  <h1>新官上任(補丁篇)</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/new_principal_patch.jpeg" alt="新官上任(補丁篇)" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、董事會的切割</h2>
+<p>暗房案件正式曝光後不到三週,布萊克威爾學院董事會就召開了一場緊急閉門會議——會議結果毫無懸念:時任校長 Wells,因長期對 Nathan Prescott 的異常行為視而不見、對 Kate Marsh 的求助敷衍處理、且被證實在多起校園安全問題上偏袒 Prescott 家族的資助利益,遭到董事會全票通過解除職務。</p>
+<p>沒有記者會,沒有體面的歡送辭。舊校長的辦公室在一個平常的週二早晨被靜悄悄清空,他的名字從學校官網和所有官方文件上迅速抹去,退休金和榮譽頭銜也一併化為烏有。往後的日子裡,他大半時間都耗在律師事務所和法庭之間,應付一場又一場的民事訴訟和證人傳喚。</p>
+<p>董事會迅速召開記者會,宣布已經啟動全國範圍的校長遴選,承諾將以「最嚴格的標準」重建學院聲譽。</p>
+<h2>二、新校長上任</h2>
+<p>三個月後,一位新校長正式走馬上任。</p>
+<p>新聞稿裡,校方用詞謹慎而積極——「豐富的教育管理經驗」「致力於校園安全與學生福祉」「將帶領布萊克威爾邁向嶄新篇章」。</p>
+<p>而這位新校長的名字,恰好也叫 Wells。</p>
+<p>純屬巧合。</p>
+<p>董事會秘書處在對外說明會上,特地花了整整一分鐘,鄭重澄清這兩位 Wells 校長之間,沒有任何血緣或姻親關係,純粹是這個姓氏,剛好在候選名單裡撞了名——但沒有人在意這個解釋,鎮上的居民私下議論起來,大多只是聳聳肩,半開玩笑地說「這學校跟 Wells 這個姓,大概是犯沖了吧」。</p>
+<p>新任 Wells 校長上任第一天,便在全校集會上,慷慨激昂地發表了一篇關於「重建信任、擁抱透明治理」的就職演說,台下的教職員和學生,大多只是禮貌性地鼓掌,沒有人真的抱太大期待。</p>
+<p>畢竟,他們心裡都清楚,不管換上哪一個姓 Wells 的人,布萊克威爾這套運作了幾十年的體制慣性,大概率不會因為換了一張辦公室的名牌,就有什麼真正的改變。</p>
+<hr />
+<p><em>(此篇作為世界觀補丁:自本篇之後,故事正文中出現的「Wells 校長」,均指這位案發後空降上任的新校長,與原任校長並無關聯。)</em></p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="dismissal.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="rebirth.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

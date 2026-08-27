@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>道館 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 031 章 · 旅館連環案</div>
+  <h1>道館</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/dojo_training.jpeg" alt="道館" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、意外的高分</h2>
+<p>藝術課的作業評分公布那天,Ms. Whitfield 把 Max 和 Chloe 叫到辦公室——不是為了訓話,而是滿臉興奮地把她們那疊「被遺忘的建築」照片攤在桌上。</p>
+<p>「這幾張,」她指著其中幾張旅館外觀的構圖,光影和廢墟質感確實拿捏得極好,「是我這學期收到最好的作品。妳們用的角度、光線,完全捕捉到了『時間留下的痕跡』這個主題的精髓。」</p>
+<p>Max 和 Chloe 對視一眼,誰都沒提照片背後真正發生過什麼——那些照片,是她們僥倖逃出來之後,隔了將近一個月,才鼓起勇氣重新翻看記憶卡,挑出裡面「看起來只是很有氛圍感的廢墟照」,交出去的。</p>
+<p>高分很快傳到了 Wells 校長耳朵裡。他幾乎是立刻嗅到了宣傳素材的味道——「布萊克威爾學生實地取材,榮獲藝術課最高分,展現卓越美學素養」,又是一篇能往招生簡章裡塞的漂亮文章。</p>
+<p>Chloe 被叫進校長室的時候,心裡冷笑了一聲——這人消費她們的機會,永遠比誰都快。</p>
+<p>但她轉念一想,既然對方擺明了想拿這件事做文章,那她也不介意順勢討點好處。</p>
+<p>「校長,」她清了清嗓子,一臉誠懇,「這次拍攝過程中,我們幾個其實受到了不小的驚嚇,心理創傷需要時間恢復。我在想,如果學校能批一段『心理治療假』,不扣課堂出席時數,也算是……呼應學校一直強調的『學生身心健康』理念?」</p>
+<p>Wells 校長愣了一下,隨即眼睛一亮——這個說法對他來說簡直是送上門的宣傳素材:「布萊克威爾學院重視學生心理健康,特批療癒假期」,聽起來比什麼都好聽。</p>
+<p>「這個提議很好,」他毫不猶豫地拍板,「我馬上請教務處辦理。」</p>
+<p>Chloe 走出校長室,嘴角壓不住地上揚。</p>
+<hr />
+<h2>二、車庫裡的訓話</h2>
+<p>晚上回到家,Chloe 剛把休假的事跟 Joyce 提了一嘴,轉身就撞見在車庫整理裝備的 David。</p>
+<p>「聽妳媽說了,」David 頭也沒抬,語氣裡帶著壓不住的凝重,「那晚的事。」</p>
+<p>Chloe 聳聳肩,想蒙混過去:「都過去了,我們不是好好的嗎。」</p>
+<p>「好好的?」David 終於抬起頭,眉頭皺得死緊,「Chloe,你們五個孩子,面對一個顯然受過專業訓練的成年男性,單靠運氣和一堆臨時拼湊的小聰明活下來。這次是運氣好,下次呢?」</p>
+<p>「那你倒是說,」Chloe 也來了脾氣,雙手抱胸,「換作是你,你能怎麼樣?你去單挑那個人試試?」</p>
+<p>車庫裡安靜了兩秒。</p>
+<p>David 沒有被激怒,反而異常平靜地看著她,像是在權衡什麼。</p>
+<p>「說話沒用,」他終於開口,語氣裡帶著一種罕見的篤定,「我帶妳去個地方,比我在這裡說教一百句都有用。」</p>
+<hr />
+<h2>三、道館</h2>
+<p>隔天,David 開車帶著 Chloe 和 Max,來到鎮外一間不起眼的徒手搏擊道館——外觀陳舊,裡頭卻整整齊齊地擺著訓練墊、沙包和各式器材,牆上掛滿了退役的軍規訓練刀、訓練槍複製品。</p>
+<p>「這裡是我以前的老戰友開的,」David 一邊換上訓練服,一邊解釋,「我退役後偶爾還會回來練練,保持手感。」</p>
+<p>館內的教練是個沉默寡言的中年男人,和 David 打了個招呼,便把場地讓了出來。David 熟練地拿起兩把橡膠材質、但重量手感都做得極其擬真的訓練刀,丟了一把給 Chloe。</p>
+<p>「今天,我親自教。」</p>
+<hr />
+<h2>四、幾十刀</h2>
+<p>David 教得極其扎實——握姿、重心、如何觀察對方肩膀和手腕的細微動作預判攻擊方向,講解時一板一眼,不厭其煩地重複糾正 Chloe 的每一個小細節。</p>
+<p>一個小時的基礎教學後,Chloe 自信滿滿地擺好架勢:「來吧,老兵,讓我試試身手。」</p>
+<p>結果,不到十秒鐘,她的「訓練刀」就已經在 David 手裡的刀鋒下,被輕巧地「劃」過手臂、腹部、頸側,連續好幾下,速度快到她幾乎反應不過來對方是什麼時候欺身近前的。</p>
+<p>「一。」David 冷靜地報數,退回起始位置。</p>
+<p>Chloe 咬牙重新擺架勢,結果又是一模一樣的結果——這次連刀都還沒舉起來,就已經被摸進了防禦死角。</p>
+<p>「二。」</p>
+<p>接下來的十幾分鐘,場館裡不斷重複著同一個過程:Chloe 擺架勢、進攻或防守、瞬間被「劃」中要害、David 面不改色地報數。從一數到快三十,Chloe 滿頭大汗,氣喘吁吁地癱坐在訓練墊上,一句話都說不出來。</p>
+<p>「妳現在明白了嗎,」David 收起訓練刀,語氣沒有絲毫得意,反而透著一種沉重,「一把刀,近距離,面對一個真正懂得怎麼用它的人——不存在『無傷應對』這種事。妳能做的最好結果,是儘量減少傷害、拖延時間、爭取逃跑或反制的機會。這就是為什麼那晚,你們光靠運氣,已經算是奇蹟。」</p>
+<hr />
+<h2>五、不服輸</h2>
+<p>Chloe 喘著氣,還是嘴硬:「刀不算,老子有槍。」</p>
+<p>她從器材架上抓起一把訓練槍,擺出她從電視上學來的、自覺很帥的持槍姿勢。</p>
+<p>David 挑了挑眉,沒說話,只是重新握起訓練刀。</p>
+<p>下一秒,他幾乎是瞬間欺身欺近——距離拉近的速度快得讓 Chloe 完全來不及扣下扳機,訓練刀又是一連串精準的「劃」擊,分別點過她持槍的手腕、手臂、側腰。</p>
+<p>「一。」</p>
+<p>Chloe 瞪大眼睛,還沒回過神,又是同樣的流程重複了一次,又一次。</p>
+<p>十幾刀下來,Chloe終於徹底洩了氣,一屁股坐在地上,大口喘著粗氣,一臉「這不科學」的表情。</p>
+<p>「近距離內,」David 蹲下身,語氣依然平靜,「槍不是萬能的。反應時間、拔槍出鞘的速度、瞄準所需要的那零點幾秒——這些空檔,足夠一個訓練有素的持刀者欺身近前,先解決掉妳的持槍手。這就是為什麼特種部隊近身戰術訓練裡,永遠把『近距離格鬥』和『武器使用』放在同一個科目裡教,而不是分開。」</p>
+<p>Chloe 死死盯著地板,還是不甘心,轉頭看向一旁全程旁觀的 Max:「妳倒是說句話啊,妳那超能力,對付這種情況到底有沒有搞頭?」</p>
+<p>Max 沉默了幾秒,搖搖頭,語氣裡帶著一絲複雜的認真:「我試過在腦子裡回放那晚的畫面很多次了,各種不同的選擇、不同的應對方式……Chloe,我沒辦法找到一個『完美無傷』的版本。」她頓了頓,看向 David,「他說的是對的。運氣和反應速度能救我們一次,但那不是能長期依靠的東西。」</p>
+<p>Chloe 張了張嘴,還想反駁點什麼,最終還是把話咽了回去,撅著嘴,像個輸了比賽卻死不承認的小孩。</p>
+<p>「……行吧。」她從牙縫裡擠出這句話,語氣彆扭得不能再彆扭,「謝了,老兵。」</p>
+<p>David 看著她這副模樣,難得地,嘴角微微牽動了一下,幾乎稱得上是笑意。</p>
+<p>「下週同一時間,」他站起身,拍拍身上的灰,「繼續。」</p>
+<p>「……啊?」</p>
+<p>「妳以為今天就結束了?」David 已經開始收拾器材,語氣恢復了一貫的嚴肅,「防身這種事,練一次沒用,得練到變成肌肉記憶。」</p>
+<p>Chloe 癱在訓練墊上,望著道館天花板,發出一聲長長的哀嚎。</p>
+<p>Max 站在一旁,看著這對彆扭的父女——雖然沒有血緣,卻在這一刻,吵鬧和不甘心裡,透著一種踏踏實實的、屬於「家人」的溫度——忍不住笑了出來。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="devil_hotel_ch4.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="hospital_visit.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

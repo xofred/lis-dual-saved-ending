@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>旅館 · 第三章:交會與反制 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 029 章 · 旅館連環案</div>
+  <h1>旅館 · 第三章:交會與反制</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/devil_hotel_ch3.jpeg" alt="旅館 · 第三章:交會與反制" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、鎖死的房間</h2>
+<p>Warren 死死抵著房門,不知道自己在黑暗裡蹲了多久。門外那道光終於在某個時刻悄然移開,腳步聲遠去,但他不敢有絲毫放鬆——直到整層樓的燈毫無預警地全部熄滅,伴隨著一連串沉悶的機械聲響,一扇接一扇,某種鎖死的聲音由遠而近地傳來,最後,連他抵著的這扇門,也在他背後傳來「喀」的一聲。</p>
+<p>他伸手一試,門把紋絲不動。</p>
+<p>被鎖住了。</p>
+<p>但奇怪的是,那種被困住的絕望感裡,竟摻著一絲荒謬的安心——至少,外面那個人,現在也進不來了。</p>
+<p>他掏出手機,螢幕的光在漆黑房間裡顯得格外刺眼,相機裡那段剛才錄下的畫面還在——晃動、破碎、幾乎看不清任何具體畫面,但聲音清晰得可怕:那道從容不迫的腳步聲,停在門前時,呼吸的頻率,還有一段極輕、幾乎像是自言自語的低語。</p>
+<p>Warren 顫抖著手,把音量調到最低,重新播放了一次那段低語。</p>
+<p>「……老規矩,慢慢來,」那個聲音說,帶著一種詭異的、近乎享受的耐心,「反正,沒人會來。」</p>
+<p>他猛地攥緊手機,一股寒意順著脊椎竄上來——這句話證實了 Chloe 剛才的猜測,這一切,是有預謀的,而且對方顯然清楚,這棟樓早已是一座徹底孤立的獵場。</p>
+<hr />
+<h2>二、串聯</h2>
+<p>「Warren 被鎖在三樓某個房間裡,」Kenji 對著對講機,語速飛快,「我這邊的系統顯示,那整層樓的鎖同時鎖死,包括他所在的房間——好消息是,凶手現在也進不去。」</p>
+<p>「那我們要怎麼把他弄出來?」Chloe 的聲音從對講機另一頭傳來,帶著壓抑的焦躁。</p>
+<p>「我可以遠端解鎖,」Kenji 說,「但解鎖的瞬間,那個房間會重新變得『可以被打開』——包括被外面的人打開。除非,我們能確保解鎖的那一刻,凶手不在附近。」</p>
+<p>Brooke 蹲在他身邊,忽然開口:「你剛才不是說,妳們已經讓他的監控系統失效了?」</p>
+<p>「暫時的,」Max 的聲音插進來,帶著喘息,「他現在應該是『瞎』的,但我們不知道能撐多久。」</p>
+<p>「那就趁現在。」Chloe 的聲音斬釘截鐵,「Kenji,你解鎖 Warren 那扇門,我們去把他接出來。你跟 Brooke 呢?」</p>
+<p>管理室裡,Kenji 和 Brooke 對視一眼。</p>
+<p>「我們去把 Warren 手機裡那段錄音想辦法傳出去,」Kenji 說,「如果能透過廣播系統,把那段話重新播放出去——」</p>
+<p>「你想幹嘛?」Brooke 皺眉。</p>
+<p>「讓他聽聽自己說過的話,」Kenji 的聲音難得帶上一絲狠勁,「一個靠著『沒人知道』才敢那麼從容的人,最怕的就是,有人已經聽到了。」</p>
+<hr />
+<h2>三、重逢</h2>
+<p>三樓走廊,燈光重新亮起的瞬間,Chloe 和 Max 幾乎是同時衝了進去,循著 Kenji 回報的房號狂奔。</p>
+<p>門鎖「喀」地一聲彈開,Warren 幾乎是連滾帶爬地衝出來,一把撲進 Brooke 和 Chloe 中間——不,他愣住了,眼前站著的是 Chloe 和 Max。</p>
+<p>「你們——」他哽咽了一下,「Brooke 呢?Kenji 呢?」</p>
+<p>「他們在做點別的事,」Chloe 一把扶住他,目光快速掃過他滿是淚痕和塵土的臉,「你還好嗎?」</p>
+<p>「我沒事,」Warren 的聲音還在抖,「我錄下他的聲音了,我錄下——」</p>
+<p>「先走,」Max 打斷他,「這裡不安全。」</p>
+<p>三人剛要轉身離開,走廊盡頭,那道原本熟悉的、從容不迫的腳步聲,再度出現。</p>
+<p>只是這一次,節奏明顯亂了。不再是精準的、確認過路線的靠近,而是帶著焦躁的、來回試探的遊走——像是一個突然被蒙上眼睛的獵人,只能靠著殘存的聽覺和直覺摸索。</p>
+<p>「他還在找我們。」Max 低聲說,握緊了 Chloe 的手。</p>
+<p>「那就讓他找。」Chloe 咬牙,眼神裡有種豁出去的狠勁,「我們人多。」</p>
+<hr />
+<h2>四、廣播</h2>
+<p>管理室裡,Kenji 的手指在鍵盤上飛快敲擊,終於找到了廣播系統的操控介面。</p>
+<p>「找到了。」他把 Warren 傳過來的那段錄音檔案匯入系統,深吸一口氣,按下了發布鍵。</p>
+<p>整棟旅館的老舊喇叭,同時發出一陣刺耳的雜訊,緊接著——</p>
+<p><strong>「……老規矩,慢慢來。反正,沒人會來。」</strong></p>
+<p>那句話,帶著原本的雜訊和顫音,在空曠的走廊裡迴盪,經過老舊喇叭的失真處理,顯得格外詭異而清晰。一遍,又一遍,循環播放。</p>
+<p>走廊某處,那道遊走的腳步聲,猛地停住了。</p>
+<p>「他聽到了。」Brooke 死死盯著螢幕,「他現在知道,有人拿到證據了。」</p>
+<p>「這是雙面刃,」Kenji 的聲音緊繃,「他可能會慌,也可能——」</p>
+<p>話音未落,螢幕上顯示的一段警報訊息跳了出來:系統偵測到有人正試圖從主機物理層面強行切斷電源。</p>
+<p>「他往管理室來了。」Kenji 臉色一變。</p>
+<hr />
+<h2>五、正面交鋒</h2>
+<p>Chloe、Max、Warren 三人循著走廊往樓下摸索,途中撞見了正拉著 Kenji 倉皇逃出管理室的 Brooke。</p>
+<p>「他往這邊來了!」Brooke 氣喘吁吁地喊。</p>
+<p>五人終於在三樓與二樓之間的樓梯轉角,徹底會合。</p>
+<p>沒有人有時間慶祝重逢——身後,那道腳步聲已經追了上來,不再遲疑,顯然是循著廣播的方向摸索過來的。</p>
+<p>「往樓下衝,」Chloe當機立斷,「一次性衝出去,他一個人,追不了五個方向。」</p>
+<p>黑暗中,一道身影終於清晰地出現在樓梯口——體型精瘦,動作訓練有素,手裡不知何時已經多了一把匕首,即使失去了監控優勢,那種冷靜的殺意依然壓得人喘不過氣。</p>
+<p>「Max!」Chloe 低喊。</p>
+<p>Max 閉眼凝神,那份重新回歸的預感猛地清晰起來——她「看」到了下一秒,對方即將撲向的方向,是離她們最近的 Warren。</p>
+<p>「往左閃!」她幾乎是尖叫著喊出口。</p>
+<p>Warren 下意識地照做,堪堪避開了那道劃過空氣的匕首。與此同時,Brooke 抓起手邊一個滅火器,狠狠朝著那道黑影的方向砸了過去。</p>
+<p>滅火器擊中對方肩膀的瞬間,對方悶哼一聲,腳步一個踉蹌。</p>
+<p>「就是現在!」Kenji 大喊,同時按下手裡另一個裝置——那是他臨時改造出來的訊號發射器,原理是強行讓旅館所有殘存的照明系統同時瞬間全亮再全滅,連續閃爍,製造出短暫而劇烈的視覺干擾。</p>
+<p>刺眼的閃光在黑暗中連續炸開,那道黑影下意識舉起手臂遮擋,腳步徹底亂了。</p>
+<p>「衝!」Chloe 拽著 Max,五人幾乎是連滾帶爬地衝下最後一段樓梯,直奔大廳的方向。</p>
+<hr />
+<h2>六、逃出</h2>
+<p>大廳的門在眼前,五人幾乎是用盡最後一絲力氣衝了出去,跌跌撞撞地摔進了旅館外那片荒廢已久的車道,冰涼的空氣灌進肺裡,帶著劫後餘生的刺痛感。</p>
+<p>Chloe 回頭望去——旅館的大門敞開著,黑暗的門洞裡,那道身影停在門檻邊緣,並沒有追出來,只是靜靜地站在陰影裡,像是在計算著什麼,又像是單純地,不打算在暴露的空曠地帶繼續冒險。</p>
+<p>幾秒鐘後,那道身影轉身,消失在旅館深處的黑暗中,再沒有出現。</p>
+<p>五人癱坐在車道的碎石地上,誰都沒有力氣說話,只是大口大口地喘著氣,確認彼此都還完整地站在這裡。</p>
+<p>Chloe 摸出手機,螢幕右上角,那格代表訊號的圖示,終於重新跳了出來。</p>
+<p>她顫抖著手,撥出了這輩子撥得最快的一通報警電話。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="devil_hotel_ch2b.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="devil_hotel_ch4.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

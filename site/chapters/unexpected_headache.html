@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沒有預警的頭痛 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 048 章 · 校園與衰退</div>
+  <h1>沒有預警的頭痛</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/unexpected_headache.jpeg" alt="沒有預警的頭痛" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、突如其來</h2>
+<p>那天下午,兩人窩在客廳看電視,Max 忽然皺眉,伸手按住太陽穴。</p>
+<p>「妳還好嗎?」Chloe 察覺到她的異樣,立刻轉頭。</p>
+<p>「頭有點……」Max 話還沒說完,一滴鮮紅的血,毫無預警地從鼻子滑落下來,滴在她攤開的手心裡。</p>
+<p>「Max!」Chloe 瞬間慌了,一把抓過旁邊的紙巾按住她的鼻子,「妳沒用能力吧?妳剛才根本沒——」</p>
+<p>「我沒有,」Max 的聲音有點發悶,被紙巾捂住鼻子,含糊不清,「我什麼都沒做,就是突然……」</p>
+<p>Chloe 顧不上多想,抓起車鑰匙,連拖帶拽地把 Max 塞進車裡,直奔鎮上的診所。</p>
+<hr />
+<h2>二、檢查結果</h2>
+<p>醫生仔仔細細地做了一輪檢查——量血壓、抽血、簡單的神經反應測試,又皺著眉盯著儀器螢幕看了好一會兒。</p>
+<p>「從目前的檢查結果來看,」醫生摘下眼鏡,語氣裡帶著一絲困惑,「妳的各項生理指標其實都在正常範圍內,血壓、心跳、血液檢測都沒有異常,物理層面上,我暫時看不出明確的問題。」</p>
+<p>「那她怎麼會突然頭痛流鼻血?」Chloe 追問,語氣裡藏不住焦急。</p>
+<p>「有可能是壓力性的偏頭痛,」醫生斟酌著用詞,「這種情況有時候找不到明確病因,近期如果生活壓力大、睡眠不規律,身體會用一些意想不到的方式反應出來。建議這幾天多休息,如果症狀反覆或加重,再回來做進一步檢查。」</p>
+<p>Max 點點頭,沒有多說什麼。</p>
+<hr />
+<h2>三、回家路上</h2>
+<p>車子行駛在回家的路上,Chloe 一直沉默著,手指緊緊攥著方向盤,指節都有點發白。</p>
+<p>「妳在想什麼?」Max 察覺到她的異樣。</p>
+<p>Chloe 沉默了很久,才終於開口,聲音有些發澀:「是不是……那次『雙保結局』的鍋?」</p>
+<p>「什麼意思?」</p>
+<p>「妳那次,」Chloe 的聲音低下去,「在暗房裡,為了同時保住我和小鎮,把能力用到極限,那種超負荷的代價,是不是留下什麼後遺症了?是不是……是我害的?」</p>
+<p>車廂裡陷入一陣沉默。</p>
+<p>「Chloe,」Max 終於開口,語氣異常堅定,「那個決定,是我自己做的。不是妳逼我的,也不是妳求我的——是我自己,清清楚楚地知道後果,依然選擇那麼做。」</p>
+<p>「可是——」</p>
+<p>「沒有可是,」Max 打斷她,語氣柔和了幾分,卻依然堅持,「如果真的有什麼代價要承擔,那也是我自己選擇要承擔的東西,跟妳無關。妳不准把這件事,又攬到自己身上變成妳的錯。」</p>
+<p>Chloe 握著方向盤的手,微微鬆動了一些,眼眶卻有點發熱,沒有再說話。</p>
+<hr />
+<h2>四、不肯鬆開的手</h2>
+<p>回到家後,Max 說想躺一會兒,Chloe 扶著她上樓,替她掖好被子,轉身想去倒杯溫水。</p>
+<p>手腕卻被一把抓住。</p>
+<p>「別走。」Max 的聲音有點虛弱,卻異常清晰。</p>
+<p>Chloe 回頭,看到她眼底藏著一絲不易察覺的、近乎脆弱的驚慌。</p>
+<p>「我就是……」Max 的手指收得更緊了些,像是抓著什麼救命稻草,「怕我閉上眼睛,再睜開的時候,妳又不見了。」</p>
+<p>Chloe 的心猛地一揪,什麼話都沒再說,只是重新坐回床邊,俯身輕輕把 Max 整個人攬進懷裡,下巴抵在她的髮頂。</p>
+<p>「我在這裡,」她的聲音很輕,卻帶著不容置疑的篤定,「哪裡都不去,妳放心睡。」</p>
+<p>Max 的身體漸漸放鬆下來,緊抓著 Chloe 手腕的力道,也一點一點鬆懈,最終只是安靜地窩進她懷裡,呼吸漸漸平穩。</p>
+<p>窗外夕陽的餘暉透過窗簾縫隙灑進來,落在兩人交疊的身影上。Chloe 低頭看著懷裡漸漸睡去的人,伸手輕輕替她拂開額前的碎髮,眼神裡的擔憂,久久沒有散去。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="debt_repaid.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="two_theories.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

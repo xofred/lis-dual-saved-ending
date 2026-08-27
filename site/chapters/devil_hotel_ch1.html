@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>旅館 · 第一章:作業與封鎖線 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 026 章 · 旅館連環案</div>
+  <h1>旅館 · 第一章:作業與封鎖線</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/devil_hotel_ch1.jpeg" alt="旅館 · 第一章:作業與封鎖線" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、被遺忘的建築</h2>
+<p>「這學期的作業主題,」Ms. Whitfield 站在講台前,語氣裡帶著剛畢業老師特有的、還沒被磨平的熱忱,「叫『被遺忘的建築』。我要你們找一個廢棄的、有歷史故事的地點,拍下你們認為最能代表『時間留下的痕跡』的畫面。」</p>
+<p>她在黑板上寫下幾個參考方向:老教堂、廢棄工廠、無人農舍。</p>
+<p>「當然,」她補充,「安全第一。我不希望在批改作業的時候,順便收到醫院的病危通知書。」</p>
+<p>台下響起零星的笑聲。Chloe 坐在最後一排,手托著下巴,眼神卻已經飄遠——她想到的不是教堂,也不是農舍。</p>
+<p>是那間旅館。</p>
+<p>半年前,郡界外那間老旅館鬧出過一起震動全州的連環命案,新聞連著播了快兩個禮拜,鎮上的人茶餘飯後聊了整整一個夏天。後來熱度退了,警方也早就撤了駐守,只留下一圈鬆垮的封鎖線,意思意思圍著,彷彿在提醒路過的人「這裡出過事」,僅此而已。</p>
+<p>下課鈴一響,Chloe 立刻抓住 Max 的手臂。</p>
+<p>「我知道要拍哪。」她眼睛發亮。</p>
+<p>Max 看著她那個表情,心裡警鈴大作:「妳該不會是想去——」</p>
+<p>「那間旅館。」Chloe 幾乎是宣判一樣說出口,「妳想想,還有比『真的死過人的地方』更符合『被遺忘的建築』這個主題的嗎?」</p>
+<p>「這不是符合主題的問題,」Max 皺眉,「這是『我們會不會也死在裡面』的問題。」</p>
+<p>「封鎖線都快被風吹爛了,」Chloe滿不在乎地擺手,「早就沒人看守了,我上禮拜開車經過還看到有浣熊大搖大擺地從裡面走出來。浣熊都不怕,我們怕什麼。」</p>
+<p>Max 張嘴還想反駁,話還沒出口,身後忽然傳來一個意料之外的聲音。</p>
+<p>「我也想去。」</p>
+<p>兩人回頭,是 Kenji——難得主動開口,語氣淡淡的,但那雙平時毫無波瀾的眼睛裡,閃過一絲不太尋常的專注。</p>
+<p>「你?」Chloe 挑眉,「你什麼時候對『鬧鬼探險』有興趣了。」</p>
+<p>「不是鬧鬼。」Kenji 推了推眼鏡,「聽說那間旅館一直沿用一套很舊式的樓層管理系統——門鎖、廣播、監控,全部串在同一套主機上。案發之後警方好像懶得拆,直接封了了事。」他頓了一下,語氣依然平淡,但眼神有那麼一瞬間飄向別處,「我想看看那套系統長什麼樣子。」</p>
+<p>Max 覺得他這句話裡藏著什麼沒說完的東西,但 Kenji 向來話少,追問了也未必有答案,她只好把這份疑惑先放下。</p>
+<hr />
+<h2>二、五人成行</h2>
+<p>消息傳到 Warren 和 Brooke 耳朵裡的時候,兩人幾乎是同時抓起書包衝過來。</p>
+<p>「妳說什麼?!」Warren 兩眼放光,「連環命案旅館?我們可以去?這簡直是我這輩子最想拍的取材地點!」</p>
+<p>「我要帶我那台夜視相機。」Brooke 已經開始在腦內盤點裝備,「還有,如果裡面真的有監控系統殘留,說不定能拍到什麼有意思的東西。」</p>
+<p>Max 看著身邊三個人一個比一個興奮,最後一絲勸退的力氣也消散了。</p>
+<p>「行吧,」她嘆氣,「但誰都不許亂跑,誰都不許逞英雄,拍完照片就走人。」</p>
+<p>「妳這話聽起來像是在說給誰聽的。」Chloe 意味深長地看她一眼。</p>
+<p>「說給妳聽的,還能有誰。」</p>
+<hr />
+<h2>三、封鎖線</h2>
+<p>週六下午,五人擠進 Chloe 那輛老皮卡,一路顛簸開上通往旅館的碎石路。窗外的景色越來越荒涼,道路兩旁的樹越長越密,陽光被層層枝葉切碎,灑在擋風玻璃上忽明忽暗。</p>
+<p>「你們說,」Warren 從後座探出頭,「這種地方晚上會不會真的鬧鬼?」</p>
+<p>「白天都夠嚇人了,」Brooke 白他一眼,「你還想晚上來?」</p>
+<p>車子拐過最後一個彎,旅館的輪廓終於出現在視野裡——三層樓的老式建築,外牆爬滿枯萎的藤蔓,幾扇窗戶的玻璃碎裂,像是某種空洞的眼神,靜靜俯視著這條荒廢已久的車道。門口拉著一圈黃黑相間的警戒帶,被風吹得半脫落,其中一段已經垂到地上,隨風輕輕拖拽出沙沙的聲響。</p>
+<p>Chloe 把車停在外圍,率先跳下車,伸了個懶腰。</p>
+<p>「看吧,」她朝著封鎖線努了努嘴,「連守衛都懶得裝了。」</p>
+<p>五人下車,靠近那圈警戒帶。上面用褪色的油墨印著警告字樣,以及——一塊立在門口的公告牌,上面簡略記載著案件發生的日期,和一行數字:<strong>遇害人數:七</strong>。</p>
+<p>Brooke 的腳步在那塊牌子前頓住了,原本興奮的表情淡了幾分。</p>
+<p>「欸,」她低聲說,「我們真的要進去?」</p>
+<p>「怎麼,怕了?」Chloe 側頭看她。</p>
+<p>「不是怕,」Brooke 深吸一口氣,又很快被自己的好奇心壓過猶豫,「就是……有點毛骨悚然而已。走吧,都到這了。」</p>
+<p>Kenji 已經自顧自地繞到旅館側面,一手拎著工具包,目光落在牆角一根鏽蝕的電纜線上,像是在確認什麼。Warren 舉著相機興奮地繞著門口取景,嘴裡念念有詞地構思著待會的鏡頭角度。</p>
+<p>Max 站在原地,看著大家陸續越過那圈警戒帶,又看了眼手機——訊號格數不知何時已經從滿格掉到只剩一格。</p>
+<p>「你們的手機還有訊號嗎?」她隨口問了一句。</p>
+<p>「偏僻地方訊號差很正常吧。」Chloe 頭也不回地應了一聲,已經一腳跨過了警戒帶,伸手推開了那扇虛掩的旅館大門。</p>
+<p>門軸發出一聲長長的、生鏽的呻吟。</p>
+<p>五人陸續踏進大廳,腳步聲在空曠的空間裡迴盪。灰塵在從破窗灑進來的光束中緩緩浮動,牆上還掛著早已褪色的旅館裝飾畫,一切都維持著案發那天被匆忙撤離的模樣,彷彿時間在這裡被按了暫停鍵。</p>
+<p>前台的登記簿還攤開在櫃檯上,紙頁邊緣因為長年受潮而捲曲發黃。Warren 好奇地湊過去,用相機鏡頭湊近拍了張特寫,順口念出上面最後一頁的入住紀錄。</p>
+<p>「凱特・懷爾德……馬克・內斯特……查理・朗斯代爾……」他一邊念一邊皺眉,「還有一對,伊琳跟傑米,姓氏被水漬糊掉看不清了。」</p>
+<p>「怎麼了?」Brooke 湊過去看。</p>
+<p>「沒事,」Warren 搖搖頭,自己也說不上哪裡不對勁,只是那五個名字並排寫在同一頁,墨跡潦草卻整齊,像是同一批人、同一天登記入住的——正好也是五個人,跟他們此刻站在這裡的人數一模一樣。他心裡莫名掠過一絲寒意,卻很快被自己甩開,「大概只是巧合吧,誰知道呢。」</p>
+<p>他闔上鏡頭蓋,沒再多想,轉身去拍別的角落。</p>
+<p>「有點……安靜得詭異。」他又補了一句,聲音比剛才低了幾分。</p>
+<p>「這叫氛圍感,」Chloe 咧嘴一笑,四處張望,「Ms. Whitfield 看到這個絕對給我們滿分。」</p>
+<p>Max 站在門口,回頭看了一眼身後——外面的天色還亮著,陽光灑在荒廢的車道上,一切看起來平靜得毫無異狀。她說不清那種不安從何而來,只是那種感覺,像是有什麼東西正藏在看不見的角落,安靜地注視著他們的一舉一動。</p>
+<hr />
+<h2>四、分頭</h2>
+<p>在大廳粗略拍了幾張照片後,五人圍在一起商量接下來的行動。</p>
+<p>「時間有限,」Max 看了眼手錶,「分頭拍比較快,天黑前我們得離開這裡。」</p>
+<p>「我想去看管理室,」Kenji 開口,「應該在後面,樓層系統的主機大概就在那裡。」</p>
+<p>「那我跟你去,」Warren 立刻舉手,「順便拍些設備的畫面,說不定能當作業的亮點。」</p>
+<p>「我也去,」Brooke 補了一句,「三個人互相有個照應。」</p>
+<p>Chloe 摟過 Max 的肩膀:「那我們倆去樓上,樓梯那邊看起來拍照效果會不錯。」</p>
+<p>Max 猶豫了一下:「要不我們還是——」</p>
+<p>「別掃興,」Chloe 已經拉著她往樓梯口走,「快去快回,半小時後大廳集合。」</p>
+<p>兩組人馬就這樣散開了——Kenji、Warren、Brooke 往大廳後方的走廊走去,腳步聲漸漸被轉角吞沒;Chloe 拉著 Max 踏上通往二樓的樓梯,木頭階梯在腳下發出細微的呻吟。</p>
+<p>走出十幾步後,某個地方,忽然傳來一聲悶重的、拖拽著什麼重物劃過地板的聲響。</p>
+<p>不是老舊建築的木頭吱呀聲,也不是風吹動窗簾的聲音。那是一種明確的、有東西在移動的聲音,沉重、緩慢,像是有人正拖著一具不輕的物體,穿過某條看不見的走廊——但那道聲音悶悶地從牆壁另一側傳來,混著建築本身的迴音,誰也說不準究竟是從樓上、樓下,還是走廊深處傳來的。</p>
+<p>兩組人幾乎同時停下腳步。</p>
+<p>「你們那邊聽到了嗎?」Brooke 隔著老遠喊了一聲,聲音在空曠的大廳迴盪。</p>
+<p>「聽到了,」Chloe 在樓梯上回頭喊,「什麼玩意?」</p>
+<p>一陣短暫的沉默。Kenji 站在走廊轉角,側耳聽了幾秒,那道聲響已經停了,四周重新陷入寂靜。</p>
+<p>「可能是浣熊,」他的聲音一如既往地平淡,帶著一種讓人安心的篤定,「這種廢棄建築常有野生動物進駐,拖動雜物很正常——妳自己上禮拜不是說看到過?」</p>
+<p>「對啊,」Chloe 想起自己說過的話,聳聳肩,語氣重新輕鬆起來,「說不定剛才那隻正在裡面開派對。」</p>
+<p>Warren 也跟著笑了一聲,雖然笑得有點乾:「說得也是,浣熊而已,浣熊而已……」</p>
+<p>兩組人就這樣各自順著原本的方向重新邁開腳步,沒有人再提議要會合確認。</p>
+<p>只是 Max 站在樓梯轉角,握著相機背帶的手,不自覺地收得更緊了些。那個解釋聽起來合理,合理到她幾乎要說服自己相信——但心底某個角落,還是隱隱覺得不太對勁,像是有什麼細節被自己下意識地忽略了過去。</p>
+<p>她沒說出口,只是跟上了 Chloe 的腳步,一步一步,踏入樓上那片幽暗的走廊。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="pe_class_ai.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="devil_hotel_ch2a.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

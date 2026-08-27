@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>兩個猜想 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 049 章 · 校園與衰退</div>
+  <h1>兩個猜想</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/two_theories.jpeg" alt="兩個猜想" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、找上 Kenji</h2>
+<p>Max 那次突如其來的頭痛和流鼻血,雖然表面上已經過去,但 Chloe 始終放不下心。她想了幾天,最終沒有去找 Warren 或 Brooke,而是私下約了 Kenji。</p>
+<p>「妳怎麼會來找我?」Kenji 有點意外,推了推眼鏡。</p>
+<p>「妳是理性派,」Chloe 直白地說,「而且妳跟 Max 交集沒那麼深,不像 Warren 和 Brooke 那樣容易被感情左右判斷。我需要一個純粹的、旁觀者的分析。」她頓了頓,又補了一句,「而且妳這人設一直很像個機器人,冷靜得很適合幹這事。」</p>
+<p>Kenji 沉默了兩秒,似乎不太確定這算不算誇獎,最終還是點了點頭。</p>
+<hr />
+<h2>二、兩部作品</h2>
+<p>「妳有看過《隔離島》,不,」Kenji 頓了頓,糾正自己,「我是說《怵目驚魂 28 天》(Donnie Darko),或是玩過《沉默之丘 2》嗎?」</p>
+<p>Chloe一臉茫然:「那是什麼?」</p>
+<p>「都不重要,」Kenji 揮揮手,「重點是它們探討的一種敘事概念——關於『主觀現實是否可靠』的懷疑。」他調整了一下坐姿,語氣切換成一種近乎講課的認真,「我根據 Max 這次的狀況,想了兩個猜想,純粹是假設,妳聽聽就好,別太當真。」</p>
+<p>「說。」</p>
+<hr />
+<h2>三、猜想一:切線宇宙</h2>
+<p>「第一個猜想,」Kenji 緩緩開口,「跟妳們的『雙保結局』有關。妳們當時是靠著某種超出常理的力量,同時保住了小鎮和 Max、也保住了妳。但如果借用一種平行宇宙的敘事邏輯——類似『切線宇宙』的概念——妳們現在所處的這個世界,搞不好本質上仍然是一條『不該存在』的分支時間線,只是暫時被強行『修正』穩定住了。」</p>
+<p>「妳是說,」Chloe 皺眉,「我們現在的生活,其實是一種……不穩定的狀態?」</p>
+<p>「借用《怵目驚魂 28 天》的邏輯來解釋,」Kenji 進一步說明,語氣像是在推演一個假設模型,「電影裡,那條不該存在的切線宇宙,需要靠一件『引擎』——一個具體、不合常理出現在錯誤時間點的物件,像那架墜毀的飛機引擎——來維持自身的存在。而這條分支時間線,最終必須靠『接受體』,把那個異常吸收回原本的軌跡,才能讓世界恢復穩定。」</p>
+<p>他頓了頓,目光落在 Chloe 身上,語氣謹慎了幾分。</p>
+<p>「套用到妳們身上,」他繼續說,「Max 當年在暗房裡拍下的那張照片——還有她那台相機本身——很可能就是這條時間線裡的『引擎』。那是一個原本『不該存在』的物件,卻硬生生撐起了『雙保結局』這個結果。」他停頓了一下,才把最後那句說完,「而『接受體』,很可能就是妳,Chloe。妳是那個原本應該要死去、卻被硬生生拉回時間線的存在。Max 這次的異狀,說不定就是那個『引擎』和妳這個『接受體』之間的連結,產生了某種細微的排斥反應——時間線本身,還在試圖『修正』這個不該存在的結果。」</p>
+<p>Chloe 聽得後背發涼,下意識摸了摸自己的手臂,像是要確認自己此刻是不是真實存在的。</p>
+<p>「這……」她艱難地開口,「這聽起來,比我想像中還要離譜。」</p>
+<p>「我說了,純屬猜測,」Kenji 立刻補充,語氣放緩了些,「這只是套用一部老電影的敘事邏輯去強行解釋,沒有任何實質證據。妳們去旅館拿到的那些線索、那套詭異的系統,背後或許牽扯著更複雜的東西,誰都說不準。」</p>
+<hr />
+<h2>四、猜想二:心魔</h2>
+<p>「第二個猜想,」Kenji 話鋒一轉,語氣柔和了些,「比較單純,也比較……人性化一點。」</p>
+<p>「說。」</p>
+<p>「妳有沒有注意到,」Kenji 看著她,「Max 那次頭痛發作的日子,剛好是妳爸——William——當年出事的忌日?」</p>
+<p>Chloe 猛地一怔,腦子飛快地回想日期,臉色瞬間變了。</p>
+<p>「如果只是單純的心理因素,」Kenji 繼續說,「那次或許跟超能力一點關係都沒有。Max 這幾年一直活在『妳會不會突然離開』的恐懼裡——先是那場風暴,後來是旅館案,現在又剛好撞上這個特殊的日子。她可能只是在潛意識裡,把『失去』這件事,和這個特定的日期綁在一起,身體用頭痛和流鼻血的方式,替她把那份說不出口的焦慮,發洩出來而已。」</p>
+<p>「這……」Chloe 的聲音有點抖,「這比第一個猜想,聽起來更讓人心疼。」</p>
+<hr />
+<h2>五、都是猜想而已</h2>
+<p>Kenji 看著她瞬間沉重下來的表情,難得地放緩了語氣。</p>
+<p>「我再說一次,」他認真地看著她,「這兩個都只是猜想,沒有任何實質證據支持,妳不用太往心裡去。也許就只是普通的偏頭痛,普通人也會突然這樣,不需要什麼超自然或心理學的解釋。」</p>
+<p>他頓了頓,嘴角忽然勾起一抹罕見的、帶著點刻意模仿意味的笑。</p>
+<p>「畢竟,」他慢悠悠地補了一句,語氣裡帶著明顯的調侃,「Life is strange 嘛。」</p>
+<p>Chloe 瞪大眼睛,又好氣又好笑地瞪了他一眼:「喂!這是我的台詞,妳搶什麼搶!」</p>
+<p>「我覺得挺應景的。」Kenji 難得地露出一絲得意的笑容。</p>
+<p>Chloe 沒好氣地翻了個白眼,但緊繃了一下午的肩膀,終於鬆懈下來,忍不住笑出聲。</p>
+<p>「不過,」她收起笑意,認真地看向他,「謝了,Kenji。不管是不是瞎猜,妳願意花時間陪我想這些,我很感激。」</p>
+<p>Kenji 難得地有些不自在,推了推眼鏡,別開視線:「不用謝,舉手之勞。」</p>
+<p>窗外的陽光透過玻璃灑進來,Chloe 望著這個一向面無表情、此刻卻難得展現出一絲溫度的技術宅,心裡那份沉甸甸的擔憂,雖然沒有徹底消失,卻多了一絲被人認真對待過的踏實感。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="unexpected_headache.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="subsidy_visit.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

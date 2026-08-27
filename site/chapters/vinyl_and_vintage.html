@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>唱片與古著 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 083 章 · 校園與公路(二)</div>
+  <h1>唱片與古著</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、黑膠洞穴</h2>
+<p>國會山區那家開了幾十年的老唱片行,一走進去就是撲面而來的舊紙板和塵封膠木的氣味。Chloe 幾乎是兩眼放光地一頭扎進成堆的黑膠箱裡,手指飛快地翻找著,不時發出驚呼。</p>
+<p>「靠,」她抽出一張邊角磨損的專輯封套,聲音都在抖,「這是 Nirvana 的初版黑膠,連刮痕都透著歷史感!」</p>
+<p>Max 站在她身邊,笑著看她像挖到寶藏似的,一張接一張把 Soundgarden、Sleater-Kinney 的舊唱片抱進懷裡,幾乎要抱不下。</p>
+<h2>二、古著店的換裝癖好</h2>
+<p>淘完唱片,兩人拐進隔壁一家堆滿舊衣架的古著店。</p>
+<p>Chloe 很快找到了心頭好——一件磨得恰到好處的棕色皮夾克,袖口帶著自然做舊的裂紋,還有一件破洞恰好分布得很有態度的法蘭絨襯衫。她把兩件衣服往身上一套,對著試衣鏡左右轉了轉,滿意地咧嘴一笑。</p>
+<p>「就這兩件了。」她剛想抱著去結帳,餘光就瞥見 Max 那雙眼睛,忽然亮得不太對勁。</p>
+<p>「等等,」Max 已經興沖沖地衝進衣架堆裡,不由分說地翻找起來,「妳先別急著結帳,我覺得妳應該試試這個。」</p>
+<p>她抱回來一疊衣服,款式一件比一件離譜——一件綴滿流蘇的復古牛仔外套、一頂寬邊牛仔帽、甚至還有一條印著誇張碎花圖案的長裙。</p>
+<p>「這是要幹嘛?」Chloe 一臉警惕地後退半步。</p>
+<p>「就試試嘛,」Max 已經舉起相機,眼神裡是那種熟悉的、每次犯病時都會出現的執著光芒,「反正試衣間免費。」</p>
+<h2>三、被迫走秀</h2>
+<p>在 Max 軟磨硬泡的攻勢下,Chloe 半推半就地換上了那套流蘇外套配牛仔帽的荒謬組合,從試衣間走出來時,整個人臭著臉,活像被迫營業的偶像。</p>
+<p>「笑一個。」Max 舉著相機,興奮地連拍好幾張。</p>
+<p>「這造型跟我的靈魂完全不搭,」Chloe 面無表情地擺著僵硬的姿勢,「我看起來像個牛仔主題派對上走錯場的臨演。」</p>
+<p>「很有反差萌,」Max 一邊拍一邊評論,完全沒有停手的意思,「換下一套,那條碎花長裙!」</p>
+<p>「不換了,」Chloe 試圖逃跑,卻被 Max 一把攔住,又硬塞了一堆衣服進試衣間。</p>
+<p>接下來的二十分鐘,Chloe 像個提線木偶一樣,被迫換上一套又一套風格迥異的服裝,從牛仔到波西米亞風,甚至還有一頂綴滿羽毛的誇張禮帽——Max 的快門聲,幾乎沒有停過。</p>
+<h2>四、經費不足大逃亡</h2>
+<p>好不容易換完最後一套,Chloe 終於忍無可忍,一把扯下頭上那頂羽毛帽子,重新套回自己那身皮夾克。</p>
+<p>「行了,」她語氣堅決,「今天的份額,老娘已經超額完成了。」</p>
+<p>「再試一件就好,」Max 還不死心,又翻出一件亮片斗篷。</p>
+<p>「不行,」Chloe 果斷抱起自己看中的那兩件戰利品,轉身就往收銀台衝,「經費有限,老娘的預算只夠買這兩件,妳那些花裡胡哨的東西,一律不在今天的採購清單裡!」</p>
+<p>她付完錢,幾乎是頭也不回地衝出店門,揚長而去。</p>
+<p>「喂!」Max 舉著那件亮片斗篷,在身後嘟著嘴,快步追了上去,「妳這是明擺著逃跑!」</p>
+<p>「這叫戰略性撤退,」Chloe 頭也不回,腳步卻明顯放慢了些,故意讓 Max 追上,「妳那些奇怪的收藏癖,再讓我試下去,今天這趟就得吃土回家了。」</p>
+<p>Max 追上她,氣喘吁吁地拽住她的袖子,一臉不滿:「妳穿那件牛仔造型明明很好看,妳自己看看剛才拍的照片!」</p>
+<p>她舉起相機,把螢幕轉過來給 Chloe 看。</p>
+<p>Chloe 湊過去瞄了一眼——螢幕裡的自己,雖然表情臭得像便秘,但那身流蘇配牛仔帽的造型,意外地有種粗獷又帥氣的違和魅力。</p>
+<p>「……」她沉默了兩秒,嘴硬地移開視線,「也就還好吧。」</p>
+<p>「妳明明就很喜歡,」Max 得意地笑了,湊過去在她臉頰上親了一下,「下次帶妳去更多古著店,妳的『收藏』我幫妳保管。」</p>
+<p>「妳這是把我的臉,」Chloe 沒好氣地瞪她,卻沒有真的生氣,「當成妳私人的換裝娃娃了吧。」</p>
+<p>「差不多,」Max 毫不掩飾地承認,笑著挽住她的手臂,「反正妳這張臉,穿什麼都挺好看的。」</p>
+<p>Chloe 被這句話噎住,耳根悄悄泛紅,只能嘟囔著加快腳步,拉著 Max 朝下一個目的地走去,把那句嘴硬的反駁,留在了心裡沒說出口。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="old_school_pilgrimage.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="georgetown_light.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

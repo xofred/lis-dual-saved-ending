@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>帥不過三秒 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 114 章 · Victoria與Kate</div>
+  <h1>帥不過三秒</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、奧斯卡影后級別的求知慾</h2>
+<p>大家坐在地毯上喝著茶,氣氛重新變得輕鬆。Chloe 盤腿坐著,單手托腮,把筆記本電腦上那首粵語同人曲的歌詞,用線上翻譯軟體打開,悄悄開啟了她那套「求知慾表演」。</p>
+<p>「Kate,Maxine,」她眨巴著大眼睛,一臉無辜地湊到兩人面前,「你們英語好。這句『懸崖邊的大雨,這次……』到底是什麼意境啊?是說某個小書呆子在懸崖上被雨淋成落湯雞,需要一個藍髮大美女給她暖被窩嗎?」</p>
+<p>Kate 扶著眼鏡,認真地翻看英文字幕,語氣裡帶著一絲困惑。</p>
+<p>「呃……Chloe,」她說,「從上下文來看,這應該象徵著命運降臨前的危機與悲劇預兆,不是指暖被窩……」</p>
+<p>Chloe 故作深沉地點點頭,一臉恍然大悟。</p>
+<p>「哦!原來是危機!」她說,「那遇到危機,是不是應該抱得更緊一點?像這樣?」</p>
+<p>說完,她順勢一把,把 Max 的腰摟得死死的。</p>
+<h2>二、得寸進尺</h2>
+<p>嚐到甜頭,Chloe 越發起勁,指著螢幕上那句深情的高潮句,故意捏著嗓子,用做作的播音腔朗讀起英文註解。</p>
+<p>「『就算世界沉沒,仍想護你一次』……」她一臉陶醉,「天哪,Maxine,這句太深奧了!這是在暗示某人願意為了拯救她最愛的女朋友,把整座小鎮當成祭品送給龍捲風嗎?」</p>
+<p>「那被保護的那個人,」她順勢把腦袋往 Max 懷裡蹭,語氣裡帶著毫不掩飾的得逞感,「是不是該每天給她的守護神獻上早安吻,外加負責一整年的修車費作為肉償呢?」</p>
+<h2>三、破綻百出</h2>
+<p>Chloe 越演越起勁,一邊裝作虛心求教,一邊在桌底下瘋狂抖腿,嘴角憋笑憋到快抽筋,眼裡那股藏不住的痞氣和得逞的光芒,幾乎要溢出來。</p>
+<p>正當 Kate 還在試圖用宗教哲學,認真向她解釋「犧牲與救贖」的深層含義時,Max 的視線,無意間瞥向 Chloe 那台還亮著的平板瀏覽器後台。</p>
+<p>搜索紀錄赫然攤開在螢幕上:</p>
+<p><strong>「粵語『掀起滔天暗示』怎麼用來調情」</strong></p>
+<p><strong>「如何用情歌歌詞讓社恐女友臉紅一整天」</strong></p>
+<p><strong>「在線翻譯:就算世界沉沒我也要親你」</strong></p>
+<h2>四、當場抓包</h2>
+<p>Max 臉上那抹羞紅,瞬間轉化成一種被耍後的、極致的惱羞成怒。</p>
+<p>她面無表情地合上筆記型電腦,深吸了一口氣。</p>
+<p>「Chloe Price。」她的聲音平靜得像暴風雨前的寧靜。</p>
+<p>「怎麼了,」Chloe 還在嬉皮笑臉,「我的首席翻譯官?」</p>
+<h2>五、正義鐵拳</h2>
+<p>話音未落,Max 抄起沙發上最沉的一個羊毛抱枕,精準無誤地拍在她臉上,直接把她拍倒在毛毯上。</p>
+<p>緊接著,她翻身騎坐上 Chloe 的腰,雙手直奔她最怕癢的肋骨和脖子兩側。</p>
+<p>「裝不懂是吧?!」Max 手上的動作絲毫不留情,「微侵犯歌詞是吧?!肉償是吧?!今天不把妳在西雅圖拍的醜照洗一百張貼在走廊,我就不叫 Maxine!」</p>
+<h2>六、朋克硬漢的求饒</h2>
+<p>平時天不怕地不怕的 Chloe,瞬間徹底破防,在地上笑得瘋狂打滾,眼淚狂飆,兩條大長腿在半空中亂蹬。</p>
+<p>「哈哈哈哈哈!」她笑得上氣不接下氣,「停!Maxine!我錯了!饒命!Kate 救我!家暴啊!」</p>
+<h2>七、吃瓜群眾</h2>
+<p>坐在對面的 Victoria,優雅地抿了一口花草茶,饒有興致地冷笑一聲。</p>
+<p>「打得好,考菲爾德,」她說,「用點力,把她腦子裡的廢鐵敲出來。」</p>
+<p>Kate 則笑瞇瞇地把茶几上的熱茶杯往旁邊挪了挪,以防被滾成一團的兩人撞翻,雙手合十,語氣溫柔地下了個結論。</p>
+<p>「看來這段歌詞的中心思想,」她一本正經地說,「確實是『充滿生機的肢體互動』呢。」</p>
+<p>房間裡響起一片鬨笑,Chloe 抱著頭在毛毯上滾來滾去,終於徹底求饒,而 Max 這才心滿意足地鬆開手,居高臨下地俯視著她這副狼狽又心虛的模樣,眼底卻藏不住一絲笑意。</p>
+<p>Chloe 揉著發癢的側腰,喘著氣從地上坐起來,不死心地繼續添油加醋。</p>
+<p>「妳們都看到了吧,」她指著 Max,一臉悲憤,「這就是家暴!她天天這樣對我,肋骨都被撓出瘀青了,長期精神虐待,老娘活得生無可戀!」</p>
+<p>Kate 端起茶杯,慢條斯理地喝了一口,視線飄向窗外,彷彿完全沒聽見這句控訴。</p>
+<p>Victoria 則低頭仔細研究起自己指甲上的甲油顏色,語氣平淡地跟旁邊的空氣搭話:「今天天氣真好。」</p>
+<p>「喂!」Chloe 瞪大眼睛,難以置信地看著這兩人默契十足的迴避,「妳們是集體失聰了嗎?」</p>
+<p>「我什麼都沒聽到,」Kate 依然望著窗外,唇角卻藏不住一絲笑意。</p>
+<p>「我也是,」Victoria 附和,「這裡只有風聲。」</p>
+<p>Max 在一旁憋著笑,一臉「這就是妳自找的」的表情,絲毫沒有替她說話的打算。</p>
+<p>Chloe 徹底洩了氣,癱回毛毯上,望著天花板長嘆一口氣:「這個世界,已經沒有人願意為受害者發聲了。」</p>
+<p>Max 看著她這副誇張的委屈模樣,終究還是沒忍住,湊過去,在她發紅的側腰上輕輕揉了揉,又貼近她耳邊,壓低聲音說了句什麼。</p>
+<p>沒人聽清具體內容,只看到 Chloe 瞬間眼睛一亮,委屈的表情秒速切換成心滿意足的壞笑,伸手攬過 Max 的脖子,湊近又低聲回了句什麼,惹得 Max 也跟著紅了臉,輕輕拍了她一下。</p>
+<p>坐在對面的 Kate,把這一切看在眼裡,腦補的畫面瞬間豐富了起來,臉頰微微泛紅,雙手合十,一臉認真地開口叮囑。</p>
+<p>「那個,」她的聲音帶著一絲刻意維持的鎮定,「不管你們等下要做什麼,記得注意安全,還有,」她頓了頓,像是斟酌著用詞,「音量也稍微控制一下,隔壁房間住的是新生,別嚇著人家。」</p>
+<p>Max 瞬間石化,臉刷地一下漲得通紅,結結巴巴地想解釋:「不、不是妳想的那樣!我們只是——」</p>
+<p>「妳們想去哪玩不用跟我解釋,」Kate 一臉「我都懂」的溫柔微笑,絲毫沒有要聽解釋的意思,「上帝也鼓勵健康的親密關係。」</p>
+<p>「Kate!」Max 幾乎要崩潰,「我剛才只是說要帶她去買宵夜!」</p>
+<p>Chloe 在旁邊笑得直不起腰,絲毫沒有幫忙澄清的意思,反而順著這個誤會,煞有介事地點頭附和:「對,买宵夜,順便……談點別的。」</p>
+<p>「Chloe!」</p>
+<p>一旁的 Victoria 端著茶杯,饒有興致地看著這場越描越黑的鬧劇,忍不住輕笑出聲:「看來這齣戲,今晚還有下集。」</p>
+<p>她話鋒一轉,饒有興味地打量著 Kate,眼神裡帶著一絲揶揄。</p>
+<p>「話說回來,Kate,」她挑眉,「妳這番『注意安全』『控制音量』的提醒,聽起來未免太有經驗了吧?哪個純潔的教會少女,能把老司機的台詞說得這麼順口?」</p>
+<p>Kate 瞬間僵住,臉頰以肉眼可見的速度紅了起來,雙手合十的動作也跟著慌亂了幾分。</p>
+<p>「我、我只是……」她結結巴巴,一時找不到合適的解釋,「聽室友提過幾次而已!純粹是耳濡目染!」</p>
+<p>「耳濡目染,」Victoria 意味深長地重複了一遍,嘴角笑意更深,絲毫不打算輕易放過這個難得的破綻。</p>
+<p>Kate 徹底招架不住這波反擊,只能舉起雙手投降,把臉埋進手裡,發出一聲細若蚊蚋的哀嚎:「別再說了……」</p>
+<p>Max 和 Chloe 對視一眼,忍不住笑出聲來——沒想到今晚這場鬧劇,最後居然輪到 Kate 自己社死收場。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="mv_incident.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="dual_defense.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

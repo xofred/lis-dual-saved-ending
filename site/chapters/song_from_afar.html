@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>滔天暗示 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 056 章 · 校園與衰退</div>
+  <h1>滔天暗示</h1>
+
+  <div class="media-slot"><div class="media-item media-audio"><span class="slot-label">♪ 配樂</span><audio controls preload="none" src="../songs/song_from_afar.mp3"></audio></div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/song_from_afar.jpeg" alt="滔天暗示" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、意外刷到的歌</h2>
+<p>露營第二晚,兩人窩在皮卡後斗的睡袋裡,靠著微弱的手機訊號漫無目的地滑著影片。Chloe 一邊嚼著薯片,一邊隨手點開一個演算法推薦的陌生連結。</p>
+<p>前奏一下,是一種她從沒聽過的語言——帶著獨特的聲調起伏,吉他編曲卻意外地扎實。</p>
+<p>「等等,」Chloe 挑眉,湊近螢幕,「這唱的是哪國語言?香港?廣州?」她頓了頓,一臉茫然又帶著點驚喜,「雖然老娘一個字都聽不懂,但這旋律和編曲——該死,居然比 Blackwell 那幫裝腔作勢的獨立樂隊寫得好聽一萬倍。」</p>
+<p>她點開自動翻譯字幕,螢幕上跳出斷斷續續、帶著翻譯腔的英文字句——大意是「如果命運注定要寫下終點,我寧願撕碎規則,陪你走過深淵」。</p>
+<p>Chloe 吹了聲口哨,拿手肘撞了撞 Max 的肩膀:「看啊 Maxine,在地球另一端、幾萬公里外,居然有人用我們完全聽不懂的語言,寫了一首聽起來像是專門獻給妳這個『時空恐怖分子』的輓歌。」</p>
+<p>Max 沒有接話,眼睛死死盯著螢幕。</p>
+<hr />
+<h2>二、窒息的共鳴</h2>
+<p>畫面切換,MV 裡出現一段昏暗的走廊、一聲槍響的音效——</p>
+<p>Max 的手指瞬間收緊,死死攥住了睡袋邊緣。</p>
+<p>畫面很快又切換了,轉到黑白色調的葬禮場景,一隻藍色的蝴蝶,緩緩振翅,從棺木上方飛過。</p>
+<p>Chloe 的呼吸猛地一滯。</p>
+<p>「等等,」她的聲音有點抖,伸手按住 Max 的手腕,示意先別划走,「倒回去一點。」</p>
+<p>Max 依言把進度條往回拖了幾秒,兩人一起盯著螢幕,看著那隻畫質略顯粗糙、卻精準戳中某個記憶開關的動畫蝴蝶,一次又一次地重複振翅、飛過棺木、消失在畫面邊緣。</p>
+<p>「這……」Chloe 的聲音很輕,「跟我們在 Rachel 墓前看到的那隻,顏色一模一樣。」</p>
+<p>「巧合嗎?」Max 也有點恍惚。</p>
+<p>「我不知道,」Chloe 搖搖頭,目光卻依然黏在螢幕上,「但這種巧合,已經多到讓人沒辦法只當它是巧合了。」</p>
+<p>兩人沉默地又把那幾秒鐘重播了一次,誰都沒有催著往下看,任由那隻虛擬的蝴蝶,在螢幕裡一遍一遍,靜靜地飛過。</p>
+<p>過了許久,Max 才輕輕按下播放鍵,讓 MV 繼續往下走——懸崖邊的暴雨畫面裡,兩個模糊的身影,在雷聲中緊緊相擁。</p>
+<p>Max 的手開始微微發抖。</p>
+<p>那些跨越時空的記憶碎片——無數次失敗的回溯、暗房裡的窒息感、風暴前那個不能回頭的選擇——彷彿全部被這段陌生語言的旋律,重新串聯了起來。</p>
+<p>字幕滾動到副歌:「就算世界沉沒,仍想護你一次。」</p>
+<p>Max 盯著螢幕,眼眶毫無預警地泛紅,聲音輕得像是自言自語:「原來……在別人的宇宙裡,這場風暴,永遠沒有停過。」</p>
+<hr />
+<h2>三、收起嬉笑</h2>
+<p>Chloe 察覺到她的異樣,原本掛在臉上的調侃笑意,一點一點收了起來。</p>
+<p>MV 播到最後,畫面定格在一輛老皮卡衝出廢墟、兩人重逢相擁的畫面,和一個模糊卻溫柔的吻。</p>
+<p>Chloe 忽然伸手,按滅了 Max 手裡的手機螢幕。</p>
+<p>她沒有說任何調侃的話,只是把 Max 的腦袋輕輕按進自己的頸窩,任由冷冽的湖風灌進睡袋的縫隙,感受著懷裡那具身體微微顫抖的溫度,和滴落在自己鎖骨上的、溫熱的眼淚。</p>
+<p>「聽到了嗎,書呆子。」她的聲音有點沙啞,低頭吻著 Max 的髮頂,「幾萬里外,居然有人替我們記住了那場風暴。」</p>
+<p>Max 吸了吸鼻子,伸手緊緊環住她的腰,聲音悶悶地從她頸窩裡傳出來:「……」</p>
+<p>「但最重要的是,」Chloe 繼續說,語氣裡帶著一種近乎篤定的溫柔,「老娘現在就在這裡,被妳這個破睡袋裹得滿身大汗,而且哪兒都不會去。」</p>
+<p>Max 終於破涕為笑,抬起頭,眼眶還泛著紅,卻帶著失而復得般的笑意。</p>
+<p>「Chloe,」她吸了吸鼻子,聲音裡帶著一絲哽咽後的鬆快,「把剛才那首歌,加進車載播放清單裡吧。」</p>
+<p>「妳聽得懂?」</p>
+<p>「一個字都聽不懂,」Max 笑著搖頭,靠回她懷裡,「但下次開長途公路的時候,我想聽著它看日落。」</p>
+<hr />
+<p>海浪一下一下拍打著遠處的礁石,篝火早已熄滅成一堆餘燼。皮卡車斗裡,兩具交疊的身影,在冷冽的夜風中,安靜地擁抱著彼此,還有那段來自遙遠他方、卻精準擊中了她們靈魂的、陌生語言的旋律。</p>
+<p>某種意義上,這是一張來自世界另一端的存在證明——告訴她們,那場她們拚了命換來的、關於愛與抗爭的故事,早已在她們看不見的地方,留下了不可磨滅的回響。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="coastal_camping.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="fading_tide.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

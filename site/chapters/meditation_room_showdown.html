@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>靜心室交鋒 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 106 章 · Victoria與Kate</div>
+  <h1>靜心室交鋒</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、免打擾特權</h2>
+<p>校方為了展現關懷,在 Kate 的牽頭下,把一間舊自習室改造成了「心理安全與靜心冥想室」——這裡擁有最高級別的免打擾特權,任何老師都不得強行叫走正在進行「創傷療癒」的學生。</p>
+<h2>二、鑽空子天才</h2>
+<p>週三下午,枯燥的進步主義通識大課正在進行,Chloe 卻抱著一大包多力多滋薯片,戴著降噪耳機,大喇喇地陷進靜心室最舒服的懶人沙發裡,翹著二郎腿打著掌機。</p>
+<p>門口的登記表上,她用粗黑簽字筆,在「進入原因」一欄龍飛鳳舞地寫下:</p>
+<p><strong>「嚴重情感創傷:剛才在走廊被英語教授的領帶顏色進行了視覺微侵犯,需要在此進行長達兩小時的沉浸式心理排毒。」</strong></p>
+<h2>三、狼狽的撞見</h2>
+<p>天台鬧劇過後,滿身泥巴的 Victoria 走進靜心室想洗把手,一推門,就撞見了正舒舒服服嚼著薯片、甚至還開了一罐冰鎮可樂的 Chloe。</p>
+<h2>四、理智斷線</h2>
+<p>Victoria 抱著手臂,一眼瞥見門口那張荒謬的登記表,氣得眉毛直跳。</p>
+<p>「Price!」她的聲音拔高,「妳上週在那間進步機構,不是還把『微侵犯』這個詞罵成中產階級的無病呻吟嗎?現在居然拿這個當理由,逃掉期末必修課?!」</p>
+<h2>五、無賴哲學</h2>
+<p>Chloe 嘴裡叼著薯片,慢悠悠地摘下一邊耳機,挑眉露出招牌式的痞笑。</p>
+<p>「蔡斯大小姐,」她說,「這叫『用魔法打敗魔法』。」</p>
+<p>「體制既然給老子發明了這麼多愚蠢的規則和標籤,」她攤手,語氣裡帶著毫不掩飾的理直氣壯,「老娘不拿來逃課睡大覺,豈不是對不起校長那張虛偽的臉?」</p>
+<p>她朝身邊的空位努了努下巴,大方地晃了晃手裡的薯片袋。</p>
+<p>「過來坐啊,」她笑得欠揍,「沙發挺軟的,分妳半包洋蔥圈,就當治癒一下妳剛才被兔子嚇破的膽子。」</p>
+<p>「妳!」Victoria 一時語塞,臉頰又氣又窘地泛紅——她完全沒料到,連兔子追逐這種糗事,消息都已經傳到了 Chloe 耳朵裡。</p>
+<h2>六、最終調解</h2>
+<p>正端著花草茶走進來的 Kate,看了看滿身泥巴、氣急敗壞的 Victoria,又看了看理直氣壯、毫無悔意的 Chloe,只是安靜地走過去,把靜心室的百葉窗輕輕拉上,徹底阻隔了門外教務主任探頭探腦的視線。</p>
+<p>她微微一笑,把兩杯熱氣騰騰的花草茶,分別放在兩人面前。</p>
+<p>「既然兩位,」她語氣溫和,帶著一絲不容拒絕的堅定,「都在這裡經歷著各自的『心靈考驗』,那麼在下課鈴響之前,這裡就只有洋甘菊茶,沒有曠課名單。」</p>
+<p>Victoria 翻了個白眼,一時說不出反駁的話,最終還是認命地在另一張懶人沙發上坐下,接過 Chloe 遞來的薯片袋,狠狠咬碎一片,語氣裡帶著徹底放棄掙扎的無奈。</p>
+<p>「……下不為例,」她咬牙切齒地嘟囔,「你們這群瘋子。」</p>
+<p>Chloe 咧嘴一笑,舉起手裡的可樂罐,朝她碰了碰杯:「歡迎加入,大小姐。」</p>
+<p>窗外的陽光透過緊閉的百葉窗縫隙,斜斜灑進這間充斥著薯片香氣和洋甘菊茶香的靜心室,三個曾經在校園裡各自站在不同立場的女孩,此刻難得地擠在同一片安靜的午後時光裡,誰都沒有再多說一句關於規則與道德的爭辯。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="rooftop_gardening_disaster.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="century_reconciliation_shot.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

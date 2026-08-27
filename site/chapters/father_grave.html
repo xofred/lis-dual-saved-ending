@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>父親的墓 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 016 章 · 背景與序曲</div>
+  <h1>父親的墓</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/father_grave.jpeg" alt="父親的墓" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、另一座墓碑</h2>
+<p>離開 Rachel 的墓地後,Chloe 沒有立刻往皮卡的方向走,而是繞了條小路,走向公墓深處另一個角落。</p>
+<p>Max 沉默地跟在她身後,沒有多問——她知道這條路通向哪裡。</p>
+<h2>二、童年的暗號</h2>
+<p>William Price 的墓碑不算起眼,樸素的灰色石材,刻著簡單的名字和生卒年份,邊角已經被歲月磨得有些圓潤。</p>
+<p>Chloe 從口袋裡摸出一樣東西,輕輕放在墓碑前——一把磨得發亮的老式金屬火花塞套筒,邊緣還留著經年累月使用留下的痕跡。那是當年 William 教她修車時,兩人共用過的老工具。</p>
+<p>「還熱的,」她低聲說,把手裡另一個紙袋也放下,「餐館剛出爐的藍莓煎餅,你以前最愛吃這個。」</p>
+<p>Max 也蹲下身,從包裡取出一張洗印好的拍立得,輕輕放在旁邊——照片裡,年幼的 Chloe 和 Max,滿臉沾著麵粉,笑得肆無忌憚,William 繫著圍裙站在她們身後,手裡還舉著一個平底鍋。</p>
+<p>Chloe 看到那張照片,呼吸猛地一滯。</p>
+<h2>三、跪下的孩子</h2>
+<p>她伸出手,指尖撫過墓碑上刻著的名字,微微顫抖。</p>
+<p>沒有像平常那樣歪歪扭扭地站著,她慢慢跪坐到潮濕的草地上,把額頭輕輕抵在冰涼的石碑頂端,像個做錯事、終於找到路回家的孩子。</p>
+<p>沉默了很久很久,她才終於開口,聲音低沉,卻沒有了以往提起這件事時的尖銳和刺痛。</p>
+<p>「嗨,老爸,」她的聲音有點啞,「我來看你了。」</p>
+<p>「抱歉,好久沒來了,」她吸了吸鼻子,「以前每次來,我都只想對著這塊石頭大吼大叫——怪你那天為什麼要拿車鑰匙,怪你為什麼就這麼丟下我跟媽不管。」</p>
+<p>她頓了頓,肩膀微微起伏。</p>
+<p>「但我現在想通了,」她繼續說,「你不是故意要走的。這操蛋的命運,就喜歡在人最想不到的時候,給你來一記悶棍。」她深吸一口氣,像是終於卸下了一副背了五年的重擔,「我原諒你了,老爸。」</p>
+<h2>四、另一個女兒</h2>
+<p>她吸了吸鼻子,回頭看了一眼安靜站在兩步外、眼眶已經泛紅的 Max,嘴角扯出一個溫柔的笑容。</p>
+<p>「還有,」她說,「看我把誰帶回來給你了。」</p>
+<p>「你的另一個女兒,Maxine,」她的聲音裡帶著一種近乎驕傲的柔軟,「這幾年是長高了一點,但還是那個拍照笨手笨腳、動不動就發呆的書呆子。」</p>
+<p>「老爸,」Chloe 的聲音又低了幾分,「你走了之後,我差點把自己整個人生都砸得稀巴爛。但她回來了。她穿過了無數場噩夢和風暴,把時間都撕碎了無數次,最後硬是把我從那個坑裡,拽了回來。」</p>
+<h2>五、Max 的承諾</h2>
+<p>聽到這裡,Max 終於走上前,蹲到 Chloe 身邊,伸手握住那隻布滿老繭和紋身、此刻卻微微發顫的手。</p>
+<p>她抬起頭,直視著那塊墓碑,聲音很輕,卻異常認真。</p>
+<p>「William 叔叔,」她開口,語氣裡帶著一絲不易察覺的哽咽,「當年你走了之後,我逃去了西雅圖,一個人躲得遠遠的,留下 Chloe 一個人扛著這一切——這是我這輩子,最說不出口的一件憾事。」</p>
+<p>她頓了頓,握緊了 Chloe 的手。</p>
+<p>「但我向你保證,」她繼續說,「從今以後,我不會再逃了。」</p>
+<p>「我會看著她修車,」她的聲音漸漸穩了下來,「她也會看著我好好拍照。你可以放心了。」</p>
+<h2>六、告別</h2>
+<p>海風穿過公墓外圍的松樹林,雲層裂開一道縫隙,一縷陽光斜斜灑在墓碑上。</p>
+<p>Chloe 俯下身,輕輕吻了吻墓碑冰涼的邊緣,才緩緩站起身,拍了拍膝蓋上沾著的泥土。</p>
+<p>那個困擾了她整整五年、無數次在噩夢裡哭喊著「你為什麼離開我」的心結,在這一刻,終於化成了一種平靜的、不再帶著撕裂感的思念。</p>
+<p>「好了,」她轉身,把大半重量懶洋洋地壓到 Max 身上,長長舒了一口氣,「老頭子應該聽到了。要是我們以後敢吵架,他大概會在天上拿扳手敲我們的腦袋。」</p>
+<p>「那也是先敲你的,」Max 笑著伸手扶住她的腰,「畢竟妳才是那個總愛挑事的人。」</p>
+<p>Chloe 被逗得哈哈大笑,伸手揉亂了 Max 的頭髮,兩人並肩踩著滿地落葉,朝著那輛引擎轟鳴的老皮卡走去。</p>
+<p>身後,那塊灰色的墓碑靜靜立著,藍莓煎餅的香氣混在海風裡,那張沾著麵粉、笑得毫無防備的老照片,靜靜地躺在墓碑前的草地上,像是終於補上了一句遲來了很久很久的,「我很好,老爸。」</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="frank_at_grave.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="tin_box.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

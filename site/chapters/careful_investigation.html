@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>謹慎行事 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 038 章 · 旅館連環案</div>
+  <h1>謹慎行事</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/careful_investigation.jpeg" alt="謹慎行事" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、私下的門路</h2>
+<p>Chloe、Max 和 Kenji 再次來到醫院,這次帶著那張放大處理過的財務文件照片,把整件事的來龍去脈一五一十地告訴了 Leon。</p>
+<p>Leon 靠在病床上,聽完整段陳述,神情從一開始的驚訝,漸漸沉澱成一種與年紀不太相符的審慎。</p>
+<p>「你們做得對,沒直接交給警局。」他緩緩開口,手指無意識地敲著床邊扶手,「我這幾天躺在床上想了很多——證物室那次入侵,手法太乾淨了,我沒辦法排除內部有問題的可能性。如果我們現在直接把這個丟進正規系統走流程,搞不好還沒等到深入調查,線索就先被神不知鬼不覺地銷毀或洩露出去,反而打草驚蛇。」</p>
+<p>「那怎麼辦?」Chloe 問。</p>
+<p>「我有個大學同學,」Leon 想了想,「現在在 FBI 金融犯罪那條線做事,權限比我這邊高不少,人也信得過。我私下拜託他幫忙查一下這個帳戶的關聯資訊,不走官方申請流程,低調處理。這樣至少能先確認線索是否有效,再決定下一步怎麼往上呈報。」</p>
+<p>三人對視一眼,由衷地佩服起來。</p>
+<p>「你這判斷,」Kenji 忍不住開口,「比很多正式辦案的人都謹慎。」</p>
+<p>Leon 難得地露出一絲不好意思的表情,撓了撓後腦勺:「其實也沒什麼,」他笑了笑,「我從小跟我爸一起看各種 CSI、犯罪心理那類美劇長大的,他是死忠劇迷,家裡電視常年鎖定那幾個台。耳濡目染久了,腦子裡大概也裝了不少『辦案該注意什麼』的常識,雖然大部分可能只是電視劇瞎編的。」</p>
+<p>「至少這次瞎編得挺管用。」Chloe 笑著調侃。</p>
+<hr />
+<h2>二、拍照速成班(續)</h2>
+<p>回到校園,暗房速成課還在繼續。這天,Chloe 一邊擺弄相機一邊隨口問:「最近有什麼流行的東西嗎?我想拍點『貼近潮流』的題材,反正 Victoria 那邊肯定又要拿『格調』說事。」</p>
+<p>Brooke 和 Warren 對視一眼,異口同聲:「妳不會喜歡的。」</p>
+<p>「試試看啊,」Chloe 不服氣,「我沒那麼老古板。」</p>
+<p>Kenji 已經默默打開平板,調出幾支短影音——內容五花八門,全是各種毫無邏輯可言的網路挑戰:有人把整顆生洋蔥當蘋果啃、有人邊倒立邊唱歌唱到面紅耳赤、還有一支影片是一群人排成一列,輪流用誇張的表情模仿某種說不清是什麼動物的叫聲,底下留言區一片「笑死」和滿滿的表情符號。</p>
+<p>Chloe 盯著螢幕看了足足十秒,一臉生無可戀。</p>
+<p>「這是……人類文明的未來?」</p>
+<p>「潮流就是這樣,」Kenji 聳肩,語氣一如既往地平淡,「沒有邏輯可言,火了就是火了。」</p>
+<p>「那我拍不了,」Chloe 果斷放棄,「這種東西拍出來我自己都尷尬。有沒有別的選項?比較有文化底蘊那種。」</p>
+<p>「歷史雕像呢?」她又提議。</p>
+<p>「幾年前鎮上那批老雕像,」Max 想了想,「因為年久失修加上一些爭議,好像都已經拆光了,現在原地大概只剩空底座。」</p>
+<p>「那博物館?」</p>
+<p>Kenji 又調出一份數據,螢幕上是本地博物館最近的訪客流量統計:「節假日期間,外地遊客加上本地 staycation 的人潮,平均排隊時間超過一小時,想找個安靜角度取景基本不可能。」</p>
+<p>Chloe 深吸一口氣,眼看又要炸毛。</p>
+<p>「那到底要我拍什麼——」</p>
+<p>「畫廊怎麼樣?」Max 忽然開口,眼睛一亮,「鎮上那間小型藝廊,平時人不多,而且裡面掛的畫本身就是『被框住的畫面』,如果妳站在畫前面拍,鏡頭裡同時會有畫、畫框、還有妳自己的倒影——某種套娃式的層層構圖,概念上很有意思。」</p>
+<p>Chloe 愣了一下,認真琢磨了兩秒,勾起嘴角:「這個聽起來,倒是有點意思。」</p>
+<p>「而且,」Max 補充,眼神帶著點狡黠,「保證比生啃洋蔥有格調多了。」</p>
+<p>Chloe 白了她一眼,收拾起相機:「行吧,走,去畫廊。」</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="open_day_dei.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="accidental_fisherman.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

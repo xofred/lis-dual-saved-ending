@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>拍立得相簿 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="index.html">目錄</a>
+    <a href="polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="gallery-page">
+  <div class="gallery-hero">
+    <div class="eyebrow">POLAROID ARCHIVE</div>
+    <h1>拍立得相簿</h1>
+    <p class="subtitle">散落在故事裡的6張快照,點一張回到它出現的章節</p>
+  </div>
+  <div class="gallery-grid"><a class="gallery-card" href="chapters/accidental_fisherman.html">
+                  <div class="polaroid-card polaroid-card-lg" style="--rot: -4deg">
+                    <img src="polaroids/accidental_fisherman.jpeg" alt="意外的漁夫 拍立得照片" loading="lazy">
+                    <div class="polaroid-caption">意外的漁夫</div>
+                  </div>
+                </a>
+<a class="gallery-card" href="chapters/resignation_maid_encore.html">
+                  <div class="polaroid-card polaroid-card-lg" style="--rot: -2deg">
+                    <img src="polaroids/resignation_maid_encore.jpeg" alt="辭職與復工 拍立得照片" loading="lazy">
+                    <div class="polaroid-caption">辭職與復工</div>
+                  </div>
+                </a>
+<a class="gallery-card" href="chapters/debt_repaid.html">
+                  <div class="polaroid-card polaroid-card-lg" style="--rot: 0deg">
+                    <img src="polaroids/debt_repaid.jpeg" alt="還債日 拍立得照片" loading="lazy">
+                    <div class="polaroid-caption">還債日</div>
+                  </div>
+                </a>
+<a class="gallery-card" href="chapters/demolition_squad.html">
+                  <div class="polaroid-card polaroid-card-lg" style="--rot: 2deg">
+                    <img src="polaroids/demolition_squad.jpeg" alt="拆遷隊 拍立得照片" loading="lazy">
+                    <div class="polaroid-caption">拆遷隊</div>
+                  </div>
+                </a>
+<a class="gallery-card" href="chapters/coastal_camping.html">
+                  <div class="polaroid-card polaroid-card-lg" style="--rot: 4deg">
+                    <img src="polaroids/coastal_camping.jpeg" alt="海岸線露營 拍立得照片" loading="lazy">
+                    <div class="polaroid-caption">海岸線露營</div>
+                  </div>
+                </a>
+<a class="gallery-card" href="chapters/analog_rebellion.html">
+                  <div class="polaroid-card polaroid-card-lg" style="--rot: -4deg">
+                    <img src="polaroids/analog_rebellion.jpeg" alt="傳統的反攻 拍立得照片" loading="lazy">
+                    <div class="polaroid-caption">傳統的反攻</div>
+                  </div>
+                </a></div>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

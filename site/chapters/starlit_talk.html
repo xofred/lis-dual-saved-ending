@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>星空夜話 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 112 章 · Victoria與Kate</div>
+  <h1>星空夜話</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、裹著毯子的四人</h2>
+<p>夜幕降臨,俄勒岡的夜空格外清澈,銀河橫跨在阿卡迪亞海灣之上。四個人裹著毯子,並排躺在溫室外的木甲板上,微涼的海風拂過臉頰,滿天星斗靜靜俯視著這片曾經被陰霾籠罩的小鎮。</p>
+<p>沒有人急著開口,只是靜靜躺著,聽著遠處懸崖下規律的浪濤聲。</p>
+<p>過了許久,還是 Kate 先打破了沉默。</p>
+<h2>二、Kate:用溫柔重構的世界</h2>
+<p>「我想去讀兒童心理學,」她望著星空,聲音輕柔卻帶著一種篤定,「並把園藝療法結合進去。」</p>
+<p>「經歷過黑暗之後,」她頓了頓,像是在斟酌怎麼把心裡那份感悟說清楚,「我才明白,一株破土而出的幼苗,能有多大的力量。我想開一家社區溫室診所,陪伴那些在學校裡感到孤立、受過創傷的孩子——讓他們知道,泥土和陽光,永遠不會拋棄任何人。」</p>
+<p>夜色中,誰都沒有打斷她,只是靜靜聽著,任由這份溫柔的願景,在星空下緩緩鋪展開來。</p>
+<h2>三、Victoria:撕碎虛偽的藝術引路人</h2>
+<p>輪到 Victoria,她抱著手臂,望著天邊那顆最亮的星,語氣裡帶著一種難得褪去傲慢的認真。</p>
+<p>「我不會接手家族那些無聊的房地產信託,」她說,「我要去紐約,或者倫敦,做獨立策展人。」</p>
+<p>「但我不會捧那些喝著香檳、滿嘴空洞理論的學院派騙子,」她的聲音裡透出一絲銳利,「我要開一家自己的先鋒畫廊,專門挖掘那些在地下室、廢墟和街頭掙扎的真正創作者——沒錯,」她瞥了眼身邊的 Max,嘴角勾起一抹促狹的笑,「包括某個只會用過期膠捲拍照的社恐極客。」</p>
+<p>Max 被這句話逗笑,伸手輕輕推了她一把,沒有反駁。</p>
+<h2>四、Max:記錄時間與記憶的眼睛</h2>
+<p>Max 望著滿天星斗,聲音裡帶著一種安靜卻堅定的嚮往。</p>
+<p>「我不想去紐約擠那些名利場的時裝秀,」她說,「我想開著車,沿著西海岸這條公路一直走,去拍那些即將消失的伐木小鎮、老式修車廠、生鏽的燈塔,還有像我們一樣,在邊緣生活著的普通人。」</p>
+<p>她頓了頓,聲音更輕了些。</p>
+<p>「時間總是在往前走,很多東西隨時會消失,」她說,「我想用膠片,替這個世界,把真實的記憶留下來。」</p>
+<p>Chloe 側過頭看她,眼神裡帶著毫不掩飾的溫柔,沒有說話,只是悄悄伸手,握住了她的手。</p>
+<h2>五、Chloe:廢土與公路的機械詩人</h2>
+<p>最後輪到 Chloe。她嘴裡叼著一根未點燃的草棍,枕著雙手,望著北極星,眼神裡少見地帶著一種沉靜的篤定。</p>
+<p>「老娘要開一家自己的客製化機車與老爺車改裝廠,」她說,「不聽任何老闆的狗屁指令,只接自己看順眼的活兒。」</p>
+<p>她頓了頓,嘴角慢慢揚起一抹溫柔的笑意。</p>
+<p>「等賺夠了油錢,」她說,「我就把皮卡車後面裝上最硬核的露營設備,載著 Max 跑遍六十六號公路和阿拉斯加荒原。只要發動機還能轉,公路沒有盡頭,老子就不會停下來。」</p>
+<p>Max 握緊她的手,靠得更近了些,沒有說話,只是那份無聲的依偎,已經是最好的回應。</p>
+<h2>六、星光下的沉默</h2>
+<p>星光灑在四個人的臉龐上,海浪在懸崖下規律地拍打著礁石,誰都沒有再多說什麼,只是靜靜地躺著,任由夜風拂過,任由各自對未來的嚮往,在這片星空下靜靜地生長、蔓延。</p>
+<p>所有的創傷與風暴,都已成為過往。這片曾經被陰霾籠罩的小鎮夜空下,四個年輕的女孩,正望著同一片星河,各自懷抱著截然不同、卻同樣真實而滾燙的未來,在她們眼前,無限地延展開去。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="three_gifts.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="mv_incident.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

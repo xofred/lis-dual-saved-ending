@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>睡前的冷笑話 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 071 章 · 宿舍與公路(一)</div>
+  <h1>睡前的冷笑話</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、床位資源的絕對浪費</h2>
+<p>打通套間住了一段時間後,整棟樓的女生漸漸發現一個公開的秘密——名義上兩張床的配置,實際上形同虛設。</p>
+<p>Chloe 那張單人床,早已被雜物徹底攻陷,床墊上堆滿了吉他盒、成堆的舊黑膠唱片和幾件洗到一半忘記收的髒衣服,幾乎沒人見過那張床真正被用來睡覺。</p>
+<p>每天夜裡,兩人都擠在 Max 那張略顯狹窄的小床上,裹在同一條印著鹿紋圖案的厚毛毯裡,直到清晨鬧鐘響了三遍,才互相推搡著,不情不願地從溫暖的被窩裡爬起來。</p>
+<h2>二、失敗的冷笑話</h2>
+<p>某個尋常的夜晚,兩人照例窩在小床上,準備熄燈睡覺。黑暗中,Chloe 忽然開口。</p>
+<p>「欸,Max,妳知道為什麼骷髏頭不跟別人打架嗎?」</p>
+<p>Max 迷迷糊糊地哼了一聲,示意她繼續說。</p>
+<p>「因為,」Chloe 一本正經地停頓了兩秒,像是在醞釀效果,「他們沒有『膽』量。」</p>
+<p>黑暗中,一片死寂。</p>
+<p>Max 沉默了整整三秒,語氣裡帶著毫不掩飾的嫌棄:「……這什麼爛笑話。」</p>
+<p>「等等,還有更好笑的,」Chloe 不死心,繼續往下講,「妳知道為什麼吸血鬼不喜歡吃素嗎?因為他們沒有『血』性!」</p>
+<p>Max 翻了個白眼,連敷衍的笑聲都懶得擠出來:「妳這是從哪本過期笑話大全裡翻出來的?」</p>
+<p>「這叫經典,」Chloe 有點不服氣,「妳笑一個會死嗎?」</p>
+<p>「不好笑的東西,」Max 打了個哈欠,「我沒辦法強迫自己笑。」</p>
+<h2>三、物理強迫發笑</h2>
+<p>Chloe 聽到這句話,眼珠一轉,忽然想到了什麼餿主意。</p>
+<p>「妳說妳沒辦法笑,」她語氣裡帶著蓄謀已久的壞笑,「那我幫妳想想辦法。」</p>
+<p>不等 Max 反應過來,她的手指已經精準地摸向 Max 腰側最怕癢的地方,毫不留情地開始撓癢癢。</p>
+<p>「不、不要——」Max 猝不及防地慘叫出聲,身體瞬間蜷縮起來,毫無防備地被逗得笑出聲,在黑暗的被窩裡拚命掙扎,「Chloe!住手!」</p>
+<p>「笑一個,」Chloe 手上的動作絲毫不停,語氣裡帶著得逞的興奮,「妳不是說沒辦法笑嗎?我這叫『物理輔助』!」</p>
+<p>Max 被撓得幾乎喘不過氣,在毛毯裡笑得渾身發顫,一邊求饒一邊反擊,伸手也往 Chloe 身上撓過去。</p>
+<p>兩人在狹窄的小床上笑鬧成一團,枕頭被擠掉在地上,毛毯纏成一團亂麻,黑暗中充斥著壓抑不住的笑聲和此起彼落的求饒聲。</p>
+<p>好不容易鬧夠了,兩人氣喘吁吁地癱在一起,重新扯過毛毯裹住彼此。</p>
+<p>「所以,」Chloe 得意地總結,「這笑話最後還是成功把妳逗笑了,對吧?」</p>
+<p>「這不叫笑話成功,」Max 沒好氣地反駁,聲音裡還帶著沒平復的笑意,「這叫暴力脅迫。」</p>
+<p>「效果一樣,」Chloe 毫不在意地把她往懷裡帶了帶,下巴抵在她的髮頂,「反正妳笑了。」</p>
+<p>Max 沒再反駁,只是任由自己被抱得更緊,笑意還殘留在唇角,漸漸地,呼吸聲慢慢平穩下來,融進這個屬於兩人的、擁擠卻溫暖的小床上。</p>
+<p>黑暗中,Chloe 又壓低聲音,不死心地補了一句:「欸,妳知道時間為什麼從不停下腳步嗎?」</p>
+<p>Max 已經半夢半醒,含糊地哼了一聲。</p>
+<p>「因為,」Chloe 輕聲說,語氣裡少了平常的戲謔,多了一絲認真,「它知道,好日子還在後面等著我們。」</p>
+<p>這一次,Max 沒有翻白眼,只是在迷糊的睡意裡,悄悄勾起一抹淺淺的笑,往 Chloe 懷裡又蹭得更近了些。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="secret_stream.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="hallway_standoff.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

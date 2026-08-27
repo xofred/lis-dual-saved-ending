@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>重新入學(倒敘) · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 009 章 · 背景與序曲</div>
+  <h1>重新入學(倒敘)</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/reenrollment_flashback.jpeg" alt="重新入學(倒敘)" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、送學路上的偶遇</h2>
+<p>新任 Wells 校長上任後,一直為找不到合適的贊助商發愁——案發陰影未散,沒有幾家企業願意在這個時間點,把自己的名字跟布萊克威爾放在一起。學校急需一波扎實的正面公關,好讓外界重新願意靠近。</p>
+<p>某天清晨,校長正好在校門口迎接晨會來賓,恰巧看到 Max 從一輛老舊皮卡上下車,開車的是一個頂著藍色頭髮、渾身痞氣、隔著車窗都能感覺到那股「生人勿近」氣場的年輕女孩。</p>
+<p>校長的目光在那女孩身上停留了兩秒,腦子裡幾乎是瞬間閃過一連串念頭。</p>
+<p>「那位是?」他狀似隨意地向旁邊的助理打聽。</p>
+<p>「Chloe Price,」助理低聲回答,「案發前被開除的學生,現在在鎮上打工。」</p>
+<p>校長的眼睛驟然一亮,像是撿到了什麼寶貝。</p>
+<h2>二、靈光一閃</h2>
+<p>「多元、包容、給予曾經的『問題學生』重新來過的機會,」他喃喃自語,越說越興奮,「這個角度,簡直是完美的公關素材。」</p>
+<p>他幾乎沒有猶豫,主動走上前,對著剛下車、還沒反應過來的 Chloe 露出一個過分熱情的笑容,開始滔滔不絕地遊說她重返校園——各種好聽的詞彙輪番上陣,「重新開始」「布萊克威爾的大門永遠敞開」「我們重視每一位學生的可能性」。</p>
+<p>Chloe 全程面無表情,一句話都沒接,只是抱著手臂,眼神裡寫滿了不耐煩。</p>
+<p>Max 站在一旁,沒有開口說任何一句話,但那雙眼睛,卻毫不掩飾地寫滿了殷切的期望,時不時偷偷瞄向 Chloe。</p>
+<h2>三、複雜的印象</h2>
+<p>回家路上,Chloe 一邊發動車子,一邊忍不住碎碎念。</p>
+<p>「那個學校,」她皺眉,「除了那個保安大叔 Speed 還算對脾氣,」她想了想,語氣裡帶著一絲貧嘴的調侃,「Warren 那個宅男話多得跟連珠炮似的,Brooke 冷得跟塊冰似的,Kate 那種聖母心腸看著都替她累——雖然這幾個人,大概是我對那間學校少數幾個沒有負面印象的人了,但整體加起來,還是不夠抵銷我對那個地方的厭惡。」</p>
+<p>Max 沒有反駁她的吐槽,只是安靜地坐在副駕駛座,那份寫在臉上的期望,一點都沒有淡去。</p>
+<p>Chloe 從後照鏡瞥見她這副模樣,嘆了口氣。</p>
+<p>「行,」她妥協地開口,「我先跟我媽和老兵商量商量。」</p>
+<h2>四、家庭會議</h2>
+<p>晚飯桌上,Chloe 把這件事說了一遍,原本以為會遭到一番說教或猶豫,沒想到 Joyce 和 David 幾乎是異口同聲地表示支持。</p>
+<p>「這是好事,」Joyce 眼睛發亮,「妳能拿到正式文憑,以後路會好走很多。」</p>
+<p>David 也難得地沒有多說什麼大道理,只是點頭:「我陪妳去辦手續。」</p>
+<p>Chloe 看著兩人這副毫無保留的支持模樣,一時有點不知所措,最終只能嘴硬地聳肩:「行吧,反正你們都這麼說了。」</p>
+<h2>五、破爛的學生袍</h2>
+<p>入學典禮那天,新生們一個個穿著整齊筆挺的深色學生袍,排成整齊的隊伍,準備接受校方的正式歡迎儀式。</p>
+<p>Chloe 站在隊伍裡,格外顯眼——她那件學生袍,底下露出的,依然是那身磨破了洞的牛仔褲、釘滿徽章的皮夾克,還有一雙沾著油漬的舊工裝靴,那件本該遮住一切的黑色長袍,怎麼看都像是勉強披在她身上、蓋不住半點桀驁氣息的裝飾品。</p>
+<p>站在觀禮台上的 Wells 校長,目光掃過隊伍,落在 Chloe 身上時,嘴角控制不住地抽動了一下,顯然對這個「公關典範」的實際造型,有那麼一瞬間的措手不及。</p>
+<p>就在他準備開口說些什麼的時候,身旁的科學老師 Callahan——同時也是新設數位影像實驗室的督導負責人,在校方决策上,並非全然只有校長一人说了算的角色——不動聲色地湊近,低聲說了句什麼。</p>
+<p>Wells 校長的表情瞬間變化,原本準備發作的怒氣,硬生生轉換成一個燦爛的笑容。</p>
+<p>「各位請看,」他對著台下的媒體鏡頭朗聲說道,「這正是布萊克威爾『擁抱多元、不拘一格』教育理念的最佳體現——我們重視的,從來不是表面的整齊劃一,而是每一個孩子獨一無二的真實自我!」</p>
+<p>台下響起一陣稀稀落落、卻還算配合的掌聲。</p>
+<p>Chloe 站在隊伍裡,聽著這番說辭,嘴角微不可察地抽動了一下,轉頭低聲跟身旁的 Max 咕噥:「你看,又來這套。」</p>
+<p>Max 忍著笑,輕輕碰了碰她的手臂,沒有說話,只是那個藏不住的笑意,已經說明了一切。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="vanished_darkroom.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="exam_hell.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

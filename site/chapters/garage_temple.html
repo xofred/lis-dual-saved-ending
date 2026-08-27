@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工具神殿 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 097 章 · Victoria與Kate</div>
+  <h1>工具神殿</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、地下車庫的邀請</h2>
+<p>Victoria 太清楚該怎麼精準擊碎一個野生機修工的心理防線了——她根本不需要炫耀珠寶或名畫,只是踩著高跟鞋,慢條斯理地領著渾身滴水的 Chloe,走向莊園地下那座恆溫恆濕、私人定制的頂級機械車庫。</p>
+<p>「跟我來,」她語氣裡帶著一絲不易察覺的得意,「既然妳都已經把我家花園澆成沼澤了,好歹讓妳見識點真正值得偷窺的東西。」</p>
+<h2>二、工具神殿</h2>
+<p>剛踏進地下車庫,Chloe 嘴裡那句「老娘對資本家的廢鐵沒興趣」硬生生卡在嗓子眼,整個人徹底石化。</p>
+<p>靠牆的不是她熟悉的那種生鏽鐵皮工具架,而是一整套德國 Hazet 和定制版 Snap-on 鈦合金工具組,按毫米規格整齊嵌在雷射切割的防靜電海綿槽裡,連一把扭力扳手都帶著數字液晶扭矩反饋。</p>
+<p>旁邊,還擺著她過去只在科技雜誌上瞄過幾眼的五軸聯動 CNC 精密機床、工業級超聲波零件清洗機,以及一台自帶排煙系統的光纖雷射焊機。</p>
+<h2>三、認知崩塌</h2>
+<p>Chloe 顫抖著手,摸上一把超輕碳纖維棘輪扳手,眼神呆滯地喃喃自語。</p>
+<p>「這玩意兒……」她的聲音發飄,「轉動齒比居然有一百二十齒?手感順滑得像抹了黃油……這他媽比我整輛皮卡的殘值還貴吧?!」</p>
+<p>Victoria 站在一旁抱著雙臂,嘴角掛著勝券在握的冷笑。</p>
+<p>「把妳的口水收一收,Price,」她語氣輕描淡寫,「那套工具是我爸請保時捷賽事工程團隊配的,平時只用來給我調校卡丁車。」</p>
+<h2>四、豪車展廳</h2>
+<p>車庫深處的射燈逐一亮起,照亮了宛如私人汽車博物館般的藏車陣列。</p>
+<p>展台上停著一輛一九七三年純手工打磨的經典風冷保時捷 911 Carrera RS、一輛全碳纖維車身的阿斯頓·馬丁,還有一輛經過現代化電噴改造的一九六九年道奇戰馬。</p>
+<h2>五、死鴨子嘴硬</h2>
+<p>Chloe 繞著那輛道奇戰馬轉了三圈,試圖用僅存的一點街頭尊嚴挑刺。</p>
+<p>「哼,」她抱著手臂,語氣裡帶著勉強維持的不屑,「化油器改成電子燃油噴射,這改裝完全失去了 V8 大排量的野性靈魂……」</p>
+<p>Victoria 根本沒打算跟她廢話,隨手從牆上摘下車鑰匙,直接扔進她懷裡。</p>
+<p>「去,」她語氣淡淡的,「打著火聽聽看。」</p>
+<h2>六、靈魂出竅</h2>
+<p>Chloe 坐進那張定制真皮包裹的賽車座椅,按下一鍵啟動。</p>
+<p>地庫裡瞬間爆發出低沉而暴烈的發動機轟鳴,整座地下室的空氣都跟著劇烈共振起來。</p>
+<p>她的瞳孔猛地放大,雙手死死握著方向盤,臉上綻放出一種混雜著狂喜與震撼的、近乎孩童般的笑容,連夾在指縫間的香菸掉落在褲腿上,都渾然未覺。</p>
+<h2>七、鏡頭定格</h2>
+<p>Max 站在車庫門口,迅速調好光圈,按下快門——畫面裡,穿著寬大衛衣、手握方向盤笑得像個瘋子的 Chloe,和靠在車門邊、一手端著氣泡水、眼神裡帶著一絲不易察覺溫和的 Victoria,同時被定格進了這張照片。</p>
+<p>「行了,Price,」Victoria 敲了敲車窗,「把車熄火。」她丟給 Chloe 一罐昂貴的進口機能飲料,「看在妳剛才沒把泥巴蹭到真皮座椅上的份上,那台超聲波清洗機借妳用一週,把妳那輛破皮卡上發霉的化油器拿過來洗乾淨。」</p>
+<h2>八、停戰協定</h2>
+<p>Chloe 接過飲料,灌了一大口,罕見地沒有反脣相譏,只是咧嘴一笑。</p>
+<p>「一言為定,蔡斯,」她說,語氣裡帶著一種久違的、發自內心的暢快,「下次我開皮卡來,免費幫妳把那台保時捷的火花塞全換了。」</p>
+<p>Victoria 挑眉,似笑非笑地打量著她:「妳這是終於承認,我家的破爛也有幾件值得妳正眼看待了?」</p>
+<p>「勉強承認,」Chloe 聳肩,嘴角卻藏不住笑意,「妳這幾樣傢伙,是真的懂行。」</p>
+<p>Victoria 滿意地哼了一聲,轉身踩著高跟鞋,朝車庫另一頭的控制面板走去,準備關閉那些還亮著的射燈。</p>
+<p>等她的身影一走遠,Max 立刻湊到 Chloe 耳邊,壓低聲音,語氣裡帶著毫不掩飾的調侃。</p>
+<p>「所以說,」她挑眉,「妳這算不算,見錢眼開了?」</p>
+<p>Chloe 瞪她一眼,矢口否認:「才不是見錢眼開。」</p>
+<p>「那是什麼?」</p>
+<p>「這叫,」Chloe 一本正經地斟酌著措辭,「英雄惜英雄——老娘敬的從來不是她那身家底,是那套工具背後,願意花心思真正搞懂機械原理的態度。妳看她剛才調校放大機的手法,還有她對引擎聲浪的品味,這種東西,不是有錢就能裝出來的。」</p>
+<p>Max 沒想到她能給出這麼一套邏輯自洽的說法,一時被噎得說不出反駁的話,只能將信將疑地哼了一聲。</p>
+<p>「行吧,」她語氣裡帶著笑意,「就當妳說的有道理。」</p>
+<p>「本來就有道理,」Chloe 得意地摟過她的肩膀,湊近她耳邊,壓低聲音又補了一句,「不過那輛道奇戰馬的引擎聲,確實他媽的讓老娘走不動道就是了。」</p>
+<p>Max 被這句誠實的補充逗得笑出聲來,伸手輕輕捶了她一下。</p>
+<p>Max 站在一旁,看著這兩個曾經勢同水火的死對頭,此刻正圍著一輛老爺車聊得眉飛色舞,忍不住笑著搖了搖頭——這場意外的機械同好會,大概是她今晚見過最荒謬、卻也最溫馨的和解畫面。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="sprinkler_showdown.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="borrowed_wealth_upgrade.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>走廊心理戰 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 072 章 · 宿舍與公路(一)</div>
+  <h1>走廊心理戰</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、隔空對峙</h2>
+<p>案發後,David 因為私裝監控、擅自跟蹤學生宿舍等一連串失職行為,早已被學校正式解除安保主任的職務——但憑著退伍軍人的專業背景和熟悉校園系統的優勢,他轉型成了一名獨立的私人安保顧問,偶爾接一些學校按次委託的技術性委託案,比如電路檢修、監控系統評估之類的活兒,算是靠專業技能換一份case-by-case的外快。</p>
+<p>那天,他正好是被學校請來評估 Talia Hall 老舊電路系統的過載問題,拎著工具箱路過走廊時,恰巧經過那扇熟悉的房門。他心裡清楚兩人住在一起,卻始終帶著幾分尷尬和說不清的愧疚,每次經過那扇門,總是選擇最迂迴的方式處理。</p>
+<p>門內傳出震天的低音炮聲響時,他會停在門口,重重咳嗽兩聲,再拿著手電筒隔著門縫晃兩下,權當是一種心照不宣的警告。</p>
+<p>門內的反應向來如出一轍——裡面通常會傳來一陣手忙腳亂的響動,Max 慌慌張張地把通風窗開到最大,狂噴空氣清新劑試圖掩蓋些什麼氣味;而 Chloe 則大喇喇地翹著腳窩在床上,耳機聲外放到最大,對著門板豎起中指,嘴裡嚼著口香糖,一副全然不在乎的模樣。</p>
+<h2>二、代為傳話</h2>
+<p>某個週末,David 又因為電路評估的委託案來到宿舍樓,忽然想起臨出門前,Joyce 特地叮囑過的一句話——「你順道去看看那兩個孩子,提醒她們注意安全。」</p>
+<p>他站在門口,猶豫了整整十秒,才終於鼓起勇氣,舉手敲了敲門。</p>
+<p>「進來。」裡面傳來 Chloe 漫不經心的聲音。</p>
+<p>David 推門而入,神情少見地帶著幾分不自在,清了清嗓子,像是在部隊裡宣讀命令一樣,語氣生硬地開口。</p>
+<p>「妳媽讓我轉告妳,」他目光刻意飄向天花板,絕口不看向床鋪的方向,「你們兩個……玩的時候,注意安全。」</p>
+<p>話音剛落,房間裡瞬間陷入死寂。</p>
+<p>Max 「唰」地一聲,整張臉迅速埋進枕頭裡,只露出一雙泛紅到耳根的耳朵,發出一聲被悶住的哀嚎。</p>
+<p>Chloe 瞪大眼睛,臉頰以肉眼可見的速度漲紅,猛地從床上跳起來,一把揪住 David 的胳膊,連拖帶拽地把他往門外推。</p>
+<p>「出去出去出去!」她幾乎是喊著,聲音裡帶著崩潰的尷尬,「老兵,你這是想幹嘛?!」</p>
+<p>「我只是,」David 被推得踉蹌後退,試圖辯解,「轉達妳媽的原話而已——」</p>
+<p>「不需要轉達!」Chloe 用力把他推出門外,幾乎是甩上了房門,「這種話,你們兩個大人自己心照不宣就行了,幹嘛非要當面說出來!」</p>
+<p>門「砰」地一聲關上,走廊裡只剩下 David 一個人,站在原地,若有所思地摸了摸下巴,難得帶著一絲哭笑不得的自嘲。</p>
+<p>「這差事,」他喃喃自語,轉身重新拎起工具箱,繼續去忙他的電路評估委託,「還是留給妳媽自己去講比較好。」</p>
+<h2>三、跳閘危機</h2>
+<p>心理戰的餘波還沒散去,另一場物理層面的危機,已經悄然醞釀——某種意義上,也算是提前印證了 David 那份委託案評估報告的準確性。</p>
+<p>私拉的排插沿著天花板一路蔓延,從 Chloe 的音響、電烙鐵,一路連到 Max 那頭的插座。某天傍晚,Max 正巧打開吹風機吹頭髮,同一時間,Chloe 也隨手插上了電吉他音箱——</p>
+<p>「啪」的一聲脆響,整層樓瞬間陷入一片黑暗。</p>
+<p>五秒鐘後,隔壁所有房間,不約而同地爆發出崩潰的尖叫和哀嚎。</p>
+<p>Chloe 熟門熟路地嘆了口氣,摸黑抓起手電筒叼在嘴裡,拎起一把絕緣鉗,輕車熟路地摸出房門,朝著走廊盡頭的配電箱走去。</p>
+<p>「又跳閘了?」路過的 Warren 舉著手機當手電筒,一臉見怪不怪。</p>
+<p>「習慣就好,」Chloe 叼著手電筒,含糊不清地應了一聲,熟練地打開配電箱檢查線路,「這棟樓的電力系統,大概比我這人還脆弱。」</p>
+<p>不到五分鐘,走廊的燈重新亮起,伴隨著幾聲此起彼落的歡呼。Chloe 收起工具,拍拍手,一臉得意地往回走。</p>
+<p>「妳這手藝,」剛好從房間探出頭確認狀況的 Max,忍不住感慨,「都快趕上專業電工了。」</p>
+<p>「熟能生巧,」Chloe 咧嘴一笑,順手把手電筒別回腰間,「畢竟這事,咱倆一個月怎麼也得經歷個兩三回。老兵上次來評估的時候還念叨這棟樓的電路遲早要出事,現在看來他說得挺準。」</p>
+<p>兩人並肩走回房間,身後,走廊裡陸續傳來鄰居們劫後餘生般的抱怨和笑鬧聲——這場屬於 Talia Hall 三樓西側的日常鬧劇,顯然還會繼續上演下去。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="bedtime_jokes.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="olympia_basement.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

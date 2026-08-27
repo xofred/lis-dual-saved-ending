@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>數位機房日常 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 079 章 · 校園與公路(二)</div>
+  <h1>數位機房日常</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、暗房的消失與重生</h2>
+<p>那間曾經瀰漫著顯影液氣味、被 Max 刻意迴避的舊暗房,如今已徹底改頭換面——冷白光源、成排的 4K 雙螢幕 iMac,還有一整排昂貴的數位繪圖板,取代了過去所有陰森壓抑的痕跡。</p>
+<p>負責這門新開設「數位影像編修」課程的,正是 Ms. Whitfield——當年那個滿懷理想、堅信「藝術教育不該向流行低頭」的年輕老師,如今早已在 Callahan 那番現實邏輯的洗禮下,磨出了一身謹小慎微的處世智慧。</p>
+<h2>二、折疊刀刮螢幕事件</h2>
+<p>第一堂課,Chloe 被摁在一台三千美元的專業顯示器前,面對 Photoshop 那堆繁雜的圖層、通道和鋼筆工具,大腦當場過載。</p>
+<p>「同學們,」Whitfield 老師站在講台前,語氣一如既往地帶著幾分過度謹慎,「請使用『污點修復畫筆』工具,清除照片上的灰塵痕跡。」</p>
+<p>Chloe 盯著螢幕上那個礙眼的小黑點,下意識地從靴子邊緣拔出隨身折疊刀,就要往螢幕上刮。</p>
+<p>「Price!」坐在隔壁機位的 Brooke 眼疾手快,一把按住她的手腕,語氣裡帶著一貫的冷靜和無奈,「那玩意兒是三千美元的 Retina 屏幕,妳這一刀下去,等於當場報廢一台頂配電腦。妳想想,那筆維修費夠妳買幾組全新的化油器?」</p>
+<p>Chloe 的動作瞬間頓住,顯然這個換算方式,比任何技術術語都更能讓她瞬間清醒。</p>
+<p>「……行吧,」她悻悻然收起刀子,「早說是錢的事就好懂多了。」</p>
+<p>改用觸控板嘗試操作「液化」工具時,她又因為完全沒有手感,乾脆把整塊數位板當成方向盤,雙手抓著使勁狂擰,力道之大,幾乎要把整排機位的電源線連根拔起。</p>
+<p>Brooke 眼疾手快地伸手穩住那條差點被扯掉的電源線,面無表情地補了一句:「這叫『液化』工具,不是動力轉向系統。」</p>
+<h2>三、絕對禁忌詞</h2>
+<p>Whitfield 老師這門課,充斥著一種創傷應激式的謹慎——課堂上任何帶有「暗」「捕捉」「拍攝」字眼的詞彙,她都下意識地主動迴避替換。</p>
+<p>「同學們,」她講到曝光控制時,額角滲出細密的冷汗,語速飛快地補充說明,「我們現在調整的是『亮度分佈曲線』,請大家保持平靜,這純粹是數學矩陣的呈現,沒有任何……那個,沒有任何隱藏的、呃,暗處空間。」</p>
+<p>台下學生面面相覷,沒人真正明白她為什麼講得這麼小心翼翼,但也沒人追問。</p>
+<h2>四、投屏社死現場</h2>
+<p>作業評析環節,學生的電腦桌面需要即時投放到教室前方的百寸大螢幕上,供全班觀摩。</p>
+<p>輪到 Chloe 的畫面被隨機抽中投屏時,全班瞬間爆發出一陣哄笑——螢幕上,她正用高飽和度的霓虹粉噴漆筆刷,把 Wells 校長的官方證件照,塗成了一個長著兔耳朵的賽博龐克小丑,旁邊還開著三個標題諸如「如何用二手化油器改裝割草機」的 YouTube 分頁。</p>
+<p>Whitfield 老師扶了扶眼鏡,深吸一口氣,努力維持著臉上的鎮定,語氣裡帶著明顯的求生欲。</p>
+<p>「Price 同學……對權威符號的解構,」她艱難地擠出評語,「非常有視覺衝擊力。請大家……學習這種直白的反叛精神。」</p>
+<p>台下響起一陣忍俊不禁的低笑聲。</p>
+<h2>五、膠片原教旨主義者的迷茫</h2>
+<p>坐在 Chloe 旁邊的 Max,日子過得同樣不太好——作為習慣了光學測光、手動對焦和顯影罐攪拌節奏的膠片黨,她面對這套一鍵磨皮、AI 生成背景和各種堆棧濾鏡,顯得格外格格不入。</p>
+<p>她花了整整半節課,對著操作面板反覆尋找「手動攪拌顯影罐」的快捷鍵,一臉茫然。</p>
+<p>「妳在找什麼?」旁邊的 Warren 探頭過來,一臉熱心地想幫忙科普數位工作流程的邏輯。</p>
+<p>還沒等他解釋兩句,一顆從後排精準投擲過來的橡皮擦,「啪」地一聲打斷了這場即興教學。</p>
+<p>「別耽誤上課,」Chloe 朝 Warren 挑眉,語氣裡帶著明顯的護短意味。</p>
+<h2>六、地下代打黑市</h2>
+<p>摸清了色彩科學的邏輯後,Max 很快成了整間機房裡對色階直方圖最有心得的人。</p>
+<p>問題是,機房的區域網路權限設有層層限制,想從自己的主機切換進 Chloe 那台,操作起來繁瑣又容易被系統記錄下異常登入紀錄。</p>
+<p>Max 私下找上 Kenji 求助,對方只用了不到十分鐘,就寫出一個偽裝成螢幕保護程式的小工具,存進一支隨身碟裡遞給她。</p>
+<p>「插上,雙擊執行,」Kenji 語氣一如既往地簡潔,「介面會偽裝成待機畫面,系統後台不會留下切換紀錄。用完記得拔走隨身碟,別留下痕跡。」</p>
+<p>「妳這是,」Max 又驚又謝,「早就防患於未然?」</p>
+<p>「上次體育課數據那件事,」Kenji 推了推眼鏡,語氣裡帶著一絲不易察覺的得意,「多少也算是個練手的前例。」</p>
+<p>有了這個工具加持,為了不讓 Chloe 期末掛科,每次機房關燈進行作品預覽時,Max 便趁著昏暗的掩護,一鍵切換進 Chloe 的主機後台,飛快地把那些歪七扭八的色階曲線,調整回專業水準,整個過程行雲流水,不留一絲破綻。</p>
+<p>期末成果展示那天,靠著這份「暗中代打」的先鋒調色,Chloe 意外拿下了全班最高分。</p>
+<p>上台領獎時,她大喇喇地把腳搭上講桌邊緣,對著全班咧嘴一笑。</p>
+<p>「這份榮譽,」她煞有介事地舉起那張獎狀,「要感謝 Adobe,更要感謝我的專屬人工智慧——Maxine。」</p>
+<p>台下爆出一陣哄堂大笑,Whitfield 老師站在講台一側,扶額苦笑,顯然已經徹底放棄糾正這堂課的荒謬走向。</p>
+<p>Max 坐在台下,被這句公開的「感謝」臊得滿臉通紅,卻還是忍不住跟著笑出聲來,眼底藏著一絲被偷偷點名的、竊喜的溫柔。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="hallway_defense.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="film_fellowship.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

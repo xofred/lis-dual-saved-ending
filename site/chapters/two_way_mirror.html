@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>雙面鏡 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 061 章 · 校園與衰退</div>
+  <h1>雙面鏡</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/two_way_mirror.jpeg" alt="雙面鏡" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、陪同</h2>
+<p>Kenji 帶著那份財務線索的最新進展,約了 Leon 在警局碰面——經過一番私下確認,那位 FBI 老同學已經有了初步回覆,值得當面詳談。</p>
+<p>Chloe 和 Max 只是陪同,原本打算安靜地坐在旁邊聽,沒打算多說什麼。</p>
+<p>警局內部比想像中冷清,幾間會議室沿著走廊一字排開,其中一間虛掩著門,裡面擺著一張長桌和幾張塑膠椅,牆上嵌著一面不算大的鏡子。</p>
+<p>Kenji 推門走進去,示意大家先坐下,自己去找 Leon。</p>
+<p>Max 隨手拉開椅子坐下,目光無意間掃過那面牆上的鏡子。</p>
+<h2>二、瞬間的拉扯</h2>
+<p>那不是什麼特殊的鏡子,普普通通的裝飾鏡而已——但那個角度、那種略帶反光的冷灰色調,還有身後日光燈管發出的、規律而刺耳的嗡鳴聲,忽然精準地疊合上了某個她拚命想遺忘的畫面。</p>
+<p>眼前的畫面毫無預警地開始扭曲。</p>
+<p>冷灰色的雙面鏡,取代了眼前這面普通的裝飾鏡;規律的嗡鳴聲,變成了打字機敲擊鍵盤的聲響;對面坐著的,不再是 Kenji 隨口交代的空椅子,而是一個面無表情、反覆追問著同一個問題的側寫探員。</p>
+<p><em>「妳說妳是怎麼知道暗房位置的?再說一次。」</em></p>
+<p><em>「妳跟 Jefferson 之間,到底是什麼關係?」</em></p>
+<p><em>「妳為什麼不早點報警?」</em></p>
+<p>那些聲音一句一句疊加上來,冰冷、機械,沒有絲毫溫度。Max 的呼吸開始變得又急又淺,雙手不自覺地攥緊了椅子扶手,指節泛白。</p>
+<h2>三、失控</h2>
+<p>「Max?」</p>
+<p>Chloe 察覺到身邊的異樣,轉頭一看——Max 的臉色瞬間變得慘白,額頭上滲出一層冷汗,瞳孔渙散,整個人像是被凍住了一樣,死死盯著牆上那面鏡子,身體開始不受控制地微微顫抖。</p>
+<p>「Max!」Chloe 立刻意識到不對勁,一把握住她冰涼的手,聲音裡帶著壓抑住的驚慌,「妳看著我,妳現在很安全,這裡不是——」</p>
+<p>Max 的呼吸急促得像是要喘不上氣,嘴唇無聲地翕動著,反覆說著同樣的話。</p>
+<p>「我沒有,」她的聲音破碎、發顫,「我沒有幫他,我不知道……我不知道要怎麼跟你們解釋,我真的沒辦法解釋——」</p>
+<p>「Max,聽我說,」Chloe 迅速站起身,擋在她和那面鏡子中間,徹底切斷她的視線,雙手捧住她的臉,強迫她的目光聚焦在自己身上,「沒有人在審問妳,這裡沒有警察在盤問妳,妳看著我——是我,Chloe。」</p>
+<h2>四、拉回現實</h2>
+<p>Max 的視線渙散地飄了幾秒,終於慢慢聚焦在 Chloe 焦急的臉上。</p>
+<p>「Chloe……?」她的聲音還帶著哭腔,身體依然抖得厲害。</p>
+<p>「對,是我,」Chloe 的聲音放得很輕,卻異常堅定,一遍一遍重複著,「妳現在很安全,那都是很久以前的事了,已經結束了,誰都不會再逼問妳任何事。」</p>
+<p>Max 猛地縮進她懷裡,雙手死死攥住她的衣領,像是抓住唯一的浮木,呼吸依然急促,眼淚毫無預警地決堤,無聲地滑落。</p>
+<p>「他們當時一直問,」她哽咽著,聲音破碎不成調,「一遍一遍問同樣的問題,好像不管我怎麼回答都是錯的……我那時候好怕,怕說錯一句話,就會被當成瘋子關起來,或者……或者被當成幫兇。」</p>
+<p>「我知道,」Chloe 輕輕拍著她的背,把她抱得更緊,「我知道那有多可怕,但那已經過去了,妳當時撐過來了,現在什麼都結束了。」</p>
+<h2>五、事後</h2>
+<p>門口,Kenji 和 Leon 恰好談完事情走回來,一眼就看到 Max 蜷縮在 Chloe 懷裡、渾身發抖的模樣,兩人臉色瞬間都變了。</p>
+<p>「怎麼回事?」Leon 快步走近,聲音壓得很低。</p>
+<p>「這間會議室,」Chloe 咬牙,聲音裡帶著一絲後怕的自責,「跟她當年被審訊的房間太像了——那面鏡子,那個燈光,可能還有這裡的味道。我們不該選在這種地方碰面的。」</p>
+<p>Leon 的表情瞬間凝重下來,顯然立刻意識到問題所在。</p>
+<p>「是我疏忽了,」他語氣裡帶著真心的歉意,「早該提前想到這一層。」他轉頭對 Kenji 說,「剩下的細節,我們換個地方談,或者我直接把資料整理好送過去。」</p>
+<p>Kenji 沉默地點頭,目光落在依然沒有平復下來的 Max 身上,難得地帶著一絲不知該如何表達的關切。</p>
+<p>Chloe 沒有理會旁邊的動靜,只是專注地摟著懷裡的人,一下一下輕輕撫著她的背,直到那陣劇烈的顫抖,漸漸平息下來。</p>
+<p>「對不起,」Max 過了許久,才終於找回自己的聲音,悶悶地從她懷裡開口,「我不是故意要在這種時候……」</p>
+<p>「妳不用道歉,」Chloe 打斷她,語氣裡帶著毫不猶豫的堅定,「這不是妳能控制的事。」</p>
+<p>她低頭,在 Max 的髮頂落下一個輕柔的吻。</p>
+<p>「以後這種地方,」她低聲說,像是在對 Max 承諾,也像是在對自己發誓,「我陪妳一起面對,誰都別想再單獨把妳一個人關在什麼房間裡逼問。」</p>
+<p>Max 靠在她懷裡,終於漸漸找回平穩的呼吸,窗外午後的陽光透過百葉窗的縫隙,斜斜灑落在兩人交疊的身影上。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="analog_rebellion.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="rooftop_greenhouse.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

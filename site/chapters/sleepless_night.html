@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>失眠夜 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 052 章 · 校園與衰退</div>
+  <h1>失眠夜</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/sleepless_night.jpeg" alt="失眠夜" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <p>Kenji 那通電話掛斷後,兩人躺在床上翻來覆去,誰都睡不著。窗外月光透過窗簾縫隙,在天花板上投下一道細長的光痕,兩人盯著那道光痕看了不知道多久。</p>
+<p>Chloe 終於受不了,一把掀開被子坐起身。</p>
+<p>「睡不著,」她嘟囔著,「我去抽根煙。」</p>
+<p>Max 沒攔她,只是也跟著坐起來,看她走到窗邊,劃著打火機,點燃一根煙。</p>
+<p>煙霧在月光下緩緩繚繞,Chloe 深吸一口,肩膀上緊繃的線條稍微鬆了一些。她剛抽沒幾口,Max 忽然湊過來,伸手一把把煙叼了過去,有模有樣地吸了一口,又輕輕吐出來。</p>
+<p>「妳幹嘛,」Chloe 又驚又好笑,「妳什麼時候會抽煙了?」</p>
+<p>「跟妳學的啊,」Max 一臉理所當然,把煙又還給她,「近墨者黑。」</p>
+<p>「奇怪了,」Chloe 挑眉,「妳以前看到煙頭就一臉嫌棄,說什麼二手菸有害健康,現在倒是抽得挺順手。」</p>
+<p>「是妳教壞我的。」Max 聳肩,語氣裡帶著點調侃的埋怨。</p>
+<p>「喂,」Chloe 喊冤,「我承認我可能帶壞妳不少事,但教妳抽煙這事,我可不記得我主動教過。」她想了想,忽然壞笑起來,「該不會是妳外面有別的女人教的吧?」</p>
+<p>這句話原本只是隨口調侃,沒想到 Max 卻真的認真地想了想,眼神飄向遠處,像是在仔細回憶什麼。</p>
+<p>Chloe 徹底愣住了:「……妳認真的?」</p>
+<p>Max 回過神,看到她那副驚訝的表情,忍不住笑出聲:「開玩笑的。」</p>
+<p>「妳這個反應速度,」Chloe 沒好氣地瞪她,「差點沒把我嚇死。」</p>
+<p>「怎麼,」Max 湊近了些,眼底帶著促狹的笑意,「妳剛才是不是,吃醋了?」</p>
+<p>「才沒有,」Chloe 立刻嘴硬否認,轉頭把煙灰彈到窗外,「妳這種乖乖牌,能有什麼別的女人,想都不用想。」</p>
+<p>「是嗎?」Max 卻不依不饒,整個人湊得更近,下巴抵在她肩膀上,「妳語氣聽起來,可不像『沒有』。」</p>
+<p>「真的沒有,」Chloe 試圖維持鎮定,眼神卻悄悄飄開,不敢跟她對視。</p>
+<p>Max 沒有鬆手,反而環住她的腰,像隻纏人的貓,一下一下地蹭著她的肩膀,不說話,就是纏著不放。</p>
+<p>Chloe 撐了沒幾秒,終於敗下陣來,長嘆一口氣,把手裡的煙隨手摁滅在窗台的煙灰缸裡。</p>
+<p>「行行行,」她舉手投降,轉身把 Max 整個人攬進懷裡,「我承認,我剛才確實心跳漏了一拍,滿意了吧?」</p>
+<p>Max 這才滿意地笑了,窩進她懷裡:「滿意了。」</p>
+<p>窗外的月光靜靜灑進來,兩人依偎在窗邊,誰都沒有再提起 Kenji 那通電話裡的沉重猜想,只是任由這一小段插科打諢的溫存,把先前那份揮之不去的不安,悄悄地、暫時地,推得遠了一些。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="man_in_high_castle.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="dignity_defense.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

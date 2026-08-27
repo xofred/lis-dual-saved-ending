@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>內化的壓迫 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 077 章 · 校園與公路(二)</div>
+  <h1>內化的壓迫</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+
+  <div class="chapter-body">
+    <h2>一、被指控的效率</h2>
+<p>這學期,校方替 Chloe 和 Max 安排了一份短期實習,對象是鎮上一間新開的、標榜「進步價值、社會影響力優先」的獨立媒體工作室。</p>
+<p>第一天上工,任務是布置一批攝影器材、整理一份影展提案。Chloe 手腳俐落,不到一小時就把所有器材歸位、標籤貼好;Max 那份提案,邏輯清晰、排版精緻,連總監自己都挑不出明顯毛病。</p>
+<p>兩人原本以為,這波表現足夠拿到一句誇獎。</p>
+<p>總監——一位穿著昂貴棉麻襯衫、手裡端著八美元燕麥奶拿鐵的中年男人——卻皺著眉,把兩人叫進辦公室,神情凝重得像是在宣布什麼壞消息。</p>
+<p>「Chloe,」他語氣沉重,「妳知道妳剛才那個效率,代表什麼嗎?」</p>
+<p>「代表我手腳快?」Chloe一頭霧水。</p>
+<p>「代表資本主義的規訓,」總監嘆了口氣,語重心長,「已經深深內化進了妳的身體。妳不假思索地用最短時間完成最大產出,這種『生產力至上』的慣性反應,恰恰是剝削體制最成功的洗腦成果——妳甚至沒有意識到,自己正在為一個壓榨妳的系統,免費賣命。」</p>
+<p>Chloe 愣住了:「……我只是把器材放整齊而已。」</p>
+<p>「Max,」總監轉向她,語氣同樣沉痛,「妳這份提案,結構完美到令人不安。這種對『完美』近乎強迫症的追求,本身就是父權資本主義審美暴力的產物——我建議妳們兩位,這週先別急著工作,去參加我們安排的『去生產力化』療癒工作坊,重新學習怎麼『不做』,而不是怎麼『做好』。」</p>
+<p>Max 和 Chloe 面面相覷,一時不知道該做何反應。</p>
+<h2>二、雷區蹦迪</h2>
+<p>「去生產力化」工作坊過後,兩人回到日常任務,卻發現自己動輒得咎——說話語氣稍微直接一點,就會被單獨請去小會議室「溫柔談話」。</p>
+<p>某次討論器材排版時,Chloe 忍不住拍了下桌子:「這設計爛透了,字體選得跟被卡車碾過一樣!」</p>
+<p>項目主管立刻臉色一變,拉著她坐下,語氣嚴肅:「Chloe,我們提倡建設性反饋,妳剛才的語氣帶有情感壓迫性,讓團隊成員感到心理安全感缺失。」</p>
+<p>「我只是說那個字體很醜,」Chloe 翻了個白眼翻到天靈蓋,「你們這裡是玻璃做的辦公室嗎?」</p>
+<p>Max 在旁邊,幾乎是本能反應,在桌子底下瘋狂踢她的鞋頭,搶在她繼續開口前,用極度委婉的措辭「同聲傳譯」:「Chloe 的意思是,我們或許可以嘗試更具動態張力的視覺呈現方式……」</p>
+<p>項目主管這才滿意地點點頭,渾然不覺自己剛才那番話,聽起來比 Chloe 原本那句「字體很醜」荒謬十倍。</p>
+<h2>三、不夠進步的訓斥</h2>
+<p>實習進行到第二週,總監再次把兩人叫進辦公室,這次的語氣,帶上了一種居高臨下的失望。</p>
+<p>「Max,」他抿了口拿鐵,慢條斯理地開口,「妳的黑白膠片視角太過傳統,缺乏對邊緣交織性的敘事賦權;Chloe,妳的整體形象帶有過時的攻擊性符碼,不太符合我們機構倡導的無害化進步方針。」</p>
+<p>他頓了頓,語氣裡帶著一絲教育意味的憐憫:「我知道你們的背景,或許讓你們難以真正理解什麼是『進步』。這需要時間,還有系統性的學習。」</p>
+<p>辦公室裡陷入短暫的死寂。</p>
+<h2>四、破防與反殺</h2>
+<p>Chloe 猛地拍案而起,椅子被帶得往後倒,發出刺耳的聲響。</p>
+<p>「老娘十四歲死了爹,」她的聲音發抖,卻字字清晰,帶著積壓多年的怒火,「被繼父裝監控盯著長大,睡過廢品場,跟毒販拔過刀,差點被你們口中那種穿著考究、道貌岸然的『藝術導師』殺了埋進地下——你現在坐在裝潢十萬美元的辦公室裡,喝著八美元的咖啡,教老娘什麼叫『邊緣經驗』,什麼叫『進步』?!」</p>
+<p>總監臉色一僵,張了張嘴,想開口辯解,卻一個字都吐不出來。</p>
+<p>Max 這一次,沒有像往常那樣伸手攔她,也沒有搶著幫忙「翻譯」緩和氣氛。她只是靜靜地收起自己的相機包,動作平穩,語氣異常平靜地看向總監。</p>
+<p>「如果真正的生活經驗,」她說,「在你們眼裡只是一份用來打勾、彰顯機構formation形象的公關素材,那這份實習,我們不需要了。」</p>
+<h2>五、揚長而去</h2>
+<p>兩人頭也不回地走出那間裝潢精緻、瀰漫著燕麥奶香氣的辦公室,身後,總監還維持著那副錯愕又難以置信的表情,一句話都說不出來。</p>
+<p>走出大樓,Chloe 深吸一口氣,忽然笑出聲來,帶著一種卸下重擔的暢快。</p>
+<p>「老娘這輩子,」她甩了甩手,語氣裡混雜著憤怒和解脫,「還是第一次被人指控『太會做事』。」</p>
+<p>「這年頭,」Max 挽住她的手臂,語氣裡帶著同樣的自嘲,「連優秀,都能被說成是一種病。」</p>
+<p>兩人並肩走向停在路邊的老皮卡,陽光灑在她們身上,把那間標榜「進步」、實則空洞虛偽的辦公室,連同裡面那套荒謬的話術,徹底甩在了身後。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="stuck_and_haggle.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="hallway_defense.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>

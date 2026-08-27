@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>實習週 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems">
+      <li class="playlist-item" data-index="0">雙保結局</li>
+      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+      <li class="playlist-item" data-index="3">遲來的舞台</li>
+      <li class="playlist-item" data-index="4">海岸線露營</li>
+      <li class="playlist-item" data-index="5">滔天暗示</li>
+    </ul>
+  </div>
+</div>
+<script>
+(function() {
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var toggle = document.getElementById('playerToggle');
+  var panel = document.getElementById('playerPanel');
+  var audio = document.getElementById('playerAudio');
+  var playBtn = document.getElementById('playerPlay');
+  var prevBtn = document.getElementById('playerPrev');
+  var nextBtn = document.getElementById('playerNext');
+  var nowTitle = document.getElementById('nowPlayingTitle');
+  var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var currentIndex = -1;
+
+  if (!toggle) { return; }
+
+  toggle.addEventListener('click', function() {
+    var isHidden = panel.hasAttribute('hidden');
+    if (isHidden) {
+      panel.removeAttribute('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+    } else {
+      panel.setAttribute('hidden', '');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  if (!playlist.length) { return; }
+
+  function highlight() {
+    items.forEach(function(el, i) {
+      el.classList.toggle('playing', i === currentIndex);
+    });
+  }
+
+  function loadTrack(i, autoplay) {
+    currentIndex = (i + playlist.length) % playlist.length;
+    var track = playlist[currentIndex];
+    audio.src = track.src;
+    nowTitle.textContent = track.title;
+    highlight();
+    if (autoplay) {
+      audio.play().catch(function() {});
+    }
+  }
+
+  items.forEach(function(el, i) {
+    el.addEventListener('click', function() { loadTrack(i, true); });
+  });
+
+  playBtn.addEventListener('click', function() {
+    if (currentIndex === -1) { loadTrack(0, true); return; }
+    if (audio.paused) { audio.play().catch(function() {}); }
+    else { audio.pause(); }
+  });
+
+  prevBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+  });
+
+  nextBtn.addEventListener('click', function() {
+    loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+  });
+
+  audio.addEventListener('play', function() {
+    playBtn.textContent = '⏸';
+    toggle.classList.add('is-playing');
+  });
+  audio.addEventListener('pause', function() {
+    playBtn.textContent = '▶';
+    toggle.classList.remove('is-playing');
+  });
+  audio.addEventListener('ended', function() {
+    loadTrack(currentIndex + 1, true);
+  });
+})();
+</script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第 040 章 · 旅館連環案</div>
+  <h1>實習週</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/internship_week.jpeg" alt="實習週" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、溫馨提示</h2>
+<p>放假前最後一次全校集會,Wells 校長站上講台,語氣一如既往地充滿激情。</p>
+<p>「為了拓寬各位同學的職涯視野,」他清了清嗓子,身後投影幕打出一張色彩繽紛的簡報,「校方特別與幾家指定企業合作,推出『菁英實習計畫』。凡是選擇這幾家合作企業實習的同學,將額外獲得學分加成,實習時數也會相應縮減,並附有現金津貼——絕對不是要白白佔用大家的勞動力,這是校方回饋學生、培養未來人才的誠意展現!」</p>
+<p>底下一片議論聲。有心思靈活的學生已經悄悄拿出手機,搜尋那幾家「合作企業」的背景資料——搜尋結果顯示,清一色都是校董事會成員、地方政客,或者鎮上幾位金主的親友名下產業。</p>
+<p>「懂的都懂,」Warren 小聲跟 Brooke 咬耳朵,「這擺明就是幫他們家親戚公司,湊那個政府合規指標的免費人力吧。」</p>
+<p>「說是這麼說,」Brooke 聳肩,「但學分加成是真的,時數縮短也是真的,不去白不去。」</p>
+<p>大部分同學最終還是排隊登記了名字——包括 Chloe。</p>
+<p>Max 湊過去,一臉意外:「妳這次居然沒打算搞事?」</p>
+<p>「這次不了,」Chloe 嘆口氣,語氣裡帶著點認命的疲憊,「修車費還沒還完,能少上點實習時數又有津貼拿,哪怕明知道是被人佔便宜,我這次選擇閉嘴賺這筆錢。」</p>
+<hr />
+<h2>二、實習週的第一天</h2>
+<p>Chloe 被分配到一家名義上做「社區資源整合顧問」的小公司——說穿了,就是某位鎮議員侄子開的空殼型顧問行,辦公室裝潢得富麗堂皇,卻沒幾個真正在做事的員工。</p>
+<p>第一天上班,她就被拖進一場長達兩小時的會議,主題是「本季度願景對齊與價值觀共識」。整場會議翻來覆去講著同一套空洞的口號,沒有任何具體結論,唯一的產出是會議結束前,主管要求每個人輪流分享「今天的一句感悟」。</p>
+<p>Chloe 面無表情地擠出一句:「團結就是力量。」</p>
+<p>主管滿意地點頭記錄下來。</p>
+<hr />
+<p>下午,她被塞進一套精確到分鐘的工時追蹤系統,螢幕上密密麻麻地列著各種待辦任務標籤,每完成一項都要手動打卡記錄耗時,美其名曰「提升效率透明度」。她光是搞懂這套系統怎麼操作,就耗掉了將近半小時,而這半小時,系統貼心地自動歸類成「系統熟悉時間」,不計入有效工時。</p>
+<p>與此同時,她的手機從早到晚不間斷地被拉進各種名目奇怪的工作群組——「創新思維交流群」「企業文化建設群」「每日正能量分享群」,訊息提示音幾乎沒停過。「每日正能量分享群」裡,主管每天早上七點準時轉發一篇來路不明的雞湯文章,標題諸如《成功人士都有的五個清晨習慣》,底下要求所有人「回覆已閱並簽到」,遲了超過十分鐘沒回覆的,會被單獨 @提醒。</p>
+<p>「這位同學,」一名資深員工湊過來,指手畫腳地「指導」她如何排版一份簡單的 Excel 表格,「妳這個欄位順序不對,要先放日期再放金額,這是我們公司的規矩。」</p>
+<p>Chloe 忍住翻白眼的衝動,乖乖照做——雖然那名員工顯然對 Excel 的基本操作,遠不如她熟練。</p>
+<p>好不容易熬過那份表格,她又被叫去參加一場臨時插進來的「跨部門協作腦力激盪」,會議室裡擺著一塊寫滿箭頭和圓圈的白板,主持會議的經理激動地講了四十分鐘「顛覆性思維」,最後的具體行動項目,只確定了下次開會的時間。</p>
+<p>散會後,Warren 剛好也在附近的合作企業實習,兩人在茶水間偶遇,Chloe忍不住吐槽了幾句。</p>
+<p>「忍忍就好,」Warren 一邊泡著即溶咖啡一邊安慰她,「我這邊也差不多,反正就當是提前體驗社會毒打,學分和津貼到手就行。」</p>
+<p>「妳想開點,」湊巧路過的 Brooke 也搭話,「這種公司,做做樣子而已,不會真的把妳當自己人使喚太久,忍過這幾天就解脫了。」</p>
+<p>Chloe 剛想反駁,又看到 Kenji 從另一頭的辦公室悠哉地走過來,手裡端著一杯現煮的手沖咖啡,神情放鬆得像是在度假。</p>
+<p>「你怎麼看起來一點都不累?」Chloe 狐疑地打量他。</p>
+<p>Kenji 神秘地笑了笑,壓低聲音:「跟妳說個秘密。」他劃開手機螢幕,展示了一套自己私下搭建的自動化系統,「我寫了個腳本,結合語音克隆和自動回覆邏輯,能模擬我的打字習慣和說話語氣,自動處理那些例行公文、群組簽到、還有大部分不需要臨場應變的例行會議紀錄。我只要每天挑幾個關鍵時段,親自露個面裝忙就行,剩下的時間全部解放。」</p>
+<p>Chloe 目瞪口呆:「這不是作弊嗎?」</p>
+<p>「這是效率優化。」Kenji 糾正她,語氣理直氣壯。</p>
+<p>更離譜的是,一週實習結束後的表彰大會上,Kenji 憑藉「高效、細膩、超前的工作彙報品質」,被評選為本次「菁英實習計畫」的最佳實習生,公司總經理當眾拍著他的肩膀,語重心長地表示已經預留了一個管培幹部的名額,希望他畢業後直接入職。</p>
+<p>Kenji 站在台上,笑容維持得恰到好處,眼神卻不動聲色地瞄了台下目瞪口呆的 Chloe 一眼。</p>
+<p>Chloe 坐在台下,看著那個靠著 AI 影分身矇混過關、還意外拿了大獎的傢伙,一時竟不知道該羨慕還是該生氣。</p>
+<hr />
+<h2>三、後樓梯的避難所</h2>
+<p>到了下午三點,Chloe 已經第三次溜到辦公大樓的後樓梯間抽煙透氣,又或者藉口下樓買咖啡,躲開那些連環不斷的會議通知和訊息轟炸。</p>
+<p>她靠在樓梯間冰冷的欄杆上,深吸一口煙,長長地吐出一口氣,像是要把一整天積攢的煩躁都跟著呼出去。</p>
+<p>咖啡杯裡的黑咖啡已經涼了大半,她一口氣灌下去,胃裡傳來一陣隱隱的不適。</p>
+<hr />
+<h2>四、抱怨大會</h2>
+<p>下班後,Chloe 拖著疲憊的身軀,癱進雙鯨餐廳的卡座裡,Max 端著兩杯溫水在她對面坐下。</p>
+<p>「怎麼樣?」</p>
+<p>「別提了,」Chloe 揉著發脹的太陽穴,「開了快三小時的會,一個能落地的結論都沒有。手機群組多到我乾脆設成靜音,結果他們又跑來『提醒』我沒看訊息不禮貌。一個外行天天在旁邊教我怎麼做內行的事,我這一天,實際做正經事的時間,加起來大概不到一小時。」</p>
+<p>她揉了揉喉嚨,聲音有點沙啞:「喉嚨都快講話講乾了,光是應付那些空話就耗光了。」又皺眉按了按胃口的位置,「胃也不太舒服,可能是咖啡灌太多,又或者是被氣的。」</p>
+<p>Max 心疼地推過去一杯溫水:「妳慢點喝。」她想了想,忍不住笑出聲,「照這個節奏算下來,妳耗掉的煙錢跟咖啡錢,搞不好比那點實習津貼還高,妳這是倒貼著上班?」</p>
+<p>Chloe 沉默了兩秒,深深地嘆了口氣,一臉生無可戀地把臉埋進手臂裡。</p>
+<p>「我現在,」她悶聲道,「有點後悔上了這艘賊船。」</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="accidental_fisherman.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="resignation_maid_encore.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+</body>
+</html>
