@@ -18,23 +18,24 @@ ordered/                       ← 章節原始檔資料夾（輸入）
 ├── 002_xxx.md
 └── ...                        ← 每個檔案開頭必須是 "# 章節標題" 這一行
 
-Images/                        ← 章節插圖素材(來源,不在 site/ 裡),檔名對應章節 slug
+Images/                        ← 章節插圖素材(來源,不在 docs/ 裡),檔名對應章節 slug
 songs/                         ← 章節配樂素材(來源),檔名對應章節 slug
 Polaroids/                     ← 拍立得照片素材(來源),檔名對應章節 slug,可多張
 
-site/                          ← 建置後的成品（輸出，這就是要部署的東西，整個由 build.py 產生）
+docs/                          ← 建置後的成品（輸出，這就是要部署的東西，整個由 build.py 產生；GitHub Pages 從此資料夾發佈）
 ├── index.html                 ← 首頁，自動產生的分區目錄
 ├── polaroids.html              ← 拍立得相簿頁,列出全站所有拍立得照片
 ├── style.css
 ├── images/                    ← 從 Images/ 複製過來(只複製有對應章節的檔案)
 ├── songs/                     ← 從 songs/ 複製過來(只複製有對應章節的檔案)
 ├── polaroids/                 ← 從 Polaroids/ 複製過來(只複製有對應章節的檔案)
+├── .nojekyll                  ← 空檔案,叫 GitHub Pages 不要跑 Jekyll
 └── chapters/
     ├── xxx.html                ← 每章一個獨立頁面
     └── ...
 ```
 
-**重要**：`site/` 整個資料夾都是**每次跑 `build.py` 就會重新產生**的產物（已加進 `.gitignore`，不進版控），包括 `site/images` `site/songs` `site/polaroids` 這三個媒體子資料夾也是——它們是建置時從專案根目錄的 `Images/` `songs/` `Polaroids/` 複製過來的，不是素材真正的家。**要新增/修改素材，永遠是去改根目錄的 `Images/` `songs/` `Polaroids/`，或改 `ordered/` 裡的 `.md` 原始檔，或改 `build.py` / `templates.py` / `style.css` 這幾個原始碼檔案**，改完重新跑一次建置就好，不要手動改 `site/` 底下的任何東西。
+**重要**：`docs/` 整個資料夾都是**每次跑 `build.py` 就會重新產生**的產物（為了讓 GitHub Pages 直接發佈，它有進版控，但不要手動編輯），包括 `docs/images` `docs/songs` `docs/polaroids` 這三個媒體子資料夾也是——它們是建置時從專案根目錄的 `Images/` `songs/` `Polaroids/` 複製過來的，不是素材真正的家。**要新增/修改素材，永遠是去改根目錄的 `Images/` `songs/` `Polaroids/`，或改 `ordered/` 裡的 `.md` 原始檔，或改 `build.py` / `templates.py` / `style.css` 這幾個原始碼檔案**，改完重新跑一次建置、把 `docs/` 的變更一起 commit 就好，不要手動改 `docs/` 底下的任何東西。
 
 ---
 
@@ -45,7 +46,7 @@ cd site_build
 python3 build.py
 ```
 
-需要 Python 3 + `markdown` 套件（`pip install markdown`）。跑完會在 `/mnt/user-data/outputs/site/`（或你設定的 `OUT_DIR`）產生完整網站。
+需要 Python 3 + `markdown` 套件（`pip install markdown`）。跑完會在專案根目錄的 `docs/`（或你設定的 `OUT_DIR`）產生完整網站。
 
 ---
 
@@ -84,7 +85,7 @@ SECTIONS = [
 
 ## 六、音樂、插圖、拍立得照片都是自動偵測機制
 
-不需要改 `.md` 原始檔，也不需要寫 front matter。系統會在建置時，自動去專案根目錄的 `Images/`、`songs/`、`Polaroids/` 這三個資料夾裡，找有沒有跟章節 slug 同名的檔案，找到就複製進 `site/` 並自動嵌入，找不到就顯示「尚未配圖 / 尚未配樂」的提示（拍立得沒有就直接不顯示該欄位）。
+不需要改 `.md` 原始檔，也不需要寫 front matter。系統會在建置時，自動去專案根目錄的 `Images/`、`songs/`、`Polaroids/` 這三個資料夾裡，找有沒有跟章節 slug 同名的檔案，找到就複製進 `docs/` 並自動嵌入，找不到就顯示「尚未配圖 / 尚未配樂」的提示（拍立得沒有就直接不顯示該欄位）。
 
 ### 命名規則（唯一需要注意的地方）
 
@@ -106,11 +107,11 @@ Polaroids/bedroom_lua_2.jpeg    ← 同一章的第 2 張拍立得,加 _2 _3... 
 
 ### 資料夾位置
 
-素材放在專案根目錄的 `Images/`、`songs/`、`Polaroids/` 底下就行（不是 `site/` 裡面，`site/` 是建置產物）。`build.py` 只會把「檔名對得上某章節 slug」的檔案複製進 `site/images` `site/songs` `site/polaroids`，跟任何章節都對不上的檔案會被跳過、不進 `site/`，可以放心把素材原始檔（包含改名前的舊版本）都留在這三個來源資料夾裡管理。
+素材放在專案根目錄的 `Images/`、`songs/`、`Polaroids/` 底下就行（不是 `docs/` 裡面，`docs/` 是建置產物）。`build.py` 只會把「檔名對得上某章節 slug」的檔案複製進 `docs/images` `docs/songs` `docs/polaroids`，跟任何章節都對不上的檔案會被跳過、不進 `docs/`，可以放心把素材原始檔（包含改名前的舊版本）都留在這三個來源資料夾裡管理。
 
 ### 拍立得相簿
 
-除了會顯示在對應章節頁面之外，全站所有拍立得照片還會彙整成一個獨立的「拍立得相簿」頁面（`site/polaroids.html`，導覽列上有連結），依章節順序排列，點一張照片會跳回它所屬的章節頁。
+除了會顯示在對應章節頁面之外，全站所有拍立得照片還會彙整成一個獨立的「拍立得相簿」頁面（`docs/polaroids.html`，導覽列上有連結），依章節順序排列，點一張照片會跳回它所屬的章節頁。
 
 ### 之後如果想做「檔名對不上也能手動指定」
 
@@ -140,12 +141,12 @@ MEDIA_OVERRIDE = {
 
 ## 八、部署方式
 
-`site/` 資料夾本身就是完整的靜態網站，任何方式都行：
+`docs/` 資料夾本身就是完整的靜態網站，任何方式都行：
 
-- **本地**：直接雙擊 `site/index.html`
-- **GitHub Pages**：把 `site/` 內容推到一個 repo，設定 Pages 指向該分支即可
-- **Netlify / Vercel**：把 `site/` 資料夾拖進去，或連接 git repo 自動部署
-- **自己的伺服器**：整個資料夾丟進網頁根目錄就能跑，不需要任何伺服器端設定（Nginx / Apache 純靜態檔案服務即可）
+- **本地**：直接雙擊 `docs/index.html`
+- **GitHub Pages**：本 repo 就是這樣部署的——Settings → Pages 選 `main` 分支的 `/docs` 資料夾，每次 commit 完 `docs/` 就會自動更新
+- **Netlify / Vercel**：把 `docs/` 資料夾拖進去，或連接 git repo 自動部署
+- **自己的伺服器**：整個 `docs/` 資料夾丟進網頁根目錄就能跑，不需要任何伺服器端設定（Nginx / Apache 純靜態檔案服務即可）
 
 ---
 

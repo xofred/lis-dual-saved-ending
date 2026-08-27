@@ -3,7 +3,7 @@
 """
 靜態網站建置腳本
 把 ordered/ 資料夾裡的 111 篇 markdown 章節,轉成統一風格的靜態閱讀站台。
-輸出到 /mnt/user-data/outputs/site/
+輸出到專案根目錄的 docs/(給 GitHub Pages 用)
 """
 
 import os
@@ -18,7 +18,7 @@ import markdown as md_lib
 #   ├── Images/           ← 你放插圖的地方(注意大寫I,配合實際使用習慣)
 #   ├── songs/            ← 你放配樂的地方
 #   ├── Polaroids/        ← 你放拍立得照片的地方,一章可以有好幾張
-#   ├── site/             ← 建置輸出(images/ songs/ polaroids/ 會在建置時自動從上面複製過來)
+#   ├── docs/            ← 建置輸出(images/ songs/ polaroids/ 會在建置時自動從上面複製過來;GitHub Pages 從這裡發佈)
 #   └── site_build/       ← 這支腳本所在的資料夾
 #       ├── build.py
 #       ├── templates.py
@@ -27,13 +27,13 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 
 SRC_DIR = os.path.join(PROJECT_ROOT, "ordered")
-OUT_DIR = os.path.join(PROJECT_ROOT, "site")
+OUT_DIR = os.path.join(PROJECT_ROOT, "docs")
 CHAPTERS_DIR = os.path.join(OUT_DIR, "chapters")
 IMAGES_DIR = os.path.join(OUT_DIR, "images")
 SONGS_DIR = os.path.join(OUT_DIR, "songs")
 POLAROIDS_DIR = os.path.join(OUT_DIR, "polaroids")
 
-# 素材來源資料夾(專案根目錄下,不在 site/ 裡面)
+# 素材來源資料夾(專案根目錄下,不在 docs/ 裡面)
 # 依序嘗試這些資料夾名稱,兼容大小寫習慣不一致的情況
 IMAGES_SOURCE_CANDIDATES = ["Images", "images"]
 SONGS_SOURCE_CANDIDATES = ["songs", "Songs"]
@@ -153,18 +153,21 @@ if __name__ == "__main__":
     print(f"共找到 {len(files)} 個章節檔案")
 
     # 章節 slug 集合,用來過濾素材:只有檔名(去副檔名)對得上某章節的
-    # 圖片/音樂才會被複製進 site/,資料夾裡其餘不相干的檔案一律跳過
+    # 圖片/音樂才會被複製進 docs/,資料夾裡其餘不相干的檔案一律跳過
     slugs = {slugify(f) for f in files}
 
     from templates import BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, render_player
 
     os.makedirs(CHAPTERS_DIR, exist_ok=True)
 
+    # GitHub Pages 用:放一個空的 .nojekyll,避免 Jekyll 處理掉某些檔案/資料夾
+    open(os.path.join(OUT_DIR, ".nojekyll"), "w").close()
+
     # 複製 CSS
     shutil.copy(os.path.join(os.path.dirname(__file__), "style.css"), os.path.join(OUT_DIR, "style.css"))
 
     # ---- 複製素材:從專案根目錄的 Images/ songs/ Polaroids/ 複製進
-    # site/images site/songs site/polaroids ----
+    # docs/images docs/songs docs/polaroids ----
     images_src = find_source_dir(IMAGES_SOURCE_CANDIDATES)
     songs_src = find_source_dir(SONGS_SOURCE_CANDIDATES)
     polaroids_src = find_source_dir(POLAROIDS_SOURCE_CANDIDATES)
@@ -182,7 +185,7 @@ if __name__ == "__main__":
                 copied += 1
             elif ext.lower() in IMAGE_EXTS:
                 skipped += 1
-        print(f"已從 {images_src} 複製 {copied} 張圖片到 site/images/(跳過 {skipped} 張跟章節對不上的)")
+        print(f"已從 {images_src} 複製 {copied} 張圖片到 docs/images/(跳過 {skipped} 張跟章節對不上的)")
     else:
         print(f"警告:找不到圖片來源資料夾(嘗試過 {IMAGES_SOURCE_CANDIDATES}),跳過圖片複製")
 
@@ -195,7 +198,7 @@ if __name__ == "__main__":
                 copied += 1
             elif ext.lower() in AUDIO_EXTS:
                 skipped += 1
-        print(f"已從 {songs_src} 複製 {copied} 首歌曲到 site/songs/(跳過 {skipped} 首跟章節對不上的)")
+        print(f"已從 {songs_src} 複製 {copied} 首歌曲到 docs/songs/(跳過 {skipped} 首跟章節對不上的)")
     else:
         print(f"警告:找不到音樂來源資料夾(嘗試過 {SONGS_SOURCE_CANDIDATES}),跳過音樂複製")
 
@@ -208,7 +211,7 @@ if __name__ == "__main__":
                 copied += 1
             elif ext.lower() in IMAGE_EXTS:
                 skipped += 1
-        print(f"已從 {polaroids_src} 複製 {copied} 張拍立得照片到 site/polaroids/(跳過 {skipped} 張跟章節對不上的)")
+        print(f"已從 {polaroids_src} 複製 {copied} 張拍立得照片到 docs/polaroids/(跳過 {skipped} 張跟章節對不上的)")
     else:
         print(f"警告:找不到拍立得來源資料夾(嘗試過 {POLAROIDS_SOURCE_CANDIDATES}),跳過拍立得複製")
 
