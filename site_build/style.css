@@ -389,11 +389,11 @@ a { color: inherit; text-decoration: none; }
   border-radius: 2px;
 }
 
-/* 拍立得照片(章節頁的媒體欄位裡橫向並列的小卡) */
+/* 拍立得照片(章節頁的媒體欄位裡並列的小卡,超過一行寬度就自動換行) */
 .polaroid-strip {
   display: flex;
+  flex-wrap: wrap;
   gap: 18px;
-  overflow-x: auto;
   padding: 6px 2px 14px;
 }
 .polaroid-card {
