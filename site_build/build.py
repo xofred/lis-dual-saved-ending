@@ -156,7 +156,7 @@ if __name__ == "__main__":
     # 圖片/音樂才會被複製進 docs/,資料夾裡其餘不相干的檔案一律跳過
     slugs = {slugify(f) for f in files}
 
-    from templates import BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, render_player
+    from templates import BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, LIGHTBOX, render_player
 
     os.makedirs(CHAPTERS_DIR, exist_ok=True)
 
@@ -336,6 +336,7 @@ if __name__ == "__main__":
             player=render_player("../", playlist),
             content=content,
             footer=FOOTER,
+            lightbox=LIGHTBOX,
         )
         with open(os.path.join(CHAPTERS_DIR, f"{ch['slug']}.html"), "w", encoding="utf-8") as out:
             out.write(html)
@@ -393,6 +394,7 @@ if __name__ == "__main__":
         player=render_player("", playlist),
         content=index_content,
         footer=FOOTER,
+        lightbox=LIGHTBOX,
     )
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as out:
         out.write(index_html)
@@ -419,7 +421,7 @@ if __name__ == "__main__":
   <div class="gallery-hero">
     <div class="eyebrow">POLAROID ARCHIVE</div>
     <h1>拍立得相簿</h1>
-    <p class="subtitle">散落在故事裡的{len(all_polaroids)}張快照,點一張回到它出現的章節</p>
+    <p class="subtitle">散落在故事裡的{len(all_polaroids)}張快照,點一張放大看,再點「回到章節」就能翻到它出現的地方</p>
   </div>
   {gallery_body}
 </main>
@@ -432,6 +434,7 @@ if __name__ == "__main__":
         player=render_player("", playlist),
         content=gallery_content,
         footer=FOOTER,
+        lightbox=LIGHTBOX,
     )
     with open(os.path.join(OUT_DIR, "polaroids.html"), "w", encoding="utf-8") as out:
         out.write(gallery_html)
