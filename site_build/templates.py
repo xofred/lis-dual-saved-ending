@@ -220,12 +220,13 @@ LIGHTBOX = """
     }, cfg.clearAfter);
   }
 
-  // 收集頁面上兩種可放大的素材:
-  //   .polaroid-card        章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
-  //   .media-image / .journal-card  章節頁的手帳插圖 + 手帳頁包在 <a> 裡的整頁
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
   function collect(selector, k, capSel) {
     [].forEach.call(document.querySelectorAll(selector), function(card) {
-      var img = card.matches && card.matches('img') ? card : card.querySelector('img');
+      var img = card.querySelector('img');
       if (!img) return;
       var capNode = capSel ? card.querySelector(capSel) : null;
       var link = card.closest ? card.closest('a') : null;
@@ -244,7 +245,7 @@ LIGHTBOX = """
   }
 
   collect('.polaroid-card', 'polaroid', '.polaroid-caption');
-  collect('.media-item.media-image, .journal-card', 'journal', '.journal-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
 
   if (!groups.polaroid.length && !groups.journal.length) return;
 

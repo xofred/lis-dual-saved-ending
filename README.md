@@ -21,6 +21,7 @@ ordered/                       ← 章節原始檔資料夾（輸入）
 Images/                        ← 章節插圖素材(來源,不在 docs/ 裡),檔名對應章節 slug
 songs/                         ← 章節配樂素材(來源),檔名對應章節 slug
 Polaroids/                     ← 拍立得照片素材(來源),檔名對應章節 slug,可多張
+Journal/                       ← Max 的手帳頁素材(來源),檔名對應章節 slug,可多頁
 
 docs/                          ← 建置後的成品（輸出，這就是要部署的東西，整個由 build.py 產生；GitHub Pages 從此資料夾發佈）
 ├── index.html                 ← 首頁，自動產生的分區目錄
@@ -30,13 +31,14 @@ docs/                          ← 建置後的成品（輸出，這就是要部
 ├── images/                    ← 從 Images/ 複製過來(只複製有對應章節的檔案)
 ├── songs/                     ← 從 songs/ 複製過來(只複製有對應章節的檔案)
 ├── polaroids/                 ← 從 Polaroids/ 複製過來(只複製有對應章節的檔案)
+├── journal/                   ← 從 Journal/ 複製過來(只複製有對應章節的檔案)
 ├── .nojekyll                  ← 空檔案,叫 GitHub Pages 不要跑 Jekyll
 └── chapters/
     ├── xxx.html                ← 每章一個獨立頁面
     └── ...
 ```
 
-**重要**：`docs/` 整個資料夾都是**每次跑 `build.py` 就會重新產生**的產物（為了讓 GitHub Pages 直接發佈，它有進版控，但不要手動編輯），包括 `docs/images` `docs/songs` `docs/polaroids` 這三個媒體子資料夾也是——它們是建置時從專案根目錄的 `Images/` `songs/` `Polaroids/` 複製過來的，不是素材真正的家。**要新增/修改素材，永遠是去改根目錄的 `Images/` `songs/` `Polaroids/`，或改 `ordered/` 裡的 `.md` 原始檔，或改 `build.py` / `templates.py` / `style.css` 這幾個原始碼檔案**，改完重新跑一次建置、把 `docs/` 的變更一起 commit 就好，不要手動改 `docs/` 底下的任何東西。
+**重要**：`docs/` 整個資料夾都是**每次跑 `build.py` 就會重新產生**的產物（為了讓 GitHub Pages 直接發佈，它有進版控，但不要手動編輯），包括 `docs/images` `docs/songs` `docs/polaroids` `docs/journal` 這幾個媒體子資料夾也是——它們是建置時從專案根目錄的 `Images/` `songs/` `Polaroids/` `Journal/` 複製過來的，不是素材真正的家。**要新增/修改素材，永遠是去改根目錄的 `Images/` `songs/` `Polaroids/` `Journal/`，或改 `ordered/` 裡的 `.md` 原始檔，或改 `build.py` / `templates.py` / `style.css` 這幾個原始碼檔案**，改完重新跑一次建置、把 `docs/` 的變更一起 commit 就好，不要手動改 `docs/` 底下的任何東西。
 
 ---
 
@@ -86,7 +88,7 @@ SECTIONS = [
 
 ## 六、音樂、插圖、拍立得照片都是自動偵測機制
 
-不需要改 `.md` 原始檔，也不需要寫 front matter。系統會在建置時，自動去專案根目錄的 `Images/`、`songs/`、`Polaroids/` 這三個資料夾裡，找有沒有跟章節 slug 同名的檔案，找到就複製進 `docs/` 並自動嵌入，找不到就顯示「尚未配圖 / 尚未配樂」的提示（拍立得沒有就直接不顯示該欄位）。
+不需要改 `.md` 原始檔，也不需要寫 front matter。系統會在建置時，自動去專案根目錄的 `Images/`、`songs/`、`Polaroids/`、`Journal/` 這四個資料夾裡，找有沒有跟章節 slug 同名的檔案，找到就複製進 `docs/` 並自動嵌入，找不到就顯示「尚未配圖 / 尚未配樂」的提示（拍立得、手帳沒有就直接不顯示該欄位）。
 
 ### 命名規則（唯一需要注意的地方）
 
@@ -98,6 +100,8 @@ Images/bedroom_lua.jpeg         ← 插圖，自動配對成功
 songs/bedroom_lua.mp3           ← 配樂，自動配對成功
 Polaroids/bedroom_lua.jpeg      ← 拍立得照片(第 1 張),自動配對成功
 Polaroids/bedroom_lua_2.jpeg    ← 同一章的第 2 張拍立得,加 _2 _3... 後綴
+Journal/bedroom_lua.jpeg        ← Max 的手帳(第 1 頁),自動配對成功
+Journal/bedroom_lua_2.jpeg      ← 同一章的第 2 頁手帳,加 _2 _3... 後綴
 ```
 
 支援的副檔名：
@@ -108,21 +112,25 @@ Polaroids/bedroom_lua_2.jpeg    ← 同一章的第 2 張拍立得,加 _2 _3... 
 
 ### 資料夾位置
 
-素材放在專案根目錄的 `Images/`、`songs/`、`Polaroids/` 底下就行（不是 `docs/` 裡面，`docs/` 是建置產物）。`build.py` 只會把「檔名對得上某章節 slug」的檔案複製進 `docs/images` `docs/songs` `docs/polaroids`，跟任何章節都對不上的檔案會被跳過、不進 `docs/`，可以放心把素材原始檔（包含改名前的舊版本）都留在這三個來源資料夾裡管理。
+素材放在專案根目錄的 `Images/`、`songs/`、`Polaroids/`、`Journal/` 底下就行（不是 `docs/` 裡面，`docs/` 是建置產物）。`build.py` 只會把「檔名對得上某章節 slug」的檔案複製進 `docs/images` `docs/songs` `docs/polaroids` `docs/journal`，跟任何章節都對不上的檔案會被跳過、不進 `docs/`，可以放心把素材原始檔（包含改名前的舊版本）都留在這幾個來源資料夾裡管理。
 
 ### 拍立得相簿
 
 除了會顯示在對應章節頁面之外，全站所有拍立得照片還會彙整成一個獨立的「拍立得相簿」頁面（`docs/polaroids.html`，導覽列上有連結），依章節順序排列。
 
-### Max 的手帳
+### Max 的手帳（跟插圖是兩種不同素材）
 
-除了顯示在對應章節頁面之外，全站所有章節插圖（`docs/images/` 底下、每章一張的手繪速寫）也會彙整成一個獨立的「Max 的手帳」頁面（`docs/journal.html`，導覽列上有連結），依章節順序排列，可以一頁頁翻閱。素材來源與命名規則跟插圖完全相同（`Images/{slug}.jpeg`），不需要額外準備檔案。
+**插圖**（`Images/`，📷）是給讀者順順讀的配圖，一章一張，正文旁邊直接顯示，不放大也不進相簿。
+
+**手帳**（`Journal/`，📓）是另外一種多媒體：模擬 Max 隨手畫的手繪日記頁（帶標題框、分格、手寫註記那種）。放在專案根目錄的 `Journal/` 底下，命名規則跟拍立得一樣——`Journal/{slug}.jpeg` 是第 1 頁，`Journal/{slug}_2.jpeg`、`_3`… 是後續頁，一章可以有好幾頁。建置時複製進 `docs/journal/`，在對應章節頁顯示成一疊可點擊的頁面卡。
+
+全站所有手帳頁還會彙整成一個獨立的「Max 的手帳」頁面（`docs/journal.html`，導覽列上有連結），依章節順序排列，可以一頁頁翻閱。`Journal/` 已列入 `.gitignore`（跟其他素材來源資料夾一樣），只有 `docs/journal/` 進版控。
 
 ### 放大檢視（燈箱）
 
-點任何一張拍立得或手帳插圖會全螢幕放大看原圖（`templates.py` 裡的 `LIGHTBOX` 片段，CSS/JS 純內建、無外部依賴，每頁都會注入）。同一組有多張時可用左右箭頭、鍵盤方向鍵、或手機左右滑動切換；`Esc`、點背景、或下滑關閉。在相簿／手帳頁,燈箱底部會多一個「回到章節 →」連結（章節頁本身不顯示,因為已經在該章節）。
+點任何一張拍立得、或任何一頁手帳,會全螢幕放大看原圖（`templates.py` 裡的 `LIGHTBOX` 片段，CSS/JS 純內建、無外部依賴，每頁都會注入）。同一組有多張時可用左右箭頭、鍵盤方向鍵、或手機左右滑動切換；`Esc`、點背景、或下滑關閉。在相簿／手帳頁,燈箱底部會多一個「回到章節 →」連結（章節頁本身不顯示,因為已經在該章節）。章節插圖（📷）不進燈箱。
 
-同一套燈箱靠來源元素分成兩組獨立導覽：拍立得（`.polaroid-card`）與手帳（`.media-image` / `.journal-card`），彼此不會互相翻到。兩組的開場動畫也不同——拍立得是模擬顯影（`developing`），手帳是模擬繞書脊翻頁（`flipping`，往回翻時鉸鏈換到右側）；打開時做完整動畫，左右切換時做快速版，`prefers-reduced-motion` 一律跳過。手機與桌面共用同一套燈箱,靠 `style.css` 裡 `max-width: 640px` 的 media query 調整尺寸。
+同一套燈箱靠來源元素分成兩組獨立導覽：拍立得（`.polaroid-card`）與手帳（`.journal-page-card` / `.journal-card`），彼此不會互相翻到。兩組的開場動畫也不同——拍立得是模擬顯影（`developing`），手帳是模擬繞書脊翻頁（`flipping`，往回翻時鉸鏈換到右側）；打開時做完整動畫，左右切換時做快速版，`prefers-reduced-motion` 一律跳過。手機與桌面共用同一套燈箱,靠 `style.css` 裡 `max-width: 640px` 的 media query 調整尺寸。
 
 ### 之後如果想做「檔名對不上也能手動指定」
 

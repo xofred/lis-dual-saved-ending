@@ -32,12 +32,14 @@ CHAPTERS_DIR = os.path.join(OUT_DIR, "chapters")
 IMAGES_DIR = os.path.join(OUT_DIR, "images")
 SONGS_DIR = os.path.join(OUT_DIR, "songs")
 POLAROIDS_DIR = os.path.join(OUT_DIR, "polaroids")
+JOURNAL_DIR = os.path.join(OUT_DIR, "journal")
 
 # 素材來源資料夾(專案根目錄下,不在 docs/ 裡面)
 # 依序嘗試這些資料夾名稱,兼容大小寫習慣不一致的情況
 IMAGES_SOURCE_CANDIDATES = ["Images", "images"]
 SONGS_SOURCE_CANDIDATES = ["songs", "Songs"]
 POLAROIDS_SOURCE_CANDIDATES = ["Polaroids", "polaroids"]
+JOURNAL_SOURCE_CANDIDATES = ["Journal", "journal"]
 
 
 def find_source_dir(candidates):
@@ -90,11 +92,18 @@ def find_polaroids(slug, media_dir, exts):
 
 
 def polaroid_matches_any_slug(stem, slugs):
-    """建置時過濾用:檔名是否屬於任何一個章節的拍立得照片(含 _2 _3... 額外張數)。"""
+    """建置時過濾用:檔名是否屬於任何一個章節的拍立得照片(含 _2 _3... 額外張數)。
+    手帳頁的多頁比對也共用這個函式(slug / slug_2 / slug_3 ...)。"""
     if stem in slugs:
         return True
     m = re.match(r"^(.+)_(\d+)$", stem)
     return bool(m and m.group(1) in slugs)
+
+
+def find_journal_pages(slug, media_dir, exts):
+    """某章節的手帳頁,支援多頁(slug.ext 是第 1 頁,slug_2.ext ... 是後續頁);
+    多頁比對邏輯跟拍立得完全一樣,直接沿用。"""
+    return find_polaroids(slug, media_dir, exts)
 
 # 六大篇章分區,對應之前排定的順序區間 (檔名數字範圍, 含頭含尾)
 SECTIONS = [
@@ -143,6 +152,8 @@ def render_badges(ch):
         parts.append('<span class="badge badge-audio" title="有配樂">♪</span>')
     if ch.get("polaroid_files"):
         parts.append('<span class="badge badge-polaroid" title="有拍立得照片">🖼</span>')
+    if ch.get("journal_files"):
+        parts.append('<span class="badge badge-journal" title="有 Max 的手帳">📓</span>')
     if not parts:
         return ""
     return f'<div class="ch-badges">{"".join(parts)}</div>'
@@ -172,9 +183,12 @@ if __name__ == "__main__":
     songs_src = find_source_dir(SONGS_SOURCE_CANDIDATES)
     polaroids_src = find_source_dir(POLAROIDS_SOURCE_CANDIDATES)
 
+    journal_src = find_source_dir(JOURNAL_SOURCE_CANDIDATES)
+
     os.makedirs(IMAGES_DIR, exist_ok=True)
     os.makedirs(SONGS_DIR, exist_ok=True)
     os.makedirs(POLAROIDS_DIR, exist_ok=True)
+    os.makedirs(JOURNAL_DIR, exist_ok=True)
 
     if images_src:
         copied = skipped = 0
@@ -215,6 +229,19 @@ if __name__ == "__main__":
     else:
         print(f"警告:找不到拍立得來源資料夾(嘗試過 {POLAROIDS_SOURCE_CANDIDATES}),跳過拍立得複製")
 
+    if journal_src:
+        copied = skipped = 0
+        for fname in os.listdir(journal_src):
+            stem, ext = os.path.splitext(fname)
+            if ext.lower() in IMAGE_EXTS and polaroid_matches_any_slug(stem, slugs):
+                shutil.copy(os.path.join(journal_src, fname), os.path.join(JOURNAL_DIR, fname))
+                copied += 1
+            elif ext.lower() in IMAGE_EXTS:
+                skipped += 1
+        print(f"已從 {journal_src} 複製 {copied} 頁手帳到 docs/journal/(跳過 {skipped} 頁跟章節對不上的)")
+    else:
+        print(f"警告:找不到手帳來源資料夾(嘗試過 {JOURNAL_SOURCE_CANDIDATES}),跳過手帳複製")
+
     chapters = []  # 收集每章 metadata,供首頁與導覽使用
     for f in files:
         num = parse_chapter_num(f)
@@ -231,6 +258,7 @@ if __name__ == "__main__":
             "image_file": find_media(slug, IMAGES_DIR, IMAGE_EXTS),
             "audio_file": find_media(slug, SONGS_DIR, AUDIO_EXTS),
             "polaroid_files": find_polaroids(slug, POLAROIDS_DIR, IMAGE_EXTS),
+            "journal_files": find_journal_pages(slug, JOURNAL_DIR, IMAGE_EXTS),
         })
 
     chapters.sort(key=lambda c: c["num"])
@@ -249,12 +277,12 @@ if __name__ == "__main__":
     ]
     print(f"拍立得相簿共 {len(all_polaroids)} 張照片")
 
-    # 全站手帳:按章節順序,收錄每章的手繪插圖(有配圖的章節)
+    # 全站手帳:按章節順序,收錄每章的每一頁手帳
     all_journal = [
-        {"title": c["title"], "slug": c["slug"], "file": c["image_file"]}
-        for c in chapters if c["image_file"]
+        {"title": c["title"], "slug": c["slug"], "file": f}
+        for c in chapters for f in c["journal_files"]
     ]
-    print(f"手帳共 {len(all_journal)} 頁插圖")
+    print(f"手帳共 {len(all_journal)} 頁")
 
     # ---------- 產生每一章的頁面 ----------
     for i, ch in enumerate(chapters):
@@ -312,6 +340,21 @@ if __name__ == "__main__":
                 f'<div class="media-item media-polaroids">'
                 f'<span class="slot-label">🖼 拍立得</span>'
                 f'<div class="polaroid-strip">{polaroid_cards}</div>'
+                f'</div>'
+            )
+
+        journal_files = ch["journal_files"]
+        if journal_files:
+            journal_cards = "".join(
+                f'<div class="journal-page-card" style="--rot: {(-2 + (i % 3) * 2)}deg">'
+                f'<img src="../journal/{f}" alt="{ch["title"]} Max 的手帳" loading="lazy">'
+                f'</div>'
+                for i, f in enumerate(journal_files)
+            )
+            media_parts.append(
+                f'<div class="media-item media-journal">'
+                f'<span class="slot-label">📓 Max 的手帳</span>'
+                f'<div class="journal-strip">{journal_cards}</div>'
                 f'</div>'
             )
 
@@ -453,7 +496,7 @@ if __name__ == "__main__":
         journal_cards = "\n".join(
             f'''<a class="journal-card" href="chapters/{p['slug']}.html" style="--rot: {(-2 + (i % 3) * 2)}deg">
                   <figure class="journal-page">
-                    <img src="images/{p['file']}" alt="{p['title']} 手帳插圖" loading="lazy">
+                    <img src="journal/{p['file']}" alt="{p['title']} Max 的手帳" loading="lazy">
                     <figcaption class="journal-caption">{p['title']}</figcaption>
                   </figure>
                 </a>'''
@@ -461,14 +504,14 @@ if __name__ == "__main__":
         )
         journal_body = f'<div class="gallery-grid journal-grid">{journal_cards}</div>'
     else:
-        journal_body = '<p class="gallery-empty">目前還沒有手帳插圖。</p>'
+        journal_body = '<p class="gallery-empty">目前還沒有手帳。</p>'
 
     journal_content = f"""
 <main class="gallery-page journal-gallery">
   <div class="gallery-hero">
     <div class="eyebrow">MAX'S JOURNAL</div>
     <h1>Max 的手帳</h1>
-    <p class="subtitle">{len(all_journal)}頁手繪速寫,點一頁放大翻閱,再點「回到章節」就能讀那一章</p>
+    <p class="subtitle">Max 隨手記下的手繪日記,目前收錄 {len(all_journal)} 頁,點一頁翻開來看,再點「回到章節」就能讀那一章</p>
   </div>
   {journal_body}
 </main>
