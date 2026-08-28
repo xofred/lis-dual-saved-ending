@@ -249,6 +249,13 @@ if __name__ == "__main__":
     ]
     print(f"拍立得相簿共 {len(all_polaroids)} 張照片")
 
+    # 全站手帳:按章節順序,收錄每章的手繪插圖(有配圖的章節)
+    all_journal = [
+        {"title": c["title"], "slug": c["slug"], "file": c["image_file"]}
+        for c in chapters if c["image_file"]
+    ]
+    print(f"手帳共 {len(all_journal)} 頁插圖")
+
     # ---------- 產生每一章的頁面 ----------
     for i, ch in enumerate(chapters):
         body_html = md_lib.markdown(ch["raw"], extensions=["extra"])
@@ -440,5 +447,45 @@ if __name__ == "__main__":
         out.write(gallery_html)
 
     print("拍立得相簿已產生:polaroids.html")
+
+    # ---------- 產生 Max 的手帳頁 ----------
+    if all_journal:
+        journal_cards = "\n".join(
+            f'''<a class="journal-card" href="chapters/{p['slug']}.html" style="--rot: {(-2 + (i % 3) * 2)}deg">
+                  <figure class="journal-page">
+                    <img src="images/{p['file']}" alt="{p['title']} 手帳插圖" loading="lazy">
+                    <figcaption class="journal-caption">{p['title']}</figcaption>
+                  </figure>
+                </a>'''
+            for i, p in enumerate(all_journal)
+        )
+        journal_body = f'<div class="gallery-grid journal-grid">{journal_cards}</div>'
+    else:
+        journal_body = '<p class="gallery-empty">目前還沒有手帳插圖。</p>'
+
+    journal_content = f"""
+<main class="gallery-page journal-gallery">
+  <div class="gallery-hero">
+    <div class="eyebrow">MAX'S JOURNAL</div>
+    <h1>Max 的手帳</h1>
+    <p class="subtitle">{len(all_journal)}頁手繪速寫,點一頁放大翻閱,再點「回到章節」就能讀那一章</p>
+  </div>
+  {journal_body}
+</main>
+"""
+    journal_html = HTML_SHELL.format(
+        title="Max 的手帳 · 雙保結局同人合集",
+        root="",
+        butterfly=BUTTERFLY_SVG,
+        header=HEADER.format(root=""),
+        player=render_player("", playlist),
+        content=journal_content,
+        footer=FOOTER,
+        lightbox=LIGHTBOX,
+    )
+    with open(os.path.join(OUT_DIR, "journal.html"), "w", encoding="utf-8") as out:
+        out.write(journal_html)
+
+    print("Max 的手帳已產生:journal.html")
     print(f"\n完成！網站輸出於: {OUT_DIR}")
 
