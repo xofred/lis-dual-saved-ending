@@ -121,11 +121,25 @@ __LIST_HTML__
     });
   }
 
+  // 「正在播放」標題:有對應章節就渲染成連結,點了翻到那一章
+  function setNowPlaying(track) {
+    nowTitle.innerHTML = '';
+    if (track.href) {
+      var a = document.createElement('a');
+      a.className = 'player-now-link';
+      a.href = track.href;
+      a.textContent = track.title + ' ↗';
+      nowTitle.appendChild(a);
+    } else {
+      nowTitle.textContent = track.title;
+    }
+  }
+
   function loadTrack(i, autoplay) {
     currentIndex = (i + playlist.length) % playlist.length;
     var track = playlist[currentIndex];
     audio.src = track.src;
-    nowTitle.textContent = track.title;
+    setNowPlaying(track);
     highlight();
     revealCurrent();
     if (autoplay) {
@@ -136,6 +150,9 @@ __LIST_HTML__
   [].forEach.call(items, function(el) {
     var i = parseInt(el.getAttribute('data-index'), 10);
     el.addEventListener('click', function() { loadTrack(i, true); });
+    // 列右側的章節鈕:直接導覽,別觸發播放
+    var link = el.querySelector('.playlist-item-link');
+    if (link) link.addEventListener('click', function(e) { e.stopPropagation(); });
   });
 
   playBtn.addEventListener('click', function() {
@@ -174,7 +191,12 @@ def render_player(root, playlist):
     只收錄真的有配樂的章節(不是佔位)。清單依 playlist 順序(即章節順序)
     按篇章分區分組,前端可逐區摺疊,避免歌一多就變成小框裡的長捲軸。"""
     items = [
-        {"title": p["title"], "src": root + "songs/" + p["file"], "section": p.get("section", "")}
+        {
+            "title": p["title"],
+            "src": root + "songs/" + p["file"],
+            "section": p.get("section", ""),
+            "href": (root + "chapters/" + p["slug"] + ".html") if p.get("slug") else "",
+        }
         for p in playlist
     ]
 
@@ -193,7 +215,10 @@ def render_player(root, playlist):
         blocks = []
         for sec in section_order:
             lis = "\n".join(
-                '          <li class="playlist-item" data-index="{0}">{1}</li>'.format(i, it["title"])
+                '          <li class="playlist-item" data-index="{0}">'
+                '<span class="playlist-item-title">{1}</span>'
+                '<a class="playlist-item-link" href="{2}" aria-label="翻到「{1}」這一章">↗</a>'
+                '</li>'.format(i, it["title"], it["href"])
                 for i, it in by_section[sec]
             )
             blocks.append(

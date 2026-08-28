@@ -279,7 +279,7 @@ if __name__ == "__main__":
 
     # 全站播放清單:按章節順序,只收錄真的有配樂的章節(不是佔位)
     playlist = [
-        {"title": c["title"], "file": c["audio_file"], "section": c["section"]}
+        {"title": c["title"], "file": c["audio_file"], "section": c["section"], "slug": c["slug"]}
         for c in chapters if c["audio_file"]
     ]
     print(f"播放清單共 {len(playlist)} 首歌")

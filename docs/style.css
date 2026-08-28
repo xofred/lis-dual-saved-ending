@@ -610,6 +610,12 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.player-now-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.player-now-link:hover { color: var(--butterfly); }
 .player-controls {
   display: flex;
   justify-content: center;
@@ -686,17 +692,48 @@ a { color: inherit; text-decoration: none; }
 .playlist-group.open .playlist-group-items { display: flex; }
 
 .playlist-item {
-  padding: 8px 10px 8px 26px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 6px 8px 26px;
   border-radius: 3px;
   font-size: 13px;
   color: var(--ink);
   cursor: pointer;
   transition: background 0.15s;
 }
+.playlist-item-title { flex: 1; min-width: 0; }
 .playlist-item:hover { background: var(--polaroid-warm); }
 .playlist-item.playing {
   background: var(--dusk-blue);
   color: var(--polaroid);
+}
+
+/* 列右側的章節鈕:桌面 hover 才浮現,觸控裝置常駐做淡 */
+.playlist-item-link {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  font-size: 13px;
+  line-height: 1;
+  color: var(--ink-soft);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s, color 0.15s;
+}
+.playlist-item-link:hover { background: rgba(27, 42, 65, 0.12); color: var(--dusk-blue); }
+.playlist-item:hover .playlist-item-link { opacity: 1; }
+.playlist-item.playing .playlist-item-link { opacity: 1; color: var(--butterfly-bright); }
+.playlist-item.playing .playlist-item-link:hover {
+  background: rgba(242, 236, 224, 0.2);
+  color: var(--polaroid);
+}
+@media (hover: none) {
+  .playlist-item-link { opacity: 0.5; }
 }
 .playlist-empty {
   padding: 8px 10px;
