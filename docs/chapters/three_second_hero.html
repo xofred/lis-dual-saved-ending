@@ -205,7 +205,7 @@
   <div class="chapter-meta">第 114 章 · Victoria與Kate</div>
   <h1>帥不過三秒</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-placeholder"><span class="slot-label">📷 插圖</span>尚未配圖</div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/three_second_hero.jpeg" alt="帥不過三秒" loading="lazy"></div></div>
 
   <div class="chapter-body">
     <h2>一、奧斯卡影后級別的求知慾</h2>
@@ -450,6 +450,15 @@
     else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
   }, { passive: true });
 })();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
 </script>
 
 </body>

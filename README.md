@@ -33,6 +33,7 @@ docs/                          ← 建置後的成品（輸出，這就是要部
 ├── polaroids/                 ← 從 Polaroids/ 複製過來(只複製有對應章節的檔案)
 ├── journal/                   ← 從 Journal/ 複製過來(只複製有對應章節的檔案)
 ├── .nojekyll                  ← 空檔案,叫 GitHub Pages 不要跑 Jekyll
+├── sw.js                      ← Service Worker,離線快取用(每次建置帶新版本字串,見第七之二節)
 └── chapters/
     ├── xxx.html                ← 每章一個獨立頁面
     └── ...
@@ -157,6 +158,24 @@ MEDIA_OVERRIDE = {
 - **首頁章節卡片加縮圖**：目前卡片只有編號和標題，如果每章都配了插圖，可以把插圖縮圖也放進卡片裡
 
 ---
+
+## 七之二、離線快取（Service Worker）
+
+`build.py` 每次建置會產生一個帶版本字串的 `docs/sw.js`（版本 = 建置時間戳，例如 `v20260828-220656`），每個頁面底部都會註冊它。目的:手機讀到一半網路抽風，開過的頁面、看過的圖、聽過的歌都還在。
+
+快取策略（手寫,沒引 Workbox,保持零依賴）:
+
+| 資源 | 策略 | 效果 |
+|---|---|---|
+| 頁面導覽（HTML） | NetworkFirst | 線上永遠拿最新章節;離線時回退到曾開過的快取,沒開過的顯示簡短離線提示 |
+| 圖片 / 拍立得 / 手帳 / 音檔 / 字型檔 | CacheFirst | 開過看過聽過的,離線照樣可用。音檔額外做手動 `Range` 切片,拖進度條不會壞 |
+| `style.css` / Google Fonts CSS | StaleWhileRevalidate | 先用快取秒開,背景更新 |
+
+版本一換（下次建置),舊的 `shell-*` / `media-*` 快取會在新 SW 的 `activate` 事件整包刪除。因為 HTML 走 NetworkFirst、JS 又全部內聯在 HTML 裡沒有獨立 bundle,不會有「頁面新、資源舊」的版本錯位,所以 SW 直接 `skipWaiting()` 立即接管,不需要更新提示。
+
+媒體快取有上限（圖片類 ~90 條、頁面 ~130 條），超過就從最舊的開始淘汰。`CacheStorage` 在裝置儲存吃緊時可能被整個清掉——這是效能優化,不是「保證永久離線」。
+
+要停用:把 `templates.py` 的 `SW_REGISTER` 換成空字串重新建置,並在 `sw.js` 加一段 `self.registration.unregister()` 讓已安裝的使用者退出。
 
 ## 八、部署方式
 

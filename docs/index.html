@@ -844,12 +844,12 @@
                   <div class="ch-title">意外投屏事件</div>
                 </a>
 <a class="chapter-card" href="chapters/three_second_hero.html">
-                  
+                  <div class="ch-badges"><span class="badge badge-image" title="有插圖">📷</span></div>
                   <div class="ch-num">114</div>
                   <div class="ch-title">帥不過三秒</div>
                 </a>
 <a class="chapter-card" href="chapters/dual_defense.html">
-                  
+                  <div class="ch-badges"><span class="badge badge-image" title="有插圖">📷</span></div>
                   <div class="ch-num">115</div>
                   <div class="ch-title">護短雙重暴擊</div>
                 </a>
@@ -1026,6 +1026,15 @@
     else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
   }, { passive: true });
 })();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
 </script>
 
 </body>

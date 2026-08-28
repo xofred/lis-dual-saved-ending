@@ -9,6 +9,7 @@
 import os
 import re
 import shutil
+import time
 import markdown as md_lib
 
 # ---- 路徑設定：全部相對於這支腳本檔案所在的位置去推算 ----
@@ -167,12 +168,25 @@ if __name__ == "__main__":
     # 圖片/音樂才會被複製進 docs/,資料夾裡其餘不相干的檔案一律跳過
     slugs = {slugify(f) for f in files}
 
-    from templates import BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, LIGHTBOX, render_player
+    from templates import (
+        BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, LIGHTBOX,
+        SW_REGISTER, SERVICE_WORKER, render_player,
+    )
+
+    # Service Worker:每次建置換一個版本字串,舊快取在 activate 時整包清掉
+    sw_version = time.strftime("v%Y%m%d-%H%M%S")
+    sw_register_chapter = SW_REGISTER.replace("__ROOT__", "../")
+    sw_register_root = SW_REGISTER.replace("__ROOT__", "")
 
     os.makedirs(CHAPTERS_DIR, exist_ok=True)
 
     # GitHub Pages 用:放一個空的 .nojekyll,避免 Jekyll 處理掉某些檔案/資料夾
     open(os.path.join(OUT_DIR, ".nojekyll"), "w").close()
+
+    # 產生 Service Worker(帶本次建置版本)
+    with open(os.path.join(OUT_DIR, "sw.js"), "w", encoding="utf-8") as sw_out:
+        sw_out.write(SERVICE_WORKER.replace("__CACHE_VERSION__", sw_version))
+    print(f"Service Worker 已產生:sw.js({sw_version})")
 
     # 複製 CSS
     shutil.copy(os.path.join(os.path.dirname(__file__), "style.css"), os.path.join(OUT_DIR, "style.css"))
@@ -387,6 +401,7 @@ if __name__ == "__main__":
             content=content,
             footer=FOOTER,
             lightbox=LIGHTBOX,
+            sw_register=sw_register_chapter,
         )
         with open(os.path.join(CHAPTERS_DIR, f"{ch['slug']}.html"), "w", encoding="utf-8") as out:
             out.write(html)
@@ -445,6 +460,7 @@ if __name__ == "__main__":
         content=index_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
+        sw_register=sw_register_root,
     )
     with open(os.path.join(OUT_DIR, "index.html"), "w", encoding="utf-8") as out:
         out.write(index_html)
@@ -485,6 +501,7 @@ if __name__ == "__main__":
         content=gallery_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
+        sw_register=sw_register_root,
     )
     with open(os.path.join(OUT_DIR, "polaroids.html"), "w", encoding="utf-8") as out:
         out.write(gallery_html)
@@ -525,6 +542,7 @@ if __name__ == "__main__":
         content=journal_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
+        sw_register=sw_register_root,
     )
     with open(os.path.join(OUT_DIR, "journal.html"), "w", encoding="utf-8") as out:
         out.write(journal_html)
