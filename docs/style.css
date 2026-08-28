@@ -587,7 +587,7 @@ a { color: inherit; text-decoration: none; }
   left: 0;
   bottom: 52px;
   width: 300px;
-  max-height: 70vh;
+  max-height: 78vh;
   background: var(--polaroid);
   border: 1px solid var(--paper-line);
   border-radius: 8px;
@@ -635,13 +635,58 @@ a { color: inherit; text-decoration: none; }
   margin: 0;
   padding: 0;
   overflow-y: auto;
-  max-height: 40vh;
+  max-height: 46vh;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(27, 42, 65, 0.25) transparent;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 10px, #000 calc(100% - 10px), transparent 100%);
 }
-.playlist-item {
+.playlist::-webkit-scrollbar { width: 6px; }
+.playlist::-webkit-scrollbar-thumb { background: rgba(27, 42, 65, 0.22); border-radius: 3px; }
+.playlist::-webkit-scrollbar-track { background: transparent; }
+
+/* 歌單按篇章分區分組,逐區摺疊 */
+.playlist-group { list-style: none; }
+.playlist-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
   padding: 8px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.15s, color 0.15s;
+}
+.playlist-group-head:hover { background: var(--polaroid-warm); color: var(--ink); }
+.playlist-group-name::before {
+  content: "\25B8";
+  display: inline-block;
+  margin-right: 7px;
+  transition: transform 0.15s ease;
+}
+.playlist-group.open .playlist-group-name::before { transform: rotate(90deg); }
+.playlist-group-count { opacity: 0.55; font-size: 10px; }
+.playlist-group-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+.playlist-group.open .playlist-group-items { display: flex; }
+
+.playlist-item {
+  padding: 8px 10px 8px 26px;
   border-radius: 3px;
   font-size: 13px;
   color: var(--ink);

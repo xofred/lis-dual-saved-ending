@@ -72,6 +72,7 @@ __LIST_HTML__
   var nextBtn = document.getElementById('playerNext');
   var nowTitle = document.getElementById('nowPlayingTitle');
   var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var groupEls = document.querySelectorAll('#playlistItems .playlist-group');
   var currentIndex = -1;
 
   if (!toggle) { return; }
@@ -81,6 +82,7 @@ __LIST_HTML__
     if (isHidden) {
       panel.removeAttribute('hidden');
       toggle.setAttribute('aria-expanded', 'true');
+      if (currentIndex !== -1) revealCurrent();
     } else {
       panel.setAttribute('hidden', '');
       toggle.setAttribute('aria-expanded', 'false');
@@ -89,8 +91,32 @@ __LIST_HTML__
 
   if (!playlist.length) { return; }
 
+  // 歌單按篇章分區摺疊:點標題展開/收合,預設只展開第一個分區
+  function setGroupOpen(g, open) {
+    g.classList.toggle('open', open);
+    var head = g.querySelector('.playlist-group-head');
+    if (head) head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  [].forEach.call(groupEls, function(g, i) {
+    var head = g.querySelector('.playlist-group-head');
+    if (head) head.addEventListener('click', function() {
+      setGroupOpen(g, !g.classList.contains('open'));
+    });
+    setGroupOpen(g, i === 0);
+  });
+
+  // 展開當前曲目所屬分區,並把它捲進可視範圍
+  function revealCurrent() {
+    var el = items[currentIndex];
+    if (!el) return;
+    var g = el.closest ? el.closest('.playlist-group') : null;
+    if (g) setGroupOpen(g, true);
+    requestAnimationFrame(function() { el.scrollIntoView({ block: 'nearest' }); });
+  }
+
   function highlight() {
-    items.forEach(function(el, i) {
+    [].forEach.call(items, function(el) {
+      var i = parseInt(el.getAttribute('data-index'), 10);
       el.classList.toggle('playing', i === currentIndex);
     });
   }
@@ -101,12 +127,14 @@ __LIST_HTML__
     audio.src = track.src;
     nowTitle.textContent = track.title;
     highlight();
+    revealCurrent();
     if (autoplay) {
       audio.play().catch(function() {});
     }
   }
 
-  items.forEach(function(el, i) {
+  [].forEach.call(items, function(el) {
+    var i = parseInt(el.getAttribute('data-index'), 10);
     el.addEventListener('click', function() { loadTrack(i, true); });
   });
 
@@ -142,17 +170,44 @@ __LIST_HTML__
 
 def render_player(root, playlist):
     """全站播放清單選單。root 是目前頁面到站台根目錄的相對路徑前綴,
-    playlist 是 [{"title": 章節標題, "file": 配樂檔名}, ...],
-    只收錄真的有配樂的章節(不是佔位)。"""
-    items = [{"title": p["title"], "src": root + "songs/" + p["file"]} for p in playlist]
+    playlist 是 [{"title": 章節標題, "file": 配樂檔名, "section": 篇章分區}, ...],
+    只收錄真的有配樂的章節(不是佔位)。清單依 playlist 順序(即章節順序)
+    按篇章分區分組,前端可逐區摺疊,避免歌一多就變成小框裡的長捲軸。"""
+    items = [
+        {"title": p["title"], "src": root + "songs/" + p["file"], "section": p.get("section", "")}
+        for p in playlist
+    ]
 
-    if items:
-        list_html = "\n".join(
-            '      <li class="playlist-item" data-index="{0}">{1}</li>'.format(i, it["title"])
-            for i, it in enumerate(items)
-        )
-    else:
+    if not items:
         list_html = '      <li class="playlist-empty">目前還沒有配樂</li>'
+    else:
+        section_order = []
+        by_section = {}
+        for i, it in enumerate(items):
+            sec = it["section"] or "未分類"
+            if sec not in by_section:
+                by_section[sec] = []
+                section_order.append(sec)
+            by_section[sec].append((i, it))
+
+        blocks = []
+        for sec in section_order:
+            lis = "\n".join(
+                '          <li class="playlist-item" data-index="{0}">{1}</li>'.format(i, it["title"])
+                for i, it in by_section[sec]
+            )
+            blocks.append(
+                '      <li class="playlist-group">\n'
+                '        <button class="playlist-group-head" type="button" aria-expanded="false">\n'
+                '          <span class="playlist-group-name">{sec}</span>\n'
+                '          <span class="playlist-group-count">{n}</span>\n'
+                '        </button>\n'
+                '        <ul class="playlist-group-items">\n'
+                '{lis}\n'
+                '        </ul>\n'
+                '      </li>'.format(sec=sec, n=len(by_section[sec]), lis=lis)
+            )
+        list_html = "\n".join(blocks)
 
     return (
         PLAYER_TEMPLATE

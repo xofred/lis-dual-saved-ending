@@ -59,18 +59,45 @@
       <button id="playerNext" type="button" title="下一首">⏭</button>
     </div>
     <ul class="playlist" id="playlistItems">
-      <li class="playlist-item" data-index="0">雙保結局</li>
-      <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
-      <li class="playlist-item" data-index="2">AI 作曲速成班</li>
-      <li class="playlist-item" data-index="3">遲來的舞台</li>
-      <li class="playlist-item" data-index="4">海岸線露營</li>
-      <li class="playlist-item" data-index="5">滔天暗示</li>
+      <li class="playlist-group">
+        <button class="playlist-group-head" type="button" aria-expanded="false">
+          <span class="playlist-group-name">背景與序曲</span>
+          <span class="playlist-group-count">2</span>
+        </button>
+        <ul class="playlist-group-items">
+          <li class="playlist-item" data-index="0">雙保結局</li>
+          <li class="playlist-item" data-index="1">臥室,唱片轉動的聲音</li>
+        </ul>
+      </li>
+      <li class="playlist-group">
+        <button class="playlist-group-head" type="button" aria-expanded="false">
+          <span class="playlist-group-name">校園與衰退</span>
+          <span class="playlist-group-count">4</span>
+        </button>
+        <ul class="playlist-group-items">
+          <li class="playlist-item" data-index="2">AI 作曲速成班</li>
+          <li class="playlist-item" data-index="3">遲來的舞台</li>
+          <li class="playlist-item" data-index="4">海岸線露營</li>
+          <li class="playlist-item" data-index="5">滔天暗示</li>
+        </ul>
+      </li>
+      <li class="playlist-group">
+        <button class="playlist-group-head" type="button" aria-expanded="false">
+          <span class="playlist-group-name">Victoria與Kate</span>
+          <span class="playlist-group-count">3</span>
+        </button>
+        <ul class="playlist-group-items">
+          <li class="playlist-item" data-index="6">微距魔法與天台午後</li>
+          <li class="playlist-item" data-index="7">星空夜話</li>
+          <li class="playlist-item" data-index="8">意外投屏事件</li>
+        </ul>
+      </li>
     </ul>
   </div>
 </div>
 <script>
 (function() {
-  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3"}];
+  var playlist = [{"title": "雙保結局", "src": "../songs/dual_saved_ending_family_reunion.mp3", "section": "背景與序曲"}, {"title": "臥室,唱片轉動的聲音", "src": "../songs/bedroom_lua.mp3", "section": "背景與序曲"}, {"title": "AI 作曲速成班", "src": "../songs/ai_music_class.mp3", "section": "校園與衰退"}, {"title": "遲來的舞台", "src": "../songs/rachel_song.mp3", "section": "校園與衰退"}, {"title": "海岸線露營", "src": "../songs/coastal_camping.mp3", "section": "校園與衰退"}, {"title": "滔天暗示", "src": "../songs/song_from_afar.mp3", "section": "校園與衰退"}, {"title": "微距魔法與天台午後", "src": "../songs/macro_magic_rooftop.mp3", "section": "Victoria與Kate"}, {"title": "星空夜話", "src": "../songs/starlit_talk.mp3", "section": "Victoria與Kate"}, {"title": "意外投屏事件", "src": "../songs/mv_incident.mp3", "section": "Victoria與Kate"}];
   var toggle = document.getElementById('playerToggle');
   var panel = document.getElementById('playerPanel');
   var audio = document.getElementById('playerAudio');
@@ -79,6 +106,7 @@
   var nextBtn = document.getElementById('playerNext');
   var nowTitle = document.getElementById('nowPlayingTitle');
   var items = document.querySelectorAll('#playlistItems .playlist-item');
+  var groupEls = document.querySelectorAll('#playlistItems .playlist-group');
   var currentIndex = -1;
 
   if (!toggle) { return; }
@@ -88,6 +116,7 @@
     if (isHidden) {
       panel.removeAttribute('hidden');
       toggle.setAttribute('aria-expanded', 'true');
+      if (currentIndex !== -1) revealCurrent();
     } else {
       panel.setAttribute('hidden', '');
       toggle.setAttribute('aria-expanded', 'false');
@@ -96,8 +125,32 @@
 
   if (!playlist.length) { return; }
 
+  // 歌單按篇章分區摺疊:點標題展開/收合,預設只展開第一個分區
+  function setGroupOpen(g, open) {
+    g.classList.toggle('open', open);
+    var head = g.querySelector('.playlist-group-head');
+    if (head) head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  [].forEach.call(groupEls, function(g, i) {
+    var head = g.querySelector('.playlist-group-head');
+    if (head) head.addEventListener('click', function() {
+      setGroupOpen(g, !g.classList.contains('open'));
+    });
+    setGroupOpen(g, i === 0);
+  });
+
+  // 展開當前曲目所屬分區,並把它捲進可視範圍
+  function revealCurrent() {
+    var el = items[currentIndex];
+    if (!el) return;
+    var g = el.closest ? el.closest('.playlist-group') : null;
+    if (g) setGroupOpen(g, true);
+    requestAnimationFrame(function() { el.scrollIntoView({ block: 'nearest' }); });
+  }
+
   function highlight() {
-    items.forEach(function(el, i) {
+    [].forEach.call(items, function(el) {
+      var i = parseInt(el.getAttribute('data-index'), 10);
       el.classList.toggle('playing', i === currentIndex);
     });
   }
@@ -108,12 +161,14 @@
     audio.src = track.src;
     nowTitle.textContent = track.title;
     highlight();
+    revealCurrent();
     if (autoplay) {
       audio.play().catch(function() {});
     }
   }
 
-  items.forEach(function(el, i) {
+  [].forEach.call(items, function(el) {
+    var i = parseInt(el.getAttribute('data-index'), 10);
     el.addEventListener('click', function() { loadTrack(i, true); });
   });
 
@@ -150,7 +205,7 @@
   <div class="chapter-meta">第 108 章 · Victoria與Kate</div>
   <h1>微距魔法與天台午後</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/macro_magic_rooftop.jpeg" alt="微距魔法與天台午後" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/macro_magic_rooftop.jpeg" alt="微距魔法與天台午後 拍立得照片" loading="lazy"></div></div></div><div class="media-item media-journal"><span class="slot-label">📓 Max 的手帳</span><div class="journal-strip"><div class="journal-page-card" style="--rot: -2deg"><img src="../journal/macro_magic_rooftop.jpeg" alt="微距魔法與天台午後 Max 的手帳" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-audio"><span class="slot-label">♪ 配樂</span><audio controls preload="none" src="../songs/macro_magic_rooftop.mp3"></audio></div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/macro_magic_rooftop.jpeg" alt="微距魔法與天台午後" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/macro_magic_rooftop.jpeg" alt="微距魔法與天台午後 拍立得照片" loading="lazy"></div></div></div><div class="media-item media-journal"><span class="slot-label">📓 Max 的手帳</span><div class="journal-strip"><div class="journal-page-card" style="--rot: -2deg"><img src="../journal/macro_magic_rooftop.jpeg" alt="微距魔法與天台午後 Max 的手帳" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <h2>一、鈔能力微距教學</h2>
