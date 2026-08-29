@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 靜態網站建置腳本
-把 ordered/ 資料夾裡的 111 篇 markdown 章節,轉成統一風格的靜態閱讀站台。
-輸出到專案根目錄的 docs/(給 GitHub Pages 用)
+把 ordered/(第一季)與 ordered_s2/(第二季)資料夾裡的 markdown 章節,
+轉成統一風格的靜態閱讀站台。輸出到專案根目錄的 docs/(給 GitHub Pages 用)
 """
 
 import os
@@ -27,7 +27,8 @@ import markdown as md_lib
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 
-SRC_DIR = os.path.join(PROJECT_ROOT, "ordered")
+SRC_DIR = os.path.join(PROJECT_ROOT, "ordered")        # 第一季章節原始檔
+SRC_DIR_S2 = os.path.join(PROJECT_ROOT, "ordered_s2")   # 第二季章節原始檔(檔名各自從 001 起算)
 OUT_DIR = os.path.join(PROJECT_ROOT, "docs")
 CHAPTERS_DIR = os.path.join(OUT_DIR, "chapters")
 IMAGES_DIR = os.path.join(OUT_DIR, "images")
@@ -106,7 +107,7 @@ def find_journal_pages(slug, media_dir, exts):
     多頁比對邏輯跟拍立得完全一樣,直接沿用。"""
     return find_polaroids(slug, media_dir, exts)
 
-# 六大篇章分區,對應之前排定的順序區間 (檔名數字範圍, 含頭含尾)
+# 第一季的篇章分區,對應排定的順序區間 (檔名數字範圍, 含頭含尾)
 SECTIONS = [
     ("背景與序曲",     1,   25,  "案發後的世界觀補完、漩渦崩解與Victoria的贖罪、David的解職、學校重生、波特蘭假期、墓地告別、隔音期間的日常"),
     ("旅館連環案",     26,  42,  "Devil in Me crossover ── 五人小隊的驚魂旅館夜,及其後續"),
@@ -114,10 +115,18 @@ SECTIONS = [
     ("宿舍與公路(一)", 65,  76,  "打通宿舍的鬧劇日常,以及奧林匹亞/阿斯托利亞公路旅行"),
     ("校園與公路(二)", 77,  94,  "校園日常延續,西雅圖公路旅行系列"),
     ("Victoria與Kate", 95, 115,  "四人組主線 ── 從死對頭到真心朋友的完整弧線"),
+    ("畢業季終章",     116, 129,  "從凌晨兩點的苦讀夜到畢業典禮 ── Chloe 補完高中學分的最後一個學期,提勒穆克海岸小旅行、放榜與畢業"),
 ]
+
+# 第二季:獨立成一個明顯區隔的篇章,之後篇數多了也能套用同一套折疊邏輯
+SEASON_2 = {
+    "name": "波特蘭",
+    "desc": "風暴之後,四個人都留在了波特蘭 ── Max 讀 PNCA、Chloe 修應用機械、Kate 唸兒童心理、Victoria 遠端上課兼接手畫廊。新生活的第一批日常。",
+}
 
 
 def get_section(num):
+    """只用於第一季;第二季的分區直接是 SEASON_2['name']。"""
     for name, lo, hi, desc in SECTIONS:
         if lo <= num <= hi:
             return name
@@ -160,13 +169,20 @@ def render_badges(ch):
     return f'<div class="ch-badges">{"".join(parts)}</div>'
 
 
+def list_md(src_dir):
+    if not os.path.isdir(src_dir):
+        return []
+    return sorted(f for f in os.listdir(src_dir) if f.endswith(".md"))
+
+
 if __name__ == "__main__":
-    files = sorted([f for f in os.listdir(SRC_DIR) if f.endswith(".md")])
-    print(f"共找到 {len(files)} 個章節檔案")
+    s1_files = list_md(SRC_DIR)
+    s2_files = list_md(SRC_DIR_S2)
+    print(f"第一季 {len(s1_files)} 篇、第二季 {len(s2_files)} 篇,共 {len(s1_files) + len(s2_files)} 個章節檔案")
 
     # 章節 slug 集合,用來過濾素材:只有檔名(去副檔名)對得上某章節的
     # 圖片/音樂才會被複製進 docs/,資料夾裡其餘不相干的檔案一律跳過
-    slugs = {slugify(f) for f in files}
+    slugs = {slugify(f) for f in s1_files} | {slugify(f) for f in s2_files}
 
     from templates import (
         BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, LIGHTBOX,
@@ -257,25 +273,27 @@ if __name__ == "__main__":
         print(f"警告:找不到手帳來源資料夾(嘗試過 {JOURNAL_SOURCE_CANDIDATES}),跳過手帳複製")
 
     chapters = []  # 收集每章 metadata,供首頁與導覽使用
-    for f in files:
-        num = parse_chapter_num(f)
-        with open(os.path.join(SRC_DIR, f), "r", encoding="utf-8") as fh:
-            text = fh.read()
-        title = extract_title(text)
-        slug = slugify(f)
-        chapters.append({
-            "num": num,
-            "title": title,
-            "slug": slug,
-            "section": get_section(num),
-            "raw": text,
-            "image_file": find_media(slug, IMAGES_DIR, IMAGE_EXTS),
-            "audio_file": find_media(slug, SONGS_DIR, AUDIO_EXTS),
-            "polaroid_files": find_polaroids(slug, POLAROIDS_DIR, IMAGE_EXTS),
-            "journal_files": find_journal_pages(slug, JOURNAL_DIR, IMAGE_EXTS),
-        })
+    for season, src, flist in ((1, SRC_DIR, s1_files), (2, SRC_DIR_S2, s2_files)):
+        for f in flist:
+            num = parse_chapter_num(f)
+            with open(os.path.join(src, f), "r", encoding="utf-8") as fh:
+                text = fh.read()
+            slug = slugify(f)
+            chapters.append({
+                "num": num,
+                "season": season,
+                "title": extract_title(text),
+                "slug": slug,
+                "section": get_section(num) if season == 1 else SEASON_2["name"],
+                "raw": text,
+                "image_file": find_media(slug, IMAGES_DIR, IMAGE_EXTS),
+                "audio_file": find_media(slug, SONGS_DIR, AUDIO_EXTS),
+                "polaroid_files": find_polaroids(slug, POLAROIDS_DIR, IMAGE_EXTS),
+                "journal_files": find_journal_pages(slug, JOURNAL_DIR, IMAGE_EXTS),
+            })
 
-    chapters.sort(key=lambda c: c["num"])
+    # 閱讀順序:先第一季(依編號),再第二季(依編號)
+    chapters.sort(key=lambda c: (c["season"], c["num"]))
 
     # 全站播放清單:按章節順序,只收錄真的有配樂的章節(不是佔位)
     playlist = [
@@ -374,9 +392,14 @@ if __name__ == "__main__":
 
         media_html = f'<div class="media-slot">{"".join(media_parts)}</div>'
 
+        if ch["season"] == 2:
+            chapter_meta = f'第二季 · 第 {ch["num"]:02d} 章'
+        else:
+            chapter_meta = f'第 {ch["num"]:03d} 章 · {ch["section"]}'
+
         content = f"""
 <main class="chapter-page">
-  <div class="chapter-meta">第 {ch['num']:03d} 章 · {ch['section']}</div>
+  <div class="chapter-meta">{chapter_meta}</div>
   <h1>{ch['title']}</h1>
 
   {media_html}
@@ -409,29 +432,52 @@ if __name__ == "__main__":
     print(f"已產生 {len(chapters)} 個章節頁面")
 
     # ---------- 產生首頁 ----------
+    def chapter_card(c):
+        num_label = f'S2 · {c["num"]:02d}' if c["season"] == 2 else f'{c["num"]:03d}'
+        return (
+            f'<a class="chapter-card" href="chapters/{c["slug"]}.html">'
+            f'{render_badges(c)}'
+            f'<div class="ch-num">{num_label}</div>'
+            f'<div class="ch-title">{c["title"]}</div>'
+            f'</a>'
+        )
+
+    def render_section(label, name, desc, section_chapters, is_open=False, extra_class=""):
+        """一個可折疊的篇章分區:<details> 原生折疊,標題+篇數+簡介放 <summary>,
+        展開才顯示章節卡片。is_open 控制預設是否展開。"""
+        cards = "\n      ".join(chapter_card(c) for c in section_chapters)
+        cls = ("section-block " + extra_class).strip()
+        open_attr = " open" if is_open else ""
+        return f"""
+<details class="{cls}"{open_attr}>
+  <summary class="section-summary">
+    <span class="section-num">{label}</span>
+    <h2 class="section-name">{name}</h2>
+    <span class="section-count">{len(section_chapters)} 章</span>
+    <span class="section-desc">{desc}</span>
+  </summary>
+  <div class="chapter-grid">
+      {cards}
+  </div>
+</details>
+"""
+
     section_blocks = []
     for idx, (name, lo, hi, desc) in enumerate(SECTIONS, start=1):
-        section_chapters = [c for c in chapters if lo <= c["num"] <= hi]
-        cards = "\n".join(
-            f'''<a class="chapter-card" href="chapters/{c['slug']}.html">
-                  {render_badges(c)}
-                  <div class="ch-num">{c['num']:03d}</div>
-                  <div class="ch-title">{c['title']}</div>
-                </a>'''
-            for c in section_chapters
-        )
-        section_blocks.append(f"""
-<div class="section-block">
-  <div class="section-head">
-    <span class="section-num">{idx:02d}</span>
-    <h2>{name}</h2>
-  </div>
-  <p class="section-desc">{desc}</p>
-  <div class="chapter-grid">
-    {cards}
-  </div>
+        section_chapters = [c for c in chapters if c["season"] == 1 and lo <= c["num"] <= hi]
+        section_blocks.append(render_section(f"{idx:02d}", name, desc, section_chapters))
+
+    # 第二季:大標題分隔 + 明顯區隔的區塊,預設展開(篇數少),結構仍與其他分區一致
+    s2_chapters = [c for c in chapters if c["season"] == 2]
+    season_2_block = ""
+    if s2_chapters:
+        season_2_block = f"""
+<div class="season-divider">
+  <div class="eyebrow">SEASON TWO</div>
+  <h2>第二季 · {SEASON_2["name"]}</h2>
 </div>
-""")
+""" + render_section("S2", SEASON_2["name"], SEASON_2["desc"], s2_chapters,
+                      is_open=True, extra_class="season-block")
 
     hero = f"""
 <div class="hero">
@@ -442,7 +488,8 @@ if __name__ == "__main__":
     官方原作把玩家推向一道殘酷的電車難題——<strong>犧牲小鎮，或是犧牲 Chloe</strong>，
     二選一，沒有第三條路。這部合集是對那道難題的另一種回答：<br><br>
     <strong>如果 somehow，兩者都保住了呢？</strong><br><br>
-    這裡收錄了{len(chapters)}章，從風暴退去的第一個清晨，到公路盡頭的星空，
+    這裡收錄了{len(chapters)}章，從風暴退去的第一個清晨，一路到畢業典禮的夏天，
+    再到四個人在波特蘭重新開始的新生活，
     記錄著 Chloe 與 Max，還有這座小鎮上每一個劫後餘生的人，
     如何在一個「不該存在」的結局裡，笨拙卻真實地活下去。
   </p>
@@ -450,7 +497,9 @@ if __name__ == "__main__":
 <div class="hero-divider">❦</div>
 """
 
-    index_content = hero + '<div class="sections">' + "\n".join(section_blocks) + "</div>"
+    index_content = (
+        hero + '<div class="sections">' + "\n".join(section_blocks) + season_2_block + "</div>"
+    )
     index_html = HTML_SHELL.format(
         title="雙保結局 · 拍立得檔案",
         root="",

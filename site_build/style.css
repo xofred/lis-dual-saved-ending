@@ -178,35 +178,96 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
   padding: 0 24px 80px;
 }
+/* 篇章分區:<details> 原生折疊,預設收合,只顯示標題列 */
 .section-block {
-  margin-bottom: 56px;
-}
-.section-block .section-head {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
   border-bottom: 2px solid var(--dusk-blue);
-  padding-bottom: 10px;
 }
-.section-block .section-num {
+.section-summary {
+  list-style: none;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 2px 14px;
+  padding: 16px 32px 16px 4px;
+  position: relative;
+}
+.section-summary::-webkit-details-marker { display: none; }
+.section-summary::after {
+  content: "\203A";
+  position: absolute;
+  right: 8px;
+  top: 15px;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--butterfly);
+  transition: transform 0.2s ease;
+}
+.section-block[open] > .section-summary::after { transform: rotate(90deg); }
+.section-summary .section-num {
   font-family: var(--font-mono);
   font-size: 13px;
   color: var(--butterfly);
   letter-spacing: 0.1em;
 }
-.section-block h2 {
+.section-summary .section-name {
   font-family: var(--font-display);
-  font-size: 34px;
+  font-size: 32px;
   color: var(--dusk-blue);
   margin: 0;
+  line-height: 1.05;
+  transition: color 0.15s ease;
 }
-.section-block .section-desc {
+.section-summary:hover .section-name { color: var(--butterfly); }
+.section-summary .section-count {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.section-summary .section-desc {
+  grid-column: 1 / -1;
   font-size: 14px;
   color: var(--ink-soft);
   font-style: italic;
-  margin: 10px 0 20px;
+  margin: 4px 0 0;
 }
+.section-block[open] { padding-bottom: 24px; }
+.section-block[open] .chapter-grid { margin-top: 12px; }
+
+/* 第二季:大標題分隔 + 暖色調區隔,預設展開 */
+.season-divider {
+  margin: 64px 0 22px;
+  padding-top: 40px;
+  border-top: 3px double var(--diner-amber);
+  text-align: center;
+}
+.season-divider .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: var(--diner-amber);
+  margin-bottom: 10px;
+}
+.season-divider h2 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  color: var(--dusk-blue);
+  margin: 0;
+}
+.season-block {
+  background: rgba(193, 122, 79, 0.06);
+  border: 1px solid rgba(193, 122, 79, 0.22);
+  border-bottom-width: 2px;
+  border-bottom-color: var(--diner-amber);
+  border-radius: 4px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.season-block .section-num,
+.season-block > .section-summary::after { color: var(--diner-amber); }
+.season-block .section-summary:hover .section-name { color: var(--diner-amber); }
 
 .chapter-grid {
   display: grid;
@@ -770,6 +831,8 @@ a { color: inherit; text-decoration: none; }
   .site-header .brand { font-size: 20px; }
   .site-header nav a { margin-left: 12px; font-size: 10px; }
   .chapter-grid { grid-template-columns: 1fr; }
+  .section-summary .section-name { font-size: 26px; }
+  .season-divider h2 { font-size: 32px; }
 }
 
 /* ---------- 鍵盤焦點可見性 ---------- */
