@@ -194,7 +194,16 @@ if __name__ == "__main__":
     sw_register_chapter = SW_REGISTER.replace("__ROOT__", "../")
     sw_register_root = SW_REGISTER.replace("__ROOT__", "")
 
-    os.makedirs(CHAPTERS_DIR, exist_ok=True)
+    # docs/ 底下這幾個子資料夾整個是建置產物,先清空再重建。
+    # 不清的話,改名或刪掉的章節/素材會在 docs/ 裡留下孤兒檔案;而 find_media
+    # 這些函式是去 docs/ 裡比對的,孤兒檔案會被錯配到另一個還存在的章節上
+    # (例:Journal/wrong_words.jpeg 改名成 case_file_sketch.jpeg 後,舊的
+    #  docs/journal/wrong_words.jpeg 沒被清掉,同一張手帳就同時出現在兩篇故事)。
+    os.makedirs(OUT_DIR, exist_ok=True)
+    for d in (CHAPTERS_DIR, IMAGES_DIR, SONGS_DIR, POLAROIDS_DIR, JOURNAL_DIR):
+        if os.path.isdir(d):
+            shutil.rmtree(d)
+        os.makedirs(d)
 
     # GitHub Pages 用:放一個空的 .nojekyll,避免 Jekyll 處理掉某些檔案/資料夾
     open(os.path.join(OUT_DIR, ".nojekyll"), "w").close()
@@ -214,11 +223,6 @@ if __name__ == "__main__":
     polaroids_src = find_source_dir(POLAROIDS_SOURCE_CANDIDATES)
 
     journal_src = find_source_dir(JOURNAL_SOURCE_CANDIDATES)
-
-    os.makedirs(IMAGES_DIR, exist_ok=True)
-    os.makedirs(SONGS_DIR, exist_ok=True)
-    os.makedirs(POLAROIDS_DIR, exist_ok=True)
-    os.makedirs(JOURNAL_DIR, exist_ok=True)
 
     if images_src:
         copied = skipped = 0
