@@ -9,7 +9,7 @@
 import os
 import re
 import shutil
-import time
+import hashlib
 import markdown as md_lib
 
 # ---- 路徑設定：全部相對於這支腳本檔案所在的位置去推算 ----
@@ -186,11 +186,9 @@ if __name__ == "__main__":
 
     from templates import (
         BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, LIGHTBOX,
-        SW_REGISTER, SERVICE_WORKER, render_player,
+        SW_REGISTER, SERVICE_WORKER, render_player, render_player_js,
     )
 
-    # Service Worker:每次建置換一個版本字串,舊快取在 activate 時整包清掉
-    sw_version = time.strftime("v%Y%m%d-%H%M%S")
     sw_register_chapter = SW_REGISTER.replace("__ROOT__", "../")
     sw_register_root = SW_REGISTER.replace("__ROOT__", "")
 
@@ -207,11 +205,6 @@ if __name__ == "__main__":
 
     # GitHub Pages 用:放一個空的 .nojekyll,避免 Jekyll 處理掉某些檔案/資料夾
     open(os.path.join(OUT_DIR, ".nojekyll"), "w").close()
-
-    # 產生 Service Worker(帶本次建置版本)
-    with open(os.path.join(OUT_DIR, "sw.js"), "w", encoding="utf-8") as sw_out:
-        sw_out.write(SERVICE_WORKER.replace("__CACHE_VERSION__", sw_version))
-    print(f"Service Worker 已產生:sw.js({sw_version})")
 
     # 複製 CSS
     shutil.copy(os.path.join(os.path.dirname(__file__), "style.css"), os.path.join(OUT_DIR, "style.css"))
@@ -424,7 +417,7 @@ if __name__ == "__main__":
             root="../",
             butterfly=BUTTERFLY_SVG,
             header=HEADER.format(root="../"),
-            player=render_player("../", playlist),
+            player=render_player("../"),
             content=content,
             footer=FOOTER,
             lightbox=LIGHTBOX,
@@ -509,7 +502,7 @@ if __name__ == "__main__":
         root="",
         butterfly=BUTTERFLY_SVG,
         header=HEADER.format(root=""),
-        player=render_player("", playlist),
+        player=render_player(""),
         content=index_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
@@ -550,7 +543,7 @@ if __name__ == "__main__":
         root="",
         butterfly=BUTTERFLY_SVG,
         header=HEADER.format(root=""),
-        player=render_player("", playlist),
+        player=render_player(""),
         content=gallery_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
@@ -591,7 +584,7 @@ if __name__ == "__main__":
         root="",
         butterfly=BUTTERFLY_SVG,
         header=HEADER.format(root=""),
-        player=render_player("", playlist),
+        player=render_player(""),
         content=journal_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
@@ -601,5 +594,35 @@ if __name__ == "__main__":
         out.write(journal_html)
 
     print("Max 的手帳已產生:journal.html")
+
+    # ---------- 產生 player.js(全站播放清單資料 + 播放器邏輯) ----------
+    # 抽成獨立檔,加一首歌只會動到這個檔,不會讓每個章節頁都產生 diff
+    with open(os.path.join(OUT_DIR, "player.js"), "w", encoding="utf-8") as out:
+        out.write(render_player_js(playlist))
+    print(f"播放器已產生:player.js({len(playlist)} 首)")
+
+    # ---------- 產生 Service Worker(版本 = docs/ 內容 hash) ----------
+    # 版本號用內容 hash 而非時間戳:只有 docs/ 真的有東西變了,sw.js 才變,
+    # 回訪讀者也才會被要求重新快取(不然每次建置都白洗一次快取)。
+    def docs_content_hash(path, exclude):
+        rels = []
+        for base_dir, _dirs, names in os.walk(path):
+            for name in names:
+                rel = os.path.relpath(os.path.join(base_dir, name), path)
+                if rel not in exclude:
+                    rels.append(rel)
+        rels.sort()  # 全域排序,不受檔案系統遍歷順序影響
+        h = hashlib.sha1()
+        for rel in rels:
+            h.update(rel.encode("utf-8") + b"\0")
+            with open(os.path.join(path, rel), "rb") as fh:
+                h.update(fh.read())
+        return h.hexdigest()[:12]
+
+    sw_version = "v" + docs_content_hash(OUT_DIR, exclude={"sw.js"})
+    with open(os.path.join(OUT_DIR, "sw.js"), "w", encoding="utf-8") as out:
+        out.write(SERVICE_WORKER.replace("__CACHE_VERSION__", sw_version))
+    print(f"Service Worker 已產生:sw.js({sw_version})")
+
     print(f"\n完成！網站輸出於: {OUT_DIR}")
 

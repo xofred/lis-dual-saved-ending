@@ -45,8 +45,10 @@ HEADER = """
 </header>
 """
 
-PLAYER_TEMPLATE = """
-<div class="player-widget" id="playerWidget">
+# 每頁都放的播放器 widget(靜態,不含資料)。清單資料與邏輯都在 docs/player.js,
+# 所以加一首歌只會動到 player.js,不會讓 100 多個章節頁全部產生 diff。
+PLAYER_WIDGET = """
+<div class="player-widget" id="playerWidget" data-root="{root}">
   <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
   <div class="player-panel" id="playerPanel" hidden>
     <div class="player-now" id="nowPlayingTitle">尚未播放</div>
@@ -56,14 +58,28 @@ PLAYER_TEMPLATE = """
       <button id="playerPlay" type="button" title="播放/暫停">▶</button>
       <button id="playerNext" type="button" title="下一首">⏭</button>
     </div>
-    <ul class="playlist" id="playlistItems">
-__LIST_HTML__
-    </ul>
+    <ul class="playlist" id="playlistItems"></ul>
   </div>
 </div>
-<script>
+<script src="{root}player.js" defer></script>
+"""
+
+# docs/player.js 的內容:全站播放清單資料 + 播放器邏輯。__PLAYLIST_JSON__ 是
+# [{title, file, section, slug}, ...],src/href 由前端依 widget 上的 data-root 拼出。
+PLAYER_JS = """/* 由 build.py 產生:全站播放清單資料 + 播放器邏輯。只有配樂變動時才會變。 */
 (function() {
-  var playlist = __PLAYLIST_JSON__;
+  var widget = document.getElementById('playerWidget');
+  if (!widget) return;
+  var root = widget.getAttribute('data-root') || '';
+  var playlist = (__PLAYLIST_JSON__).map(function(p) {
+    return {
+      title: p.title,
+      section: p.section || '',
+      src: root + 'songs/' + p.file,
+      href: p.slug ? (root + 'chapters/' + p.slug + '.html') : ''
+    };
+  });
+
   var toggle = document.getElementById('playerToggle');
   var panel = document.getElementById('playerPanel');
   var audio = document.getElementById('playerAudio');
@@ -71,11 +87,10 @@ __LIST_HTML__
   var prevBtn = document.getElementById('playerPrev');
   var nextBtn = document.getElementById('playerNext');
   var nowTitle = document.getElementById('nowPlayingTitle');
-  var items = document.querySelectorAll('#playlistItems .playlist-item');
-  var groupEls = document.querySelectorAll('#playlistItems .playlist-group');
+  var listEl = document.getElementById('playlistItems');
   var currentIndex = -1;
 
-  if (!toggle) { return; }
+  if (!toggle) return;
 
   toggle.addEventListener('click', function() {
     var isHidden = panel.hasAttribute('hidden');
@@ -89,17 +104,74 @@ __LIST_HTML__
     }
   });
 
-  if (!playlist.length) { return; }
+  // ---- 依篇章分區,把清單建進 DOM ----
+  if (!playlist.length) {
+    var empty = document.createElement('li');
+    empty.className = 'playlist-empty';
+    empty.textContent = '目前還沒有配樂';
+    listEl.appendChild(empty);
+    return;
+  }
+
+  var order = [], bySection = {};
+  playlist.forEach(function(t, i) {
+    var sec = t.section || '未分類';
+    if (!bySection[sec]) { bySection[sec] = []; order.push(sec); }
+    bySection[sec].push(i);
+  });
+  order.forEach(function(sec) {
+    var groupLi = document.createElement('li');
+    groupLi.className = 'playlist-group';
+    var head = document.createElement('button');
+    head.className = 'playlist-group-head';
+    head.type = 'button';
+    head.setAttribute('aria-expanded', 'false');
+    var nm = document.createElement('span');
+    nm.className = 'playlist-group-name';
+    nm.textContent = sec;
+    var ct = document.createElement('span');
+    ct.className = 'playlist-group-count';
+    ct.textContent = String(bySection[sec].length);
+    head.appendChild(nm);
+    head.appendChild(ct);
+    var sub = document.createElement('ul');
+    sub.className = 'playlist-group-items';
+    bySection[sec].forEach(function(idx) {
+      var t = playlist[idx];
+      var li = document.createElement('li');
+      li.className = 'playlist-item';
+      li.setAttribute('data-index', String(idx));
+      var ts = document.createElement('span');
+      ts.className = 'playlist-item-title';
+      ts.textContent = t.title;
+      li.appendChild(ts);
+      if (t.href) {
+        var a = document.createElement('a');
+        a.className = 'playlist-item-link';
+        a.href = t.href;
+        a.setAttribute('aria-label', '翻到「' + t.title + '」這一章');
+        a.textContent = '\\u2197';
+        li.appendChild(a);
+      }
+      sub.appendChild(li);
+    });
+    groupLi.appendChild(head);
+    groupLi.appendChild(sub);
+    listEl.appendChild(groupLi);
+  });
+
+  var items = listEl.querySelectorAll('.playlist-item');
+  var groupEls = listEl.querySelectorAll('.playlist-group');
 
   // 歌單按篇章分區摺疊:點標題展開/收合,預設只展開第一個分區
   function setGroupOpen(g, open) {
     g.classList.toggle('open', open);
-    var head = g.querySelector('.playlist-group-head');
-    if (head) head.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var h = g.querySelector('.playlist-group-head');
+    if (h) h.setAttribute('aria-expanded', open ? 'true' : 'false');
   }
   [].forEach.call(groupEls, function(g, i) {
-    var head = g.querySelector('.playlist-group-head');
-    if (head) head.addEventListener('click', function() {
+    var h = g.querySelector('.playlist-group-head');
+    if (h) h.addEventListener('click', function() {
       setGroupOpen(g, !g.classList.contains('open'));
     });
     setGroupOpen(g, i === 0);
@@ -128,7 +200,7 @@ __LIST_HTML__
       var a = document.createElement('a');
       a.className = 'player-now-link';
       a.href = track.href;
-      a.textContent = track.title + ' ↗';
+      a.textContent = track.title + ' \\u2197';
       nowTitle.appendChild(a);
     } else {
       nowTitle.textContent = track.title;
@@ -142,9 +214,7 @@ __LIST_HTML__
     setNowPlaying(track);
     highlight();
     revealCurrent();
-    if (autoplay) {
-      audio.play().catch(function() {});
-    }
+    if (autoplay) audio.play().catch(function() {});
   }
 
   [].forEach.call(items, function(el) {
@@ -157,88 +227,48 @@ __LIST_HTML__
 
   playBtn.addEventListener('click', function() {
     if (currentIndex === -1) { loadTrack(0, true); return; }
-    if (audio.paused) { audio.play().catch(function() {}); }
-    else { audio.pause(); }
+    if (audio.paused) audio.play().catch(function() {});
+    else audio.pause();
   });
-
   prevBtn.addEventListener('click', function() {
     loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
   });
-
   nextBtn.addEventListener('click', function() {
     loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
   });
-
   audio.addEventListener('play', function() {
-    playBtn.textContent = '⏸';
+    playBtn.textContent = '\\u23f8';
     toggle.classList.add('is-playing');
   });
   audio.addEventListener('pause', function() {
-    playBtn.textContent = '▶';
+    playBtn.textContent = '\\u25b6';
     toggle.classList.remove('is-playing');
   });
   audio.addEventListener('ended', function() {
     loadTrack(currentIndex + 1, true);
   });
 })();
-</script>
 """
 
 
-def render_player(root, playlist):
-    """全站播放清單選單。root 是目前頁面到站台根目錄的相對路徑前綴,
-    playlist 是 [{"title": 章節標題, "file": 配樂檔名, "section": 篇章分區}, ...],
-    只收錄真的有配樂的章節(不是佔位)。清單依 playlist 順序(即章節順序)
-    按篇章分區分組,前端可逐區摺疊,避免歌一多就變成小框裡的長捲軸。"""
-    items = [
+def render_player(root):
+    """每頁都放的播放器 widget(靜態片段,不含清單資料)。"""
+    return PLAYER_WIDGET.replace("{root}", root)
+
+
+def render_player_js(playlist):
+    """docs/player.js 的內容:全站播放清單資料 + 播放器邏輯。
+    playlist 是 [{"title", "file", "section", "slug"}, ...],依章節順序。"""
+    data = [
         {
             "title": p["title"],
-            "src": root + "songs/" + p["file"],
+            "file": p["file"],
             "section": p.get("section", ""),
-            "href": (root + "chapters/" + p["slug"] + ".html") if p.get("slug") else "",
+            "slug": p.get("slug", ""),
         }
         for p in playlist
     ]
-
-    if not items:
-        list_html = '      <li class="playlist-empty">目前還沒有配樂</li>'
-    else:
-        section_order = []
-        by_section = {}
-        for i, it in enumerate(items):
-            sec = it["section"] or "未分類"
-            if sec not in by_section:
-                by_section[sec] = []
-                section_order.append(sec)
-            by_section[sec].append((i, it))
-
-        blocks = []
-        for sec in section_order:
-            lis = "\n".join(
-                '          <li class="playlist-item" data-index="{0}">'
-                '<span class="playlist-item-title">{1}</span>'
-                '<a class="playlist-item-link" href="{2}" aria-label="翻到「{1}」這一章">↗</a>'
-                '</li>'.format(i, it["title"], it["href"])
-                for i, it in by_section[sec]
-            )
-            blocks.append(
-                '      <li class="playlist-group">\n'
-                '        <button class="playlist-group-head" type="button" aria-expanded="false">\n'
-                '          <span class="playlist-group-name">{sec}</span>\n'
-                '          <span class="playlist-group-count">{n}</span>\n'
-                '        </button>\n'
-                '        <ul class="playlist-group-items">\n'
-                '{lis}\n'
-                '        </ul>\n'
-                '      </li>'.format(sec=sec, n=len(by_section[sec]), lis=lis)
-            )
-        list_html = "\n".join(blocks)
-
-    return (
-        PLAYER_TEMPLATE
-        .replace("__LIST_HTML__", list_html)
-        .replace("__PLAYLIST_JSON__", json.dumps(items, ensure_ascii=False))
-    )
+    return PLAYER_JS.replace("__PLAYLIST_JSON__", json.dumps(data, ensure_ascii=False))
 
 
 FOOTER = """
@@ -478,7 +508,8 @@ function isMedia(url) {
 }
 function isFontFile(url) { return url.hostname === 'fonts.gstatic.com'; }
 function isStyle(url) {
-  return (url.origin === self.location.origin && url.pathname.endsWith('.css')) ||
+  return (url.origin === self.location.origin &&
+          (url.pathname.endsWith('.css') || url.pathname.endsWith('/player.js'))) ||
          url.hostname === 'fonts.googleapis.com';
 }
 

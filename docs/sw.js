@@ -1,5 +1,5 @@
 /* 由 build.py 產生,請勿手動編輯 */
-const VERSION = 'v20260831-164013';
+const VERSION = 'v96b091f59a77';
 const SHELL = 'shell-' + VERSION;
 const MEDIA = 'media-' + VERSION;
 const SHELL_MAX = 130;
@@ -22,7 +22,8 @@ function isMedia(url) {
 }
 function isFontFile(url) { return url.hostname === 'fonts.gstatic.com'; }
 function isStyle(url) {
-  return (url.origin === self.location.origin && url.pathname.endsWith('.css')) ||
+  return (url.origin === self.location.origin &&
+          (url.pathname.endsWith('.css') || url.pathname.endsWith('/player.js'))) ||
          url.hostname === 'fonts.googleapis.com';
 }
 
