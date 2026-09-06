@@ -65,7 +65,7 @@ PLAYER_WIDGET = """
 """
 
 # docs/player.js 的內容:全站播放清單資料 + 播放器邏輯。__PLAYLIST_JSON__ 是
-# [{title, file, section, slug}, ...],src/href 由前端依 widget 上的 data-root 拼出。
+# [{title, file, section, slug, cover}, ...],src/href/cover 由前端依 widget 上的 data-root 拼出。
 PLAYER_JS = """/* 由 build.py 產生:全站播放清單資料 + 播放器邏輯。只有配樂變動時才會變。 */
 (function() {
   var widget = document.getElementById('playerWidget');
@@ -76,7 +76,8 @@ PLAYER_JS = """/* 由 build.py 產生:全站播放清單資料 + 播放器邏輯
       title: p.title,
       section: p.section || '',
       src: root + 'songs/' + p.file,
-      href: p.slug ? (root + 'chapters/' + p.slug + '.html') : ''
+      href: p.slug ? (root + 'chapters/' + p.slug + '.html') : '',
+      cover: p.cover ? (root + p.cover) : ''
     };
   });
 
@@ -89,6 +90,36 @@ PLAYER_JS = """/* 由 build.py 產生:全站播放清單資料 + 播放器邏輯
   var nowTitle = document.getElementById('nowPlayingTitle');
   var listEl = document.getElementById('playlistItems');
   var currentIndex = -1;
+  var mediaSession = navigator.mediaSession;
+
+  // 副檔名 → MIME,給 Media Session 的封面圖用
+  function coverMime(path) {
+    var ext = (path.split('.').pop() || '').toLowerCase();
+    if (ext === 'png') return 'image/png';
+    if (ext === 'webp') return 'image/webp';
+    return 'image/jpeg';
+  }
+
+  // 把當前曲目資訊餵給系統(鎖屏 / 控制中心 / 藍牙車機 / Apple Watch 都吃這個)
+  function updateMediaSession(track) {
+    if (!mediaSession || !window.MediaMetadata) return;
+    var art = [];
+    if (track.cover) {
+      var url = new URL(track.cover, location.href).href;
+      var type = coverMime(track.cover);
+      art = ['96x96', '192x192', '512x512'].map(function(sizes) {
+        return { src: url, sizes: sizes, type: type };
+      });
+    }
+    try {
+      mediaSession.metadata = new window.MediaMetadata({
+        title: track.title,
+        artist: track.section || 'Life is Strange:雙保結局',
+        album: '雙保結局 · 全站配樂',
+        artwork: art
+      });
+    } catch (e) {}
+  }
 
   if (!toggle) return;
 
@@ -212,6 +243,7 @@ PLAYER_JS = """/* 由 build.py 產生:全站播放清單資料 + 播放器邏輯
     var track = playlist[currentIndex];
     audio.src = track.src;
     setNowPlaying(track);
+    updateMediaSession(track);
     highlight();
     revealCurrent();
     if (autoplay) audio.play().catch(function() {});
@@ -236,13 +268,46 @@ PLAYER_JS = """/* 由 build.py 產生:全站播放清單資料 + 播放器邏輯
   nextBtn.addEventListener('click', function() {
     loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
   });
+
+  // ---- Media Session:鎖屏 / 控制中心 / AirPods 雙擊(下一首)三擊(上一首)----
+  if (mediaSession && typeof mediaSession.setActionHandler === 'function') {
+    var bind = function(action, fn) {
+      try { mediaSession.setActionHandler(action, fn); } catch (e) {}
+    };
+    bind('play', function() { audio.play().catch(function() {}); });
+    bind('pause', function() { audio.pause(); });
+    bind('previoustrack', function() {
+      loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+    });
+    bind('nexttrack', function() {
+      loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+    });
+    bind('seekto', function(d) {
+      if (d && d.seekTime != null && isFinite(d.seekTime)) audio.currentTime = d.seekTime;
+    });
+  }
+
   audio.addEventListener('play', function() {
     playBtn.textContent = '\\u23f8';
     toggle.classList.add('is-playing');
+    if (mediaSession) mediaSession.playbackState = 'playing';
   });
   audio.addEventListener('pause', function() {
     playBtn.textContent = '\\u25b6';
     toggle.classList.remove('is-playing');
+    if (mediaSession) mediaSession.playbackState = 'paused';
+  });
+  // 鎖屏進度條:把播放位置同步給系統
+  audio.addEventListener('timeupdate', function() {
+    if (!mediaSession || typeof mediaSession.setPositionState !== 'function') return;
+    if (!audio.duration || !isFinite(audio.duration)) return;
+    try {
+      mediaSession.setPositionState({
+        duration: audio.duration,
+        position: Math.min(audio.currentTime, audio.duration),
+        playbackRate: audio.playbackRate || 1
+      });
+    } catch (e) {}
   });
   audio.addEventListener('ended', function() {
     loadTrack(currentIndex + 1, true);
@@ -265,6 +330,7 @@ def render_player_js(playlist):
             "file": p["file"],
             "section": p.get("section", ""),
             "slug": p.get("slug", ""),
+            "cover": p.get("cover", ""),
         }
         for p in playlist
     ]

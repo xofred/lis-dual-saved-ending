@@ -292,9 +292,26 @@ if __name__ == "__main__":
     # 閱讀順序:先第一季(依編號),再第二季(依編號)
     chapters.sort(key=lambda c: (c["season"], c["num"]))
 
+    # 播放器封面圖(給系統鎖屏 / 控制中心 / AirPods 的 Media Session 用):
+    # 優先該章第一張拍立得,其次插圖,兩者都沒有就用第一季第一章的插圖
+    default_cover = (
+        "images/" + chapters[0]["image_file"]
+        if chapters and chapters[0].get("image_file") else ""
+    )
+
+    def chapter_cover(c):
+        if c["polaroid_files"]:
+            return "polaroids/" + c["polaroid_files"][0]
+        if c["image_file"]:
+            return "images/" + c["image_file"]
+        return default_cover
+
     # 全站播放清單:按章節順序,只收錄真的有配樂的章節(不是佔位)
     playlist = [
-        {"title": c["title"], "file": c["audio_file"], "section": c["section"], "slug": c["slug"]}
+        {
+            "title": c["title"], "file": c["audio_file"], "section": c["section"],
+            "slug": c["slug"], "cover": chapter_cover(c),
+        }
         for c in chapters if c["audio_file"]
     ]
     print(f"播放清單共 {len(playlist)} 首歌")

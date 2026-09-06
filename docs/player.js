@@ -3,12 +3,13 @@
   var widget = document.getElementById('playerWidget');
   if (!widget) return;
   var root = widget.getAttribute('data-root') || '';
-  var playlist = ([{"title": "雙保結局", "file": "dual_saved_ending_family_reunion.mp3", "section": "背景與序曲", "slug": "dual_saved_ending_family_reunion"}, {"title": "故人", "file": "old_friends.mp3", "section": "背景與序曲", "slug": "old_friends"}, {"title": "父親的墓", "file": "father_grave.mp3", "section": "背景與序曲", "slug": "father_grave"}, {"title": "臥室,唱片轉動的聲音", "file": "bedroom_lua.mp3", "section": "背景與序曲", "slug": "bedroom_lua"}, {"title": "AI 作曲速成班", "file": "ai_music_class.mp3", "section": "校園與衰退", "slug": "ai_music_class"}, {"title": "遲來的舞台", "file": "rachel_song.mp3", "section": "校園與衰退", "slug": "rachel_song"}, {"title": "海岸線露營", "file": "coastal_camping.mp3", "section": "校園與衰退", "slug": "coastal_camping"}, {"title": "滔天暗示", "file": "song_from_afar.mp3", "section": "校園與衰退", "slug": "song_from_afar"}, {"title": "微距魔法與天台午後", "file": "macro_magic_rooftop.mp3", "section": "Victoria與Kate", "slug": "macro_magic_rooftop"}, {"title": "星空夜話", "file": "starlit_talk.mp3", "section": "Victoria與Kate", "slug": "starlit_talk"}, {"title": "意外投屏事件", "file": "mv_incident.mp3", "section": "Victoria與Kate", "slug": "mv_incident"}, {"title": "下海追逐戰", "file": "ocean_chase.mp3", "section": "畢業季終章", "slug": "ocean_chase"}, {"title": "相框與日記", "file": "frame_and_diary.mp3", "section": "畢業季終章", "slug": "frame_and_diary"}, {"title": "不分開的約定", "file": "staying_together.mp3", "section": "波特蘭", "slug": "staying_together"}, {"title": "一級通水測試", "file": "irrigation_test.mp3", "section": "波特蘭", "slug": "irrigation_test"}, {"title": "末頁的心裡話", "file": "final_page_confessions.mp3", "section": "波特蘭", "slug": "final_page_confessions"}, {"title": "001號委託", "file": "order_001.mp3", "section": "波特蘭", "slug": "order_001"}, {"title": "收工儀式", "file": "closing_ritual.mp3", "section": "波特蘭", "slug": "closing_ritual"}, {"title": "種子與微光", "file": "seeds_and_light.mp3", "section": "波特蘭", "slug": "seeds_and_light"}, {"title": "重返阿卡迪亞灣", "file": "return_to_arcadia.mp3", "section": "波特蘭", "slug": "return_to_arcadia"}, {"title": "晚餐哲學交流", "file": "supper_philosophy_discussion.mp3", "section": "波特蘭", "slug": "supper_philosophy_discussion"}, {"title": "壁畫日和長者探班", "file": "mural_day_and_visit.mp3", "section": "波特蘭", "slug": "mural_day_and_visit"}, {"title": "風雨方舟", "file": "storm_system_test.mp3", "section": "波特蘭", "slug": "storm_system_test"}, {"title": "開學日", "file": "first_day_send_off.mp3", "section": "波特蘭", "slug": "first_day_send_off"}, {"title": "黃銅鎮紙", "file": "miles_farewell_letter.mp3", "section": "波特蘭", "slug": "miles_farewell_letter"}, {"title": "重力加倍術", "file": "gravity_doubling_spell.mp3", "section": "波特蘭", "slug": "gravity_doubling_spell"}, {"title": "命案現場的誤會", "file": "crime_scene_misunderstanding.mp3", "section": "波特蘭", "slug": "crime_scene_misunderstanding"}, {"title": "法定放空日", "file": "mandatory_relaxation_day.mp3", "section": "波特蘭", "slug": "mandatory_relaxation_day"}, {"title": "弟弟的週末報到", "file": "miles_weekend_visit.mp3", "section": "波特蘭", "slug": "miles_weekend_visit"}, {"title": "雙重曝光的一天", "file": "double_exposure_day.mp3", "section": "波特蘭", "slug": "double_exposure_day"}]).map(function(p) {
+  var playlist = ([{"title": "雙保結局", "file": "dual_saved_ending_family_reunion.mp3", "section": "背景與序曲", "slug": "dual_saved_ending_family_reunion", "cover": "images/dual_saved_ending_family_reunion.jpeg"}, {"title": "故人", "file": "old_friends.mp3", "section": "背景與序曲", "slug": "old_friends", "cover": "images/old_friends.jpeg"}, {"title": "父親的墓", "file": "father_grave.mp3", "section": "背景與序曲", "slug": "father_grave", "cover": "images/father_grave.jpeg"}, {"title": "臥室,唱片轉動的聲音", "file": "bedroom_lua.mp3", "section": "背景與序曲", "slug": "bedroom_lua", "cover": "images/bedroom_lua.jpeg"}, {"title": "AI 作曲速成班", "file": "ai_music_class.mp3", "section": "校園與衰退", "slug": "ai_music_class", "cover": "images/ai_music_class.jpeg"}, {"title": "遲來的舞台", "file": "rachel_song.mp3", "section": "校園與衰退", "slug": "rachel_song", "cover": "images/rachel_song.jpeg"}, {"title": "海岸線露營", "file": "coastal_camping.mp3", "section": "校園與衰退", "slug": "coastal_camping", "cover": "polaroids/coastal_camping.jpeg"}, {"title": "滔天暗示", "file": "song_from_afar.mp3", "section": "校園與衰退", "slug": "song_from_afar", "cover": "images/song_from_afar.jpeg"}, {"title": "微距魔法與天台午後", "file": "macro_magic_rooftop.mp3", "section": "Victoria與Kate", "slug": "macro_magic_rooftop", "cover": "polaroids/macro_magic_rooftop.jpeg"}, {"title": "星空夜話", "file": "starlit_talk.mp3", "section": "Victoria與Kate", "slug": "starlit_talk", "cover": "images/starlit_talk.jpeg"}, {"title": "意外投屏事件", "file": "mv_incident.mp3", "section": "Victoria與Kate", "slug": "mv_incident", "cover": "images/mv_incident.jpeg"}, {"title": "下海追逐戰", "file": "ocean_chase.mp3", "section": "畢業季終章", "slug": "ocean_chase", "cover": "polaroids/ocean_chase.jpeg"}, {"title": "相框與日記", "file": "frame_and_diary.mp3", "section": "畢業季終章", "slug": "frame_and_diary", "cover": "polaroids/frame_and_diary.jpeg"}, {"title": "不分開的約定", "file": "staying_together.mp3", "section": "波特蘭", "slug": "staying_together", "cover": "images/staying_together.jpeg"}, {"title": "一級通水測試", "file": "irrigation_test.mp3", "section": "波特蘭", "slug": "irrigation_test", "cover": "polaroids/irrigation_test.jpeg"}, {"title": "末頁的心裡話", "file": "final_page_confessions.mp3", "section": "波特蘭", "slug": "final_page_confessions", "cover": "images/final_page_confessions.jpeg"}, {"title": "001號委託", "file": "order_001.mp3", "section": "波特蘭", "slug": "order_001", "cover": "polaroids/order_001.jpeg"}, {"title": "收工儀式", "file": "closing_ritual.mp3", "section": "波特蘭", "slug": "closing_ritual", "cover": "images/closing_ritual.jpeg"}, {"title": "種子與微光", "file": "seeds_and_light.mp3", "section": "波特蘭", "slug": "seeds_and_light", "cover": "polaroids/seeds_and_light.jpeg"}, {"title": "重返阿卡迪亞灣", "file": "return_to_arcadia.mp3", "section": "波特蘭", "slug": "return_to_arcadia", "cover": "polaroids/return_to_arcadia.jpeg"}, {"title": "晚餐哲學交流", "file": "supper_philosophy_discussion.mp3", "section": "波特蘭", "slug": "supper_philosophy_discussion", "cover": "images/supper_philosophy_discussion.jpeg"}, {"title": "壁畫日和長者探班", "file": "mural_day_and_visit.mp3", "section": "波特蘭", "slug": "mural_day_and_visit", "cover": "images/mural_day_and_visit.jpeg"}, {"title": "風雨方舟", "file": "storm_system_test.mp3", "section": "波特蘭", "slug": "storm_system_test", "cover": "polaroids/storm_system_test.jpeg"}, {"title": "開學日", "file": "first_day_send_off.mp3", "section": "波特蘭", "slug": "first_day_send_off", "cover": "polaroids/first_day_send_off.jpeg"}, {"title": "黃銅鎮紙", "file": "miles_farewell_letter.mp3", "section": "波特蘭", "slug": "miles_farewell_letter", "cover": "images/miles_farewell_letter.jpeg"}, {"title": "重力加倍術", "file": "gravity_doubling_spell.mp3", "section": "波特蘭", "slug": "gravity_doubling_spell", "cover": "images/gravity_doubling_spell.jpeg"}, {"title": "命案現場的誤會", "file": "crime_scene_misunderstanding.mp3", "section": "波特蘭", "slug": "crime_scene_misunderstanding", "cover": "images/crime_scene_misunderstanding.jpeg"}, {"title": "法定放空日", "file": "mandatory_relaxation_day.mp3", "section": "波特蘭", "slug": "mandatory_relaxation_day", "cover": "polaroids/mandatory_relaxation_day.jpeg"}, {"title": "弟弟的週末報到", "file": "miles_weekend_visit.mp3", "section": "波特蘭", "slug": "miles_weekend_visit", "cover": "polaroids/miles_weekend_visit.jpeg"}, {"title": "雙重曝光的一天", "file": "double_exposure_day.mp3", "section": "波特蘭", "slug": "double_exposure_day", "cover": "polaroids/double_exposure_day.jpeg"}]).map(function(p) {
     return {
       title: p.title,
       section: p.section || '',
       src: root + 'songs/' + p.file,
-      href: p.slug ? (root + 'chapters/' + p.slug + '.html') : ''
+      href: p.slug ? (root + 'chapters/' + p.slug + '.html') : '',
+      cover: p.cover ? (root + p.cover) : ''
     };
   });
 
@@ -21,6 +22,36 @@
   var nowTitle = document.getElementById('nowPlayingTitle');
   var listEl = document.getElementById('playlistItems');
   var currentIndex = -1;
+  var mediaSession = navigator.mediaSession;
+
+  // 副檔名 → MIME,給 Media Session 的封面圖用
+  function coverMime(path) {
+    var ext = (path.split('.').pop() || '').toLowerCase();
+    if (ext === 'png') return 'image/png';
+    if (ext === 'webp') return 'image/webp';
+    return 'image/jpeg';
+  }
+
+  // 把當前曲目資訊餵給系統(鎖屏 / 控制中心 / 藍牙車機 / Apple Watch 都吃這個)
+  function updateMediaSession(track) {
+    if (!mediaSession || !window.MediaMetadata) return;
+    var art = [];
+    if (track.cover) {
+      var url = new URL(track.cover, location.href).href;
+      var type = coverMime(track.cover);
+      art = ['96x96', '192x192', '512x512'].map(function(sizes) {
+        return { src: url, sizes: sizes, type: type };
+      });
+    }
+    try {
+      mediaSession.metadata = new window.MediaMetadata({
+        title: track.title,
+        artist: track.section || 'Life is Strange:雙保結局',
+        album: '雙保結局 · 全站配樂',
+        artwork: art
+      });
+    } catch (e) {}
+  }
 
   if (!toggle) return;
 
@@ -144,6 +175,7 @@
     var track = playlist[currentIndex];
     audio.src = track.src;
     setNowPlaying(track);
+    updateMediaSession(track);
     highlight();
     revealCurrent();
     if (autoplay) audio.play().catch(function() {});
@@ -168,13 +200,46 @@
   nextBtn.addEventListener('click', function() {
     loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
   });
+
+  // ---- Media Session:鎖屏 / 控制中心 / AirPods 雙擊(下一首)三擊(上一首)----
+  if (mediaSession && typeof mediaSession.setActionHandler === 'function') {
+    var bind = function(action, fn) {
+      try { mediaSession.setActionHandler(action, fn); } catch (e) {}
+    };
+    bind('play', function() { audio.play().catch(function() {}); });
+    bind('pause', function() { audio.pause(); });
+    bind('previoustrack', function() {
+      loadTrack(currentIndex === -1 ? playlist.length - 1 : currentIndex - 1, true);
+    });
+    bind('nexttrack', function() {
+      loadTrack(currentIndex === -1 ? 0 : currentIndex + 1, true);
+    });
+    bind('seekto', function(d) {
+      if (d && d.seekTime != null && isFinite(d.seekTime)) audio.currentTime = d.seekTime;
+    });
+  }
+
   audio.addEventListener('play', function() {
     playBtn.textContent = '\u23f8';
     toggle.classList.add('is-playing');
+    if (mediaSession) mediaSession.playbackState = 'playing';
   });
   audio.addEventListener('pause', function() {
     playBtn.textContent = '\u25b6';
     toggle.classList.remove('is-playing');
+    if (mediaSession) mediaSession.playbackState = 'paused';
+  });
+  // 鎖屏進度條:把播放位置同步給系統
+  audio.addEventListener('timeupdate', function() {
+    if (!mediaSession || typeof mediaSession.setPositionState !== 'function') return;
+    if (!audio.duration || !isFinite(audio.duration)) return;
+    try {
+      mediaSession.setPositionState({
+        duration: audio.duration,
+        position: Math.min(audio.currentTime, audio.duration),
+        playbackRate: audio.playbackRate || 1
+      });
+    } catch (e) {}
   });
   audio.addEventListener('ended', function() {
     loadTrack(currentIndex + 1, true);

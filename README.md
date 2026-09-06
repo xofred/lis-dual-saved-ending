@@ -131,14 +131,18 @@ Journal/bedroom_lua_2.jpeg      ← 同一章的第 2 頁手帳,加 _2 _3... 後
 
 ### 全站歌單（左下角浮窗播放器）
 
-每頁左下角的「歌單」浮窗收錄全站所有有配樂的章節（`render_player` 產生，`PLAYER_TEMPLATE`）。清單**按篇章分區摺疊**，預設只展開第一區，載入曲目或打開面板時會自動展開當前曲目所屬分區並捲到它——避免歌一多就變成小框裡的長捲軸。
+每頁左下角的「歌單」浮窗收錄全站所有有配樂的章節。每頁只放靜態片段（`render_player`／`PLAYER_WIDGET`：一個空 `<ul>` ＋ `<script src="player.js">`），清單資料與播放邏輯全在建置產生的 `docs/player.js`（`render_player_js`／`PLAYER_JS`）——加一首歌只動這個檔，不會讓一百多個章節頁全部產生 diff。清單**按篇章分區摺疊**，預設只展開第一區，載入曲目或打開面板時會自動展開當前曲目所屬分區並捲到它——避免歌一多就變成小框裡的長捲軸。
 
 **跳轉章節**有兩個入口（歌單是常駐浮窗，不套燈箱那種「回到章節」按鈕，直接在介面上給連結）：
 
 - 「正在播放」標題本身是連結（`意外投屏事件 ↗`），點了翻到那一章
 - 每列右側一個 `↗` 章節鈕：桌面 hover 才浮現、觸控裝置常駐做淡；點它只導覽、不觸發播放（`stopPropagation`）
 
-曲目資料裡的 `href` 由 `render_player` 用 `root + "chapters/" + slug + ".html"` 算出，所以在子頁（章節頁）也指得對。
+曲目資料裡的 `href`（跳轉章節用）與 `cover`（封面圖）都只存相對站根的路徑，前端再依 widget 上的 `data-root` 拼成完整網址，所以在子頁（章節頁）也指得對。
+
+**系統層播放控制（Media Session API）。** `player.js` 會把當前曲目餵給 `navigator.mediaSession`：曲名、篇章名（當作 artist）、封面圖，並註冊 `play` / `pause` / `previoustrack` / `nexttrack` / `seekto` 的 action handler。效果是不用做原生 app，iOS 鎖屏 / 控制中心、藍牙車機、Apple Watch 都會顯示這個播放器，**AirPods 雙擊＝下一首、三擊＝上一首**，鎖屏那條進度條也能拖（`timeupdate` 時呼叫 `setPositionState`）。需要 HTTPS（GitHub Pages 有）且音訊得先被使用者手勢觸發過一次。
+
+封面圖優先序：該章**第一張拍立得** → **插圖** → 都沒有就退回第一季第一章的插圖（`build.py` 的 `chapter_cover`）。封面圖走 Service Worker 的 CacheFirst，離線也顯示得出來。
 
 ### 拍立得相簿
 
