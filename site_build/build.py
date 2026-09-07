@@ -118,16 +118,27 @@ SECTIONS = [
     ("畢業季終章",     116, 129,  "從凌晨兩點的苦讀夜到畢業典禮 ── Chloe 補完高中學分的最後一個學期,提勒穆克海岸小旅行、放榜與畢業"),
 ]
 
-# 第二季:獨立成一個明顯區隔的篇章,之後篇數多了也能套用同一套折疊邏輯
+# 第二季:自成一個明顯區隔的季,底下再切成跟第一季同構的篇章分區
 SEASON_2 = {
     "name": "波特蘭",
-    "desc": "風暴之後,四個人都留在了波特蘭 ── Max 讀 PNCA、Chloe 修應用機械、Kate 唸兒童心理、Victoria 遠端上課兼接手畫廊。新生活的第一批日常。",
+    "desc": "風暴之後,四個人都留在了波特蘭 ── Max 讀 PNCA、Chloe 修應用機械、Kate 唸兒童心理、Victoria 遠端上課兼接手畫廊。從珍珠區的天台到普吉特海灣,新生活的一整段日常。",
 }
 
+# 第二季的篇章分區,對應檔名數字範圍 (含頭含尾)
+SECTIONS_S2 = [
+    ("珍珠區的天台",   1,  17, "落腳波特蘭珍珠區的頂層 Loft、Max 的西雅圖聯展首秀、天台花園的第一個夏天,以及藝術學院宿舍的深夜攻防戰"),
+    ("匠魂與鋼鐵車廂", 18, 35, "Chloe 的工匠魂徹底點燃 ── 從防彈眼鏡盒、Kate 的園藝工具箱、草本煉金工坊,到 PNCA 期中展的最高榮譽與手工典藏冊,再到買下廢棄火車車廂、除鏽、立起 PRICE FORGE & ATELIER 的招牌、點燈、接下第一號委託"),
+    ("暑假與長輩認證", 36, 45, "材料力學補考衝刺、鮑威爾書店的書名暗殺、全員 cosplay 鬧劇、Kate 的兒童草本園藝班開課、重返阿卡迪亞灣,以及 David 在車庫深夜給出的那句核准"),
+    ("青年機械教室",   46, 56, "Miles 與「頂級義警」Robert McCall 登場、二號車廂改成青年機械教室、正式開課、Victoria 強行發起的健身房體脂淨化行動,以及 Warren 與 Brooke 帶著無人機從西雅圖回歸"),
+    ("開學季",         57, 68, "硬核親友團護送 Miles 上大學、一首 Lo-Fi 讓全員癱在地毯上、Victoria 頒布《法定放空日》、堪比國稅局審計的合規培訓,以及配電子榨菜吃飯的日常"),
+    ("家人拜訪",       69, 80, "感恩節北上見 Max 的父母、Kate 與 Victoria 的家人先後上門、重工業前衛搖滾樂隊成軍、Kate 解封的及腰長髮,以及週末市集的「令千金」風波三部曲與西雅圖慈善晚宴"),
+    ("北上",           81, 85, "波特蘭市中心的治安在半年裡崩壞、Victoria 攤開西海岸地圖、David 領銜的軍規級拆遷、兩節鋼鐵車廂的公路北上,以及在普吉特海灣臨海高地上的重新落位"),
+]
 
-def get_section(num):
-    """只用於第一季;第二季的分區直接是 SEASON_2['name']。"""
-    for name, lo, hi, desc in SECTIONS:
+
+def get_section(num, sections=SECTIONS):
+    """依檔名編號找出章節所屬的篇章分區名。第一季用 SECTIONS,第二季傳 SECTIONS_S2。"""
+    for name, lo, hi, desc in sections:
         if lo <= num <= hi:
             return name
     return "未分類"
@@ -281,7 +292,7 @@ if __name__ == "__main__":
                 "season": season,
                 "title": extract_title(text),
                 "slug": slug,
-                "section": get_section(num) if season == 1 else SEASON_2["name"],
+                "section": get_section(num) if season == 1 else get_section(num, SECTIONS_S2),
                 "raw": text,
                 "image_file": find_media(slug, IMAGES_DIR, IMAGE_EXTS),
                 "audio_file": find_media(slug, SONGS_DIR, AUDIO_EXTS),
@@ -407,7 +418,7 @@ if __name__ == "__main__":
         media_html = f'<div class="media-slot">{"".join(media_parts)}</div>'
 
         if ch["season"] == 2:
-            chapter_meta = f'第二季 · 第 {ch["num"]:02d} 章'
+            chapter_meta = f'第二季 · 第 {ch["num"]:02d} 章 · {ch["section"]}'
         else:
             chapter_meta = f'第 {ch["num"]:03d} 章 · {ch["section"]}'
 
@@ -481,17 +492,25 @@ if __name__ == "__main__":
         section_chapters = [c for c in chapters if c["season"] == 1 and lo <= c["num"] <= hi]
         section_blocks.append(render_section(f"{idx:02d}", name, desc, section_chapters))
 
-    # 第二季:大標題分隔 + 明顯區隔的區塊,預設展開(篇數少),結構仍與其他分區一致
+    # 第二季:大標題分隔 + 暖色調區隔,底下切成跟第一季同構的多個折疊分區
     s2_chapters = [c for c in chapters if c["season"] == 2]
     season_2_block = ""
     if s2_chapters:
+        s2_section_blocks = []
+        for idx, (name, lo, hi, desc) in enumerate(SECTIONS_S2, start=1):
+            sec_chapters = [c for c in s2_chapters if lo <= c["num"] <= hi]
+            if not sec_chapters:
+                continue
+            s2_section_blocks.append(
+                render_section(f"{idx:02d}", name, desc, sec_chapters, extra_class="season-block")
+            )
         season_2_block = f"""
 <div class="season-divider">
   <div class="eyebrow">SEASON TWO</div>
   <h2>第二季 · {SEASON_2["name"]}</h2>
+  <p class="season-desc">{SEASON_2["desc"]}</p>
 </div>
-""" + render_section("S2", SEASON_2["name"], SEASON_2["desc"], s2_chapters,
-                      is_open=True, extra_class="season-block")
+""" + "\n".join(s2_section_blocks)
 
     hero = f"""
 <div class="hero">

@@ -236,7 +236,7 @@ a { color: inherit; text-decoration: none; }
 .section-block[open] { padding-bottom: 24px; }
 .section-block[open] .chapter-grid { margin-top: 12px; }
 
-/* 第二季:大標題分隔 + 暖色調區隔,預設展開 */
+/* 第二季:大標題分隔 + 暖色調區隔,底下分區跟第一季一樣預設收合 */
 .season-divider {
   margin: 64px 0 22px;
   padding-top: 40px;
@@ -255,6 +255,14 @@ a { color: inherit; text-decoration: none; }
   font-size: 40px;
   color: var(--dusk-blue);
   margin: 0;
+}
+.season-divider .season-desc {
+  max-width: 640px;
+  margin: 12px auto 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  font-style: italic;
 }
 .season-block {
   background: rgba(193, 122, 79, 0.06);
