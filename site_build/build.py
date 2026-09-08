@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 靜態網站建置腳本
-把 ordered/(第一季)與 ordered_s2/(第二季)資料夾裡的 markdown 章節,
-轉成統一風格的靜態閱讀站台。輸出到專案根目錄的 docs/(給 GitHub Pages 用)
+把各季資料夾(ordered/、ordered_s2/、ordered_s3/ …,見下方 SEASONS)裡的
+markdown 章節,轉成統一風格的靜態閱讀站台。輸出到專案根目錄的 docs/(給 GitHub Pages 用)
 """
 
 import os
@@ -27,8 +27,6 @@ import markdown as md_lib
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(SCRIPT_DIR)
 
-SRC_DIR = os.path.join(PROJECT_ROOT, "ordered")        # 第一季章節原始檔
-SRC_DIR_S2 = os.path.join(PROJECT_ROOT, "ordered_s2")   # 第二季章節原始檔(檔名各自從 001 起算)
 OUT_DIR = os.path.join(PROJECT_ROOT, "docs")
 CHAPTERS_DIR = os.path.join(OUT_DIR, "chapters")
 IMAGES_DIR = os.path.join(OUT_DIR, "images")
@@ -118,12 +116,6 @@ SECTIONS = [
     ("畢業季終章",     116, 129,  "從凌晨兩點的苦讀夜到畢業典禮 ── Chloe 補完高中學分的最後一個學期,提勒穆克海岸小旅行、放榜與畢業"),
 ]
 
-# 第二季:自成一個明顯區隔的季,底下再切成跟第一季同構的篇章分區
-SEASON_2 = {
-    "name": "波特蘭",
-    "desc": "風暴之後,四個人都留在了波特蘭 ── Max 讀 PNCA、Chloe 修應用機械、Kate 唸兒童心理、Victoria 遠端上課兼接手畫廊。從珍珠區的天台到普吉特海灣,新生活的一整段日常。",
-}
-
 # 第二季的篇章分區,對應檔名數字範圍 (含頭含尾)
 SECTIONS_S2 = [
     ("珍珠區的天台",   1,  17, "落腳波特蘭珍珠區的頂層 Loft、Max 的西雅圖聯展首秀、天台花園的第一個夏天,以及藝術學院宿舍的深夜攻防戰"),
@@ -135,9 +127,49 @@ SECTIONS_S2 = [
     ("北上",           81, 85, "波特蘭市中心的治安在半年裡崩壞、Victoria 攤開西海岸地圖、David 領銜的軍規級拆遷、兩節鋼鐵車廂的公路北上,以及在普吉特海灣臨海高地上的重新落位"),
 ]
 
+# 第三季的篇章分區(才剛開始寫,先放一個大範圍的暫定分區,之後篇數多了再細切,同第二季)
+SECTIONS_S3 = [
+    ("海灣新居", 0, 99, "從普吉特海灣的臨海車廂重新開始 ── 華盛頓州的新日常,老朋友與長輩輪番來訪"),
+]
+
+# ---- 所有季的設定表 ----
+# 第一季是預設季(不畫分隔線、三位數編號);第二季起在首頁用 season-divider + 暖色
+# 區塊明顯區隔。要加新的一季:建一個 ordered_sN/ 資料夾,寫一份 SECTIONS_SN,
+# 再往這個 list 尾巴加一筆就好。
+SEASONS = [
+    {
+        "num": 1,
+        "src": os.path.join(PROJECT_ROOT, "ordered"),
+        "sections": SECTIONS,
+        "divider": None,
+    },
+    {
+        "num": 2,
+        "src": os.path.join(PROJECT_ROOT, "ordered_s2"),
+        "sections": SECTIONS_S2,
+        "divider": {
+            "eyebrow": "SEASON TWO",
+            "name": "波特蘭",
+            "desc": "風暴之後,四個人都留在了波特蘭 ── Max 讀 PNCA、Chloe 修應用機械、Kate 唸兒童心理、Victoria 遠端上課兼接手畫廊。從珍珠區的天台到普吉特海灣,新生活的一整段日常。",
+        },
+    },
+    {
+        "num": 3,
+        "src": os.path.join(PROJECT_ROOT, "ordered_s3"),
+        "sections": SECTIONS_S3,
+        "divider": {
+            "eyebrow": "SEASON THREE",
+            "name": "普吉特海灣",
+            "desc": "兩節鋼鐵車廂在華盛頓州奧林匹亞半島的臨海高地上重新扎根 ── 遠離波特蘭的煙硝,四個人在普吉特海灣邊的新生活。",
+        },
+    },
+]
+
+CN_NUM = "零一二三四五六七八九十"
+
 
 def get_section(num, sections=SECTIONS):
-    """依檔名編號找出章節所屬的篇章分區名。第一季用 SECTIONS,第二季傳 SECTIONS_S2。"""
+    """依檔名編號找出章節所屬的篇章分區名。傳入該季的 sections list。"""
     for name, lo, hi, desc in sections:
         if lo <= num <= hi:
             return name
@@ -187,13 +219,15 @@ def list_md(src_dir):
 
 
 if __name__ == "__main__":
-    s1_files = list_md(SRC_DIR)
-    s2_files = list_md(SRC_DIR_S2)
-    print(f"第一季 {len(s1_files)} 篇、第二季 {len(s2_files)} 篇,共 {len(s1_files) + len(s2_files)} 個章節檔案")
+    # 每一季讀出自己資料夾裡的 .md 檔清單
+    for s in SEASONS:
+        s["files"] = list_md(s["src"])
+    print("、".join(f'第{CN_NUM[s["num"]]}季 {len(s["files"])} 篇' for s in SEASONS)
+          + f',共 {sum(len(s["files"]) for s in SEASONS)} 個章節檔案')
 
     # 章節 slug 集合,用來過濾素材:只有檔名(去副檔名)對得上某章節的
     # 圖片/音樂才會被複製進 docs/,資料夾裡其餘不相干的檔案一律跳過
-    slugs = {slugify(f) for f in s1_files} | {slugify(f) for f in s2_files}
+    slugs = {slugify(f) for s in SEASONS for f in s["files"]}
 
     from templates import (
         BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, LIGHTBOX,
@@ -281,18 +315,18 @@ if __name__ == "__main__":
         print(f"警告:找不到手帳來源資料夾(嘗試過 {JOURNAL_SOURCE_CANDIDATES}),跳過手帳複製")
 
     chapters = []  # 收集每章 metadata,供首頁與導覽使用
-    for season, src, flist in ((1, SRC_DIR, s1_files), (2, SRC_DIR_S2, s2_files)):
-        for f in flist:
+    for s in SEASONS:
+        for f in s["files"]:
             num = parse_chapter_num(f)
-            with open(os.path.join(src, f), "r", encoding="utf-8") as fh:
+            with open(os.path.join(s["src"], f), "r", encoding="utf-8") as fh:
                 text = fh.read()
             slug = slugify(f)
             chapters.append({
                 "num": num,
-                "season": season,
+                "season": s["num"],
                 "title": extract_title(text),
                 "slug": slug,
-                "section": get_section(num) if season == 1 else get_section(num, SECTIONS_S2),
+                "section": get_section(num, s["sections"]),
                 "raw": text,
                 "image_file": find_media(slug, IMAGES_DIR, IMAGE_EXTS),
                 "audio_file": find_media(slug, SONGS_DIR, AUDIO_EXTS),
@@ -300,7 +334,7 @@ if __name__ == "__main__":
                 "journal_files": find_journal_pages(slug, JOURNAL_DIR, IMAGE_EXTS),
             })
 
-    # 閱讀順序:先第一季(依編號),再第二季(依編號)
+    # 閱讀順序:一季一季來,每季內依檔名編號
     chapters.sort(key=lambda c: (c["season"], c["num"]))
 
     # 播放器封面圖(給系統鎖屏 / 控制中心 / AirPods 的 Media Session 用):
@@ -417,10 +451,13 @@ if __name__ == "__main__":
 
         media_html = f'<div class="media-slot">{"".join(media_parts)}</div>'
 
-        if ch["season"] == 2:
-            chapter_meta = f'第二季 · 第 {ch["num"]:02d} 章 · {ch["section"]}'
-        else:
+        season_prefix = "" if ch["season"] == 1 else f'第{CN_NUM[ch["season"]]}季 · '
+        if ch["num"] == 0:  # 000_ 檔名當序章處理
+            chapter_meta = f'{season_prefix}序章 · {ch["section"]}'
+        elif ch["season"] == 1:
             chapter_meta = f'第 {ch["num"]:03d} 章 · {ch["section"]}'
+        else:
+            chapter_meta = f'{season_prefix}第 {ch["num"]:02d} 章 · {ch["section"]}'
 
         content = f"""
 <main class="chapter-page">
@@ -458,7 +495,13 @@ if __name__ == "__main__":
 
     # ---------- 產生首頁 ----------
     def chapter_card(c):
-        num_label = f'S2 · {c["num"]:02d}' if c["season"] == 2 else f'{c["num"]:03d}'
+        if c["num"] == 0:
+            num = "序章"
+        elif c["season"] == 1:
+            num = f'{c["num"]:03d}'
+        else:
+            num = f'{c["num"]:02d}'
+        num_label = num if c["season"] == 1 else f'S{c["season"]} · {num}'
         return (
             f'<a class="chapter-card" href="chapters/{c["slug"]}.html">'
             f'{render_badges(c)}'
@@ -487,30 +530,32 @@ if __name__ == "__main__":
 </details>
 """
 
-    section_blocks = []
-    for idx, (name, lo, hi, desc) in enumerate(SECTIONS, start=1):
-        section_chapters = [c for c in chapters if c["season"] == 1 and lo <= c["num"] <= hi]
-        section_blocks.append(render_section(f"{idx:02d}", name, desc, section_chapters))
-
-    # 第二季:大標題分隔 + 暖色調區隔,底下切成跟第一季同構的多個折疊分區
-    s2_chapters = [c for c in chapters if c["season"] == 2]
-    season_2_block = ""
-    if s2_chapters:
-        s2_section_blocks = []
-        for idx, (name, lo, hi, desc) in enumerate(SECTIONS_S2, start=1):
-            sec_chapters = [c for c in s2_chapters if lo <= c["num"] <= hi]
+    def render_season(season):
+        """一整季的首頁區塊:非預設季在最前面加一條 season-divider,底下是這一季
+        所有非空的篇章分區(每個都是預設收合的 <details>)。"""
+        season_chapters = [c for c in chapters if c["season"] == season["num"]]
+        if not season_chapters:
+            return ""
+        div = season["divider"]
+        extra = "" if div is None else "season-block"
+        blocks = []
+        for idx, (name, lo, hi, desc) in enumerate(season["sections"], start=1):
+            sec_chapters = [c for c in season_chapters if lo <= c["num"] <= hi]
             if not sec_chapters:
                 continue
-            s2_section_blocks.append(
-                render_section(f"{idx:02d}", name, desc, sec_chapters, extra_class="season-block")
-            )
-        season_2_block = f"""
+            blocks.append(render_section(f"{idx:02d}", name, desc, sec_chapters, extra_class=extra))
+        header = ""
+        if div is not None:
+            header = f"""
 <div class="season-divider">
-  <div class="eyebrow">SEASON TWO</div>
-  <h2>第二季 · {SEASON_2["name"]}</h2>
-  <p class="season-desc">{SEASON_2["desc"]}</p>
+  <div class="eyebrow">{div["eyebrow"]}</div>
+  <h2>第{CN_NUM[season["num"]]}季 · {div["name"]}</h2>
+  <p class="season-desc">{div["desc"]}</p>
 </div>
-""" + "\n".join(s2_section_blocks)
+"""
+        return header + "\n".join(blocks)
+
+    seasons_html = "\n".join(render_season(s) for s in SEASONS)
 
     hero = f"""
 <div class="hero">
@@ -530,9 +575,7 @@ if __name__ == "__main__":
 <div class="hero-divider">❦</div>
 """
 
-    index_content = (
-        hero + '<div class="sections">' + "\n".join(section_blocks) + season_2_block + "</div>"
-    )
+    index_content = hero + '<div class="sections">' + seasons_html + "</div>"
     index_html = HTML_SHELL.format(
         title="雙保結局 · 拍立得檔案",
         root="",

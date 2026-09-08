@@ -58,45 +58,45 @@ python3 build.py
 
 ---
 
-## 三、章節檔案規則（`ordered/`、`ordered_s2/` 資料夾）
+## 三、章節檔案規則（`ordered/`、`ordered_s2/`、`ordered_s3/` … 資料夾）
 
 1. **檔名格式**：`{三位數編號}_{英文slug}.md`，例如 `001_dual_saved_ending_family_reunion.md`
    - 編號決定排序與"上一章/下一章"導覽
    - slug 會變成該章節網頁的網址（`/chapters/{slug}.html`），**只能用英文字母、數字、底線**，中文檔名在部分平台會有編碼問題
+   - 編號 `000_` 會被當「序章」處理（頁面與卡片顯示「序章」而不是「第 00 章」）
 2. **檔案第一行必須是 `# 標題`**，這行會被抓出來當作章節標題，並且在轉換 HTML 時自動移除（因為模板會自己重新渲染一次標題，避免重複）
 3. 其餘內文用標準 Markdown 語法：`##` 是小節標題、`---` 是分隔線（會被樣式渲染成一個蝴蝶符號 ❦）、一般段落照常寫
-4. **季別**：`ordered/` 是第一季，`ordered_s2/` 是第二季，兩邊編號各自從 001 起算。閱讀順序是「整個第一季 → 整個第二季」，"上一章/下一章" 也是連著跑的（第一季最後一章的「下一章」就是第二季第一章）。第二季的媒體素材跟第一季共用同一批資料夾（`Images/` 等），一樣靠 slug 比對。
+4. **季別**：每一季一個資料夾（`ordered/` = 第一季、`ordered_s2/` = 第二季、`ordered_s3/` = 第三季…），編號各自從頭起算。閱讀順序是「整季接整季」，"上一章/下一章" 也連著跑（前一季最後一章的「下一章」就是下一季第一章）。所有季共用同一批媒體素材資料夾（`Images/` 等），一樣靠 slug 比對。**要加一整季**：建 `ordered_sN/` 資料夾、在 `build.py` 寫一份 `SECTIONS_SN`、往 `SEASONS` list 尾巴加一筆（見下一節）。
 
 ---
 
 ## 四、首頁的篇章分區怎麼設定
 
-`build.py` 最上面的 `SECTIONS`（第一季）與 `SECTIONS_S2`（第二季）就是分區設定，**新增章節後要手動更新這裡的數字範圍**：
+`build.py` 最上面每季一份 `SECTIONS` / `SECTIONS_S2` / `SECTIONS_S3` …，再由 `SEASONS` 這個 list 串起來。**新增章節後要手動更新對應那份 list 的數字範圍**：
 
 ```python
 SECTIONS = [
     ("背景與序曲",     1,   25,  "分區描述文字"),
-    ("旅館連環案",     26,  42,  "..."),
     ...
     ("畢業季終章",     116, 129,  "..."),
 ]
+SECTIONS_S2 = [ ("珍珠區的天台", 1, 17, "..."), ..., ("北上", 81, 85, "...") ]
+SECTIONS_S3 = [ ("海灣新居", 0, 99, "...") ]   # 才剛開始寫,先放一個大範圍暫定分區
 
-SEASON_2 = { "name": "波特蘭", "desc": "..." }   # 第二季的季名與季簡介(顯示在 season-divider 底下)
-
-SECTIONS_S2 = [
-    ("珍珠區的天台",   1,  17, "..."),
-    ...
-    ("北上",           81, 85, "..."),
+SEASONS = [
+    { "num": 1, "src": ".../ordered",    "sections": SECTIONS,    "divider": None },
+    { "num": 2, "src": ".../ordered_s2", "sections": SECTIONS_S2, "divider": {"eyebrow": "SEASON TWO",   "name": "波特蘭",     "desc": "..."} },
+    { "num": 3, "src": ".../ordered_s3", "sections": SECTIONS_S3, "divider": {"eyebrow": "SEASON THREE", "name": "普吉特海灣", "desc": "..."} },
 ]
 ```
 
-每一項是 `(分區名稱, 起始編號, 結束編號, 分區描述)`，系統按章節編號自動歸類（`get_section(num, sections)`）。**這兩份 list 是目前唯一需要手動維護的地方。**
+每個分區項是 `(分區名稱, 起始編號, 結束編號, 分區描述)`，`get_section(num, sections)` 按編號歸類。第一季 `divider` 是 `None`（預設季,不畫分隔線）；第二季起 `divider` 給一組 `eyebrow / name / desc`，首頁就會在那一季前面畫 `season-divider` + 暖色區塊。**要加一整季,就往 `SEASONS` 尾巴加一筆。這幾份 list 是唯一需要手動維護的地方。**
 
 ### 首頁長怎樣
 
 首頁把每個分區包成一個 HTML 原生 `<details>`（`build.py` 的 `render_section`），**預設全部收合**，只顯示「編號 + 分區名 + 篇數 + 一句話簡介 + 展開箭頭」，點一下才展開章節卡片格。純 `<details>`/`<summary>` + CSS，沒寫 JS，對鍵盤與螢幕閱讀器天然友善。
 
-第二季在視覺上明顯區隔：上方一條 `season-divider`（雙線分隔 + 「SEASON TWO」+ 大標題 + 季簡介），下方每個分區的區塊 `.season-block` 有暖色底色、編號與箭頭都是琥珀色。分區本身跟第一季同構——一樣是 `render_section` 產生的 `<details>`，一樣**預設全部收合**。
+第二季起在視覺上明顯區隔：上方一條 `season-divider`（雙線分隔 + 「SEASON TWO」/「SEASON THREE」+ 大標題 + 季簡介），下方每個分區的區塊 `.season-block` 有暖色底色、編號與箭頭都是琥珀色。分區本身跟第一季同構——一樣是 `render_section` 產生的 `<details>`，一樣**預設全部收合**。第三季以後每一季都套同一套渲染（`render_season`）。
 
 ---
 
