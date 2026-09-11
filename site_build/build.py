@@ -199,6 +199,27 @@ def slugify(filename):
     return base
 
 
+# python-markdown 的星號解析是逐字元的傳統 regex 引擎,遇到「*斜體包著**粗體**,
+# 兩邊收尾疊在一起變成三顆星連在一起」這種寫法會誤判:粗體整個消失,句尾還會
+# 露出兩顆孤立的裸星號。Typora 等照 CommonMark 規則走的編輯器不會有這個問題,
+# 只有這裡的 build 會炸。修法:轉 HTML 前,先把這兩種「三星疊在一起」的樣式直接
+# 換成對應的 <em>/<strong> 原生 HTML,繞開這段有歧義的星號解析,其餘星號完全不動。
+def fix_nested_emphasis(text):
+    # 收尾疊在一起:*文字**粗體***  →  <em>文字<strong>粗體</strong></em>
+    text = re.sub(
+        r"\*([^*\n]+?)\*\*([^*\n]+?)\*\*\*",
+        r"<em>\1<strong>\2</strong></em>",
+        text,
+    )
+    # 開頭疊在一起:***粗體**文字*  →  <em><strong>粗體</strong>文字</em>
+    text = re.sub(
+        r"\*\*\*([^*\n]+?)\*\*([^*\n]*?)\*",
+        r"<em><strong>\1</strong>\2</em>",
+        text,
+    )
+    return text
+
+
 def render_badges(ch):
     """首頁卡片用:章節有實際插圖/配樂/拍立得(不是佔位)才顯示對應徽章"""
     parts = []
@@ -380,7 +401,7 @@ if __name__ == "__main__":
 
     # ---------- 產生每一章的頁面 ----------
     for i, ch in enumerate(chapters):
-        body_html = md_lib.markdown(ch["raw"], extensions=["extra"])
+        body_html = md_lib.markdown(fix_nested_emphasis(ch["raw"]), extensions=["extra"])
         # 移除 markdown 轉換出的第一個 <h1>,因為我們會自己渲染標題
         body_html = re.sub(r"^<h1>.*?</h1>\s*", "", body_html, count=1)
 
