@@ -152,7 +152,11 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
   line-height: 1.9;
 }
-.hero .premise strong { color: var(--diner-amber); font-weight: 700; }
+.hero .premise strong {
+  color: var(--diner-amber);
+  font-weight: 700;
+  -webkit-text-stroke: 0.4px currentColor;
+}
 
 .hero-divider {
   display: flex;
@@ -569,9 +573,14 @@ a { color: inherit; text-decoration: none; }
   margin: 0 0 20px;
   text-align: justify;
 }
-/* 正文粗體:Crimson Pro 沒載入到 700 字重時瀏覽器只能偽粗體,中文字更是常常看起來
-   幾乎沒加粗。改用偏暖的琥珀色 + 明確 700 字重,顏色反差比單靠字重明顯得多。 */
-.chapter-body strong { color: var(--diner-amber); font-weight: 700; }
+/* 正文粗體:中文字體的 700 字重本來就經常看起來跟正常字重差不多,只靠顏色的話,
+   黑白列印或色弱讀者會完全看不出加粗。額外疊一層極細的同色描邊(-webkit-text-stroke)
+   把筆畫實際加粗,單看灰階也能辨識;顏色仍換成偏暖的琥珀色,彩色螢幕上反差更明顯。 */
+.chapter-body strong {
+  color: var(--diner-amber);
+  font-weight: 700;
+  -webkit-text-stroke: 0.4px currentColor;
+}
 .chapter-body hr {
   border: none;
   text-align: center;
