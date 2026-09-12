@@ -581,6 +581,33 @@ a { color: inherit; text-decoration: none; }
   font-weight: 700;
   -webkit-text-stroke: 0.4px currentColor;
 }
+/* 引用區塊:信件、判詞、逐條註解這類「文中文」,原本完全沒有樣式,跟正文
+   長得一模一樣,只靠瀏覽器預設的一點縮排,還不如 Typora 好看。加左側色條 +
+   淺色底 + 跟正文區隔的字級,一眼就看得出這段是被引用/摘錄的內容。
+   text-align 改回 left:引用裡常是逐行短句(像本例的稱號解釋),justify
+   撐滿寬度反而會把短行拉出難看的字距。 */
+.chapter-body blockquote {
+  margin: 28px 0;
+  padding: 4px 22px;
+  border-left: 3px solid var(--diner-amber);
+  background: rgba(193, 122, 79, 0.07);
+  border-radius: 0 6px 6px 0;
+}
+.chapter-body blockquote p {
+  text-align: left;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.9;
+}
+.chapter-body blockquote ul,
+.chapter-body blockquote ol {
+  margin: 16px 0;
+  padding-left: 1.4em;
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.9;
+}
+.chapter-body blockquote li { margin: 8px 0; }
 .chapter-body hr {
   border: none;
   text-align: center;

@@ -220,6 +220,21 @@ def fix_nested_emphasis(text):
     return text
 
 
+# Markdown 原生規則:引用區塊(> ...)裡連續兩行之間如果沒有空白 > 行分隔,
+# 會被當成同一段落,單一換行被壓縮成空白 ── 逐行寫的名言註解、逐條列出的
+# 稱號解釋,擠成一坨看不出原本的分行。Typora 等編輯器預設把段落內單一換行
+# 當真正的換行處理,這裡沒有,所以看起來比原始檔案差。
+# 修法:引用區塊裡每一行非空白內容,結尾補上 Markdown 的強制換行語法(兩個
+# 空白),讓它换行時真的斷行;本來就用空白 > 行分開的段落不受影響(段落
+# 最後一行補的換行標記沒有任何效果),清單項目(> - ...)也不受影響。
+def fix_blockquote_linebreaks(text):
+    lines = text.split("\n")
+    for i, line in enumerate(lines):
+        if line.startswith(">") and line[1:].strip():
+            lines[i] = line.rstrip() + "  "
+    return "\n".join(lines)
+
+
 def render_badges(ch):
     """首頁卡片用:章節有實際插圖/配樂/拍立得(不是佔位)才顯示對應徽章"""
     parts = []
@@ -401,7 +416,8 @@ if __name__ == "__main__":
 
     # ---------- 產生每一章的頁面 ----------
     for i, ch in enumerate(chapters):
-        body_html = md_lib.markdown(fix_nested_emphasis(ch["raw"]), extensions=["extra"])
+        fixed_raw = fix_blockquote_linebreaks(fix_nested_emphasis(ch["raw"]))
+        body_html = md_lib.markdown(fixed_raw, extensions=["extra"])
         # 移除 markdown 轉換出的第一個 <h1>,因為我們會自己渲染標題
         body_html = re.sub(r"^<h1>.*?</h1>\s*", "", body_html, count=1)
 
