@@ -1,5 +1,5 @@
 /* 由 build.py 產生,請勿手動編輯 */
-const VERSION = 'vef84ebe73a3d';
+const VERSION = 'v74f91911d8b8';
 const SHELL = 'shell-' + VERSION;
 const MEDIA = 'media-' + VERSION;
 const SHELL_MAX = 130;
