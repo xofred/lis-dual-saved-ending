@@ -298,6 +298,13 @@ if __name__ == "__main__":
     # 複製 CSS
     shutil.copy(os.path.join(os.path.dirname(__file__), "style.css"), os.path.join(OUT_DIR, "style.css"))
 
+    # 複製字型檔(自行代管,不再向 Google Fonts 發外部請求,見 style.css 開頭的說明)
+    fonts_src = os.path.join(os.path.dirname(__file__), "fonts")
+    fonts_out = os.path.join(OUT_DIR, "fonts")
+    if os.path.isdir(fonts_out):
+        shutil.rmtree(fonts_out)
+    shutil.copytree(fonts_src, fonts_out)
+
     # ---- 複製素材:從專案根目錄的 Images/ songs/ Polaroids/ 複製進
     # docs/images docs/songs docs/polaroids ----
     images_src = find_source_dir(IMAGES_SOURCE_CANDIDATES)

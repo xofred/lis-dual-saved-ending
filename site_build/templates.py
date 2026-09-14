@@ -548,8 +548,10 @@ if ('serviceWorker' in navigator) {
 #   - 頁面導覽 → NetworkFirst(線上永遠拿最新章節,離線回退曾開過的快取)
 #   - 圖片/拍立得/手帳/音檔/字型檔 → CacheFirst(開過看過聽過的,網路抽風照樣可用)
 #     音檔額外做手動 Range 切片,拖動進度條才不會壞
-#   - CSS / 字型 CSS → StaleWhileRevalidate
+#   - CSS → StaleWhileRevalidate
 # HTML 走 NetworkFirst、又沒有獨立的 JS bundle,所以直接 skipWaiting 不會有版本錯位。
+# 字型也自行代管在 /fonts/ 底下(不再是 fonts.gstatic.com 的外部請求),所以全站
+# 現在完全不碰任何第三方網域,離線或直接用 file:// 打開本機檔案都不會卡在等外部資源。
 SERVICE_WORKER = """/* 由 build.py 產生,請勿手動編輯 */
 const VERSION = '__CACHE_VERSION__';
 const SHELL = 'shell-' + VERSION;
@@ -570,13 +572,11 @@ self.addEventListener('activate', function(event) {
 
 function isMedia(url) {
   return url.origin === self.location.origin &&
-         /\\/(images|polaroids|journal|songs)\\//.test(url.pathname);
+         /\\/(images|polaroids|journal|songs|fonts)\\//.test(url.pathname);
 }
-function isFontFile(url) { return url.hostname === 'fonts.gstatic.com'; }
 function isStyle(url) {
-  return (url.origin === self.location.origin &&
-          (url.pathname.endsWith('.css') || url.pathname.endsWith('/player.js'))) ||
-         url.hostname === 'fonts.googleapis.com';
+  return url.origin === self.location.origin &&
+         (url.pathname.endsWith('.css') || url.pathname.endsWith('/player.js'));
 }
 
 async function trim(name, max) {
@@ -644,7 +644,7 @@ self.addEventListener('fetch', function(event) {
     return;
   }
 
-  if (isMedia(url) || isFontFile(url)) {
+  if (isMedia(url)) {
     event.respondWith(media(request, url));
     return;
   }

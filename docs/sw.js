@@ -1,5 +1,5 @@
 /* 由 build.py 產生,請勿手動編輯 */
-const VERSION = 'v01988363756f';
+const VERSION = 'vfb069e3b730e';
 const SHELL = 'shell-' + VERSION;
 const MEDIA = 'media-' + VERSION;
 const SHELL_MAX = 130;
@@ -18,13 +18,11 @@ self.addEventListener('activate', function(event) {
 
 function isMedia(url) {
   return url.origin === self.location.origin &&
-         /\/(images|polaroids|journal|songs)\//.test(url.pathname);
+         /\/(images|polaroids|journal|songs|fonts)\//.test(url.pathname);
 }
-function isFontFile(url) { return url.hostname === 'fonts.gstatic.com'; }
 function isStyle(url) {
-  return (url.origin === self.location.origin &&
-          (url.pathname.endsWith('.css') || url.pathname.endsWith('/player.js'))) ||
-         url.hostname === 'fonts.googleapis.com';
+  return url.origin === self.location.origin &&
+         (url.pathname.endsWith('.css') || url.pathname.endsWith('/player.js'));
 }
 
 async function trim(name, max) {
@@ -92,7 +90,7 @@ self.addEventListener('fetch', function(event) {
     return;
   }
 
-  if (isMedia(url) || isFontFile(url)) {
+  if (isMedia(url)) {
     event.respondWith(media(request, url));
     return;
   }
