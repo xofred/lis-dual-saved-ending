@@ -44,6 +44,7 @@
     <a href="index.html">目錄</a>
     <a href="polaroids.html">拍立得相簿</a>
     <a href="journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
   </nav>
 </header>
 
@@ -62,6 +63,19 @@
   </div>
 </div>
 <script src="player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站287篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="search.js" defer></script>
 
 
 <main class="gallery-page">

@@ -1,5 +1,5 @@
 /* 由 build.py 產生,請勿手動編輯 */
-const VERSION = 'v0aab4d158ba2';
+const VERSION = 'v571e9d308c7b';
 const SHELL = 'shell-' + VERSION;
 const MEDIA = 'media-' + VERSION;
 const SHELL_MAX = 130;
@@ -22,7 +22,10 @@ function isMedia(url) {
 }
 function isStyle(url) {
   return url.origin === self.location.origin &&
-         (url.pathname.endsWith('.css') || url.pathname.endsWith('/player.js'));
+         (url.pathname.endsWith('.css') ||
+          url.pathname.endsWith('/player.js') ||
+          url.pathname.endsWith('/search.js') ||
+          url.pathname.endsWith('/search-index.json'));
 }
 
 async function trim(name, max) {

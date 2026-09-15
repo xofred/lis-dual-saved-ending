@@ -240,6 +240,20 @@ def fix_blockquote_linebreaks(text):
     return "\n".join(lines)
 
 
+_HTML_TAG_RE = re.compile(r"<[^>]+>")
+_HTML_UNESCAPE = (
+    ("&amp;", "&"), ("&lt;", "<"), ("&gt;", ">"), ("&quot;", '"'), ("&#39;", "'"),
+)
+
+
+def html_to_search_text(html):
+    """把章節內文的 HTML 轉回一段純文字,給全文搜尋索引用(不用完美,只求能被搜到)。"""
+    text = _HTML_TAG_RE.sub(" ", html)
+    for esc, ch in _HTML_UNESCAPE:
+        text = text.replace(esc, ch)
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def render_badges(ch):
     """首頁卡片用:章節有實際插圖/配樂/拍立得(不是佔位)才顯示對應徽章"""
     parts = []
@@ -276,6 +290,7 @@ if __name__ == "__main__":
     from templates import (
         BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, LIGHTBOX,
         SW_REGISTER, SERVICE_WORKER, render_player, render_player_js,
+        render_search, render_search_js, render_search_index,
     )
 
     sw_register_chapter = SW_REGISTER.replace("__ROOT__", "../")
@@ -427,6 +442,7 @@ if __name__ == "__main__":
     print(f"手帳共 {len(all_journal)} 頁")
 
     # ---------- 產生每一章的頁面 ----------
+    search_entries = []  # 全文搜尋索引,跟章節頁一起邊產生邊收集
     for i, ch in enumerate(chapters):
         fixed_raw = fix_blockquote_linebreaks(fix_nested_emphasis(ch["raw"]))
         body_html = md_lib.markdown(fixed_raw, extensions=["extra"])
@@ -511,6 +527,11 @@ if __name__ == "__main__":
         else:
             chapter_meta = f'{season_prefix}第 {ch["num"]:02d} 章 · {ch["section"]}'
 
+        search_entries.append({
+            "title": ch["title"], "slug": ch["slug"], "meta": chapter_meta,
+            "text": html_to_search_text(body_html),
+        })
+
         content = f"""
 <main class="chapter-page">
   <div class="chapter-meta">{chapter_meta}</div>
@@ -535,6 +556,7 @@ if __name__ == "__main__":
             butterfly=BUTTERFLY_SVG,
             header=HEADER.format(root="../"),
             player=render_player("../"),
+            search=render_search("../", len(chapters)),
             content=content,
             footer=FOOTER,
             lightbox=LIGHTBOX,
@@ -634,6 +656,7 @@ if __name__ == "__main__":
         butterfly=BUTTERFLY_SVG,
         header=HEADER.format(root=""),
         player=render_player(""),
+        search=render_search("", len(chapters)),
         content=index_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
@@ -675,6 +698,7 @@ if __name__ == "__main__":
         butterfly=BUTTERFLY_SVG,
         header=HEADER.format(root=""),
         player=render_player(""),
+        search=render_search("", len(chapters)),
         content=gallery_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
@@ -716,6 +740,7 @@ if __name__ == "__main__":
         butterfly=BUTTERFLY_SVG,
         header=HEADER.format(root=""),
         player=render_player(""),
+        search=render_search("", len(chapters)),
         content=journal_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
@@ -731,6 +756,14 @@ if __name__ == "__main__":
     with open(os.path.join(OUT_DIR, "player.js"), "w", encoding="utf-8") as out:
         out.write(render_player_js(playlist))
     print(f"播放器已產生:player.js({len(playlist)} 首)")
+
+    # ---------- 產生全文搜尋(search.js + search-index.json) ----------
+    # 邏輯跟索引資料分開:加一篇故事只會動到 search-index.json,search.js 不變
+    with open(os.path.join(OUT_DIR, "search.js"), "w", encoding="utf-8") as out:
+        out.write(render_search_js())
+    with open(os.path.join(OUT_DIR, "search-index.json"), "w", encoding="utf-8") as out:
+        out.write(render_search_index(search_entries))
+    print(f"全文搜尋已產生:search.js + search-index.json({len(search_entries)} 篇)")
 
     # ---------- 產生 Service Worker(版本 = docs/ 內容 hash) ----------
     # 版本號用內容 hash 而非時間戳:只有 docs/ 真的有東西變了,sw.js 才變,
