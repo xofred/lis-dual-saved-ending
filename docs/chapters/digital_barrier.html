@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>數位結界 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站303篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 75 章 · 行政黑魔法全開</div>
+  <h1>數位結界</h1>
+
+  <div class="media-slot"><div class="media-item media-audio"><span class="slot-label">♪ 配樂</span><audio controls preload="none" src="../songs/digital_barrier.mp3"></audio></div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/digital_barrier.jpeg" alt="數位結界" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <p>對於一個堅持使用寶麗來底片相機、聽卡帶隨身聽、渾身散發著「千禧年復古文青」氣息的 Max Caulfield 來說，向蘋果生態系低頭，原本是一種對自身美學的背叛。</p>
+<p>直到她第一次把 AirPods Pro 塞進耳朵，並長按耳機柄，開啟了主動降噪模式。</p>
+<p>那一瞬間，西雅圖街頭的車水馬龍、咖啡館裡的磨豆機噪音、以及二號車廂裡 Chloe 震耳欲聾的龐克搖滾，全部被物理學的魔法抽離。整個世界彷彿被按下了靜音鍵，只剩下她自己的呼吸聲。</p>
+<p>對 Max 這個極度需要個人空間、靠著相機鏡頭與世界保持安全距離的內向者來說，這根本不是一副耳機，這是數位時代資本主義為內向者發明的最強物理結界。</p>
+<h2>一、降噪模式：內向者的絕對防禦</h2>
+<p>擁有 AirPods Pro 之後的 Max，生存狀態發生了肉眼可見的變化。</p>
+<p>以前在輕軌上遇到怪人搭話，她還得尷尬地微笑點頭；現在，她只需要面無表情地指了指耳朵裡的白色小塞子，對方就會識趣地閉嘴。這兩顆小小的塑膠，成了現代社會公認的「請勿打擾」免死金牌。</p>
+<p>有一天下午，Chloe 在車廂裡為了一顆生鏽的螺絲釘跟 Victoria 吵得不可開交，兩人甚至開始互相扔抱枕。而坐在沙發正中央的 Max，戴著耳機，端著熱茶，平靜地翻著一本攝影集。她甚至連頭都沒抬，彷彿周圍發生的不是第三次世界大戰，而是一部默片。</p>
+<p>「Maxine！妳到底有沒有在聽我說話！」Chloe 氣急敗壞地扯下 Max 的一邊耳機。</p>
+<p>「世界真和平，對吧？」Max 溫柔地把耳機重新塞回去，再次將自己鎖進了無聲的真空艙。</p>
+<p>「這簡直是資本主義的墮落！」Chloe 對著重新進入禪定狀態的 Max 怒吼，「妳這個被矽谷消費主義洗腦的叛徒！還我那個會陪我一起聽黑膠唱片的 Max！」</p>
+<h2>二、階級鄙視鏈與合規審查</h2>
+<p>Victoria 看到 Max 終於換掉了那副纏滿線的舊耳機，冷冷地哼了一聲：「歡迎來到二十一世紀，Caulfield。不過妳居然沒有給充電盒配一個皮革保護套？這簡直是對它工業設計的侮辱。」</p>
+<p>而實習生 Lily，則拿著分貝計，對 Max 的新設備進行了一次嚴格的合規審查：「Max 學姐，您這個選擇非常符合職業安全與健康管理局的聽力保護規範。主動降噪技術能有效過濾掉環境中高於 85 分貝的有害低頻噪音。」</p>
+<h2>三、通透模式：觀察者的終極黑魔法</h2>
+<p>如果說降噪模式是防禦，那麼 AirPods Pro 的通透模式，對 Max 這個習慣躲在鏡頭後面的觀察者來說，簡直就是一項合法的超能力。</p>
+<p>有了通透模式，耳機會主動收集外界的聲音並放大。這意味著，Max 可以戴著耳機，假裝自己正在沉浸於獨立民謠音樂中，雙眼無神地看著窗外——但實際上，她的聽覺比沒戴耳機時還要敏銳。</p>
+<p>她可以完美地「合法竊聽」Victoria 是如何在電話裡跟管家抱怨 Chloe 睡覺打呼；也可以清晰地聽見 Lily 在廚房裡一邊切菜，一邊用極其溫柔的語氣打電話威脅要查封某個偷稅漏稅供應商的帳戶。</p>
+<p>沒有人會對一個戴著降噪耳機、看起來正在發呆的文青產生防備。Max 靠著這兩顆白色小塞子，掌握了二號車廂裡所有的八卦與機密。</p>
+<p>有一天，Kate 溫柔地走到正在「聽音樂」的 Max 身邊，輕輕拍了拍她的肩膀，遞給她一塊剛出爐的餅乾，然後壓低聲音，用只有她們兩個人能聽見的音量說：「Max，我知道妳開著通透模式哦。下次偷聽 Victoria 抱怨的時候，記得不要笑出聲，妳的肩膀剛才抖得很厲害呢。」</p>
+<p>Max 僵住了，默默地接過餅乾，在心裡為小天使那恐怖的洞察力打了個寒顫。</p>
+<p>總而言之，對於一個需要隨時捕捉靈感、極度害怕社交內耗、又渴望在安全距離外觀察世界的攝影師來說，AirPods Pro 確實是數位時代資本主義為她量身打造的偉大發明。它甚至比時間倒轉還實用——畢竟，倒轉時間很耗體力，而降噪，只需要按住耳機柄一秒鐘。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="hostile_architecture.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="cyber_disciplinarian.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>

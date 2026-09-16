@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五十毫秒的降維打擊 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站303篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 77 章 · 行政黑魔法全開</div>
+  <h1>五十毫秒的降維打擊</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/satellite_failover.jpeg" alt="五十毫秒的降維打擊" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <p>在一個大雨滂沱的深夜，Victoria Chase 終於忍受不了手腕上那塊 Apple Watch 孜孜不倦的站立提醒與呼吸冥想建議，決定採取最原始、也是最暴力的物理手段：拔除二號車廂的 Wi-Fi 路由器電源。</p>
+<p>名媛穿著真絲睡袍，像個準備執行暗殺任務的特工一樣，躡手躡腳地摸黑走到起居室角落的網路機櫃前。</p>
+<p>她看著路由器上閃爍的綠燈，彷彿看到了科技巨頭和實習生 Lily 在對她嘲笑。</p>
+<p>「去你的數位審計，去你的活動圓環。」Victoria 咬著牙，一把拔掉了路由器的電源插頭。</p>
+<h2>一、無法逃脫的提示音</h2>
+<p>綠燈瞬間熄滅。車廂裡陷入了絕對的安靜。</p>
+<p>Victoria 得意地勾起嘴角，準備回到床上睡個沒有任何電子設備干擾的美容覺。</p>
+<p>「叮。」</p>
+<p>在靜謐的黑暗中，她手腕上的 Apple Watch 突然發出一聲清脆的提示音，螢幕在黑暗中亮起，幽幽的藍光照亮了名媛瞬間僵住的臉。</p>
+<p>「您的睡眠目標尚未達成。請放下手機，準備就寢。」</p>
+<p>「這不可能！」Victoria 壓低聲音崩潰地嘶吼，她瘋狂點擊手錶螢幕，「我已經拔了 Wi-Fi！妳這破錶哪來的網路？！」</p>
+<p>「Victoria 學姐，夜間突然拔除主網路電源，很容易導致未保存的雲端資料損毀喔。」</p>
+<p>一個軟糯、平靜，在黑暗中卻顯得無比空靈的聲音從廚房傳來。Lily 穿著小熊睡衣，手裡端著一杯剛用微波爐加熱好的熱牛奶，推了推在黑暗中反光的圓框眼鏡，像個午夜幽靈般靜靜地看著 Victoria。</p>
+<p>「Lily……妳幹了什麼？為什麼這該死的生態系還在運作？」Victoria 抱著頭，感覺自己正在面對某種無法戰勝的超自然力量。</p>
+<h2>二、偽裝成雷達天線的秘密</h2>
+<p>「只是一個簡單的業務連續性備援計畫，學姐。」</p>
+<p>Lily 喝了一口熱牛奶，溫柔地解釋：「考慮到奧林匹亞半島的極端天氣經常導致傳統有線網路中斷，為了確保我能隨時向州政府和聯邦機構發送投訴信，我在三個月前就以偏遠地區教育弱勢群體的名義，向衛星網路公司申請了當時還在極少數內部測試階段的企業級終端。」</p>
+<p>Lily 走到機櫃前，指著一個隱藏在暗處的白色小盒子：「那個接收盤就偽裝成廢棄的雷達天線，焊在 Chloe 學姐的皮卡車頂上。當您拔掉主路由器的電源時，這套系統的雙 WAN 口無縫故障轉移機制會在 50 毫秒內自動接管車廂內的所有網路連線。對於您的 Apple Watch 來說，網路甚至沒有發生過任何中斷。」</p>
+<p>Victoria 呆呆地看著那個發出微弱白光的小盒子，感覺自己的靈魂受到了降維打擊。</p>
+<p>「妳……妳居然用衛星巨頭的網路，來確保科技公司能繼續監視我的睡眠？」Victoria 屈辱地跌坐在沙發上。</p>
+<p>「資本家之間的基礎設施是可以互相借用的，只要它符合我們的行政效率。」Lily 乖巧地走過來，將熱牛奶遞給 Victoria，「而且，Apple Watch 的資料即使在斷網狀態下也會暫存在本地晶片裡，等恢復連線後再上傳。物理斷網是無法逃避數位審計的，學姐。」</p>
+<h2>三、深夜的混亂集合</h2>
+<p>這時，Chloe 的房門猛地被推開，街頭霸王頂著一頭亂髮衝了出來，手裡還拿著遊戲手把。</p>
+<p>「剛才網路是閃斷了一下嗎？！我的 Ping 值剛才跳到了 100 毫秒！差點害我被爆頭！」Chloe 怒氣衝衝地四處張望，然後看到了拿著插頭的 Victoria。</p>
+<p>「Victoria！妳半夜不睡覺拔路由器幹嘛？！想謀殺我的排位賽嗎？！」</p>
+<p>「我是在拯救我們的隱私！妳這個被遊戲蒙蔽雙眼的白痴！」Victoria 絕望地反擊。</p>
+<p>Max 揉著眼睛從房間裡走出來，脖子上依然掛著那副降噪耳機（因為她把降噪當成耳塞來用）。她看著一片混亂的客廳，無奈地嘆了口氣。</p>
+<p>「好了，大家不要吵了。」Kate 也披著毛衣出現了，小天使依然保持著那種能安撫一切的溫柔頻率。她走到 Victoria 身邊，輕輕拍了拍她的肩膀，「Victoria，既然睡不著，要不要喝完這杯牛奶，我們一起來做睡前禱告？把煩惱都交給主，心跳自然就會平穩下來了，手錶也就不會再響了呢。」</p>
+<p>在 Kate 的聖光注視下，在 Lily 無懈可擊的衛星備援系統面前，Victoria 徹底放棄了抵抗。</p>
+<p>她默默地喝了一口熱牛奶，看著手腕上那個彷彿住著一個賽博教導主任的手錶，流下了一滴屬於舊時代人類的眼淚。在這個車廂裡，試圖用物理手段去對抗一個武裝到衛星級別的實習生，顯然是她這輩子做過最愚蠢的戰略決策。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="cyber_disciplinarian.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="digital_escape_plan.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>

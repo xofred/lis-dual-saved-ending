@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>相互保證毀滅 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站303篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 87 章 · 行政黑魔法全開</div>
+  <h1>相互保證毀滅</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/mutually_assured_destruction.jpeg" alt="相互保證毀滅" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <p>當 Lily 在那台裝載著開源系統的筆記本電腦上，看到那篇關於 Windows 設下瀏覽器選擇障礙、引發微軟壟斷爭議的新聞時，二號車廂裡的氣壓瞬間下降了三度。</p>
+<p>她沒有像 Chloe 那樣破口大罵資本主義，也沒有像 Victoria 那樣急著去查股價。實習生只是非常溫柔地推了推那副反光的圓框眼鏡，嘴角勾起了一抹宛如看到待宰羔羊般的純潔微笑。</p>
+<p>「這簡直是對歐盟數位市場法最明目張膽的挑釁，而且手段粗糙得令人髮指。」Lily 軟糯的聲音在安靜的車廂裡迴盪，手指已經在鍵盤上化作一團殘影，「利用作業系統底層權限強行綁定預設瀏覽器，這是典型的暗黑模式與排他性濫用。」</p>
+<h2>一、跨大西洋的不速之客</h2>
+<p>不到三分鐘，她已經透過多重加密的 VPN 節點，無縫駭入了一個正在布魯塞爾舉行的歐盟執行委員會反壟斷局內部視訊會議。</p>
+<p>當會議室大螢幕上突然出現一個穿著小熊睡衣、抱著一杯熱牛奶的十九歲亞洲女孩時，十幾位西裝革履的歐盟高級官員集體陷入了死寂。</p>
+<p>「各位委員，下午好。請原諒我的不請自來。」Lily 甚至對著鏡頭乖巧地鞠了個躬，「我注意到貴局正在為如何對微軟的壟斷行為進行精準取證而發愁。作為一份見面禮，我剛剛向各位的加密信箱發送了一份長達三百頁的微軟底層 API 攔截第三方瀏覽器行為分析報告。」</p>
+<p>Victoria 剛好路過工作台，瞥了一眼 Lily 螢幕上的歐盟官方標誌，手裡的氣泡水差點灑了一地。名媛嚇得花容失色，一把捂住嘴巴，用氣音發出崩潰的嘶吼：「Lily！妳在幹什麼？！妳居然在跟歐盟反壟斷專員視訊？！那可是市值兆級美金的巨頭！妳會害我們被微軟法務部從地圖上抹除的！」</p>
+<p>Lily 溫柔地拍了拍 Victoria 的手背，示意她安靜，然後轉向鏡頭繼續交涉：</p>
+<p>「根據相關條款，對於這種系統級別的壟斷壁壘，歐盟有權開出高達其全球年營業額百分之十的天價罰單。而我提供的這份代碼級別的證據，足以讓這場冗長的聽證會縮短兩年。作為回報，我不需要政治庇護，我只需要各位在下週二發布正式反壟斷調查公告前，給我四十八小時的內線做空準備期，以及一封由歐盟委員會蓋章的民間技術顧問免責聲明。」</p>
+<p>視訊那頭的歐盟反壟斷專員們面面相覷。他們看著郵件裡那份完美得毫無破綻的技術鑒定與法理推演，再看看螢幕上這個大眼睛裡充滿了極致合規掠奪光芒的女孩，紛紛嚥了一口口水。</p>
+<p>「老天啊……」坐在沙發上的 Chloe 已經徹底看傻了，她默默地把手裡的遊戲手把放下，「我以前以為拿著棒球棍去砸微軟總部的玻璃就已經很龐克了。沒想到真正的賽博龐克，是穿著小熊睡衣，聯合歐盟把微軟的底褲給罰沒了。」</p>
+<p>Victoria 則在經歷了短暫的恐慌後，資本家的嗜血本能迅速佔據了上風。她瘋狂地在手機上點開 Chase 財團的內部交易終端，一邊咬著指甲一邊低聲唸叨：「四十八小時……我們有四十八小時的資訊差……如果動用信託基金加上十倍槓桿做空微軟……我們下個月就能把地中海那座度假島嶼買下來，自己封自己當公爵夫人了……」</p>
+<h2>二、急煞車</h2>
+<p>就在整個客廳陷入了即將肢解科技巨頭並暴富的狂熱氣氛時，Victoria 已經把手機貼在耳邊，正準備向信託經理下達十倍槓桿做空微軟的核彈級指令。</p>
+<p>就在她即將喊出「賣出」的瞬間，一隻白皙、柔軟，卻帶著絕對不可抗拒力量的手，輕輕按下了她手機的掛斷鍵。</p>
+<p>「Victoria 學姐，請立刻停止您的做空指令。我們必須把架在微軟脖子上的行政鍘刀，稍微往外挪兩公分。」</p>
+<p>Lily 轉過身，將歐盟反壟斷局的視訊會議設為靜音，然後將筆記本螢幕轉向眾人。螢幕上是一則剛推送的科技新聞：Google 宣布推出名為「反重力」的專案，實現了與 Windows 系統底層子系統的深度原生整合。</p>
+<p>「這是什麼意思？Google 要上天嗎？」Chloe 叼著棒棒糖，看著螢幕上那一堆對她來說宛如外星文的技術詞彙，「這跟我們把微軟告到破產有什麼關係？」</p>
+<p>Lily 推了推圓框眼鏡，開始用一種堪比哈佛商學院客座教授的語氣，為這群廢土文青進行矽谷底層政治學的降維科普。</p>
+<p>「各位學姐，簡單來說，這套底層子系統是微軟在 Windows 系統裡偷偷塞進去的一個完整的 Linux 靈魂。原本微軟和 Google 在作業系統和瀏覽器上是死敵，但現在，Google 的這個新專案選擇了直接與微軟的這套底層子系統進行原生整合。」Lily 拿著紅筆在白板上畫了兩個交疊的巨大圓圈，「這意味著，Google 正在把他們最核心的開發者生態和跨平台架構，直接嫁接到微軟的底層基礎設施上。」</p>
+<p>Lily 轉向 Victoria，語氣變得無比冷靜且殘酷：「如果我們現在任由歐盟以底層權限壟斷為由，將 Windows 的核心架構徹底肢解，微軟確實會重傷。但同時，依賴這套子系統進行原生整合的 Google 開發環境也會瞬間面臨雪崩式的崩潰。這不再是一場單方面的屠殺，這是矽谷巨頭之間的相互保證毀滅。」</p>
+<p>Victoria 的名媛大腦飛速運轉，她立刻意識到了這背後的金融連鎖反應，臉色微變：「所以如果微軟的底層被我們搞崩了，Google 的股價也會跟著陪葬？那我的單邊做空期權會因為整個納斯達克指數的系統性恐慌，而面臨極端的流動性枯竭！」</p>
+<h2>三、外科手術式的豁免</h2>
+<p>「完全正確，Victoria 學姐。」Lily 溫柔地笑了笑，重新打開了歐盟視訊會議的麥克風，但用手捂住了收音孔，「這就是為什麼我們不能一刀切斷微軟的大動脈。我們只能精準地挑斷他們在瀏覽器綁定上的靜脈，而必須在起訴書中明確豁免為第三方開發者提供底層子系統的必要整合權限。」</p>
+<p>Lily 放開麥克風，換上了那種純潔無暇的語氣對著歐盟官員說道：「抱歉，各位長官，剛才網路有些波動。關於微軟的壟斷報告，我將在一小時內提交一份修正補丁。我們將起訴範圍嚴格限定在消費端介面，絕不波及企業級與開發者底層的開源協作。畢竟，我們是為了維護自由市場，而不是為了摧毀數位世界的基礎設施，對吧？」</p>
+<p>歐盟官員們在螢幕那頭擦了擦冷汗，連連點頭，彷彿在聽從一位幕後財閥教父的聖旨。</p>
+<p>「也就是說，」Max 抱著她的底片相機，試圖用最文青的思維來理解這場賽博戰爭，「這兩家平時在廣告裡互相嘲諷的大公司，私底下其實已經偷偷牽手，甚至共用同一個地下室了？」</p>
+<p>「這叫競合關係，Maxine。」Victoria 鬆了一口氣，優雅地坐回沙發上，重新打開交易軟體，「既然不能直接核平微軟，Lily，那我們的投資策略是什麼？」</p>
+<h2>四、跨月價差的精算</h2>
+<p>「做對沖交易，學姐。」Lily 一邊在歐盟的報告裡修改著法律條款，一邊進行著金融部署，「嚴格來說，微軟只有單一股票代碼，我們沒辦法真的只做空消費者業務部門——這是個常見的簡化說法，但操作上並不是這樣運作的。我實際建立的是一組跨月價差選擇權：買入短天期、鎖定在歐盟裁決公告日前到期的賣權，用來精準捕捉這次瀏覽器壟斷判決引發的短線恐慌波動；同時搭配一組長天期的買權，用來承接底層子系統深度整合帶來的長期上漲動能。這樣一來，我們吃到的是這則特定壞消息的下跌，而不是整支股票的長期方向，兩者互不干擾。」</p>
+<p>在這場涉及兆級企業的生死博弈中，實習生展現出了外科醫生般的恐怖精準度。</p>
+<p>一直安靜在廚房裡忙碌的 Kate，這時端著一盤剛出爐的舒芙蕾走了出來。小天使完全沒有理會那些令人頭疼的代碼和股價，她只聽到了「反重力」這個詞。</p>
+<p>「大家來吃甜點吧。」Kate 溫柔地將舒芙蕾分給每一個人，看著那些蓬鬆、高高鼓起的蛋糕體，臉上洋溢著聖潔的微笑，「我覺得 Google 的這個名字取得真好。能夠擺脫重力的束縛，就像天使的翅膀一樣自由呢。Lily 決定手下留情，一定是感受到了這種充滿愛的升力吧？」</p>
+<p>看著小天使那毫無雜質的笑容，再看看剛把歐盟反壟斷局當成提線木偶、並策劃了一場華爾街對沖絞殺的 Lily，車廂裡的另外三個人默默地吃了一口舒芙蕾。她們決定永遠不要告訴 Kate，在這個被實習生統治的車廂裡，升力通常只意味著某家上市公司的股價正在被合法抽乾。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="cyborg_terminator_badge.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="planned_obsolescence.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>
