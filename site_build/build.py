@@ -8,6 +8,7 @@ markdown 章節,轉成統一風格的靜態閱讀站台。輸出到專案根目�
 
 import os
 import re
+import sys
 import shutil
 import hashlib
 import json
@@ -332,6 +333,30 @@ def fix_blockquote_linebreaks(text):
     return "\n".join(lines)
 
 
+# python-markdown 預設會讓 .md 原始檔裡寫的原始 HTML 原封不動穿透進最終頁面,
+# 不會自動跳脫(這是 Markdown 的標準行為,不是這裡的 bug)。故事草稿常常是從
+# 外部檔案貼進來的,萬一裡面夾帶了 <script> 之類的標籤,build 完就會變成一段
+# 在公開網站上真的會執行的程式碼。用一組寬鬆但涵蓋主要向量的 regex 在讀進
+# 每個章節時掃一遍,抓到就直接讓整個建置失敗,而不是默默把它發布出去。
+DANGEROUS_HTML_PATTERNS = [
+    (re.compile(r"<\s*(script|iframe|object|embed|svg|style|link|meta|base|form)\b", re.I), "危險標籤"),
+    (re.compile(r"\bon[a-z]+\s*=", re.I), "行內事件處理屬性(on*=)"),
+    (re.compile(r"javascript\s*:", re.I), "javascript: 協定"),
+]
+
+
+def scan_dangerous_html(text):
+    """掃一份章節原始 markdown 文字,找出可能被瀏覽器當成可執行內容的原始 HTML。
+    回傳 [(行號, 命中的原文片段, 分類), ...],依行號排序;沒有就回傳空列表。"""
+    hits = []
+    for pattern, label in DANGEROUS_HTML_PATTERNS:
+        for m in pattern.finditer(text):
+            line_no = text.count("\n", 0, m.start()) + 1
+            hits.append((line_no, m.group(0), label))
+    hits.sort(key=lambda h: h[0])
+    return hits
+
+
 _HTML_TAG_RE = re.compile(r"<[^>]+>")
 _HTML_UNESCAPE = (
     ("&amp;", "&"), ("&lt;", "<"), ("&gt;", ">"), ("&quot;", '"'), ("&#39;", "'"),
@@ -378,6 +403,30 @@ if __name__ == "__main__":
     # 章節 slug 集合,用來過濾素材:只有檔名(去副檔名)對得上某章節的
     # 圖片/音樂才會被複製進 docs/,資料夾裡其餘不相干的檔案一律跳過
     slugs = {slugify(f) for s in SEASONS for f in s["files"]}
+
+    # 把所有章節的原始檔內容先整批讀進來、掃一輪危險 HTML。刻意放在任何
+    # docs/ 清空/複製動作之前:一旦中伏就直接中止,docs/ 連碰都不會被碰到,
+    # 不會留下一個清到一半的目錄。掃過的內容留著給下面的 chapters 迴圈直接
+    # 重用,不用再讀一次檔案。
+    raw_texts = {}  # (season_num, filename) -> 檔案內容
+    html_violations = []  # [(檔案路徑, 行號, 命中片段, 分類), ...]
+    for s in SEASONS:
+        for f in s["files"]:
+            path = os.path.join(s["src"], f)
+            with open(path, "r", encoding="utf-8") as fh:
+                text = fh.read()
+            raw_texts[(s["num"], f)] = text
+            for line_no, matched, label in scan_dangerous_html(text):
+                html_violations.append((os.path.relpath(path, PROJECT_ROOT), line_no, matched, label))
+
+    if html_violations:
+        print("\n建置中止:偵測到原始 .md 檔案裡有可能被瀏覽器直接執行的 HTML 內容", file=sys.stderr)
+        print("(python-markdown 會讓這類內容原封不動穿透進最終頁面,不會自動跳脫)\n", file=sys.stderr)
+        for filepath, line_no, matched, label in html_violations:
+            print(f"  {filepath}:{line_no}  [{label}]  {matched!r}", file=sys.stderr)
+        print(f"\n共 {len(html_violations)} 處。確認是誤判、或真的要保留這段內容的話,"
+              f"改寫掉(或跟我說要不要調整 DANGEROUS_HTML_PATTERNS)後再重新建置。", file=sys.stderr)
+        sys.exit(1)
 
     from templates import (
         BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, LIGHTBOX,
@@ -513,8 +562,7 @@ if __name__ == "__main__":
     for s in SEASONS:
         for f in s["files"]:
             num = parse_chapter_num(f)
-            with open(os.path.join(s["src"], f), "r", encoding="utf-8") as fh:
-                text = fh.read()
+            text = raw_texts[(s["num"], f)]  # 前面掃危險 HTML 時已經讀過,直接重用
             slug = slugify(f)
             chapters.append({
                 "num": num,
