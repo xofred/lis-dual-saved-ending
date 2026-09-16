@@ -947,10 +947,18 @@ if __name__ == "__main__":
     # ---------- 產生 Service Worker(版本 = docs/ 內容 hash) ----------
     # 版本號用內容 hash 而非時間戳:只有 docs/ 真的有東西變了,sw.js 才變,
     # 回訪讀者也才會被要求重新快取(不然每次建置都白洗一次快取)。
+    # macOS Finder(或其他系統/編輯器)隨手逛過 docs/ 底下任何一層資料夾,都可能
+    # 自己產生這些雜訊檔案,內容跟真正的網站產出完全無關,卻會被 os.walk 掃到。
+    # 之前就是漏了排除這個,才會出現「明明沒改東西,兩次建置的內容 hash 卻不一樣」
+    # (.DS_Store 的內容會隨 Finder 開過幾次資料夾自己變動)。
+    JUNK_BASENAMES = {".DS_Store", "Thumbs.db", "desktop.ini"}
+
     def docs_content_hash(path, exclude):
         rels = []
         for base_dir, _dirs, names in os.walk(path):
             for name in names:
+                if name in JUNK_BASENAMES:
+                    continue
                 rel = os.path.relpath(os.path.join(base_dir, name), path)
                 if rel not in exclude:
                     rels.append(rel)
