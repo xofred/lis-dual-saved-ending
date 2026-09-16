@@ -56,6 +56,14 @@ python3 build.py
 
 需要 Python 3 + `markdown` 套件（`pip install markdown`）。跑完會在專案根目錄的 `docs/`（或你設定的 `OUT_DIR`）產生完整網站。
 
+**本地預覽,不要直接雙擊開 `docs/index.html`（`file://`）。** 瀏覽器基於安全限制,`file://` 開啟的頁面不允許用 `fetch()` 讀取「另一個」本機檔案——全文搜尋要抓 `search-index.json` 就會失敗（面板會提示「搜尋需要透過本地伺服器才能用」,不是網路或 Service Worker 的問題）；Service Worker 本身也完全不會在 `file://` 底下註冊(需要 https 或 localhost 這種安全情境),離線快取也就測不出效果。正確做法是起一個本地伺服器:
+
+```bash
+python3 -m http.server 8000 --directory docs
+```
+
+再用瀏覽器開 `http://localhost:8000`,這樣看到的行為才會跟部署到 GitHub Pages 後一致。
+
 ---
 
 ## 三、章節檔案規則（`ordered/`、`ordered_s2/`、`ordered_s3/` … 資料夾）

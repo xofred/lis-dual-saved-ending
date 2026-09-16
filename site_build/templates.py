@@ -385,7 +385,12 @@ SEARCH_JS = """/* 由 build.py 產生:全站全文搜尋邏輯,索引資料另�
       statusEl.textContent = defaultStatus;
       return index;
     }).catch(function() {
-      statusEl.textContent = '索引載入失敗,檢查一下網路連線。';
+      // file:// 直接開本機檔案時,瀏覽器基於安全限制不允許網頁讀取「另一個」本機
+      // 檔案(跟網路連線、Service Worker 都無關,是 fetch() 本身被擋下來)。
+      // 這種情況給出正確的診斷跟解法,而不是誤導使用者去檢查網路。
+      statusEl.textContent = location.protocol === 'file:'
+        ? '搜尋需要透過本地伺服器才能用(瀏覽器不允許直接用 file:// 讀取其他檔案)。在專案目錄下執行 python3 -m http.server 8000 --directory docs,再用 http://localhost:8000 開。'
+        : '索引載入失敗,檢查一下網路連線。';
       loading = null;
       throw new Error('index load error');
     });
