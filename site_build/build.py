@@ -10,6 +10,7 @@ import os
 import re
 import shutil
 import hashlib
+import json
 import markdown as md_lib
 from PIL import Image, ImageOps
 
@@ -65,6 +66,65 @@ AUDIO_EXTS = [".mp3", ".m4a", ".ogg", ".wav"]
 IMAGE_MAX_DIM = 1400
 THUMB_MAX_DIM = 720
 JPEG_QUALITY = 82
+# 改了 resize_image() 的壓縮邏輯本身(不是上面那三個數字)就手動 +1,讓所有
+# 快取紀錄一次性失效、全部重新壓縮一次;只是調整 IMAGE_MAX_DIM 這幾個數字
+# 不用管這個,resize_image_cached() 自己會比對到參數變了。
+RESIZE_ALGO_VERSION = 1
+
+# 圖片壓縮很吃 CPU(478 張全部重跑要近一分鐘),建置期做增量快取:記住每個
+# 輸出檔案上次是拿哪個來源檔案內容(sha1)、用什麼參數壓的,這次來源檔案內容
+# 沒變、參數也沒變,就直接跳過、留著上次壓好的檔案不動。快取存在 build.py
+# 旁邊的 .image_cache.json,不進版本控制(純本機加速用,見 .gitignore)。
+IMAGE_CACHE_PATH = os.path.join(SCRIPT_DIR, ".image_cache.json")
+
+
+def load_image_cache():
+    try:
+        with open(IMAGE_CACHE_PATH, "r", encoding="utf-8") as fh:
+            return json.load(fh)
+    except (FileNotFoundError, ValueError):
+        return {}
+
+
+def save_image_cache(cache):
+    with open(IMAGE_CACHE_PATH, "w", encoding="utf-8") as fh:
+        json.dump(cache, fh)
+
+
+def file_sha1(path):
+    h = hashlib.sha1()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def resize_image_cached(src_path, dst_path, max_dim, old_cache, new_cache, quality=JPEG_QUALITY):
+    """跟 resize_image() 一樣,但先比對來源檔案內容 hash + 壓縮參數;沒變、
+    輸出檔案也還在,就跳過重新壓縮。回傳這次是否真的重新壓了(給統計用)。
+    new_cache 只會收進這次實際處理過的項目,改名/刪掉的來源檔案自然不會被
+    寫回去,快取檔案本身也就跟著自動瘦身,不用另外清孤兒紀錄。"""
+    key = os.path.relpath(dst_path, OUT_DIR)
+    src_hash = file_sha1(src_path)
+    record = {"src_hash": src_hash, "max_dim": max_dim, "quality": quality, "algo": RESIZE_ALGO_VERSION}
+    prev = old_cache.get(key)
+    if prev == record and os.path.isfile(dst_path):
+        new_cache[key] = record
+        return False
+    resize_image(src_path, dst_path, max_dim, quality)
+    new_cache[key] = record
+    return True
+
+
+def prune_orphans(dir_path, keep_names):
+    """把 dir_path 底下不在 keep_names 裡的檔案刪掉(改名/刪掉來源時留下的孤兒)。
+    取代原本整批 rmtree 的做法——這三個資料夾現在跨次建置保留,才有東西可以
+    比對快取,所以孤兒清理要單獨做。"""
+    if not os.path.isdir(dir_path):
+        return
+    for fname in os.listdir(dir_path):
+        if fname not in keep_names:
+            os.remove(os.path.join(dir_path, fname))
 
 
 def resize_image(src_path, dst_path, max_dim, quality=JPEG_QUALITY):
@@ -334,11 +394,15 @@ if __name__ == "__main__":
     # (例:Journal/wrong_words.jpeg 改名成 case_file_sketch.jpeg 後,舊的
     #  docs/journal/wrong_words.jpeg 沒被清掉,同一張手帳就同時出現在兩篇故事)。
     os.makedirs(OUT_DIR, exist_ok=True)
-    for d in (CHAPTERS_DIR, IMAGES_DIR, SONGS_DIR, POLAROIDS_DIR, JOURNAL_DIR,
-              POLAROID_THUMBS_DIR, JOURNAL_THUMBS_DIR):
+    for d in (CHAPTERS_DIR, SONGS_DIR, POLAROIDS_DIR, JOURNAL_DIR):
         if os.path.isdir(d):
             shutil.rmtree(d)
         os.makedirs(d)
+    # 插圖跟縮圖這三個資料夾不整個清掉:裡面的檔案要拿來跟這次的來源檔案比對
+    # hash,沒變就跳過重新壓縮(見下面 resize_image_cached)。孤兒檔案改用
+    # prune_orphans() 個別清,而不是整批 rmtree。
+    for d in (IMAGES_DIR, POLAROID_THUMBS_DIR, JOURNAL_THUMBS_DIR):
+        os.makedirs(d, exist_ok=True)
 
     # GitHub Pages 用:放一個空的 .nojekyll,避免 Jekyll 處理掉某些檔案/資料夾
     open(os.path.join(OUT_DIR, ".nojekyll"), "w").close()
@@ -361,18 +425,28 @@ if __name__ == "__main__":
 
     journal_src = find_source_dir(JOURNAL_SOURCE_CANDIDATES)
 
+    image_cache_old = load_image_cache()
+    image_cache_new = {}
+
     if images_src:
-        copied = skipped = 0
+        copied = reused = skipped = 0
+        keep = set()
         for fname in os.listdir(images_src):
             stem, ext = os.path.splitext(fname)
             if ext.lower() in IMAGE_EXTS and stem in slugs:
                 # 插圖是讀者順順讀文章時直接看到的(沒有燈箱放大),縮到 IMAGE_MAX_DIM
                 # 直接取代原圖,不用另外維護一份縮圖 + 原圖
-                resize_image(os.path.join(images_src, fname), os.path.join(IMAGES_DIR, fname), IMAGE_MAX_DIM)
-                copied += 1
+                keep.add(fname)
+                changed = resize_image_cached(
+                    os.path.join(images_src, fname), os.path.join(IMAGES_DIR, fname),
+                    IMAGE_MAX_DIM, image_cache_old, image_cache_new,
+                )
+                copied += changed
+                reused += not changed
             elif ext.lower() in IMAGE_EXTS:
                 skipped += 1
-        print(f"已從 {images_src} 複製並壓縮 {copied} 張圖片到 docs/images/(跳過 {skipped} 張跟章節對不上的)")
+        prune_orphans(IMAGES_DIR, keep)
+        print(f"已從 {images_src} 壓縮 {copied} 張圖片到 docs/images/(沿用快取 {reused} 張,跳過 {skipped} 張跟章節對不上的)")
     else:
         print(f"警告:找不到圖片來源資料夾(嘗試過 {IMAGES_SOURCE_CANDIDATES}),跳過圖片複製")
 
@@ -390,33 +464,50 @@ if __name__ == "__main__":
         print(f"警告:找不到音樂來源資料夾(嘗試過 {SONGS_SOURCE_CANDIDATES}),跳過音樂複製")
 
     if polaroids_src:
-        copied = skipped = 0
+        copied = reused = skipped = 0
+        keep = set()
         for fname in os.listdir(polaroids_src):
             stem, ext = os.path.splitext(fname)
             if ext.lower() in IMAGE_EXTS and polaroid_matches_any_slug(stem, slugs):
-                # 原圖原封不動留給燈箱放大用;縮圖另存一份給小卡跟兩個相簿頁用
+                # 原圖原封不動留給燈箱放大用(POLAROIDS_DIR 還是整批 rmtree,複製很
+                # 便宜不需要快取);縮圖比較貴,另外存一份給小卡跟兩個相簿頁用
+                keep.add(fname)
                 shutil.copy(os.path.join(polaroids_src, fname), os.path.join(POLAROIDS_DIR, fname))
-                resize_image(os.path.join(polaroids_src, fname), os.path.join(POLAROID_THUMBS_DIR, fname), THUMB_MAX_DIM)
-                copied += 1
+                changed = resize_image_cached(
+                    os.path.join(polaroids_src, fname), os.path.join(POLAROID_THUMBS_DIR, fname),
+                    THUMB_MAX_DIM, image_cache_old, image_cache_new,
+                )
+                copied += changed
+                reused += not changed
             elif ext.lower() in IMAGE_EXTS:
                 skipped += 1
-        print(f"已從 {polaroids_src} 複製 {copied} 張拍立得照片到 docs/polaroids/,並產生對應縮圖(跳過 {skipped} 張跟章節對不上的)")
+        prune_orphans(POLAROID_THUMBS_DIR, keep)
+        print(f"已從 {polaroids_src} 複製 {copied + reused} 張拍立得照片到 docs/polaroids/,產生縮圖 {copied} 張(沿用快取 {reused} 張,跳過 {skipped} 張跟章節對不上的)")
     else:
         print(f"警告:找不到拍立得來源資料夾(嘗試過 {POLAROIDS_SOURCE_CANDIDATES}),跳過拍立得複製")
 
     if journal_src:
-        copied = skipped = 0
+        copied = reused = skipped = 0
+        keep = set()
         for fname in os.listdir(journal_src):
             stem, ext = os.path.splitext(fname)
             if ext.lower() in IMAGE_EXTS and polaroid_matches_any_slug(stem, slugs):
+                keep.add(fname)
                 shutil.copy(os.path.join(journal_src, fname), os.path.join(JOURNAL_DIR, fname))
-                resize_image(os.path.join(journal_src, fname), os.path.join(JOURNAL_THUMBS_DIR, fname), THUMB_MAX_DIM)
-                copied += 1
+                changed = resize_image_cached(
+                    os.path.join(journal_src, fname), os.path.join(JOURNAL_THUMBS_DIR, fname),
+                    THUMB_MAX_DIM, image_cache_old, image_cache_new,
+                )
+                copied += changed
+                reused += not changed
             elif ext.lower() in IMAGE_EXTS:
                 skipped += 1
-        print(f"已從 {journal_src} 複製 {copied} 頁手帳到 docs/journal/,並產生對應縮圖(跳過 {skipped} 頁跟章節對不上的)")
+        prune_orphans(JOURNAL_THUMBS_DIR, keep)
+        print(f"已從 {journal_src} 複製 {copied + reused} 頁手帳到 docs/journal/,產生縮圖 {copied} 頁(沿用快取 {reused} 頁,跳過 {skipped} 頁跟章節對不上的)")
     else:
         print(f"警告:找不到手帳來源資料夾(嘗試過 {JOURNAL_SOURCE_CANDIDATES}),跳過手帳複製")
+
+    save_image_cache(image_cache_new)
 
     chapters = []  # 收集每章 metadata,供首頁與導覽使用
     for s in SEASONS:
