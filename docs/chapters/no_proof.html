@@ -82,7 +82,7 @@
   <div class="chapter-meta">第三季 · 第 15 章 · 公款出差東京行</div>
   <h1>死無對證</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/no_proof.jpeg" alt="死無對證" loading="lazy"></div><div class="media-item media-journal"><span class="slot-label">📓 Max 的手帳</span><div class="journal-strip"><div class="journal-page-card" style="--rot: -2deg"><img src="../journal/no_proof.jpeg" alt="死無對證 Max 的手帳" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/no_proof.jpeg" alt="死無對證" loading="lazy"></div><div class="media-item media-journal"><span class="slot-label">📓 Max 的手帳</span><div class="journal-strip"><div class="journal-page-card" style="--rot: -2deg"><img src="../thumbs/journal/no_proof.jpeg" data-full="../journal/no_proof.jpeg" alt="死無對證 Max 的手帳" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <h2>一、Max 的海關申報手帳時間</h2>
@@ -197,7 +197,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

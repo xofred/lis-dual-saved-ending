@@ -82,7 +82,7 @@
   <div class="chapter-meta">第三季 · 第 62 章 · 賭城與空中合規</div>
   <h1>空中合規演習</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/air_compliance_drill.jpeg" alt="空中合規演習" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/air_compliance_drill.jpeg" alt="空中合規演習 拍立得照片" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/air_compliance_drill.jpeg" alt="空中合規演習" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/air_compliance_drill.jpeg" data-full="../polaroids/air_compliance_drill.jpeg" alt="空中合規演習 拍立得照片" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>灣流 G650 私人飛機在西雅圖塔科馬上空的厚重灰雲中，已經像一隻迷失的無頭蒼蠅一樣，畫了整整四十五分鐘的「8」字型盤旋。</p>
@@ -204,7 +204,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

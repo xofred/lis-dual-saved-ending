@@ -82,7 +82,7 @@
   <div class="chapter-meta">第三季 · 第 49 章 · 黑魔法全面上線</div>
   <h1>究極文青公路旅行</h1>
 
-  <div class="media-slot"><div class="media-item media-audio"><span class="slot-label">♪ 配樂</span><audio controls preload="none" src="../songs/road_trip_evolution.mp3"></audio></div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/road_trip_evolution.jpeg" alt="究極文青公路旅行" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/road_trip_evolution.jpeg" alt="究極文青公路旅行 拍立得照片" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-audio"><span class="slot-label">♪ 配樂</span><audio controls preload="none" src="../songs/road_trip_evolution.mp3"></audio></div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/road_trip_evolution.jpeg" alt="究極文青公路旅行" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/road_trip_evolution.jpeg" data-full="../polaroids/road_trip_evolution.jpeg" alt="究極文青公路旅行 拍立得照片" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>奧林匹亞半島的雨季暫時停歇，二號車廂的小分隊決定執行「重返童真」計畫的 B 方案：一場徹底遠離文明喧囂、純粹追求精神契合的「究極文青公路旅行」。</p>
@@ -207,7 +207,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

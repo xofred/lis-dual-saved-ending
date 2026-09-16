@@ -82,7 +82,7 @@
   <div class="chapter-meta">第 124 章 · 畢業季終章</div>
   <h1>面膜與銀翼殺手之夜</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/facemask_movie_night.jpeg" alt="面膜與銀翼殺手之夜" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/facemask_movie_night.jpeg" alt="面膜與銀翼殺手之夜 拍立得照片" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/facemask_movie_night.jpeg" alt="面膜與銀翼殺手之夜" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/facemask_movie_night.jpeg" data-full="../polaroids/facemask_movie_night.jpeg" alt="面膜與銀翼殺手之夜 拍立得照片" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>302 寢室的燈光被調暗，只剩下電視螢幕投射出的幽藍與銀白光暈，客廳裡瀰漫著海鹽爆米花、微波爐芝士卷與洋甘菊精油混合的奇妙香氣。</p>
@@ -180,7 +180,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

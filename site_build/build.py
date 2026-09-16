@@ -11,6 +11,7 @@ import re
 import shutil
 import hashlib
 import markdown as md_lib
+from PIL import Image, ImageOps
 
 # ---- 路徑設定：全部相對於這支腳本檔案所在的位置去推算 ----
 # 預期的資料夾結構(跟 build.py 同一層的上一層):
@@ -33,6 +34,11 @@ IMAGES_DIR = os.path.join(OUT_DIR, "images")
 SONGS_DIR = os.path.join(OUT_DIR, "songs")
 POLAROIDS_DIR = os.path.join(OUT_DIR, "polaroids")
 JOURNAL_DIR = os.path.join(OUT_DIR, "journal")
+# 拍立得/手帳的小縮圖(給故事頁的小卡、兩個相簿頁用),原始全解析度檔案還是
+# 完整留在 POLAROIDS_DIR / JOURNAL_DIR,只有點開燈箱放大看那一刻才會載入
+THUMBS_DIR = os.path.join(OUT_DIR, "thumbs")
+POLAROID_THUMBS_DIR = os.path.join(THUMBS_DIR, "polaroids")
+JOURNAL_THUMBS_DIR = os.path.join(THUMBS_DIR, "journal")
 
 # 素材來源資料夾(專案根目錄下,不在 docs/ 裡面)
 # 依序嘗試這些資料夾名稱,兼容大小寫習慣不一致的情況
@@ -52,6 +58,32 @@ def find_source_dir(candidates):
 # 支援的圖片/音樂副檔名,依序嘗試比對
 IMAGE_EXTS = [".jpeg", ".jpg", ".png", ".webp"]
 AUDIO_EXTS = [".mp3", ".m4a", ".ogg", ".wav"]
+
+# 圖片壓縮參數:插圖是讀者順順讀文章時直接看到的(最寬也就是文章欄寬 700px 出頭),
+# 縮到 1400px 長邊在 retina 螢幕上一樣銳利,不需要原圖那種 3~10MB 的解析度。
+# 拍立得/手帳的小卡最大也就 300px 寬,縮圖給到 720px 長邊在 3x 螢幕上都還綽綽有餘。
+IMAGE_MAX_DIM = 1400
+THUMB_MAX_DIM = 720
+JPEG_QUALITY = 82
+
+
+def resize_image(src_path, dst_path, max_dim, quality=JPEG_QUALITY):
+    """把一張圖縮到長邊不超過 max_dim(小於就不放大),存到 dst_path。
+    保留原始格式;JPEG 額外做品質壓縮,其餘格式用該格式的無損最佳化。
+    用 exif_transpose 先把手機拍照常見的旋轉 EXIF 套用實際轉正,避免縮圖歪掉。"""
+    with Image.open(src_path) as img:
+        fmt = (img.format or "JPEG").upper()  # exif_transpose/resize 之後 .format 會變 None,先記下來
+        img = ImageOps.exif_transpose(img)
+        w, h = img.size
+        scale = max_dim / max(w, h)
+        if scale < 1:
+            img = img.resize((max(1, round(w * scale)), max(1, round(h * scale))), Image.LANCZOS)
+        save_kwargs = {"optimize": True}
+        if fmt in ("JPEG", "JPG"):
+            if img.mode not in ("RGB", "L"):
+                img = img.convert("RGB")
+            save_kwargs["quality"] = quality
+        img.save(dst_path, **save_kwargs)
 
 
 def find_media(slug, media_dir, exts):
@@ -302,7 +334,8 @@ if __name__ == "__main__":
     # (例:Journal/wrong_words.jpeg 改名成 case_file_sketch.jpeg 後,舊的
     #  docs/journal/wrong_words.jpeg 沒被清掉,同一張手帳就同時出現在兩篇故事)。
     os.makedirs(OUT_DIR, exist_ok=True)
-    for d in (CHAPTERS_DIR, IMAGES_DIR, SONGS_DIR, POLAROIDS_DIR, JOURNAL_DIR):
+    for d in (CHAPTERS_DIR, IMAGES_DIR, SONGS_DIR, POLAROIDS_DIR, JOURNAL_DIR,
+              POLAROID_THUMBS_DIR, JOURNAL_THUMBS_DIR):
         if os.path.isdir(d):
             shutil.rmtree(d)
         os.makedirs(d)
@@ -333,11 +366,13 @@ if __name__ == "__main__":
         for fname in os.listdir(images_src):
             stem, ext = os.path.splitext(fname)
             if ext.lower() in IMAGE_EXTS and stem in slugs:
-                shutil.copy(os.path.join(images_src, fname), os.path.join(IMAGES_DIR, fname))
+                # 插圖是讀者順順讀文章時直接看到的(沒有燈箱放大),縮到 IMAGE_MAX_DIM
+                # 直接取代原圖,不用另外維護一份縮圖 + 原圖
+                resize_image(os.path.join(images_src, fname), os.path.join(IMAGES_DIR, fname), IMAGE_MAX_DIM)
                 copied += 1
             elif ext.lower() in IMAGE_EXTS:
                 skipped += 1
-        print(f"已從 {images_src} 複製 {copied} 張圖片到 docs/images/(跳過 {skipped} 張跟章節對不上的)")
+        print(f"已從 {images_src} 複製並壓縮 {copied} 張圖片到 docs/images/(跳過 {skipped} 張跟章節對不上的)")
     else:
         print(f"警告:找不到圖片來源資料夾(嘗試過 {IMAGES_SOURCE_CANDIDATES}),跳過圖片複製")
 
@@ -359,11 +394,13 @@ if __name__ == "__main__":
         for fname in os.listdir(polaroids_src):
             stem, ext = os.path.splitext(fname)
             if ext.lower() in IMAGE_EXTS and polaroid_matches_any_slug(stem, slugs):
+                # 原圖原封不動留給燈箱放大用;縮圖另存一份給小卡跟兩個相簿頁用
                 shutil.copy(os.path.join(polaroids_src, fname), os.path.join(POLAROIDS_DIR, fname))
+                resize_image(os.path.join(polaroids_src, fname), os.path.join(POLAROID_THUMBS_DIR, fname), THUMB_MAX_DIM)
                 copied += 1
             elif ext.lower() in IMAGE_EXTS:
                 skipped += 1
-        print(f"已從 {polaroids_src} 複製 {copied} 張拍立得照片到 docs/polaroids/(跳過 {skipped} 張跟章節對不上的)")
+        print(f"已從 {polaroids_src} 複製 {copied} 張拍立得照片到 docs/polaroids/,並產生對應縮圖(跳過 {skipped} 張跟章節對不上的)")
     else:
         print(f"警告:找不到拍立得來源資料夾(嘗試過 {POLAROIDS_SOURCE_CANDIDATES}),跳過拍立得複製")
 
@@ -373,10 +410,11 @@ if __name__ == "__main__":
             stem, ext = os.path.splitext(fname)
             if ext.lower() in IMAGE_EXTS and polaroid_matches_any_slug(stem, slugs):
                 shutil.copy(os.path.join(journal_src, fname), os.path.join(JOURNAL_DIR, fname))
+                resize_image(os.path.join(journal_src, fname), os.path.join(JOURNAL_THUMBS_DIR, fname), THUMB_MAX_DIM)
                 copied += 1
             elif ext.lower() in IMAGE_EXTS:
                 skipped += 1
-        print(f"已從 {journal_src} 複製 {copied} 頁手帳到 docs/journal/(跳過 {skipped} 頁跟章節對不上的)")
+        print(f"已從 {journal_src} 複製 {copied} 頁手帳到 docs/journal/,並產生對應縮圖(跳過 {skipped} 頁跟章節對不上的)")
     else:
         print(f"警告:找不到手帳來源資料夾(嘗試過 {JOURNAL_SOURCE_CANDIDATES}),跳過手帳複製")
 
@@ -412,7 +450,7 @@ if __name__ == "__main__":
 
     def chapter_cover(c):
         if c["polaroid_files"]:
-            return "polaroids/" + c["polaroid_files"][0]
+            return "thumbs/polaroids/" + c["polaroid_files"][0]  # 鎖屏封面圖用縮圖就夠了
         if c["image_file"]:
             return "images/" + c["image_file"]
         return default_cover
@@ -491,7 +529,8 @@ if __name__ == "__main__":
         if polaroid_files:
             polaroid_cards = "".join(
                 f'<div class="polaroid-card" style="--rot: {(-4 + (i % 5) * 2)}deg">'
-                f'<img src="../polaroids/{f}" alt="{ch["title"]} 拍立得照片" loading="lazy">'
+                f'<img src="../thumbs/polaroids/{f}" data-full="../polaroids/{f}" '
+                f'alt="{ch["title"]} 拍立得照片" loading="lazy">'
                 f'</div>'
                 for i, f in enumerate(polaroid_files)
             )
@@ -506,7 +545,8 @@ if __name__ == "__main__":
         if journal_files:
             journal_cards = "".join(
                 f'<div class="journal-page-card" style="--rot: {(-2 + (i % 3) * 2)}deg">'
-                f'<img src="../journal/{f}" alt="{ch["title"]} Max 的手帳" loading="lazy">'
+                f'<img src="../thumbs/journal/{f}" data-full="../journal/{f}" '
+                f'alt="{ch["title"]} Max 的手帳" loading="lazy">'
                 f'</div>'
                 for i, f in enumerate(journal_files)
             )
@@ -672,7 +712,7 @@ if __name__ == "__main__":
         gallery_cards = "\n".join(
             f'''<a class="gallery-card" href="chapters/{p['slug']}.html">
                   <div class="polaroid-card polaroid-card-lg" style="--rot: {(-4 + (i % 5) * 2)}deg">
-                    <img src="polaroids/{p['file']}" alt="{p['title']} 拍立得照片" loading="lazy">
+                    <img src="thumbs/polaroids/{p['file']}" data-full="polaroids/{p['file']}" alt="{p['title']} 拍立得照片" loading="lazy">
                     <div class="polaroid-caption">{p['title']}</div>
                   </div>
                 </a>'''
@@ -714,7 +754,7 @@ if __name__ == "__main__":
         journal_cards = "\n".join(
             f'''<a class="journal-card" href="chapters/{p['slug']}.html" style="--rot: {(-2 + (i % 3) * 2)}deg">
                   <figure class="journal-page">
-                    <img src="journal/{p['file']}" alt="{p['title']} Max 的手帳" loading="lazy">
+                    <img src="thumbs/journal/{p['file']}" data-full="journal/{p['file']}" alt="{p['title']} Max 的手帳" loading="lazy">
                     <figcaption class="journal-caption">{p['title']}</figcaption>
                   </figure>
                 </a>'''

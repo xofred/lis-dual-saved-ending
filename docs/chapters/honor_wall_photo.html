@@ -82,7 +82,7 @@
   <div class="chapter-meta">第二季 · 第 45 章 · 暑假與長輩認證</div>
   <h1>榮譽牆上的合影</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/honor_wall_photo.jpeg" alt="榮譽牆上的合影" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/honor_wall_photo.jpeg" alt="榮譽牆上的合影 拍立得照片" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/honor_wall_photo.jpeg" alt="榮譽牆上的合影" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/honor_wall_photo.jpeg" data-full="../polaroids/honor_wall_photo.jpeg" alt="榮譽牆上的合影 拍立得照片" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>半週年特展的收入,讓 Max 和 Chloe 終於添置了一台夢寐以求的大畫幅放大機。那天晚上,四人擠在暗房裡,親手沖洗出了第一張照片——正是阿卡迪亞灣懸崖長椅上,燈塔光柱劃破晚霞,兩人十指緊扣相依的畫面。Chloe 隨後用工坊剩餘的黑胡桃木,親手打磨了一座相框,兩人決定把這份光景寄回阿卡迪亞灣。</p>
@@ -205,7 +205,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

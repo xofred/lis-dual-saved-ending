@@ -82,7 +82,7 @@
   <div class="chapter-meta">第三季 · 第 12 章 · 公款出差東京行</div>
   <h1>秋葉原的財報估值法則</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/akihabara_valuation.jpeg" alt="秋葉原的財報估值法則" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/akihabara_valuation.jpeg" alt="秋葉原的財報估值法則 拍立得照片" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/akihabara_valuation.jpeg" alt="秋葉原的財報估值法則" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/akihabara_valuation.jpeg" data-full="../polaroids/akihabara_valuation.jpeg" alt="秋葉原的財報估值法則 拍立得照片" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>秋葉原的一條隱秘窄巷裡，二手卡牌店地下室瀰漫著舊紙板與防潮箱的獨特氣味。</p>
@@ -189,7 +189,8 @@ Max 眼明手快地舉起拍立得按下快門，拍立得吐出了一張相片�
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

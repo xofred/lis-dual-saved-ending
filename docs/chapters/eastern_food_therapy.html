@@ -82,7 +82,7 @@
   <div class="chapter-meta">第三季 · 第 53 章 · 審判與垃圾食物大越獄</div>
   <h1>東方食療打擊</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/eastern_food_therapy.jpeg" alt="東方食療打擊" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/eastern_food_therapy.jpeg" alt="東方食療打擊 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: -2deg"><img src="../polaroids/eastern_food_therapy_2.jpeg" alt="東方食療打擊 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: 0deg"><img src="../polaroids/eastern_food_therapy_3.jpeg" alt="東方食療打擊 拍立得照片" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/eastern_food_therapy.jpeg" alt="東方食療打擊" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/eastern_food_therapy.jpeg" data-full="../polaroids/eastern_food_therapy.jpeg" alt="東方食療打擊 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: -2deg"><img src="../thumbs/polaroids/eastern_food_therapy_2.jpeg" data-full="../polaroids/eastern_food_therapy_2.jpeg" alt="東方食療打擊 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: 0deg"><img src="../thumbs/polaroids/eastern_food_therapy_3.jpeg" data-full="../polaroids/eastern_food_therapy_3.jpeg" alt="東方食療打擊 拍立得照片" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>雖然在美國大眾的認知裡，中餐通常等於甜膩的左宗棠雞和幸運餅乾，但在西雅圖的國際區，只要找對了那種連招牌都褪色的老字號粵菜館，你完全能接觸到最硬核的東方飲食靈魂。</p>
@@ -195,7 +195,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

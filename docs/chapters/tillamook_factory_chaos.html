@@ -82,7 +82,7 @@
   <div class="chapter-meta">第 119 章 · 畢業季終章</div>
   <h1>工廠鬧劇</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/tillamook_factory_chaos.jpeg" alt="工廠鬧劇" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/tillamook_factory_chaos.jpeg" alt="工廠鬧劇 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: -2deg"><img src="../polaroids/tillamook_factory_chaos_2.jpeg" alt="工廠鬧劇 拍立得照片" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/tillamook_factory_chaos.jpeg" alt="工廠鬧劇" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/tillamook_factory_chaos.jpeg" data-full="../polaroids/tillamook_factory_chaos.jpeg" alt="工廠鬧劇 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: -2deg"><img src="../thumbs/polaroids/tillamook_factory_chaos_2.jpeg" data-full="../polaroids/tillamook_factory_chaos_2.jpeg" alt="工廠鬧劇 拍立得照片" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>沿著二樓挑高的全景玻璃走廊前行，腳下便是轟鳴運轉的自動化乳酪封裝車間。數以千計金黃色的切達乳酪塊在傳送帶上排成整齊的矩陣，被機械臂精準切割、過秤、抽真空包裝。</p>
@@ -182,7 +182,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

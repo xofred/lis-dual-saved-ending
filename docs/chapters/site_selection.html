@@ -82,7 +82,7 @@
   <div class="chapter-meta">第二季 · 第 27 章 · 匠魂與鋼鐵車廂</div>
   <h1>選址</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/site_selection.jpeg" alt="選址" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/site_selection.jpeg" alt="選址 拍立得照片" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/site_selection.jpeg" alt="選址" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/site_selection.jpeg" data-full="../polaroids/site_selection.jpeg" alt="選址 拍立得照片" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>清晨八點半，波特蘭東區的舊工業鐵道旁泛著薄薄的晨霧。</p>
@@ -185,7 +185,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

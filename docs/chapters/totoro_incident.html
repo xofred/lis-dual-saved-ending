@@ -82,7 +82,7 @@
   <div class="chapter-meta">第三季 · 第 14 章 · 公款出差東京行</div>
   <h1>龍貓大冒險</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/totoro_incident.jpeg" alt="龍貓大冒險" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/totoro_incident.jpeg" alt="龍貓大冒險 拍立得照片" loading="lazy"></div></div></div><div class="media-item media-journal"><span class="slot-label">📓 Max 的手帳</span><div class="journal-strip"><div class="journal-page-card" style="--rot: -2deg"><img src="../journal/totoro_incident.jpeg" alt="龍貓大冒險 Max 的手帳" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/totoro_incident.jpeg" alt="龍貓大冒險" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/totoro_incident.jpeg" data-full="../polaroids/totoro_incident.jpeg" alt="龍貓大冒險 拍立得照片" loading="lazy"></div></div></div><div class="media-item media-journal"><span class="slot-label">📓 Max 的手帳</span><div class="journal-strip"><div class="journal-page-card" style="--rot: -2deg"><img src="../thumbs/journal/totoro_incident.jpeg" data-full="../journal/totoro_incident.jpeg" alt="龍貓大冒險 Max 的手帳" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>成田機場的頭等艙專屬值機櫃檯前，氣氛降到了冰點。</p>
@@ -195,7 +195,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

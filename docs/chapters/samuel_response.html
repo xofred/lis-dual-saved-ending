@@ -82,7 +82,7 @@
   <div class="chapter-meta">第二季 · 第 73 章 · 家人拜訪</div>
   <h1>迷途小藍鳥的迴響</h1>
 
-  <div class="media-slot"><div class="media-item media-audio"><span class="slot-label">♪ 配樂</span><audio controls preload="none" src="../songs/samuel_response.mp3"></audio></div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/samuel_response.jpeg" alt="迷途小藍鳥的迴響" loading="lazy"></div><div class="media-item media-journal"><span class="slot-label">📓 Max 的手帳</span><div class="journal-strip"><div class="journal-page-card" style="--rot: -2deg"><img src="../journal/samuel_response.jpeg" alt="迷途小藍鳥的迴響 Max 的手帳" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-audio"><span class="slot-label">♪ 配樂</span><audio controls preload="none" src="../songs/samuel_response.mp3"></audio></div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/samuel_response.jpeg" alt="迷途小藍鳥的迴響" loading="lazy"></div><div class="media-item media-journal"><span class="slot-label">📓 Max 的手帳</span><div class="journal-strip"><div class="journal-page-card" style="--rot: -2deg"><img src="../thumbs/journal/samuel_response.jpeg" data-full="../journal/samuel_response.jpeg" alt="迷途小藍鳥的迴響 Max 的手帳" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>那場深夜排練結束後，Victoria 偷偷把那段未修音的狂暴錄音存進了雲端私人珍藏庫，還設了三重密碼。結果沒過幾天，工坊新升級的智能中控系統一次自動流轉播放，把這首「私藏」在全場音響裡公放了出來，當場人贓俱獲。名媛先是死鴨子嘴硬推說是系統漏洞，被 Chloe 抓著播放次數和「單曲循環」標籤拆穿後，也只能梗著脖子改口，用一連串充滿藝術術語的措辭，勉強承認這首歌「達到了近乎完美的先鋒解構高度」。</p>
@@ -189,7 +189,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

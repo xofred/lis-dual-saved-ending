@@ -82,7 +82,7 @@
   <div class="chapter-meta">第三季 · 第 60 章 · 賭城與空中合規</div>
   <h1>沙漠裡的藝術遊樂場</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/desert_art_playground.jpeg" alt="沙漠裡的藝術遊樂場" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/desert_art_playground.jpeg" alt="沙漠裡的藝術遊樂場 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: -2deg"><img src="../polaroids/desert_art_playground_2.jpeg" alt="沙漠裡的藝術遊樂場 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: 0deg"><img src="../polaroids/desert_art_playground_2.jpg" alt="沙漠裡的藝術遊樂場 拍立得照片" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/desert_art_playground.jpeg" alt="沙漠裡的藝術遊樂場" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/desert_art_playground.jpeg" data-full="../polaroids/desert_art_playground.jpeg" alt="沙漠裡的藝術遊樂場 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: -2deg"><img src="../thumbs/polaroids/desert_art_playground_2.jpeg" data-full="../polaroids/desert_art_playground_2.jpeg" alt="沙漠裡的藝術遊樂場 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: 0deg"><img src="../thumbs/polaroids/desert_art_playground_2.jpg" data-full="../polaroids/desert_art_playground_2.jpg" alt="沙漠裡的藝術遊樂場 拍立得照片" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>拉斯維加斯除了紙醉金迷的賭場和高熱量自助餐，其實隱藏著極其濃烈的、甚至帶點荒誕色彩的藝術氛圍。這座建立在沙漠海市蜃樓上的城市，對於 Max 這種「懷舊廢墟派」文青，以及 Victoria 這種「前衛高奢派」偽文青來說，簡直是一個巨大的靈感遊樂場。</p>
@@ -185,7 +185,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

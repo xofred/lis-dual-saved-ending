@@ -1,5 +1,5 @@
 /* 由 build.py 產生,請勿手動編輯 */
-const VERSION = 'v1ca685e05196';
+const VERSION = 'v5f2a7eddef58';
 const SHELL = 'shell-' + VERSION;
 const MEDIA = 'media-' + VERSION;
 const SHELL_MAX = 130;
@@ -18,7 +18,7 @@ self.addEventListener('activate', function(event) {
 
 function isMedia(url) {
   return url.origin === self.location.origin &&
-         /\/(images|polaroids|journal|songs|fonts)\//.test(url.pathname);
+         /\/(images|polaroids|journal|songs|fonts|thumbs)\//.test(url.pathname);
 }
 function isStyle(url) {
   return url.origin === self.location.origin &&

@@ -598,7 +598,8 @@ LIGHTBOX = """
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });
@@ -763,7 +764,7 @@ self.addEventListener('activate', function(event) {
 
 function isMedia(url) {
   return url.origin === self.location.origin &&
-         /\\/(images|polaroids|journal|songs|fonts)\\//.test(url.pathname);
+         /\\/(images|polaroids|journal|songs|fonts|thumbs)\\//.test(url.pathname);
 }
 function isStyle(url) {
   return url.origin === self.location.origin &&

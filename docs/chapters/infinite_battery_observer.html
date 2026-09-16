@@ -82,7 +82,7 @@
   <div class="chapter-meta">第三季 · 第 02 章 · 海灣新居</div>
   <h1>無限電量的觀察者</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/infinite_battery_observer.jpeg" alt="無限電量的觀察者" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/infinite_battery_observer.jpeg" alt="無限電量的觀察者 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: -2deg"><img src="../polaroids/infinite_battery_observer_2.jpeg" alt="無限電量的觀察者 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: 0deg"><img src="../polaroids/infinite_battery_observer_3.jpeg" alt="無限電量的觀察者 拍立得照片" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/infinite_battery_observer.jpeg" alt="無限電量的觀察者" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/infinite_battery_observer.jpeg" data-full="../polaroids/infinite_battery_observer.jpeg" alt="無限電量的觀察者 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: -2deg"><img src="../thumbs/polaroids/infinite_battery_observer_2.jpeg" data-full="../polaroids/infinite_battery_observer_2.jpeg" alt="無限電量的觀察者 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: 0deg"><img src="../thumbs/polaroids/infinite_battery_observer_3.jpeg" data-full="../polaroids/infinite_battery_observer_3.jpeg" alt="無限電量的觀察者 拍立得照片" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>道奇皮卡與 Victoria 那輛四門保時捷幾乎前後腳駛進了華盛頓州新基地的碎石地，剛一停穩，車門接連打開，在西雅圖憋了整整一天的名媛徹底撕下了所有優雅的社交偽裝。</p>
@@ -192,7 +192,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

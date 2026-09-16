@@ -82,7 +82,7 @@
   <div class="chapter-meta">第三季 · 第 40 章 · Lily 的起源（倒敘）</div>
   <h1>服從性測試（倒敘）</h1>
 
-  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/lily_old_photos_finale.jpeg" alt="服從性測試（倒敘）" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../polaroids/lily_old_photos_finale.jpeg" alt="服從性測試（倒敘） 拍立得照片" loading="lazy"></div></div></div></div>
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/lily_old_photos_finale.jpeg" alt="服從性測試（倒敘）" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/lily_old_photos_finale.jpeg" data-full="../polaroids/lily_old_photos_finale.jpeg" alt="服從性測試（倒敘） 拍立得照片" loading="lazy"></div></div></div></div>
 
   <div class="chapter-body">
     <p>如果 Lily 真的在整理二號車廂儲藏室時，翻到了那箱被 Max 封印在防潮箱最底層的 2013 年阿卡迪亞灣無碼黑歷史檔案，這隻已經完全進化的高智商小白兔，絕對不會像 Chloe 那樣作死地大聲嘲笑。</p>
@@ -206,7 +206,8 @@
       var group = groups[k];
       var slideIndex = group.length;
       group.push({
-        src: img.getAttribute('src'),
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
         caption: capNode ? capNode.textContent.trim() : '',
         href: link ? link.getAttribute('href') : ''
       });

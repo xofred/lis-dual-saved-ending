@@ -54,7 +54,7 @@ cd site_build
 python3 build.py
 ```
 
-需要 Python 3 + `markdown` 套件（`pip install markdown`）。跑完會在專案根目錄的 `docs/`（或你設定的 `OUT_DIR`）產生完整網站。
+需要 Python 3 + `markdown`、`Pillow` 兩個套件（`pip install markdown Pillow`）。`Pillow` 是建置期做圖片壓縮/縮圖用的，只在本機跑 `build.py` 時需要，不影響網站本身——`docs/` 產出後就是純靜態檔案，訪客的瀏覽器完全不會裝到它。跑完會在專案根目錄的 `docs/`（或你設定的 `OUT_DIR`）產生完整網站。
 
 **本地預覽,不要直接雙擊開 `docs/index.html`（`file://`）。** 瀏覽器基於安全限制,`file://` 開啟的頁面不允許用 `fetch()` 讀取「另一個」本機檔案——全文搜尋要抓 `search-index.json` 就會失敗（面板會提示「搜尋需要透過本地伺服器才能用」,不是網路或 Service Worker 的問題）；Service Worker 本身也完全不會在 `file://` 底下註冊(需要 https 或 localhost 這種安全情境),離線快取也就測不出效果。正確做法是起一個本地伺服器:
 
@@ -142,6 +142,15 @@ Journal/bedroom_lua_2.jpeg      ← 同一章的第 2 頁手帳,加 _2 _3... 後
 ### 資料夾位置
 
 素材放在專案根目錄的 `Images/`、`songs/`、`Polaroids/`、`Journal/` 底下就行（不是 `docs/` 裡面，`docs/` 是建置產物）。`build.py` 只會把「檔名對得上某章節 slug」的檔案複製進 `docs/images` `docs/songs` `docs/polaroids` `docs/journal`，跟任何章節都對不上的檔案會被跳過、不進 `docs/`，可以放心把素材原始檔（包含改名前的舊版本）都留在這幾個來源資料夾裡管理。
+
+### 圖片壓縮與縮圖（拍立得／手帳）
+
+素材原始檔常常是好幾 MB 一張（AI 繪圖、手機拍照都偏大），但實際顯示的地方——章節頁裡的小卡、拍立得相簿、手帳頁——CSS 顯示寬度最大也就 300px 左右，直接把原圖塞給瀏覽器等於白白浪費頻寬。`build.py` 建置時用 `Pillow` 做兩種處理：
+
+- **插圖**（`Images/`，讀者順順讀文章時直接看到的，沒有燈箱放大）：直接縮到長邊 1400px、覆蓋 `docs/images/` 裡的檔案，不另外留一份原圖。retina 螢幕上一樣銳利，檔案大小通常只剩原圖的 5%~10%。
+- **拍立得／手帳**（有燈箱放大功能）：原圖完整複製進 `docs/polaroids/`、`docs/journal/`（燈箱放大要用），另外縮一份長邊 720px 的縮圖到 `docs/thumbs/polaroids/`、`docs/thumbs/journal/`。章節頁的小卡跟兩個相簿頁的 `<img src>` 指向縮圖，`data-full` 屬性存原圖路徑；`LIGHTBOX` 那段 JS 打開放大檢視時優先讀 `data-full`，所以平常瀏覽走的是幾十 KB 的縮圖，點開才載入原始解析度。
+
+兩種尺寸、品質參數都寫在 `build.py` 最上面的 `IMAGE_MAX_DIM` / `THUMB_MAX_DIM` / `JPEG_QUALITY`，要調整縮圖銳利度或壓縮率改這幾個常數就好。所有圖片本來就用了原生 `loading="lazy"`，捲到附近瀏覽器才會真的發請求；縮圖把「每一張請求下載多少」也一併壓下來，兩者疊加後,一頁掛十幾張拍立得也不會拖垮載入。
 
 ### 全站歌單（左下角浮窗播放器）
 
