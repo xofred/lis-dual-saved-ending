@@ -276,6 +276,12 @@ SEASONS = [
 
 CN_NUM = "零一二三四五六七八九十"
 
+# 終端機警告色:只在真的接著終端機、且沒被 NO_COLOR 這個業界慣例環境變數
+# 關掉時才上色,避免輸出被重導向到檔案/log 時混進一堆看不懂的跳脫碼
+_USE_COLOR = sys.stdout.isatty() and not os.environ.get("NO_COLOR")
+WARN = "\033[1;93m" if _USE_COLOR else ""    # 粗體亮黃,警告用
+RESET = "\033[0m" if _USE_COLOR else ""
+
 
 def get_section(num, sections=SECTIONS):
     """依檔名編號找出章節所屬的篇章分區名。傳入該季的 sections list。"""
@@ -288,6 +294,18 @@ def get_section(num, sections=SECTIONS):
 def parse_chapter_num(filename):
     m = re.match(r"^(\d+)_", filename)
     return int(m.group(1)) if m else 0
+
+
+def find_duplicate_numbers(files):
+    """同一季資料夾裡,檔名數字前綴重複的那些檔案(比如上次手誤的兩個 110_)。
+    回傳 {編號: [檔名, ...]},只收真的重複(同一編號 ≥ 2 個檔案)的項目;
+    不同季各自從頭編號、互不相干,所以呼叫方要逐季分開檢查,不能整批混著查。
+    這不影響任何排序或連結是否正確(檔名 slug 才是配對依據),純粹是編號
+    本身有歧義、容易讓人誤會兩篇故事的先後順序,所以只警告、不擋 build。"""
+    by_num = {}
+    for f in files:
+        by_num.setdefault(parse_chapter_num(f), []).append(f)
+    return {n: fs for n, fs in by_num.items() if len(fs) > 1}
 
 
 def extract_title(md_text):
@@ -407,6 +425,18 @@ if __name__ == "__main__":
         s["files"] = list_md(s["src"])
     print("、".join(f'第{CN_NUM[s["num"]]}季 {len(s["files"])} 篇' for s in SEASONS)
           + f',共 {sum(len(s["files"]) for s in SEASONS)} 個章節檔案')
+
+    # 重複編號警告:同一季裡兩個檔案共用同一個數字前綴(通常是手誤,比如
+    # 複製舊檔案改標題時忘記改編號)。這不影響排序或素材配對是否正確
+    # (slug 才是真正的配對依據),也不會讓 build 失敗,只是編號本身有歧義、
+    # 容易搞錯故事的先後順序,所以印出來提醒,但繼續往下建置。
+    for s in SEASONS:
+        dupes = find_duplicate_numbers(s["files"])
+        if dupes:
+            print(f'{WARN}⚠ 警告:第{CN_NUM[s["num"]]}季有重複的章節編號,'
+                  f'不影響建置,但可能弄錯故事順序:{RESET}')
+            for num, fs in sorted(dupes.items()):
+                print(f'{WARN}    編號 {num}:{"、".join(fs)}{RESET}')
 
     # 章節 slug 集合,用來過濾素材:只有檔名(去副檔名)對得上某章節的
     # 圖片/音樂才會被複製進 docs/,資料夾裡其餘不相干的檔案一律跳過
