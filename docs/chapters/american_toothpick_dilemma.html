@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>美式牙籤困境 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站361篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 141 章 · 家族信託風暴</div>
+  <h1>美式牙籤困境</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/american_toothpick_dilemma.jpeg" alt="美式牙籤困境" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <p>在薯條和夾著厚實培根的芝士漢堡下肚後，一個極度破壞約會浪漫氣氛的美式物理難題出現了。</p>
+<p>一小塊極其頑固的烤培根碎，死死地卡在了 Max 的右側臼齒牙縫裡。</p>
+<p>在美國的休閒餐廳或汽車餐廳裡，餐桌上通常是絕對找不到牙籤盅的——在美國文化中，當眾在餐桌上剔牙被視為極度不禮貌的行為，因此餐廳只會偶爾在結帳櫃檯放一些包著透明玻璃紙的薄荷味牙籤。</p>
+<p>沒有了手機可以掩飾尷尬，也沒有牙籤可以實施物理爆破，Max 只能被迫開始了一場極度扭曲的口腔內部舌頭體操。</p>
+<h2>一、文青的舌頭體操</h2>
+<p>剛才還沉浸在浪漫濾鏡裡的 Max，此刻緊閉著嘴唇，右邊的腮幫子一鼓一鼓的。她正試圖用舌尖去瘋狂頂那個該死的培根碎，同時利用口腔內的負壓，發出極其微弱的嘖嘖吸吮聲。</p>
+<p>因為用力過猛，她的五官開始不受控制地跟著用力，時而呲牙，時而咧嘴，眉毛一高一低，看起來就像是面部神經正在經歷某種短路。</p>
+<p>坐在對面的 Chloe 原本正單手托著下巴欣賞自家攝影師，看著看著，忍不住挑起了眉毛。</p>
+<p>「Maxine，妳現在的面部表情非常狂野。」Chloe 壞笑著用吸管攪拌著奶昔，「妳這是在對我發送某種前衛的求偶信號，還是妳終於因為吃了太多酸黃瓜而導致大腦神經抽筋了？」</p>
+<p>「唔……卡度了……」Max 閉著嘴含糊不清地嘟囔，臉漲得通紅，手指指了指自己的右臉頰，「該死的培根。」</p>
+<h2>二、街頭霸王的小拇指解法</h2>
+<p>Chloe 毫不留情地爆笑出聲。身為一個在阿卡迪亞灣街頭混大的龐克太妹，Chloe 字典裡根本沒有餐桌禮儀這個詞。</p>
+<p>「看好了，書呆子，教妳一招街頭生存法則。」Chloe 伸出自己帶著黑色指甲油的小拇指，極度囂張且毫不避諱地直接伸進了自己的嘴裡，在牙齒上刮了一下，然後瀟灑地在紙巾上擦了擦，「最原始的工具，零成本，無延遲。試試看？」</p>
+<p>「嘔，Chloe，這太粗魯了！而且我的手剛抓過薯條！」Max 滿臉嫌棄地拒絕了這個小拇指解法，繼續用舌頭和那塊培根進行著絕望的殊死搏鬥。</p>
+<h2>三、終極武器：牙線棒</h2>
+<p>眼看著 Max 的舌頭快要抽筋了，她終於放棄了物理抗爭，嘆了口氣，拉開了自己那個總是亂七八糟的帆布包。</p>
+<p>在美國，雖然大家不在餐桌上用牙籤，但美國人對牙線有著一種近乎狂熱的執念。</p>
+<p>Max 的手越過底片盒、備用電池和幾張皺巴巴的收據，終於在包包的最底層，摸出了一個極具美國中產階級特色的終極武器——一根帶有薄荷味的塑膠牙線棒。</p>
+<p>「哈，我就知道妳這個好學生包裡一定有這玩意兒。」Chloe 靠在沙發上，抱著雙臂看戲，「那麼，Caulfield 小姐，妳是打算現在就在餐桌上表演牙線切割術，還是要遵守妳那可笑的社交禮儀？」</p>
+<p>Max 緊緊攥著那根牙線棒，看了一眼正在擦隔壁桌子的服務生，社交恐懼症瞬間發作。在美國人的觀念裡，用小拇指摳牙縫雖然粗魯但還算隨性，但如果正兒八經地拿出牙線在餐桌上剔牙，那簡直跟在餐廳裡剪指甲一樣讓人感到生理不適。</p>
+<p>「我……我去一下洗手間！」Max 抓起牙線棒，像一隻被踩了尾巴的貓一樣，紅著臉從卡座上彈了起來，朝著走廊盡頭的廁所狂奔而去。</p>
+<p>看著 Max 落荒而逃的背影，Chloe 在座位上笑得差點把奶昔打翻。</p>
+<p>「我們昨晚才剛炸了兩台機器狗，結果妳現在卻不敢在一個端盤子的小哥面前用牙線？！」Chloe 對著 Max 的背影大喊，引得周圍幾個卡座的客人紛紛側目。</p>
+<h2>四、結帳台的老派救贖</h2>
+<p>三分鐘後，解決了牙縫危機的 Max 感覺重獲新生，輕鬆地走回了座位。</p>
+<p>「搞定了？」Chloe 挑眉。</p>
+<p>「搞定了。薄荷味的勝利。」Max 滿意地拿起可樂喝了一口。</p>
+<p>當兩人吃飽喝足，走到門口的櫃檯結帳時，Chloe 隨手從收銀機旁的一個小玻璃杯裡，抽出了兩根包著透明玻璃紙的薄荷木牙籤——這是美式復古餐廳最後的倔強。</p>
+<p>她用牙齒咬開玻璃紙，將一根牙籤叼在嘴裡，痞氣十足地靠在櫃檯上，然後將另一根扔給了 Max。</p>
+<p>「喏，美式餐廳的飯後甜點。」Chloe 叼著牙籤，含糊不清地說，「留著吧，下次妳再吃培根的時候，就不用跑到廁所裡去了。」</p>
+<p>Max 拿著那根包裝簡陋的牙籤，看著 Chloe 叼著牙籤、戴上墨鏡推開餐廳玻璃門的囂張背影，無奈地笑了笑。她把牙籤塞進口袋，快步跟了上去，重新回到了那輛屬於她們的、充滿了引擎轟鳴與廢土浪漫的重裝皮卡上。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="absolute_isolation_time.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="rooftop_dark_history.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>
