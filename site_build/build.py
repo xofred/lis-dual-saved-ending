@@ -292,16 +292,22 @@ def get_section(num, sections=SECTIONS):
 
 
 def parse_chapter_num(filename):
-    m = re.match(r"^(\d+)_", filename)
-    return int(m.group(1)) if m else 0
+    """回傳 (編號, 插入字母後綴) 的 tuple。檔名可以在數字後面加一個小寫字母,
+    用來在不影響後面所有編號的情況下,在某個編號的位置插入一篇故事——比如
+    002a_xxx.md、002b_xxx.md,兩篇都算「第 2 章」這個位置,靠字母決定先後。
+    沒有字母後綴就回傳空字串,行為跟以前完全一樣。"""
+    m = re.match(r"^(\d+)([a-z]?)_", filename)
+    return (int(m.group(1)), m.group(2)) if m else (0, "")
 
 
 def find_duplicate_numbers(files):
-    """同一季資料夾裡,檔名數字前綴重複的那些檔案(比如上次手誤的兩個 110_)。
-    回傳 {編號: [檔名, ...]},只收真的重複(同一編號 ≥ 2 個檔案)的項目;
-    不同季各自從頭編號、互不相干,所以呼叫方要逐季分開檢查,不能整批混著查。
-    這不影響任何排序或連結是否正確(檔名 slug 才是配對依據),純粹是編號
-    本身有歧義、容易讓人誤會兩篇故事的先後順序,所以只警告、不擋 build。"""
+    """同一季資料夾裡,檔名數字前綴(含插入字母後綴)重複的那些檔案(比如
+    手誤取了兩個一模一樣的 110_,或忘記給插入章節加字母後綴)。回傳
+    {(編號, 後綴): [檔名, ...]},只收真的重複(同一組合 ≥ 2 個檔案)的項目;
+    002a 和 002b 是刻意的不同組合,不會被當成重複。不同季各自從頭編號、
+    互不相干,所以呼叫方要逐季分開檢查,不能整批混著查。這不影響任何排序
+    或連結是否正確(檔名 slug 才是配對依據),純粹是編號本身有歧義、容易
+    讓人誤會兩篇故事的先後順序,所以只警告、不擋 build。"""
     by_num = {}
     for f in files:
         by_num.setdefault(parse_chapter_num(f), []).append(f)
@@ -317,8 +323,8 @@ def extract_title(md_text):
 
 
 def slugify(filename):
-    # 去掉數字前綴與副檔名,作為輸出檔名 slug
-    base = re.sub(r"^\d+_", "", filename)
+    # 去掉數字前綴(可能帶一個插入用的字母後綴,比如 002a_)與副檔名,作為輸出檔名 slug
+    base = re.sub(r"^\d+[a-z]?_", "", filename)
     base = re.sub(r"\.md$", "", base)
     return base
 
@@ -435,8 +441,8 @@ if __name__ == "__main__":
         if dupes:
             print(f'{WARN}⚠ 警告:第{CN_NUM[s["num"]]}季有重複的章節編號,'
                   f'不影響建置,但可能弄錯故事順序:{RESET}')
-            for num, fs in sorted(dupes.items()):
-                print(f'{WARN}    編號 {num}:{"、".join(fs)}{RESET}')
+            for (n, suffix), fs in sorted(dupes.items()):
+                print(f'{WARN}    編號 {n}{suffix}:{"、".join(fs)}{RESET}')
 
     # 章節 slug 集合,用來過濾素材:只有檔名(去副檔名)對得上某章節的
     # 圖片/音樂才會被複製進 docs/,資料夾裡其餘不相干的檔案一律跳過
@@ -599,11 +605,12 @@ if __name__ == "__main__":
     chapters = []  # 收集每章 metadata,供首頁與導覽使用
     for s in SEASONS:
         for f in s["files"]:
-            num = parse_chapter_num(f)
+            num, num_suffix = parse_chapter_num(f)
             text = raw_texts[(s["num"], f)]  # 前面掃危險 HTML 時已經讀過,直接重用
             slug = slugify(f)
             chapters.append({
                 "num": num,
+                "num_suffix": num_suffix,
                 "season": s["num"],
                 "title": extract_title(text),
                 "slug": slug,
@@ -615,8 +622,9 @@ if __name__ == "__main__":
                 "journal_files": find_journal_pages(slug, JOURNAL_DIR, IMAGE_EXTS),
             })
 
-    # 閱讀順序:一季一季來,每季內依檔名編號
-    chapters.sort(key=lambda c: (c["season"], c["num"]))
+    # 閱讀順序:一季一季來,每季內依檔名編號,同編號再依插入字母後綴排
+    # (沒有後綴排最前面,002 在 002a 前面;002a 在 002b 前面)
+    chapters.sort(key=lambda c: (c["season"], c["num"], c["num_suffix"]))
 
     # 播放器封面圖(給系統鎖屏 / 控制中心 / AirPods 的 Media Session 用):
     # 優先該章第一張拍立得,其次插圖,兩者都沒有就用第一季第一章的插圖
@@ -740,9 +748,9 @@ if __name__ == "__main__":
         if ch["num"] == 0:  # 000_ 檔名當序章處理
             chapter_meta = f'{season_prefix}序章 · {ch["section"]}'
         elif ch["season"] == 1:
-            chapter_meta = f'第 {ch["num"]:03d} 章 · {ch["section"]}'
+            chapter_meta = f'第 {ch["num"]:03d}{ch["num_suffix"]} 章 · {ch["section"]}'
         else:
-            chapter_meta = f'{season_prefix}第 {ch["num"]:02d} 章 · {ch["section"]}'
+            chapter_meta = f'{season_prefix}第 {ch["num"]:02d}{ch["num_suffix"]} 章 · {ch["section"]}'
 
         search_entries.append({
             "title": ch["title"], "slug": ch["slug"], "meta": chapter_meta,
@@ -789,9 +797,9 @@ if __name__ == "__main__":
         if c["num"] == 0:
             num = "序章"
         elif c["season"] == 1:
-            num = f'{c["num"]:03d}'
+            num = f'{c["num"]:03d}{c["num_suffix"]}'
         else:
-            num = f'{c["num"]:02d}'
+            num = f'{c["num"]:02d}{c["num_suffix"]}'
         num_label = num if c["season"] == 1 else f'S{c["season"]} · {num}'
         return (
             f'<a class="chapter-card" href="chapters/{c["slug"]}.html">'
