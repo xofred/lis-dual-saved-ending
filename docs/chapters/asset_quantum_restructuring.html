@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資產的量子態重構 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站373篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 158 章 · 家族信託風暴</div>
+  <h1>資產的量子態重構</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/asset_quantum_restructuring.jpeg" alt="資產的量子態重構" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/asset_quantum_restructuring.jpeg" data-full="../polaroids/asset_quantum_restructuring.jpeg" alt="資產的量子態重構 拍立得照片" loading="lazy"></div></div></div></div>
+
+  <div class="chapter-body">
+    <p>二號車廂的寧靜，被一陣高跟鞋急促踩踏金屬地板的聲音打破了。</p>
+<p>Victoria Chase，穿著一身剪裁得體的風衣，手裡攥著幾份加州特許經營稅務局的信函和家族信託的內部警告，氣急敗壞地推開了車廂門。</p>
+<h2>一、切香腸戰術</h2>
+<p>「瘋了！薩克拉門托的那群政客全瘋了！」Victoria 把那疊文件狠狠摔在露營桌上，精緻的妝容也掩蓋不住她的焦慮。「我爸媽的私人財富管理團隊今早發了紅色預警。加州議會正在秘密起草一份超級富豪財產稅的初步草案，他們打算對未實現的資本利得和固定資產強行徵稅！家族智囊團說，這是切香腸戰術——先用百分之一試水溫，過幾年絕對會飆升到百分之五以上！我爸甚至已經在看邁阿密和內華達的別墅了，他想逼我關掉在洛杉磯剛籌備好的獨立畫廊，把資產全部轉移到特拉華州去！」</p>
+<p>正癱在沙發上打電動的 Chloe 吹了個響亮的口哨：「哦呼，加州終於要對你們這些吸血的百分之一資本家下刀了？太棒了，我這就去開瓶啤酒慶祝一下。納稅吧，Chase 大小姐，這叫財富重分配。」</p>
+<p>「妳閉嘴，Chloe！妳懂什麼叫流動性危機嗎？」Victoria 氣得渾身發抖，「畫廊的藝術品估值是虛的，但我得拿真金白銀去交那個見鬼的財產稅！如果他們按最高估值徵稅，我每年得白白交出去幾百萬！我才剛想擺脫家族的陰影獨立創業，這簡直是把我的畫廊扼殺在搖籃裡！而且如果這波稅制真的過了，連帶我們車廂工坊這邊的投資部位也會被波及，我當初投進來的那筆錢，可不是讓政府拿去分贓的！」</p>
+<p>「那妳學學那個賣顯卡的黃仁勳啊。」Chloe 頭也不抬地繼續按著手把，「我看新聞說他大方表態要繳，預計要繳八十億美金,反正他公司現金流那麼猛，繳完再賺回來不就好了，妳這麼緊張幹嘛？」</p>
+<p>「妳這是拿蘋果比橘子，Chloe。」Victoria 沒好氣地瞪了她一眼，語氣裡帶著一種被外行冒犯到的不耐煩，「黃仁勳的公司每個季度都在印鈔票，晶片賣出去就是實打實的現金入帳，繳完稅隔幾個月現金流又補回來了，那叫『富人的從容』。但我的畫廊呢？藝術品的估值是紙上富貴，商業地產更是死錢，我沒有一條每季度穩定噴現金的產線可以填補這個窟窿！如果按最高估值徵稅，我得真的去賤賣手裡的畫作或者抵押地產才能湊出稅款，這叫『資產富有、現金貧窮』，跟晶片公司的商業模式根本是兩個宇宙的東西！」</p>
+<p>Chloe 被說得一愣，摸了摸鼻子，識趣地閉上了嘴巴，重新專心打起了遊戲。</p>
+<h2>二、家人的出手</h2>
+<p>「Victoria 學姐，請先喝杯洋甘菊茶，這有助於降低皮質醇。」</p>
+<p>一雙蒼白纖細的小手遞過來一個精緻的骨瓷茶杯。Lily 穿著她那件萬年不變的米色針織衫，圓框眼鏡後的眼神平靜得像是一潭死水。她優雅地拿起桌上那疊文件，一目十行地掃過那些複雜的稅務預警。</p>
+<p>「嗯，非常典型的漸進式剝奪模型。」Lily 推了推眼鏡，「加州的財政赤字已經到了臨界點。從幾年前開始提高最高邊際稅率，到後來的嚴格審計，再到您提到的這個未來的超級富豪稅草案……這確實是一場謀劃已久的切香腸戰術。」</p>
+<p>Victoria 緊緊握著茶杯，指關節發白：「連 Peter Thiel 都已經把家族投資公司遷去邁阿密了！Lily，妳說我該怎麼辦？我不想去佛羅里達那種充滿了暴發戶和短吻鱷的鬼地方開畫廊！但我也不想破產，更不想連累車廂工坊的財務！」</p>
+<p>Chloe 在旁邊冷笑：「這就是有錢人的煩惱嗎？」</p>
+<p>「Chloe 學姐，Victoria 學姐的畫廊出了問題，我們整個工坊的資金部位也會受影響，這不是別人的閒事。」Lily 溫柔卻堅定地制止了 Chloe，然後轉向 Victoria，嘴角勾起一抹深不可測的微笑，「Victoria 學姐，既然妳是我們車廂工坊的合夥人，這件事我當然要幫妳一起處理。逃跑，是那些只懂二進位程式碼的矽谷暴發戶才會做的蠢事。真正的老錢和行政黑魔法師，從來不懼怕稅法。我們只會利用稅法，把它變成護城河。」</p>
+<p>Victoria 愣住了：「妳……妳有辦法讓我的畫廊留在加州，還能避開這個見鬼的財產稅？」</p>
+<p>「不是避稅，學姐，這兩個字在合規領域是非常危險的。」Lily 豎起一根手指，糾正道，「我們要做的是資產的量子態重構。」</p>
+<h2>三、三步走的護城河</h2>
+<p>Lily 打開筆記本電腦，劈裡啪啦地敲擊著鍵盤，屏幕上出現了一個複雜的實體架構圖。</p>
+<p>「第一步，切斷物理存在與法律所有權的連結。」Lily 指著屏幕：「我們立刻在南達科他州為您設立一個不可撤銷朝代信託。南達科他州沒有州所得稅、沒有資本利得稅，更重要的是，它有全美最強的資產保護法。您的洛杉磯畫廊裡的所有藝術品，法律所有權全部轉移到這個信託名下。」</p>
+<p>Victoria 皺起眉頭：「那我的畫廊不就成了一個空殼？」</p>
+<p>「沒錯，一個極度貧窮的空殼。」Lily 甜美地笑了，「您在加州的畫廊，將不再擁有這些畫作。它只是以每年一美元的價格，從南達科他州的信託那裡借展這些藝術品。當加州稅務局的人帶著計算器來徵收財產稅時，您只需攤開手告訴他們：抱歉，這裡的畫我一幅都買不起，我只是個熱愛藝術的佈展人。」</p>
+<p>坐在沙發上的 Chloe 手把都掉到了地上，目瞪口呆地聽著這番喪心病狂的操作。</p>
+<p>「第二步，對抗估值剝削。」Lily 繼續說道：「藝術品最怕的就是被稅務局惡意高估。為了應對未來的富豪稅，我們將為您的畫廊註冊一個非營利性附屬基金會，名為『加州邊緣青年藝術啟蒙計畫』——當然，主理人還是您。」</p>
+<p>「這有什麼用？」Victoria 完全被帶入了 Lily 的節奏。</p>
+<p>「如果稅務局把某幅畫估值一百萬美元，試圖向您徵稅，您就立刻將這幅畫的所有權捐贈給您自己的非營利基金會。這幅畫不僅不用交財產稅，還能為您產生一百萬美元的慈善抵稅額度，用來抵消您商業地產的稅單。」Lily 喝了一口熱牛奶，平靜地說出最殘忍的資本運作：「而這幅畫，從頭到尾都沒有離開過您畫廊的牆壁。它只是在法律意義上，從Victoria的私人財產，變成了Victoria管理的公共慈善財產。」</p>
+<p>Victoria 的眼睛越睜越大，呼吸開始急促。她看著 Lily，就像在看一個披著人皮的惡魔。</p>
+<p>「第三步，商業地產的降維打擊。」Lily 推了推眼鏡，「您父母擔心商業地產被徵收重稅。很簡單，我們重新定義這塊地產。在畫廊的頂樓安裝幾塊次世代商用太陽能實驗板，在後院種一片符合加州本土生態保護目錄的稀有苔蘚。然後，我們向市政府申請綠色生態與文化雙重豁免區。這樣一來，您的商業地產在稅法上就變成了環保與文化基礎設施。他們不僅不能向您收富豪稅，甚至還得每年給您發一筆城市文化生態補貼。」</p>
+<h2>四、身分的重塑</h2>
+<p>車廂裡死一般的寂靜。</p>
+<p>Max 默默地舉起拍立得，咔嚓一聲，拍下了 Victoria 那副世界觀被徹底重塑的震撼表情。</p>
+<p>「所以……」Victoria 嚥了一口唾沫，聲音微微發抖，「當 Larry Page 和 Sergey Brin 為了躲避這波稅制，狼狽地把家搬到邁阿密，還要被媒體痛罵是逃稅的無良富豪時……」</p>
+<p>「而您，Victoria 學姐，」Lily 乖巧地接過話頭，雙手交疊在膝蓋上，「將繼續優雅地喝著洛杉磯的冷萃咖啡，站在您的畫廊裡。您的身分將不再是吸血的億萬富翁繼承人，而是將畢生財富捐獻給信託、投身於環保與青年藝術教育的偉大慈善家。加州的媒體會為您唱讚歌，政客會為您頒發市民勳章，而您的實際控制資產，一分錢都不會少。」</p>
+<p>Lily 抬起頭，那雙純潔無瑕的眼睛裡閃爍著行政黑魔法的終極奧義：「切香腸戰術是很可怕。但如果我們把香腸變成了國家級受保護的素食主義胡蘿蔔，他們連刀都找不到在哪裡下。」</p>
+<p>「砰！」Chloe 狠狠地用頭撞了一下前面的茶几，發出痛苦的呻吟：「我恨這個世界。我真的恨這個世界。為什麼一個十九歲的書呆子，比華爾街所有的吸血鬼加起來還要邪惡？！」</p>
+<h2>五、共同守護的資產</h2>
+<p>Victoria 則完全無視了 Chloe。她踩著高跟鞋，快步走到 Lily 面前，一把抓住 Lily 蒼白的小手，眼神中燃燒著感激與狂熱交織的光芒。</p>
+<p>「Lily。」Victoria 激動得聲音都在顫抖，「我父母的那個家族智囊團，全是一群只會逃跑的白癡。從今天起，我畫廊的所有法務、稅務和信託架構，我想全權交給妳來處理！」</p>
+<p>「這是應該的，Victoria 學姐。」Lily 依然保持著那副純良的微笑，「妳是這個車廂工坊最重要的資金支柱，保護妳的資產，就是保護我們大家共同的家。這件事不需要什麼正式合約，我這就開始著手準備信託和基金會的文件，明天就能給妳初稿。」</p>
+<p>看著 Lily 轉身認真地開始整理架構圖，準備熬夜寫文件，Max 默默地將相機放下。</p>
+<p>她轉過頭，看著還在抱頭痛哭、信仰崩塌的 Chloe，輕聲說道：「Chloe，妳知道最可怕的是什麼嗎？」</p>
+<p>「什麼？」Chloe 絕望地問。</p>
+<p>Max 看著正在一絲不苟地畫著架構圖的 Lily，打了個冷顫：「那些億萬富翁以為自己用搬家打敗了加州政府……但 Lily 甚至還沒出新手村，就已經在把加州政府和億萬富翁一起放在她的試算表裡，當作提供免費太陽能板和營運資金的NPC了。」</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="motivation_displacement.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a class="disabled">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>
