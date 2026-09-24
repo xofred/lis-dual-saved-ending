@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>破次元的Cosplay神話 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站388篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 159 章 · 吊床、雪茄與畢業典禮的閒散日子</div>
+  <h1>破次元的Cosplay神話</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/pax_west_cosplay.jpeg" alt="破次元的Cosplay神話" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/pax_west_cosplay.jpeg" data-full="../polaroids/pax_west_cosplay.jpeg" alt="破次元的Cosplay神話 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: -2deg"><img src="../thumbs/polaroids/pax_west_cosplay_2.jpeg" data-full="../polaroids/pax_west_cosplay_2.jpeg" alt="破次元的Cosplay神話 拍立得照片" loading="lazy"></div></div></div></div>
+
+  <div class="chapter-body">
+    <p>西雅圖市中心的九月初，PAX West 遊戲展的狂熱氣氛席捲了整個街區。二號車廂小分隊原本只是陪 Victoria 去市中心的一家私人美術館看預展，卻無可避免地被迫穿過了華盛頓州會議中心外那片擠滿了精靈耳、巨型機甲和二次元水手服的 Cosplay 廣場。</p>
+<p>這四個自帶極強視覺衝擊力的實體存在，走進這片區域的瞬間，就等於把一滴沸水滴進了熱油鍋。</p>
+<h2>一、神級降臨</h2>
+<p>最先發現她們的，是一個扛著長焦鏡頭的展會街拍攝影師。他原本正在拍一組其他遊戲的 Coser，餘光掃過人群時，鏡頭猛地定住了。</p>
+<p>「老天……這組《奇異人生》的 Cosplay 也太硬核了吧？！」</p>
+<p>隨著攝影師的一聲驚呼，周圍幾個正坐著休息的玩家和 Coser 齊刷刷地轉過頭。在他們的視角裡，這簡直是打破次元壁的神級降臨：那個藍頭髮女孩不僅髮色自然到沒有一絲假髮的反光，手臂上的刺青圖案精確到毫米，甚至連她那件破洞工裝背心上沾著的機油污漬，都透著一股無可挑剔的真實工業味。而她旁邊那個短髮女孩，脖子上掛著一台磨損得恰到好處的真實復古拍立得，正用一種極度社恐且無辜的眼神看著人群。</p>
+<p>最絕的是那個穿著卡其色風衣的金髮女孩，那種骨子裡透出來的傲慢氣場，簡直是教科書級別的「女王蜂」還原！</p>
+<p>不到三十秒，她們就被十幾個激動的玩家和攝影師團團包圍了。</p>
+<p>「打擾一下！妳們的 Cosplay 實在太完美了！可以拍張照嗎？」一個男生激動得聲音都在發抖，「尤其是 Chloe！天啊，妳的紋身是怎麼做到這麼逼真的？貼紙在哪買的？！」</p>
+<p>Chloe 愣了半秒，隨即她骨子裡那股唯恐天下不亂的街頭叛逆基因瞬間覺醒。她一把將原本想往後躲的 Max 攬進懷裡，對著鏡頭挑起一個極其囂張的招牌壞笑，甚至順手比了個中指：「貼紙？小子，這可是貨真價實的針頭和墨水。想拍照？可以，十塊美金一次，只收現金！」</p>
+<p>人群爆發出一陣狂熱的歡呼：「太屌了！連這種在漫展上強行收保護費的流氓性格都完美還原！這就是體驗派演技啊！」</p>
+<h2>二、名媛的意外爆紅</h2>
+<p>站在一旁的 Victoria 則完全陷入了名媛的狂暴狀態。她嫌惡地看著一個試圖靠近觀察她衣料的攝影師，本能地用那把昂貴的長柄雨傘在地上重重一頓，眉頭皺得能夾死一隻蒼蠅：「退後，你們這群把聚酯纖維穿在身上的書呆子！我身上這件是純羊絨定制風衣，不是你們從網路上花三十美金買來的廉價道具服！誰敢用你們那沾滿廉價披薩油脂的手指碰我一下，我的律師會讓你們下半輩子都在賠償金裡度過！」</p>
+<p>這段毫不留情、極度刻薄的階級霸凌式發言，非但沒有惹怒這群玩家，反而讓現場的氣氛達到了最高潮。</p>
+<p>「聽到了嗎！她罵我們是書呆子！」一個女孩激動地捂住嘴，瘋狂按動手機快門，「這簡直是把 Victoria Chase 的靈魂演活了！那種看垃圾一樣的眼神太還原了！女王請再罵我一句！」</p>
+<p>Victoria 呆住了。她這輩子面對過無數的商業對手和政客，但從來沒見過有人在被她狠狠羞辱後，居然會露出這種宛如朝聖般狂熱且幸福的表情。名媛的大腦在這群二次元宅文化的衝擊下，出現了短暫的過載當機。</p>
+<p>而一向最溫柔的 Kate，則被幾個同樣 Cos 成 Blackwell 學院學生的女孩團團圍住。她們看著 Kate 那純天然的雙麻花辮和毫無化妝痕跡的清透皮膚，驚訝地詢問她的護膚品和假髮連結。Kate 只能無措地雙手交疊，用最溫柔的語氣解釋：「這……這不是假髮呀，我每天早上自己編的。而且我只是用了普通的保濕霜……」</p>
+<p>玩家們再次驚呼：「連這種天使般柔弱又無辜的語氣都拿捏了！她甚至自帶聖光！」</p>
+<h2>三、網路爆紅與私藏的滿足</h2>
+<p>當晚，這場偶遇就在社群平台上徹底引爆了。帶有相關標籤的帖子迅速衝上了熱門。點讚最高的一條短影音，正是 Victoria 一臉嫌棄地用雨傘指著鏡頭，而 Chloe 在背後笑得前仰後合、Max 躲在相機後面偷拍的畫面。</p>
+<p>回到二號車廂後，四個人看著手機上瘋狂跳動的幾十萬點讚和轉發，陷入了詭異的沉默。</p>
+<p>Chloe 躺在沙發上，笑得差點把手裡的櫻桃可樂噴出來：「哈哈哈哈！Caulfield，妳看到沒有？有人在評論區說妳的相機是斥巨資打造的高仿道具！還有，大富婆，恭喜妳成功收穫了三萬個喜歡被妳辱罵的互聯網奴隸！」</p>
+<p>Max 無奈地推了推眼鏡，看著屏幕上自己那張驚慌失措的抓拍：「我現在比較擔心的是，如果我們真的是某個平行宇宙的遊戲角色，我們今天這種行為算不算是打破了第四面牆，會不會引發時空崩塌？」</p>
+<p>Victoria 則坐在中島吧台前，優雅地喝了一口 Kate 剛泡好的洋甘菊茶。她雖然嘴上依然冷哼著「一群缺乏現實社交的網絡游民」，但手指卻極其誠實且迅速地，將那條誇她擁有頂級貴族氣質與無瑕骨相的推文，默默點了一個愛心，並截圖保存在了手機最深處的隱藏相冊裡。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="asset_quantum_restructuring.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="flat_cola.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>
