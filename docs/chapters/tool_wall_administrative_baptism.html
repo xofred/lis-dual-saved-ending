@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工具牆的行政洗禮（倒敘） · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站400篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 184 章 · 吊床、雪茄與畢業典禮的閒散日子</div>
+  <h1>工具牆的行政洗禮（倒敘）</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/tool_wall_administrative_baptism.jpg" alt="工具牆的行政洗禮（倒敘）" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <p>波特蘭的週末，青年機械教室的二號車廂門戶大開，陽光將門口的波士頓腎蕨照得生機盎然。</p>
+<p>自從 Miles 也考上了波特蘭社區學院之後，他大部分時間都待在校區裡上課，只有週末才會回到工坊，繼續跟著 Chloe 打下手、學點真本事。今天正好是這樣一個難得的週末。</p>
+<p>Miles 穿著一件沾了幾點防銹底漆的衛衣，正蹲在車廂外的空地上，專心地用角磨機給一塊廢棄鋼板除銹，準備用來做新的教學模具。</p>
+<p>這時，一個穿著米色針織衫、戴著圓框眼鏡的年輕女孩，手裡抱著一個標著「IKEA」的巨大紙箱，吃力地走進了鐵道花園。</p>
+<h2>一、露天作業的合規疑慮</h2>
+<p>十八歲的 Lily 剛剛在波特蘭市區完成了一次大採購。她按照那張精確到分鐘的週末採購物資清單，買齊了所有的分類收納盒和標籤機耗材，準備將她那個充滿強迫症的宿舍收納系統，強行推廣到這座由 Chloe 主導的混亂工坊裡。</p>
+<p>「請問……」Lily 站在二號車廂門口，推了推因為出汗而滑落的眼鏡，看著滿地飛濺的火星和金屬碎屑，眉頭立刻皺了起來，「Chloe 學姐在嗎？另外，根據職業安全與健康標準，您目前的除銹作業沒有設置隔離擋板，飛濺的金屬微粒可能會對三公尺內的行人造成呼吸道危害。」</p>
+<p>角磨機的聲音戛然而止。</p>
+<p>Miles 摘下防塵面罩，愣愣地看著這個突然出現、一本正經背誦安全法規的女孩。他在街頭見過各種各樣的人，也見過 Chloe 這種狂野的暴力技工，但他從來沒見過有人會對著一個除銹的學徒，嚴肅地討論隔離擋板。</p>
+<p>「呃……抱歉。」Miles 趕緊放下角磨機，拍了拍身上的灰塵，「Chloe 姐去五金店買氬弧焊的氣瓶了。我是 Miles，這裡的助教。妳是……？」</p>
+<p>「我是 Lily，PNCA 的大一新生。」Lily 規矩地鞠了個躬，然後將那個巨大的紙箱放在地上，「我是來幫工坊進行物資分類與合規化建檔的。」</p>
+<p>Miles 眨了眨眼，看著紙箱裡那一堆花花綠綠的收納盒和標籤紙，突然有種不祥的預感。</p>
+<h2>二、慘無人道的行政洗禮</h2>
+<p>半個小時後，當 Chloe 扛著氣瓶回到工坊時，她看到了讓她目瞪口呆的一幕。</p>
+<p>她引以為傲的、那面充滿了街頭隨性美學的冷軋鋼工具牆，此刻正經歷著一場慘無人道的行政洗禮。</p>
+<p>Lily 站在一把小折疊梯上，正用一台標籤機，給每一把扳手、每一把管鉗，甚至每一顆螺絲釘，貼上帶有二維碼和編號的標籤。而身強體壯的 Miles，則被 Lily 指揮得像個陀螺一樣，在各個工具箱之間來回奔波。</p>
+<p>「Miles 前輩，請將這把十四毫米的開口扳手歸類到B-3號收納區，並在系統中登記其磨損狀態。」Lily 軟糯的聲音裡透著一種不容置疑的秩序感，「還有，我發現您剛才將八號螺栓和十號螺栓混放在了同一個抽屜裡。這在工業生產中會導致零點五百分比的裝配錯誤率，請立刻進行人工分揀。」</p>
+<p>「好的……馬上分揀。」Miles 滿頭大汗，手裡拿著一堆螺絲，欲哭無淚。他想起了之前 Victoria 坐在藤椅上，用綠色激光筆指揮他把螺栓放進右側第三個抽屜時的情景。當時他覺得 Victoria 的動線規劃很流暢；但現在，面對 Lily 這個將收納精確到二維碼的合規魔王，Miles 覺得自己彷彿被困在了一個巨大的試算表裡，連呼吸都要遵守單雙號。</p>
+<h2>三、老娘的扳手</h2>
+<p>「喂喂喂！大一新生！妳在對老娘的工具牆幹什麼？！」Chloe 扔下氣瓶，衝了過去，「那是我的扳手！妳把它們貼得像超市裡的打折衛生紙一樣是想怎樣？！」</p>
+<p>Lily 從梯子上轉過頭，無辜地推了推眼鏡。</p>
+<p>「Chloe 學姐，這叫固定資產的數位化生命週期管理。我發現您之前的工具擺放完全基於隨機直覺，這會導致每次尋找特定工具時浪費平均十二點五秒的時間。經過我的重新編碼，工坊的工具調用效率將提升百分之四百。」</p>
+<p>「我不需要百分之四百的效率！我需要的是那種隨手一摸就能拿到扳手的狂野手感！」Chloe 抓狂地揉著藍色碎髮。</p>
+<p>她轉頭看向一旁滿臉生無可戀的 Miles：「小子！你不是連街頭混混都不怕嗎？你那位神級特工大叔不是能單手解決麻煩嗎？你怎麼被這個十八歲的書呆子給治住了？！」</p>
+<h2>四、只能乖乖分揀螺絲</h2>
+<p>Miles 苦笑了一聲，無奈地攤開手：「Chloe 姐……McCall 先生教過我，當別人拿著水果刀的時候，你可以用拳頭解決；但當別人拿著法規條文和標籤機的時候……你只能乖乖分揀螺絲。」</p>
+<p>看著被徹底行政化的工具牆，以及那個已經完全淪為 Lily 打工仔的重工業戰神 Miles，Chloe 仰天長嘆。</p>
+<p>她突然意識到，二號車廂裡最可怕的武器，從來不是角磨機或者等離子切割機；而是那個穿著米色針織衫、隨時能用合規和報表把你按在地上摩擦的乖乖牌學妹。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="legitimate_transfer_of_residual_value.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="first_dinner_at_the_cliff.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>
