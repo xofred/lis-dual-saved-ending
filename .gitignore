@@ -11,3 +11,6 @@ __pycache__/
 
 # 圖片壓縮的增量建置快取,純本機加速用,見 site_build/build.py 的說明
 /site_build/.image_cache.json
+
+# 匯出給 NotebookLM 之類外部工具分析用的純文字備份,跟網站無關,純本機用
+/notebooklm_export/
