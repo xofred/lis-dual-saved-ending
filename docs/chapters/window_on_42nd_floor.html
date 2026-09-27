@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>四十二樓的窗 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站424篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 202 章 · Lily 的招募回憶(倒敘二)</div>
+  <h1>四十二樓的窗</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/window_on_42nd_floor.jpg" alt="四十二樓的窗" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/window_on_42nd_floor.jpg" data-full="../polaroids/window_on_42nd_floor.jpg" alt="四十二樓的窗 拍立得照片" loading="lazy"></div></div></div></div>
+
+  <div class="chapter-body">
+    <p>西雅圖市中心，一棟摩天大樓的四十二層。</p>
+<p>這是 Victoria 家族御用律師團的頂級會議室。剛才的兩個小時裡，Lily 用她那軟糯卻毫無破綻的合規邏輯，把一群穿著阿瑪尼西裝的資深律師按在會議桌上反覆摩擦，替 Victoria 的畫廊爭取到了最完美的信託剝離協議。</p>
+<p>談判結束後，Victoria 帶著 Chloe 和 Kate 去隔壁的酒水吧台慶祝，順便阻止 Chloe 把那些純銀攪拌棒塞進口袋。</p>
+<p>會議室裡，只剩下 Max 和 Lily。</p>
+<h2>一、背影</h2>
+<p>Lily 沒有跟著去。她獨自走到那整面巨大的落地窗前，雙手背在身後，靜靜地看著窗外。雨水在厚重的玻璃上蜿蜒流下，把四十二層底下的車流和行人扭曲成一條條模糊的光帶。</p>
+<p>她站得很近，近到鼻尖幾乎要貼上玻璃。</p>
+<p>坐在會議桌旁的 Max 抬起頭，目光落在那個背影上。</p>
+<p>一瞬間，Max 覺得周圍的空氣彷彿被抽乾了。</p>
+<p>在她的視網膜裡，那扇落地窗突然變成了 Blackwell 學院那座冰冷的屋頂；而那個穿著米色針織衫的單薄背影，跟當年站在屋頂邊緣、被逼到絕望的 Kate，重疊在了一起。</p>
+<p>那一天，她的能力失效了。她沒辦法倒轉時間，只能站在雨裡，用顫抖的聲音一句一句地說，賭 Kate 會不會回頭。</p>
+<p>Max 猛地站起身，心跳飆到了極限。她的右手下意識地向前伸出，手指因為恐慌而痙攣。</p>
+<p>她已經準備好了。只要 Lily 往前傾一點點，她就會毫不猶豫地撕開時間，回到五分鐘前，無論要付出多少鼻血和頭痛。她不能再站在那樣的邊緣前，什麼都做不了。</p>
+<p>「Lily……」Max 的聲音在發抖，「離開那裡。拜託……退後一步……」</p>
+<h2>二、退後兩步</h2>
+<p>聽到 Max 變了調的聲音，Lily 轉過身。</p>
+<p>她沒有哭，也沒有任何異樣。她原本只是在看雨，腦子裡還在盤算剛才那份協議的第七條附款。但她看到了 Max——看到那隻伸在半空中、抖得不成樣子的手，看到她慘白的臉。</p>
+<p>Lily 愣了一下，然後，某種了然的溫柔從她眼底浮了上來。</p>
+<p>她沒有多問，只是從落地窗前退後了兩步，走到地毯中央，離玻璃遠遠的。</p>
+<p>「放輕鬆，Max 學姐。」她輕輕歪了歪頭，嘴角勾起一抹安撫的笑，「我只是在看雨。我不會做傻事的。」</p>
+<p>Max 雙腿一軟，跌坐回椅子上，大口大口地喘氣，手心裡全是冷汗。</p>
+<p>Lily 倒了一杯溫水遞給她，然後輕輕靠在會議桌的邊緣，沉默了一會兒。</p>
+<p>「不過，」她開口，聲音很輕，「妳剛才會怕，其實不是沒有道理的。」</p>
+<h2>三、十五歲的窗台</h2>
+<p>「這不是我第一次站在這麼高的窗戶前面。」</p>
+<p>Lily 的目光越過 Max，落在那扇被雨水沖刷的玻璃上，語氣平靜得像在講述一份別人的報表。</p>
+<p>「十五歲那年，我沒拿到某個常春藤預科營的名額，跟母親吵了這輩子最兇的一次架。我被逼到了極限。我打開了家裡十二樓的窗戶，站上了窗台。」</p>
+<p>Max 握著水杯的手猛地收緊。</p>
+<p>「那時候我是真的想過。我以為，如果我把自己放到那個邊緣上，她至少會害怕一次。會哭著叫我下來，告訴我成績不重要，我才重要。」</p>
+<p>Lily 推了推圓框眼鏡。</p>
+<p>「但她沒有。」</p>
+<p>她模仿著母親當時那種冰冷、尖銳的語氣：</p>
+<p>「『我們把所有的資源、金錢和人脈都傾注在妳身上，妳怎麼能用這種方式來威脅我們？妳怎麼能這麼殘忍地報答我們？妳對得起我們的投資嗎？』」</p>
+<p>會議室裡一片死寂。窗外的雨聲顯得格外清晰。</p>
+<p>Max 說不出話來。一個母親，在女兒站上窗台的時候，第一反應不是害怕失去她，而是憤怒於自己的投資可能血本無歸。</p>
+<p>「那一刻，我突然就不想了。」Lily 轉過頭看著 Max，露出一個悲涼卻異常清醒的笑容，「因為我忽然明白了一件事：在一個把妳當成資產的系統裡，妳的死亡不是悲劇，只是一次惡意毀約。如果我真的做了，我只會變成她們下半輩子拿來賣慘、控訴女兒有多不孝的材料。我連最後那一步，都還在替她們提供情緒價值。」</p>
+<p>「所以我從窗台上爬了下來。從那天起，我把自己變成了一台行政機器。既然她們要算帳，那我就用最完美的合規和最冷血的數據，把自己的人生接管回來。」</p>
+<p>Max 聽得眼眶發酸。她終於明白了，為什麼 Lily 看什麼都要量化成報表和資產。那不是冷血，而是在她最絕望的那一刻，只有這套冰冷的邏輯，能保護她不被撕碎。</p>
+<h2>四、還會閃過嗎</h2>
+<p>「可是，Lily……」Max 輕聲問，「現在看著那扇窗戶的時候，妳心裡……真的一點都不會動搖嗎？」</p>
+<p>Lily 低頭看著自己交疊的雙手，想了很久。</p>
+<p>「以前會。」她誠實地說，「一個人在西雅圖的那幾年，每次看到高樓的窗戶，那個念頭就會像彈出式視窗一樣跳出來。好像那是唯一一個可以一次清空所有債務的快捷鍵。」</p>
+<p>「那現在呢？」</p>
+<p>「加入車廂之後，就很少了。」她頓了頓，「不是完全沒有。偶爾還是會閃一下。但現在它一跳出來，我會先想到別的東西。」</p>
+<p>這時，會議室外傳來 Chloe 暴躁的吼聲：「Victoria！把那瓶十八年的威士忌放下！那是老娘先看到的！」</p>
+<p>緊接著是 Victoria 傲慢的回擊：「妳這個土包子懂什麼叫品酒？給妳喝簡直是暴殄天物！」</p>
+<p>還有 Kate 溫柔又無奈的勸架聲：「好啦好啦，我們把它裝進水壺帶回車廂，大家一起喝好不好？」</p>
+<p>Lily 聽著門外的喧鬧，嘴角揚起了一個真誠而溫暖的笑。她伸出手，輕輕覆在 Max 那隻剛才抖得不成樣子的手背上。</p>
+<p>「就是這些。」她說，「一個會為了我砸開地下室鐵門的維修工，一個把畫廊的信託交給我打理的傲慢名媛，一個會把烤糊的餅乾塞給我的天使……還有一個，明明自己嚇得發抖，還是第一個伸手要抓住我的攝影師。」</p>
+<h2>五、背對著窗</h2>
+<p>Lily 站直了身體，背對著那扇落地窗，面朝通往外面的門。</p>
+<p>「外面的世界也許依然是一本巨大的爛帳。」她眨了眨眼，恢復了那副乖巧腹黑的模樣，「但我在二號車廂找到了這輩子回報率最高的投資組合。我還要留著自己，去幫我們多申請幾筆預算呢。」</p>
+<p>Max 的眼淚終於掉了下來。但她笑著擦掉，從包裡拿出那台寶麗來。</p>
+<p>這一次，鏡頭沒有對準雨中的窗，也沒有對準任何邊緣。它對準的是站在地毯中央、背對著玻璃、面朝著門外那片吵鬧聲的 Lily。</p>
+<p>「喀嚓。」</p>
+<p>Max 沒有在相紙背面寫任何規則或註解，只畫了一個大大的笑臉。</p>
+<p>她知道，那個十五歲站在窗台上的女孩，不會因為一個下午就徹底消失。那個念頭也許還會在某個雨天、某扇窗前閃過一下。但下一次它出現的時候，這個女孩會記得回頭——回頭看看門外那些正在為一瓶威士忌吵成一團的人，還有這個永遠會第一個伸出手的攝影師。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="right_to_be_useless.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="a_heart_of_flesh.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>

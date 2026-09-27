@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>肉做的心 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站424篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 203 章 · Lily 的招募回憶(倒敘二)</div>
+  <h1>肉做的心</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/a_heart_of_flesh.jpg" alt="肉做的心" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <p>夜深了，雨水有節奏地敲打著二號車廂的車窗。Chloe 和 Max 已經在各自的房間裡睡下，Victoria 也早早戴上了她的真絲眼罩。</p>
+<p>車廂角落的會客區裡，只亮著一盞昏黃的小暖燈。</p>
+<p>Lily 坐在沙發上，手裡握著一杯 Kate 剛泡好的洋甘菊茶。但在她面前的木桌上，手機螢幕依然刺眼地亮著。上面是一條來自母親的訊息，字面上沒有一句重話，卻句句帶刺：抱怨她錯過了一場重要的家族晚宴，讓父母在親戚面前抬不起頭。</p>
+<p>Lily 剛剛回覆了一條：「對不起，母親。我已經為您和父親預約了下週的全身健檢，費用已經從我的帳戶扣除。」</p>
+<p>按下發送之後，她把手機倒扣在桌上，深深吸了一口氣，肩膀無力地垮了下來。</p>
+<h2>一、斯德哥爾摩</h2>
+<p>「Kate 學姐，」Lily 轉過頭，那雙平時總是充滿算計與理性的眼睛裡，此刻寫滿了迷茫和自我厭惡，「從臨床心理學的角度來看……我是不是有斯德哥爾摩症候群？」</p>
+<p>Kate 放下手裡的毛線針，溫柔地看著她：「為什麼這麼說？」</p>
+<p>「因為這不符合任何邏輯。」Lily 揉著眉心，習慣性地用術語把自己的脆弱包起來，「那十幾年，對我造成的傷害幾乎是不可逆的。理智上，我非常清楚這是一筆沉沒成本。他們就像一家不斷虧損、還在惡意吸血的母公司，我早就應該進行資產剝離，徹底切斷聯繫。」</p>
+<p>她咬著下唇，聲音開始發抖：「可是，每次他們傳訊息來，每次他們暗示自己老了、病了，我就會像個沒有腦子的蠢貨一樣立刻回覆，繼續幫他們處理爛攤子，甚至還會為了錯過一頓飯而內疚。他們那樣對我，我卻還是被牽著走……這不是病態是什麼？」</p>
+<p>Kate 沒有立刻回答。她站起身，拿過沙發靠背上那條她親手織的粗毛線毯，輕輕披在 Lily 單薄的肩膀上，然後重新坐下，雙手捧著自己的茶杯。</p>
+<h2>二、他們失敗的地方</h2>
+<p>「Lily，妳知道妳父母最大的失敗是什麼嗎？」</p>
+<p>Lily 愣了一下：「他們沒有失敗。他們成功地把我變成了一個永遠擺脫不了罪惡感的殘次品。」</p>
+<p>「不，他們失敗了。」Kate 輕輕搖頭，聲音溫柔卻很篤定。</p>
+<p>「他們花了十幾年，想用最冷的算計、最殘酷的條件交換，把妳訓練成一台只會匯報、沒有感情的機器。他們想把妳心裡所有柔軟的東西都抽乾。」</p>
+<p>她伸出手，覆在 Lily 那隻因為用力握著茶杯而骨節泛白的手上。</p>
+<p>「可是妳看看現在的妳。妳會因為他們一條訊息難過，會因為他們變老而心軟，妳還是會本能地想去照顧別人——就算是傷害過妳的人。這不是斯德哥爾摩症候群。孩子本來就會愛自己的父母，就算那份愛從來沒有被好好接住過。」</p>
+<p>Kate 微微一笑：「妳的心軟和糾結，說明他們再怎麼努力，都沒能殺死妳心裡那個善良的人。他們想要一台機器，但妳到現在都還是一個會痛的人。」</p>
+<p>Lily 的眼眶紅了，聲音細得像蚊子：「所以……我不是一台有Bug的機器？」</p>
+<p>「妳的心是肉做的，不是鐵做的。」Kate 說，「所以才會痛，才會矛盾。這不是妳的錯。」</p>
+<h2>三、心軟的許可</h2>
+<p>Lily 低著頭，很久沒有說話。過了一會兒，她輕聲問：「那我應該怎麼做？繼續這樣……每次都立刻回嗎？」</p>
+<p>Kate 想了想。在兒童心理輔導機構工作的這些年，她見過太多被這種問題困住的人，也知道這裡最容易說錯話。</p>
+<p>「心軟，不代表妳欠他們無限次。」她慢慢地說，「妳可以心疼他們，同時自己決定什麼時候回、回多少。愛他們跟保護自己，不是只能選一個。」</p>
+<p>她指了指那支倒扣在桌上的手機：「還記得妳上次把他們的來電設成靜音，讓它進語音信箱，說想自己決定什麼時候聽嗎？」</p>
+<p>Lily 點點頭。</p>
+<p>「那就是了。」Kate 溫柔地看著她，「妳沒有切斷他們，也沒有被他們牽著走。妳只是替自己留了一點時間。那已經是很了不起的一步。今天這條訊息，妳也可以明天早上再決定要不要處理，或者先問問我們，再決定要付出多少。妳不用每一次都一個人立刻扛下來。」</p>
+<p>Lily 看著那支手機，沉默了很久。然後，她伸出手，把它推到了桌子的另一邊，推到自己夠不著的地方。</p>
+<p>「那……健檢的錢，已經付了。」她小聲說，帶著一點懊惱，「這筆要算沉沒成本嗎？」</p>
+<p>Kate 忍不住笑了出來：「就當作是妳心軟的學費吧。下次，我們一起慢慢算。」</p>
+<h2>四、至少今晚</h2>
+<p>雨還在下。</p>
+<p>Lily 靠在 Kate 的肩膀上，裹著那條粗毛線毯，聞著洋甘菊茶的香氣，慢慢閉上了眼睛。</p>
+<p>她知道，明天早上醒來，那條訊息還會在那裡；下個月、下一季，他們還會傳來新的抱怨和暗示，她還是會心軟，還是會難受，還是會在該不該回覆之間來回拉扯。那些報表和合規的盔甲，也不會一夜之間就卸下來。</p>
+<p>但至少今晚，她允許自己不用去想那些。</p>
+<p>至少今晚，她只是一個心是肉做的、有點累的年輕女孩，靠在一個懂她的人肩上，安安靜靜地睡著了。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="window_on_42nd_floor.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="pro_bono_advice.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>
