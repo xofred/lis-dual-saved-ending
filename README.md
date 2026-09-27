@@ -172,6 +172,29 @@ Journal/bedroom_lua_2.jpeg      ← 同一章的第 2 頁手帳,加 _2 _3... 後
 
 封面圖優先序：該章**第一張拍立得** → **插圖** → 都沒有就退回第一季第一章的插圖（`build.py` 的 `chapter_cover`）。封面圖走 Service Worker 的 CacheFirst，離線也顯示得出來。
 
+### 手機離線保存全站配樂（Podcast feed ＋ m3u8）
+
+建置時除了站內播放器，還會另外產出兩份給**站外**播放器用的清單，目的是讓手機把配樂**真的下載到本機**、之後又能自動收到新增的曲目：
+
+| 檔案 | 網址 | 用途 |
+| --- | --- | --- |
+| `docs/feed.xml` | `https://xofred.github.io/lis-dual-saved-ending/feed.xml` | Podcast RSS feed（主力） |
+| `docs/playlist.m3u8` | `…/playlist.m3u8` | 陽春 M3U 清單（附贈） |
+| `docs/feed-cover.jpg` | `…/feed-cover.jpg` | feed 的節目封面，1400×1400 |
+
+**為什麼是 podcast feed，不是 iTunes 歌單。** iTunes／Apple Music 的歌單不是指向本機檔案，就是 Apple 自家曲庫的雲端歌單，沒有任何機制可以「訂閱一個網址，然後自動抓新歌」。podcast feed 是唯一做得到「訂閱一次 → 自動下載到手機本機 → 之後新增的配樂自動出現」的公開標準。
+
+**怎麼用。** 在 Overcast／Pocket Casts／AntennaPod 這類 app 裡選「用網址新增」，貼上上面的 `feed.xml` 網址，再把該節目設成自動下載即可。Apple 官方 Podcasts app 比較彆扭：iOS 端沒有開放用網址訂閱的入口，要先在 macOS 版「檔案 → 用網址加入節目」，才會透過 Apple ID 同步到 iPhone。
+
+**幾個實作上的決定：**
+
+- **`pubDate` 不用建置當下的時間。** 否則每次 build 出來的 `feed.xml` 都不一樣（破壞 determinism），訂閱的 app 也會每次都以為全部是新集數。改成從 `FEED_EPOCH_TS`（2020-01-01）起算，按章節順序每首歌往後推一天，永遠可重現，而且新加的配樂一定落在最後。中間插入新歌會讓後面的日期整批往後挪一天，但 `<guid>` 用的是 slug 不是日期，app 不會因此重抓已下載的檔案。
+- **`<enclosure length>` 填真實位元組數**（`os.path.getsize`），跟 GitHub Pages 回的 `content-length` 對得上，不然有些 app 的下載進度會算錯。
+- **封面另外裁一張正方形的。** podcast app 的封面欄位一律正方形，直接餵長方形插圖不是被裁兩側就是加黑邊，所以 `make_square_cover()` 會從來源原圖置中裁方再縮到 1400（Apple 規格的最小邊長）。每集的封面則沿用該章原本的拍立得／插圖。
+- **每集的 `<link>` 指向該章節頁**，在 podcast app 裡點集數說明就能回去讀對應的故事。
+
+**流量要注意：**全站配樂目前 86 首、合計約 383 MB。訂閱者開自動下載就是一次抓走這個量，而 GitHub Pages 有每月 100 GB 的軟性流量上限——自己用完全沒問題，真的傳開了要留意。
+
 ### 拍立得相簿
 
 除了會顯示在對應章節頁面之外，全站所有拍立得照片還會彙整成一個獨立的「拍立得相簿」頁面（`docs/polaroids.html`，導覽列上有連結），依章節順序排列。

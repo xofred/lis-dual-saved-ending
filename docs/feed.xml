@@ -1,0 +1,1056 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 由 build.py 產生,請勿手動編輯 -->
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>雙保結局 · 全站配樂</title>
+  <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
+  <atom:link href="https://xofred.github.io/lis-dual-saved-ending/feed.xml" rel="self" type="application/rss+xml"/>
+  <description>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</description>
+  <language>zh-TW</language>
+  <itunes:author>雙保結局 · 拍立得檔案</itunes:author>
+  <itunes:summary>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</itunes:summary>
+  <itunes:type>serial</itunes:type>
+  <itunes:explicit>false</itunes:explicit>
+  <itunes:category text="Arts"><itunes:category text="Books"/></itunes:category>
+  <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/feed-cover.jpg"/>
+  <image>
+    <url>https://xofred.github.io/lis-dual-saved-ending/feed-cover.jpg</url>
+    <title>雙保結局 · 全站配樂</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
+  </image>
+  <item>
+    <title>雙保結局</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/dual_saved_ending_family_reunion.html</link>
+    <guid isPermaLink="false">dual_saved_ending_family_reunion</guid>
+    <pubDate>Wed, 01 Jan 2020 00:00:00 GMT</pubDate>
+    <description>背景與序曲</description>
+    <itunes:title>雙保結局</itunes:title>
+    <itunes:summary>背景與序曲</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/dual_saved_ending_family_reunion.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/dual_saved_ending_family_reunion.mp3" length="4513429" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>故人</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/old_friends.html</link>
+    <guid isPermaLink="false">old_friends</guid>
+    <pubDate>Thu, 02 Jan 2020 00:00:00 GMT</pubDate>
+    <description>背景與序曲</description>
+    <itunes:title>故人</itunes:title>
+    <itunes:summary>背景與序曲</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/old_friends.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/old_friends.mp3" length="3846120" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>父親的墓</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/father_grave.html</link>
+    <guid isPermaLink="false">father_grave</guid>
+    <pubDate>Fri, 03 Jan 2020 00:00:00 GMT</pubDate>
+    <description>背景與序曲</description>
+    <itunes:title>父親的墓</itunes:title>
+    <itunes:summary>背景與序曲</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/father_grave.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/father_grave.mp3" length="6502801" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>臥室,唱片轉動的聲音</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/bedroom_lua.html</link>
+    <guid isPermaLink="false">bedroom_lua</guid>
+    <pubDate>Sat, 04 Jan 2020 00:00:00 GMT</pubDate>
+    <description>背景與序曲</description>
+    <itunes:title>臥室,唱片轉動的聲音</itunes:title>
+    <itunes:summary>背景與序曲</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/bedroom_lua.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/bedroom_lua.mp3" length="4584126" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>AI 作曲速成班</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/ai_music_class.html</link>
+    <guid isPermaLink="false">ai_music_class</guid>
+    <pubDate>Sun, 05 Jan 2020 00:00:00 GMT</pubDate>
+    <description>校園與衰退</description>
+    <itunes:title>AI 作曲速成班</itunes:title>
+    <itunes:summary>校園與衰退</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/ai_music_class.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/ai_music_class.mp3" length="6558465" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>遲來的舞台</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/rachel_song.html</link>
+    <guid isPermaLink="false">rachel_song</guid>
+    <pubDate>Mon, 06 Jan 2020 00:00:00 GMT</pubDate>
+    <description>校園與衰退</description>
+    <itunes:title>遲來的舞台</itunes:title>
+    <itunes:summary>校園與衰退</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/rachel_song.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/rachel_song.mp3" length="6665488" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>海岸線露營</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/coastal_camping.html</link>
+    <guid isPermaLink="false">coastal_camping</guid>
+    <pubDate>Tue, 07 Jan 2020 00:00:00 GMT</pubDate>
+    <description>校園與衰退</description>
+    <itunes:title>海岸線露營</itunes:title>
+    <itunes:summary>校園與衰退</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/coastal_camping.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/coastal_camping.mp3" length="5172512" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>滔天暗示</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/song_from_afar.html</link>
+    <guid isPermaLink="false">song_from_afar</guid>
+    <pubDate>Wed, 08 Jan 2020 00:00:00 GMT</pubDate>
+    <description>校園與衰退</description>
+    <itunes:title>滔天暗示</itunes:title>
+    <itunes:summary>校園與衰退</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/song_from_afar.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/song_from_afar.mp3" length="7269236" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>微距魔法與天台午後</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/macro_magic_rooftop.html</link>
+    <guid isPermaLink="false">macro_magic_rooftop</guid>
+    <pubDate>Thu, 09 Jan 2020 00:00:00 GMT</pubDate>
+    <description>Victoria與Kate</description>
+    <itunes:title>微距魔法與天台午後</itunes:title>
+    <itunes:summary>Victoria與Kate</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/macro_magic_rooftop.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/macro_magic_rooftop.mp3" length="5620433" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>星空夜話</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/starlit_talk.html</link>
+    <guid isPermaLink="false">starlit_talk</guid>
+    <pubDate>Fri, 10 Jan 2020 00:00:00 GMT</pubDate>
+    <description>Victoria與Kate</description>
+    <itunes:title>星空夜話</itunes:title>
+    <itunes:summary>Victoria與Kate</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/starlit_talk.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/starlit_talk.mp3" length="4907593" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>意外投屏事件</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/mv_incident.html</link>
+    <guid isPermaLink="false">mv_incident</guid>
+    <pubDate>Sat, 11 Jan 2020 00:00:00 GMT</pubDate>
+    <description>Victoria與Kate</description>
+    <itunes:title>意外投屏事件</itunes:title>
+    <itunes:summary>Victoria與Kate</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/mv_incident.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/mv_incident.mp3" length="5490725" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>下海追逐戰</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/ocean_chase.html</link>
+    <guid isPermaLink="false">ocean_chase</guid>
+    <pubDate>Sun, 12 Jan 2020 00:00:00 GMT</pubDate>
+    <description>畢業季終章</description>
+    <itunes:title>下海追逐戰</itunes:title>
+    <itunes:summary>畢業季終章</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/ocean_chase.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/ocean_chase.mp3" length="3675518" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>相框與日記</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/frame_and_diary.html</link>
+    <guid isPermaLink="false">frame_and_diary</guid>
+    <pubDate>Mon, 13 Jan 2020 00:00:00 GMT</pubDate>
+    <description>畢業季終章</description>
+    <itunes:title>相框與日記</itunes:title>
+    <itunes:summary>畢業季終章</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/frame_and_diary.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/frame_and_diary.mp3" length="4369172" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>不分開的約定</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/staying_together.html</link>
+    <guid isPermaLink="false">staying_together</guid>
+    <pubDate>Tue, 14 Jan 2020 00:00:00 GMT</pubDate>
+    <description>珍珠區的天台</description>
+    <itunes:title>不分開的約定</itunes:title>
+    <itunes:summary>珍珠區的天台</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/staying_together.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/staying_together.mp3" length="5144376" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>一級通水測試</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/irrigation_test.html</link>
+    <guid isPermaLink="false">irrigation_test</guid>
+    <pubDate>Wed, 15 Jan 2020 00:00:00 GMT</pubDate>
+    <description>珍珠區的天台</description>
+    <itunes:title>一級通水測試</itunes:title>
+    <itunes:summary>珍珠區的天台</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/irrigation_test.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/irrigation_test.mp3" length="4723702" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>末頁的心裡話</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/final_page_confessions.html</link>
+    <guid isPermaLink="false">final_page_confessions</guid>
+    <pubDate>Thu, 16 Jan 2020 00:00:00 GMT</pubDate>
+    <description>匠魂與鋼鐵車廂</description>
+    <itunes:title>末頁的心裡話</itunes:title>
+    <itunes:summary>匠魂與鋼鐵車廂</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/final_page_confessions.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/final_page_confessions.mp3" length="4708303" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>001號委託</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/order_001.html</link>
+    <guid isPermaLink="false">order_001</guid>
+    <pubDate>Fri, 17 Jan 2020 00:00:00 GMT</pubDate>
+    <description>匠魂與鋼鐵車廂</description>
+    <itunes:title>001號委託</itunes:title>
+    <itunes:summary>匠魂與鋼鐵車廂</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/order_001.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/order_001.mp3" length="4020112" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>收工儀式</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/closing_ritual.html</link>
+    <guid isPermaLink="false">closing_ritual</guid>
+    <pubDate>Sat, 18 Jan 2020 00:00:00 GMT</pubDate>
+    <description>匠魂與鋼鐵車廂</description>
+    <itunes:title>收工儀式</itunes:title>
+    <itunes:summary>匠魂與鋼鐵車廂</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/closing_ritual.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/closing_ritual.mp3" length="7911931" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>種子與微光</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/seeds_and_light.html</link>
+    <guid isPermaLink="false">seeds_and_light</guid>
+    <pubDate>Sun, 19 Jan 2020 00:00:00 GMT</pubDate>
+    <description>暑假與長輩認證</description>
+    <itunes:title>種子與微光</itunes:title>
+    <itunes:summary>暑假與長輩認證</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/seeds_and_light.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/seeds_and_light.mp3" length="3425393" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>重返阿卡迪亞灣</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/return_to_arcadia.html</link>
+    <guid isPermaLink="false">return_to_arcadia</guid>
+    <pubDate>Mon, 20 Jan 2020 00:00:00 GMT</pubDate>
+    <description>暑假與長輩認證</description>
+    <itunes:title>重返阿卡迪亞灣</itunes:title>
+    <itunes:summary>暑假與長輩認證</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/return_to_arcadia.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/return_to_arcadia.mp3" length="6504127" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>晚餐哲學交流</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/supper_philosophy_discussion.html</link>
+    <guid isPermaLink="false">supper_philosophy_discussion</guid>
+    <pubDate>Tue, 21 Jan 2020 00:00:00 GMT</pubDate>
+    <description>青年機械教室</description>
+    <itunes:title>晚餐哲學交流</itunes:title>
+    <itunes:summary>青年機械教室</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/supper_philosophy_discussion.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/supper_philosophy_discussion.mp3" length="5461444" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>壁畫日和長者探班</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/mural_day_and_visit.html</link>
+    <guid isPermaLink="false">mural_day_and_visit</guid>
+    <pubDate>Wed, 22 Jan 2020 00:00:00 GMT</pubDate>
+    <description>青年機械教室</description>
+    <itunes:title>壁畫日和長者探班</itunes:title>
+    <itunes:summary>青年機械教室</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/mural_day_and_visit.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/mural_day_and_visit.mp3" length="3956126" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>風雨方舟</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/storm_system_test.html</link>
+    <guid isPermaLink="false">storm_system_test</guid>
+    <pubDate>Thu, 23 Jan 2020 00:00:00 GMT</pubDate>
+    <description>青年機械教室</description>
+    <itunes:title>風雨方舟</itunes:title>
+    <itunes:summary>青年機械教室</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/storm_system_test.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/storm_system_test.mp3" length="4204357" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>開學日</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/first_day_send_off.html</link>
+    <guid isPermaLink="false">first_day_send_off</guid>
+    <pubDate>Fri, 24 Jan 2020 00:00:00 GMT</pubDate>
+    <description>開學季</description>
+    <itunes:title>開學日</itunes:title>
+    <itunes:summary>開學季</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/first_day_send_off.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/first_day_send_off.mp3" length="4404820" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>黃銅鎮紙</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/miles_farewell_letter.html</link>
+    <guid isPermaLink="false">miles_farewell_letter</guid>
+    <pubDate>Sat, 25 Jan 2020 00:00:00 GMT</pubDate>
+    <description>開學季</description>
+    <itunes:title>黃銅鎮紙</itunes:title>
+    <itunes:summary>開學季</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/miles_farewell_letter.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/miles_farewell_letter.mp3" length="5182532" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>重力加倍術</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/gravity_doubling_spell.html</link>
+    <guid isPermaLink="false">gravity_doubling_spell</guid>
+    <pubDate>Sun, 26 Jan 2020 00:00:00 GMT</pubDate>
+    <description>開學季</description>
+    <itunes:title>重力加倍術</itunes:title>
+    <itunes:summary>開學季</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/gravity_doubling_spell.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/gravity_doubling_spell.mp3" length="4622276" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>命案現場的誤會</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/crime_scene_misunderstanding.html</link>
+    <guid isPermaLink="false">crime_scene_misunderstanding</guid>
+    <pubDate>Mon, 27 Jan 2020 00:00:00 GMT</pubDate>
+    <description>開學季</description>
+    <itunes:title>命案現場的誤會</itunes:title>
+    <itunes:summary>開學季</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/crime_scene_misunderstanding.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/crime_scene_misunderstanding.mp3" length="3659801" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>法定放空日</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/mandatory_relaxation_day.html</link>
+    <guid isPermaLink="false">mandatory_relaxation_day</guid>
+    <pubDate>Tue, 28 Jan 2020 00:00:00 GMT</pubDate>
+    <description>開學季</description>
+    <itunes:title>法定放空日</itunes:title>
+    <itunes:summary>開學季</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/mandatory_relaxation_day.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/mandatory_relaxation_day.mp3" length="6873178" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>弟弟的週末報到</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/miles_weekend_visit.html</link>
+    <guid isPermaLink="false">miles_weekend_visit</guid>
+    <pubDate>Wed, 29 Jan 2020 00:00:00 GMT</pubDate>
+    <description>開學季</description>
+    <itunes:title>弟弟的週末報到</itunes:title>
+    <itunes:summary>開學季</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/miles_weekend_visit.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/miles_weekend_visit.mp3" length="4143035" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>雙重曝光的一天</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/double_exposure_day.html</link>
+    <guid isPermaLink="false">double_exposure_day</guid>
+    <pubDate>Thu, 30 Jan 2020 00:00:00 GMT</pubDate>
+    <description>開學季</description>
+    <itunes:title>雙重曝光的一天</itunes:title>
+    <itunes:summary>開學季</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/double_exposure_day.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/double_exposure_day.mp3" length="4940549" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>感恩節的西雅圖</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/thanksgiving_in_seattle.html</link>
+    <guid isPermaLink="false">thanksgiving_in_seattle</guid>
+    <pubDate>Fri, 31 Jan 2020 00:00:00 GMT</pubDate>
+    <description>家人拜訪</description>
+    <itunes:title>感恩節的西雅圖</itunes:title>
+    <itunes:summary>家人拜訪</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/thanksgiving_in_seattle.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/thanksgiving_in_seattle.mp3" length="4553907" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>重工業前衛搖滾樂隊</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/wild_band_formation.html</link>
+    <guid isPermaLink="false">wild_band_formation</guid>
+    <pubDate>Sat, 01 Feb 2020 00:00:00 GMT</pubDate>
+    <description>家人拜訪</description>
+    <itunes:title>重工業前衛搖滾樂隊</itunes:title>
+    <itunes:summary>家人拜訪</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/wild_band_formation.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/wild_band_formation.mp3" length="4797047" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>迷途小藍鳥的迴響</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/samuel_response.html</link>
+    <guid isPermaLink="false">samuel_response</guid>
+    <pubDate>Sun, 02 Feb 2020 00:00:00 GMT</pubDate>
+    <description>家人拜訪</description>
+    <itunes:title>迷途小藍鳥的迴響</itunes:title>
+    <itunes:summary>家人拜訪</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/samuel_response.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/samuel_response.mp3" length="4789333" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>帶過來的完整</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/what_we_carried_whole.html</link>
+    <guid isPermaLink="false">what_we_carried_whole</guid>
+    <pubDate>Mon, 03 Feb 2020 00:00:00 GMT</pubDate>
+    <description>北上</description>
+    <itunes:title>帶過來的完整</itunes:title>
+    <itunes:summary>北上</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/what_we_carried_whole.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/what_we_carried_whole.mp3" length="6644813" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>長輩收割機與土撥鼠</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/harvester_and_groundhog.html</link>
+    <guid isPermaLink="false">harvester_and_groundhog</guid>
+    <pubDate>Tue, 04 Feb 2020 00:00:00 GMT</pubDate>
+    <description>海灣新居</description>
+    <itunes:title>長輩收割機與土撥鼠</itunes:title>
+    <itunes:summary>海灣新居</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/harvester_and_groundhog.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/harvester_and_groundhog.mp3" length="3620338" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>工業垃圾的朋克讚歌</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/industrial_junk_anthem.html</link>
+    <guid isPermaLink="false">industrial_junk_anthem</guid>
+    <pubDate>Wed, 05 Feb 2020 00:00:00 GMT</pubDate>
+    <description>海灣新居</description>
+    <itunes:title>工業垃圾的朋克讚歌</itunes:title>
+    <itunes:summary>海灣新居</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/industrial_junk_anthem.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/industrial_junk_anthem.mp3" length="5134728" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>遲來的童年</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/belated_childhood.html</link>
+    <guid isPermaLink="false">belated_childhood</guid>
+    <pubDate>Thu, 06 Feb 2020 00:00:00 GMT</pubDate>
+    <description>海灣新居</description>
+    <itunes:title>遲來的童年</itunes:title>
+    <itunes:summary>海灣新居</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/belated_childhood.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/belated_childhood.mp3" length="4672300" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>創傷覆寫</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/trauma_rewrite.html</link>
+    <guid isPermaLink="false">trauma_rewrite</guid>
+    <pubDate>Fri, 07 Feb 2020 00:00:00 GMT</pubDate>
+    <description>海盜瞭望塔</description>
+    <itunes:title>創傷覆寫</itunes:title>
+    <itunes:summary>海盜瞭望塔</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/trauma_rewrite.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/trauma_rewrite.mp3" length="3744619" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>暴風雨夜</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/the_storm_night.html</link>
+    <guid isPermaLink="false">the_storm_night</guid>
+    <pubDate>Sat, 08 Feb 2020 00:00:00 GMT</pubDate>
+    <description>海盜瞭望塔</description>
+    <itunes:title>暴風雨夜</itunes:title>
+    <itunes:summary>海盜瞭望塔</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/the_storm_night.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/the_storm_night.mp3" length="6229334" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>三明治擁抱</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/sandwich_hug.html</link>
+    <guid isPermaLink="false">sandwich_hug</guid>
+    <pubDate>Sun, 09 Feb 2020 00:00:00 GMT</pubDate>
+    <description>海盜瞭望塔</description>
+    <itunes:title>三明治擁抱</itunes:title>
+    <itunes:summary>海盜瞭望塔</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/sandwich_hug.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/sandwich_hug.mp3" length="3377752" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>醫者不能自醫</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/healer_cannot_heal_self.html</link>
+    <guid isPermaLink="false">healer_cannot_heal_self</guid>
+    <pubDate>Mon, 10 Feb 2020 00:00:00 GMT</pubDate>
+    <description>海盜瞭望塔</description>
+    <itunes:title>醫者不能自醫</itunes:title>
+    <itunes:summary>海盜瞭望塔</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/healer_cannot_heal_self.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/healer_cannot_heal_self.mp3" length="4121962" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>橘色的嘲弄</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/orange_mockery.html</link>
+    <guid isPermaLink="false">orange_mockery</guid>
+    <pubDate>Tue, 11 Feb 2020 00:00:00 GMT</pubDate>
+    <description>懸崖邊的柴米油鹽</description>
+    <itunes:title>橘色的嘲弄</itunes:title>
+    <itunes:summary>懸崖邊的柴米油鹽</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/orange_mockery.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/orange_mockery.mp3" length="3502101" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>雨夜的秘密（倒敘）</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/lily_origin_2_rainy_night.html</link>
+    <guid isPermaLink="false">lily_origin_2_rainy_night</guid>
+    <pubDate>Wed, 12 Feb 2020 00:00:00 GMT</pubDate>
+    <description>Lily 的起源（倒敘）</description>
+    <itunes:title>雨夜的秘密（倒敘）</itunes:title>
+    <itunes:summary>Lily 的起源（倒敘）</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/lily_origin_2_rainy_night.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/lily_origin_2_rainy_night.mp3" length="5232110" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>收容所的抉擇（倒敘）</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/lily_animal_shelter.html</link>
+    <guid isPermaLink="false">lily_animal_shelter</guid>
+    <pubDate>Thu, 13 Feb 2020 00:00:00 GMT</pubDate>
+    <description>Lily 的起源（倒敘）</description>
+    <itunes:title>收容所的抉擇（倒敘）</itunes:title>
+    <itunes:summary>Lily 的起源（倒敘）</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/lily_animal_shelter.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/lily_animal_shelter.mp3" length="4638252" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>留守的最後一班崗（倒敘）</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/lily_moving_day_support.html</link>
+    <guid isPermaLink="false">lily_moving_day_support</guid>
+    <pubDate>Fri, 14 Feb 2020 00:00:00 GMT</pubDate>
+    <description>Lily 的起源（倒敘）</description>
+    <itunes:title>留守的最後一班崗（倒敘）</itunes:title>
+    <itunes:summary>Lily 的起源（倒敘）</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/lily_moving_day_support.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/lily_moving_day_support.mp3" length="3689421" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>究極文青公路旅行</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/road_trip_evolution.html</link>
+    <guid isPermaLink="false">road_trip_evolution</guid>
+    <pubDate>Sat, 15 Feb 2020 00:00:00 GMT</pubDate>
+    <description>黑魔法全面上線</description>
+    <itunes:title>究極文青公路旅行</itunes:title>
+    <itunes:summary>黑魔法全面上線</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/road_trip_evolution.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/road_trip_evolution.mp3" length="3834717" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>過期的瓜</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/expired_gossip.html</link>
+    <guid isPermaLink="false">expired_gossip</guid>
+    <pubDate>Sun, 16 Feb 2020 00:00:00 GMT</pubDate>
+    <description>黑魔法全面上線</description>
+    <itunes:title>過期的瓜</itunes:title>
+    <itunes:summary>黑魔法全面上線</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/expired_gossip.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/expired_gossip.mp3" length="4126701" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>行政地獄</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/administrative_hell.html</link>
+    <guid isPermaLink="false">administrative_hell</guid>
+    <pubDate>Mon, 17 Feb 2020 00:00:00 GMT</pubDate>
+    <description>審判與垃圾食物大越獄</description>
+    <itunes:title>行政地獄</itunes:title>
+    <itunes:summary>審判與垃圾食物大越獄</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/administrative_hell.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/administrative_hell.mp3" length="3467229" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>猴子稱王</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/monkey_kings.html</link>
+    <guid isPermaLink="false">monkey_kings</guid>
+    <pubDate>Tue, 18 Feb 2020 00:00:00 GMT</pubDate>
+    <description>審判與垃圾食物大越獄</description>
+    <itunes:title>猴子稱王</itunes:title>
+    <itunes:summary>審判與垃圾食物大越獄</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/monkey_kings.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/monkey_kings.mp3" length="3242733" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>往返賭城</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/vegas_travel.html</link>
+    <guid isPermaLink="false">vegas_travel</guid>
+    <pubDate>Wed, 19 Feb 2020 00:00:00 GMT</pubDate>
+    <description>賭城與空中合規</description>
+    <itunes:title>往返賭城</itunes:title>
+    <itunes:summary>賭城與空中合規</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/vegas_travel.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/vegas_travel.mp3" length="4293693" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>舊約聖經級別的審判</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/holy_wrath.html</link>
+    <guid isPermaLink="false">holy_wrath</guid>
+    <pubDate>Thu, 20 Feb 2020 00:00:00 GMT</pubDate>
+    <description>行政黑魔法全開</description>
+    <itunes:title>舊約聖經級別的審判</itunes:title>
+    <itunes:summary>行政黑魔法全開</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/holy_wrath.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/holy_wrath.mp3" length="4643997" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>一級行政休眠狀態令</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/level_one_hibernation.html</link>
+    <guid isPermaLink="false">level_one_hibernation</guid>
+    <pubDate>Fri, 21 Feb 2020 00:00:00 GMT</pubDate>
+    <description>行政黑魔法全開</description>
+    <itunes:title>一級行政休眠狀態令</itunes:title>
+    <itunes:summary>行政黑魔法全開</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/level_one_hibernation.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/level_one_hibernation.mp3" length="4989645" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>敵意建築</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/hostile_architecture.html</link>
+    <guid isPermaLink="false">hostile_architecture</guid>
+    <pubDate>Sat, 22 Feb 2020 00:00:00 GMT</pubDate>
+    <description>數位圍城</description>
+    <itunes:title>敵意建築</itunes:title>
+    <itunes:summary>數位圍城</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/hostile_architecture.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/hostile_architecture.mp3" length="4923645" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>數位結界</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/digital_barrier.html</link>
+    <guid isPermaLink="false">digital_barrier</guid>
+    <pubDate>Sun, 23 Feb 2020 00:00:00 GMT</pubDate>
+    <description>數位圍城</description>
+    <itunes:title>數位結界</itunes:title>
+    <itunes:summary>數位圍城</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/digital_barrier.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/digital_barrier.mp3" length="4599453" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>指節殺手</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/knuckle_buster.html</link>
+    <guid isPermaLink="false">knuckle_buster</guid>
+    <pubDate>Mon, 24 Feb 2020 00:00:00 GMT</pubDate>
+    <description>數位圍城</description>
+    <itunes:title>指節殺手</itunes:title>
+    <itunes:summary>數位圍城</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/knuckle_buster.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/knuckle_buster.mp3" length="3833229" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>計畫性報廢</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/planned_obsolescence.html</link>
+    <guid isPermaLink="false">planned_obsolescence</guid>
+    <pubDate>Tue, 25 Feb 2020 00:00:00 GMT</pubDate>
+    <description>資本博弈與矽谷反壟斷</description>
+    <itunes:title>計畫性報廢</itunes:title>
+    <itunes:summary>資本博弈與矽谷反壟斷</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/planned_obsolescence.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/planned_obsolescence.mp3" length="3859245" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>實習生的迪士尼樂園</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/interns_disneyland.html</link>
+    <guid isPermaLink="false">interns_disneyland</guid>
+    <pubDate>Wed, 26 Feb 2020 00:00:00 GMT</pubDate>
+    <description>核能鄰居與日常降維</description>
+    <itunes:title>實習生的迪士尼樂園</itunes:title>
+    <itunes:summary>核能鄰居與日常降維</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/interns_disneyland.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/interns_disneyland.mp3" length="3576621" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>電話騷擾變現指南</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/scam_call_monetization.html</link>
+    <guid isPermaLink="false">scam_call_monetization</guid>
+    <pubDate>Thu, 27 Feb 2020 00:00:00 GMT</pubDate>
+    <description>核能鄰居與日常降維</description>
+    <itunes:title>電話騷擾變現指南</itunes:title>
+    <itunes:summary>核能鄰居與日常降維</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/scam_call_monetization.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/scam_call_monetization.mp3" length="4271421" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>無用之用</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/useless_tree.html</link>
+    <guid isPermaLink="false">useless_tree</guid>
+    <pubDate>Fri, 28 Feb 2020 00:00:00 GMT</pubDate>
+    <description>核能鄰居與日常降維</description>
+    <itunes:title>無用之用</itunes:title>
+    <itunes:summary>核能鄰居與日常降維</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/useless_tree.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/useless_tree.mp3" length="4923645" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>優雅的社交切割</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/graceful_social_cutoff.html</link>
+    <guid isPermaLink="false">graceful_social_cutoff</guid>
+    <pubDate>Sat, 29 Feb 2020 00:00:00 GMT</pubDate>
+    <description>核能鄰居與日常降維</description>
+    <itunes:title>優雅的社交切割</itunes:title>
+    <itunes:summary>核能鄰居與日常降維</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/graceful_social_cutoff.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/graceful_social_cutoff.mp3" length="4248429" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>海盜旗下的前進基地</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/pirate_flag_fob.html</link>
+    <guid isPermaLink="false">pirate_flag_fob</guid>
+    <pubDate>Sun, 01 Mar 2020 00:00:00 GMT</pubDate>
+    <description>核能鄰居與日常降維</description>
+    <itunes:title>海盜旗下的前進基地</itunes:title>
+    <itunes:summary>核能鄰居與日常降維</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/pirate_flag_fob.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/pirate_flag_fob.mp3" length="3589197" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>被無人機打斷的初吻復刻</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/kiss_interrupted_by_drone.html</link>
+    <guid isPermaLink="false">kiss_interrupted_by_drone</guid>
+    <pubDate>Mon, 02 Mar 2020 00:00:00 GMT</pubDate>
+    <description>信用卡驚魂與風控朝聖</description>
+    <itunes:title>被無人機打斷的初吻復刻</itunes:title>
+    <itunes:summary>信用卡驚魂與風控朝聖</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/kiss_interrupted_by_drone.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/kiss_interrupted_by_drone.mp3" length="4373229" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>海鷗與無人車</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/seagull_vs_waymo.html</link>
+    <guid isPermaLink="false">seagull_vs_waymo</guid>
+    <pubDate>Tue, 03 Mar 2020 00:00:00 GMT</pubDate>
+    <description>信用卡驚魂與風控朝聖</description>
+    <itunes:title>海鷗與無人車</itunes:title>
+    <itunes:summary>信用卡驚魂與風控朝聖</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/seagull_vs_waymo.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/seagull_vs_waymo.mp3" length="3708738" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>偽裝成文青的終結者</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/terminator_in_disguise.html</link>
+    <guid isPermaLink="false">terminator_in_disguise</guid>
+    <pubDate>Wed, 04 Mar 2020 00:00:00 GMT</pubDate>
+    <description>信用卡驚魂與風控朝聖</description>
+    <itunes:title>偽裝成文青的終結者</itunes:title>
+    <itunes:summary>信用卡驚魂與風控朝聖</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/terminator_in_disguise.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/terminator_in_disguise.mp3" length="3832417" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>紅藍燈光</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/red_blue_lights.html</link>
+    <guid isPermaLink="false">red_blue_lights</guid>
+    <pubDate>Thu, 05 Mar 2020 00:00:00 GMT</pubDate>
+    <description>聖誕節與洗衣機大戰</description>
+    <itunes:title>紅藍燈光</itunes:title>
+    <itunes:summary>聖誕節與洗衣機大戰</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/red_blue_lights.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/red_blue_lights.mp3" length="5413193" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>生物學來源實體</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/biological_origin_entity.html</link>
+    <guid isPermaLink="false">biological_origin_entity</guid>
+    <pubDate>Fri, 06 Mar 2020 00:00:00 GMT</pubDate>
+    <description>聖誕節與洗衣機大戰</description>
+    <itunes:title>生物學來源實體</itunes:title>
+    <itunes:summary>聖誕節與洗衣機大戰</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/biological_origin_entity.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/biological_origin_entity.mp3" length="4708497" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>全家福與保險政策</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/family_photo_insurance.html</link>
+    <guid isPermaLink="false">family_photo_insurance</guid>
+    <pubDate>Sat, 07 Mar 2020 00:00:00 GMT</pubDate>
+    <description>保單與信託風暴的開場</description>
+    <itunes:title>全家福與保險政策</itunes:title>
+    <itunes:summary>保單與信託風暴的開場</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/family_photo_insurance.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/family_photo_insurance.mp3" length="4085978" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>無用之物的合法性</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/legality_of_useless_things.html</link>
+    <guid isPermaLink="false">legality_of_useless_things</guid>
+    <pubDate>Sun, 08 Mar 2020 00:00:00 GMT</pubDate>
+    <description>保單與信託風暴的開場</description>
+    <itunes:title>無用之物的合法性</itunes:title>
+    <itunes:summary>保單與信託風暴的開場</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/legality_of_useless_things.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/legality_of_useless_things.mp3" length="4265163" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>絕對物理隔離時間</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/absolute_isolation_time.html</link>
+    <guid isPermaLink="false">absolute_isolation_time</guid>
+    <pubDate>Mon, 09 Mar 2020 00:00:00 GMT</pubDate>
+    <description>底片危機、公路里程與海盜塔黑歷史</description>
+    <itunes:title>絕對物理隔離時間</itunes:title>
+    <itunes:summary>底片危機、公路里程與海盜塔黑歷史</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/absolute_isolation_time.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/absolute_isolation_time.mp3" length="4246852" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>曝光與心跳</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/exposure_and_heartbeat.html</link>
+    <guid isPermaLink="false">exposure_and_heartbeat</guid>
+    <pubDate>Tue, 10 Mar 2020 00:00:00 GMT</pubDate>
+    <description>底片危機、公路里程與海盜塔黑歷史</description>
+    <itunes:title>曝光與心跳</itunes:title>
+    <itunes:summary>底片危機、公路里程與海盜塔黑歷史</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/exposure_and_heartbeat.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/exposure_and_heartbeat.mp3" length="5458393" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>倒灌的記憶</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/memories_flooding_back.html</link>
+    <guid isPermaLink="false">memories_flooding_back</guid>
+    <pubDate>Wed, 11 Mar 2020 00:00:00 GMT</pubDate>
+    <description>底片危機、公路里程與海盜塔黑歷史</description>
+    <itunes:title>倒灌的記憶</itunes:title>
+    <itunes:summary>底片危機、公路里程與海盜塔黑歷史</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/memories_flooding_back.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/memories_flooding_back.mp3" length="5337523" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>吊床上的既視感</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/hammock_deja_vu.html</link>
+    <guid isPermaLink="false">hammock_deja_vu</guid>
+    <pubDate>Thu, 12 Mar 2020 00:00:00 GMT</pubDate>
+    <description>吊床、雪茄與畢業典禮的閒散日子</description>
+    <itunes:title>吊床上的既視感</itunes:title>
+    <itunes:summary>吊床、雪茄與畢業典禮的閒散日子</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/hammock_deja_vu.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/hammock_deja_vu.mp3" length="3592888" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>畢業典禮的品味制裁（倒敘）</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/graduation_taste_sanction.html</link>
+    <guid isPermaLink="false">graduation_taste_sanction</guid>
+    <pubDate>Fri, 13 Mar 2020 00:00:00 GMT</pubDate>
+    <description>吊床、雪茄與畢業典禮的閒散日子</description>
+    <itunes:title>畢業典禮的品味制裁（倒敘）</itunes:title>
+    <itunes:summary>吊床、雪茄與畢業典禮的閒散日子</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/graduation_taste_sanction.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/graduation_taste_sanction.mp3" length="3626148" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>方舟裡的標本室</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/arks_specimen_room.html</link>
+    <guid isPermaLink="false">arks_specimen_room</guid>
+    <pubDate>Sat, 14 Mar 2020 00:00:00 GMT</pubDate>
+    <description>疫苗通行證、綠色通行碼與封鎖下的哀傷</description>
+    <itunes:title>方舟裡的標本室</itunes:title>
+    <itunes:summary>疫苗通行證、綠色通行碼與封鎖下的哀傷</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/arks_specimen_room.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/arks_specimen_room.mp3" length="4325126" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>倒金字塔</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/inverted_pyramid.html</link>
+    <guid isPermaLink="false">inverted_pyramid</guid>
+    <pubDate>Sun, 15 Mar 2020 00:00:00 GMT</pubDate>
+    <description>供應鏈斷裂的末日廚房大戰</description>
+    <itunes:title>倒金字塔</itunes:title>
+    <itunes:summary>供應鏈斷裂的末日廚房大戰</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/inverted_pyramid.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/inverted_pyramid.mp3" length="3877785" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>末日煉金術</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/apocalypse_alchemy.html</link>
+    <guid isPermaLink="false">apocalypse_alchemy</guid>
+    <pubDate>Mon, 16 Mar 2020 00:00:00 GMT</pubDate>
+    <description>供應鏈斷裂的末日廚房大戰</description>
+    <itunes:title>末日煉金術</itunes:title>
+    <itunes:summary>供應鏈斷裂的末日廚房大戰</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/apocalypse_alchemy.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/apocalypse_alchemy.mp3" length="3593832" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>黑化炙烤</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/blackened_sear.html</link>
+    <guid isPermaLink="false">blackened_sear</guid>
+    <pubDate>Tue, 17 Mar 2020 00:00:00 GMT</pubDate>
+    <description>供應鏈斷裂的末日廚房大戰</description>
+    <itunes:title>黑化炙烤</itunes:title>
+    <itunes:summary>供應鏈斷裂的末日廚房大戰</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/blackened_sear.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/blackened_sear.mp3" length="4444042" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>戒斷反應</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/withdrawal_symptoms.html</link>
+    <guid isPermaLink="false">withdrawal_symptoms</guid>
+    <pubDate>Wed, 18 Mar 2020 00:00:00 GMT</pubDate>
+    <description>供應鏈斷裂的末日廚房大戰</description>
+    <itunes:title>戒斷反應</itunes:title>
+    <itunes:summary>供應鏈斷裂的末日廚房大戰</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/withdrawal_symptoms.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/withdrawal_symptoms.mp3" length="3710952" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>電車難題的陷阱</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/trolley_problem_trap.html</link>
+    <guid isPermaLink="false">trolley_problem_trap</guid>
+    <pubDate>Thu, 19 Mar 2020 00:00:00 GMT</pubDate>
+    <description>居家隔離的心理保衛戰</description>
+    <itunes:title>電車難題的陷阱</itunes:title>
+    <itunes:summary>居家隔離的心理保衛戰</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/trolley_problem_trap.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/trolley_problem_trap.mp3" length="4644114" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>龐克審計員（倒敘）</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/punk_auditor.html</link>
+    <guid isPermaLink="false">punk_auditor</guid>
+    <pubDate>Fri, 20 Mar 2020 00:00:00 GMT</pubDate>
+    <description>Lily 的招募回憶(倒敘二)</description>
+    <itunes:title>龐克審計員（倒敘）</itunes:title>
+    <itunes:summary>Lily 的招募回憶(倒敘二)</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/punk_auditor.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/punk_auditor.mp3" length="4504653" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>懸崖邊的第一頓晚餐（倒敘）</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/first_dinner_at_the_cliff.html</link>
+    <guid isPermaLink="false">first_dinner_at_the_cliff</guid>
+    <pubDate>Sat, 21 Mar 2020 00:00:00 GMT</pubDate>
+    <description>Lily 的招募回憶(倒敘二)</description>
+    <itunes:title>懸崖邊的第一頓晚餐（倒敘）</itunes:title>
+    <itunes:summary>Lily 的招募回憶(倒敘二)</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/first_dinner_at_the_cliff.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/first_dinner_at_the_cliff.mp3" length="6044936" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>不良資產回收站</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/bad_asset_recovery_station.html</link>
+    <guid isPermaLink="false">bad_asset_recovery_station</guid>
+    <pubDate>Sun, 22 Mar 2020 00:00:00 GMT</pubDate>
+    <description>Lily 失蹤與時空回溯的代價</description>
+    <itunes:title>不良資產回收站</itunes:title>
+    <itunes:summary>Lily 失蹤與時空回溯的代價</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/bad_asset_recovery_station.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/bad_asset_recovery_station.mp3" length="5714605" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>無螢幕的盲盒</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/screenless_blind_box.html</link>
+    <guid isPermaLink="false">screenless_blind_box</guid>
+    <pubDate>Mon, 23 Mar 2020 00:00:00 GMT</pubDate>
+    <description>無螢幕相機、鈦合金護甲與懸崖邊的第三條路</description>
+    <itunes:title>無螢幕的盲盒</itunes:title>
+    <itunes:summary>無螢幕相機、鈦合金護甲與懸崖邊的第三條路</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/screenless_blind_box.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/screenless_blind_box.mp3" length="5882230" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>紅光暗房</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/red_light_darkroom.html</link>
+    <guid isPermaLink="false">red_light_darkroom</guid>
+    <pubDate>Tue, 24 Mar 2020 00:00:00 GMT</pubDate>
+    <description>無螢幕相機、鈦合金護甲與懸崖邊的第三條路</description>
+    <itunes:title>紅光暗房</itunes:title>
+    <itunes:summary>無螢幕相機、鈦合金護甲與懸崖邊的第三條路</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/red_light_darkroom.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/red_light_darkroom.mp3" length="5374364" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>雨後的黃金時刻</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/golden_hour_after_rain.html</link>
+    <guid isPermaLink="false">golden_hour_after_rain</guid>
+    <pubDate>Wed, 25 Mar 2020 00:00:00 GMT</pubDate>
+    <description>無螢幕相機、鈦合金護甲與懸崖邊的第三條路</description>
+    <itunes:title>雨後的黃金時刻</itunes:title>
+    <itunes:summary>無螢幕相機、鈦合金護甲與懸崖邊的第三條路</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/golden_hour_after_rain.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/golden_hour_after_rain.mp3" length="4525122" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>共生熱量交換</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/symbiotic_heat_exchange.html</link>
+    <guid isPermaLink="false">symbiotic_heat_exchange</guid>
+    <pubDate>Thu, 26 Mar 2020 00:00:00 GMT</pubDate>
+    <description>無螢幕相機、鈦合金護甲與懸崖邊的第三條路</description>
+    <itunes:title>共生熱量交換</itunes:title>
+    <itunes:summary>無螢幕相機、鈦合金護甲與懸崖邊的第三條路</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/symbiotic_heat_exchange.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/symbiotic_heat_exchange.mp3" length="4321218" type="audio/mpeg"/>
+  </item>
+</channel>
+</rss>

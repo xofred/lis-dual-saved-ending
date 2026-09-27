@@ -12,6 +12,7 @@ import sys
 import shutil
 import hashlib
 import json
+from email.utils import formatdate   # RFC 2822 日期,給 Podcast feed 的 pubDate 用
 import markdown as md_lib
 from PIL import Image, ImageOps
 
@@ -71,6 +72,25 @@ JPEG_QUALITY = 82
 # 快取紀錄一次性失效、全部重新壓縮一次;只是調整 IMAGE_MAX_DIM 這幾個數字
 # 不用管這個,resize_image_cached() 自己會比對到參數變了。
 RESIZE_ALGO_VERSION = 1
+
+# ---- 站台對外網址 ----
+# Podcast feed 的 <enclosure> 跟 m3u8 播放清單都必須是絕對網址:訂閱的 app
+# 拿到的只有一份 XML,沒有「當前頁面」可以讓相對路徑接上去。
+SITE_URL = "https://xofred.github.io/lis-dual-saved-ending"
+
+# Podcast feed 每集的發布日期:不能用建置當下的時間,否則每次 build 產出的
+# feed.xml 都不一樣(破壞 determinism),訂閱的 app 也會每次都以為全部是新集數。
+# 改成從一個固定起點、按章節順序每首歌往後推一天 —— 永遠可重現,而且新加的
+# 配樂一定落在最後(日期最新)。中間插入新歌會讓後面整批往後挪一天,但每集的
+# <guid> 用的是 slug 不是日期,app 不會因此重抓已經下載過的檔案。
+FEED_EPOCH_TS = 1577836800     # 2020-01-01 00:00:00 UTC
+FEED_STEP_SECONDS = 86400      # 一首歌往後一天
+FEED_COVER_DIM = 1400          # podcast 封面規格:正方形,Apple 要求最小 1400px
+FEED_COVER_SLUG = "dual_saved_ending_family_reunion"   # 拿來當封面的那一章插圖
+AUDIO_MIME = {
+    ".mp3": "audio/mpeg", ".m4a": "audio/mp4",
+    ".ogg": "audio/ogg", ".wav": "audio/wav",
+}
 
 # 圖片壓縮很吃 CPU(478 張全部重跑要近一分鐘),建置期做增量快取:記住每個
 # 輸出檔案上次是拿哪個來源檔案內容(sha1)、用什麼參數壓的,這次來源檔案內容
@@ -145,6 +165,23 @@ def resize_image(src_path, dst_path, max_dim, quality=JPEG_QUALITY):
                 img = img.convert("RGB")
             save_kwargs["quality"] = quality
         img.save(dst_path, **save_kwargs)
+
+
+def make_square_cover(src_path, dst_path, dim=FEED_COVER_DIM, quality=JPEG_QUALITY):
+    """把一張長方形插圖置中裁成正方形,存成 podcast feed 的節目封面。
+    podcast app 的封面欄位一律是正方形,直接餵長方形圖進去不是被裁掉兩側
+    就是被加上黑邊,不如在建置時就裁好。裁完才縮放,所以不會有拉伸變形。"""
+    with Image.open(src_path) as img:
+        img = ImageOps.exif_transpose(img)
+        side = min(img.size)
+        left = (img.width - side) // 2
+        top = (img.height - side) // 2
+        img = img.crop((left, top, left + side, top + side))
+        if side != dim:
+            img = img.resize((dim, dim), Image.LANCZOS)
+        if img.mode not in ("RGB", "L"):
+            img = img.convert("RGB")
+        img.save(dst_path, "JPEG", quality=quality, optimize=True)
 
 
 def find_media(slug, media_dir, exts):
@@ -489,6 +526,7 @@ if __name__ == "__main__":
         BUTTERFLY_SVG, HEADER, FOOTER, HTML_SHELL, LIGHTBOX,
         SW_REGISTER, SERVICE_WORKER, render_player, render_player_js,
         render_search, render_search_js, render_search_index,
+        render_podcast_feed, render_m3u,
     )
 
     sw_register_chapter = SW_REGISTER.replace("__ROOT__", "../")
@@ -994,6 +1032,59 @@ if __name__ == "__main__":
     with open(os.path.join(OUT_DIR, "player.js"), "w", encoding="utf-8") as out:
         out.write(render_player_js(playlist))
     print(f"播放器已產生:player.js({len(playlist)} 首)")
+
+    # ---------- 產生 Podcast feed(feed.xml)+ m3u8 播放清單 ----------
+    # 這兩份是給「手機離線保存全站配樂」用的,跟網站本身的播放器無關。
+    # feed.xml 才是主力:podcast app 訂閱後會把 mp3 真的下載到手機本機,
+    # 而且會定期回來重抓 feed,新增的配樂自動出現。m3u8 只是順手附贈的
+    # 相容格式(VLC / Poweramp 之類吃得下),多數播放器只串流不離線。
+    if playlist:
+        cover_src = find_media(FEED_COVER_SLUG, images_src, IMAGE_EXTS) if images_src else None
+        # 優先用來源資料夾的原圖(解析度夠裁到 1400 正方形),沒有就退而求其次
+        # 用 docs/images/ 裡壓過的版本;兩邊都沒有就不附封面,feed 照樣有效
+        if cover_src:
+            cover_path = os.path.join(images_src, cover_src)
+        else:
+            fallback = find_media(FEED_COVER_SLUG, IMAGES_DIR, IMAGE_EXTS)
+            cover_path = os.path.join(IMAGES_DIR, fallback) if fallback else None
+
+        channel_cover_url = f"{SITE_URL}/feed-cover.jpg"
+        if cover_path:
+            make_square_cover(cover_path, os.path.join(OUT_DIR, "feed-cover.jpg"))
+        else:
+            channel_cover_url = ""
+
+        feed_episodes = []
+        for i, track in enumerate(playlist):
+            ext = os.path.splitext(track["file"])[1].lower()
+            feed_episodes.append({
+                "title": track["title"],
+                "url": f"{SITE_URL}/songs/{track['file']}",
+                "page_url": f"{SITE_URL}/chapters/{track['slug']}.html",
+                "guid": track["slug"],   # 用 slug 不用網址:之後換網域也不會讓 app 以為是新集數
+                "cover_url": f"{SITE_URL}/{track['cover']}" if track["cover"] else channel_cover_url,
+                "pub_date": formatdate(FEED_EPOCH_TS + i * FEED_STEP_SECONDS, usegmt=True),
+                "size": os.path.getsize(os.path.join(SONGS_DIR, track["file"])),
+                "mime": AUDIO_MIME.get(ext, "audio/mpeg"),
+                "summary": track["section"],
+            })
+
+        channel = {
+            "title": "雙保結局 · 全站配樂",
+            "link": f"{SITE_URL}/index.html",
+            "feed_url": f"{SITE_URL}/feed.xml",
+            "description": "《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,"
+                           "依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。",
+            "author": "雙保結局 · 拍立得檔案",
+            "cover_url": channel_cover_url,
+        }
+        with open(os.path.join(OUT_DIR, "feed.xml"), "w", encoding="utf-8") as out:
+            out.write(render_podcast_feed(channel, feed_episodes))
+        with open(os.path.join(OUT_DIR, "playlist.m3u8"), "w", encoding="utf-8") as out:
+            out.write(render_m3u(feed_episodes))
+        total_mb = sum(ep["size"] for ep in feed_episodes) / 1024 / 1024
+        print(f"Podcast feed 已產生:feed.xml + playlist.m3u8"
+              f"({len(feed_episodes)} 首,合計 {total_mb:.0f} MB)")
 
     # ---------- 產生全文搜尋(search.js + search-index.json) ----------
     # 邏輯跟索引資料分開:加一篇故事只會動到 search-index.json,search.js 不變

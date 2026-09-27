@@ -2,6 +2,7 @@
 """共用 HTML 片段"""
 
 import json
+from xml.sax.saxutils import escape as xml_escape
 
 BUTTERFLY_SVG = """
 <div class="butterfly" id="butterfly" aria-hidden="true">
@@ -524,6 +525,77 @@ def render_search_index(entries):
         for e in entries
     ]
     return json.dumps(data, ensure_ascii=False)
+
+
+def render_podcast_feed(channel, episodes):
+    """docs/feed.xml 的內容:RSS 2.0 + iTunes namespace 的 Podcast feed。
+
+    為什麼是 podcast feed 而不是真正的 iTunes 歌單:iTunes / Apple Music 的
+    歌單不是指向本機檔案,就是 Apple 自家曲庫的雲端歌單,沒有任何機制可以
+    「訂閱一個網址然後自動抓新歌」。podcast feed 是唯一做得到「訂閱一次 →
+    自動下載到手機本機 → 之後新增的配樂自動出現」的公開標準,Overcast /
+    Pocket Casts / AntennaPod 這類 app 都能直接貼 RSS 網址訂閱。
+
+    channel 是 {title, link, description, author, cover_url, feed_url};
+    episodes 是 build.py 組好的 [{title, url, page_url, guid, cover_url,
+    pub_date, size, mime, summary}, ...],這裡只負責組 XML。"""
+    def esc(text):
+        return xml_escape(str(text), {'"': "&quot;", "'": "&apos;"})
+
+    items = []
+    for ep in episodes:
+        items.append(f"""  <item>
+    <title>{esc(ep["title"])}</title>
+    <link>{esc(ep["page_url"])}</link>
+    <guid isPermaLink="false">{esc(ep["guid"])}</guid>
+    <pubDate>{esc(ep["pub_date"])}</pubDate>
+    <description>{esc(ep["summary"])}</description>
+    <itunes:title>{esc(ep["title"])}</itunes:title>
+    <itunes:summary>{esc(ep["summary"])}</itunes:summary>
+    <itunes:image href="{esc(ep["cover_url"])}"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="{esc(ep["url"])}" length="{ep["size"]}" type="{esc(ep["mime"])}"/>
+  </item>""")
+
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
+<!-- 由 build.py 產生,請勿手動編輯 -->
+<rss version="2.0"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>{esc(channel["title"])}</title>
+  <link>{esc(channel["link"])}</link>
+  <atom:link href="{esc(channel["feed_url"])}" rel="self" type="application/rss+xml"/>
+  <description>{esc(channel["description"])}</description>
+  <language>zh-TW</language>
+  <itunes:author>{esc(channel["author"])}</itunes:author>
+  <itunes:summary>{esc(channel["description"])}</itunes:summary>
+  <itunes:type>serial</itunes:type>
+  <itunes:explicit>false</itunes:explicit>
+  <itunes:category text="Arts"><itunes:category text="Books"/></itunes:category>
+  <itunes:image href="{esc(channel["cover_url"])}"/>
+  <image>
+    <url>{esc(channel["cover_url"])}</url>
+    <title>{esc(channel["title"])}</title>
+    <link>{esc(channel["link"])}</link>
+  </image>
+{chr(10).join(items)}
+</channel>
+</rss>
+"""
+
+
+def render_m3u(episodes):
+    """docs/playlist.m3u8 的內容:最陽春的擴充 M3U 播放清單。
+    VLC / Poweramp 這類播放器吃得下,但多數只會串流不會離線保存 —— 要離線
+    請用上面那份 podcast feed,這份只是順手附贈的相容格式。
+    #EXTINF 的秒數給 -1 表示未知:要算真實長度就得解析每個 mp3 的框頭,
+    為了一個附贈格式不值得多拉一個依賴進來。"""
+    lines = ["#EXTM3U"]
+    for ep in episodes:
+        lines.append(f'#EXTINF:-1,{ep["title"]}')
+        lines.append(ep["url"])
+    return "\n".join(lines) + "\n"
 
 
 FOOTER = """
