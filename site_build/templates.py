@@ -542,8 +542,11 @@ def render_podcast_feed(channel, episodes):
     def esc(text):
         return xml_escape(str(text), {'"': "&quot;", "'": "&apos;"})
 
+    # <itunes:episode> 用章節順序編號。pubDate 是現實世界的加入時間,不見得跟
+    # 故事順序一致(後來才補配樂給早期章節就會錯開),有了集數編號,把節目當
+    # serial 處理的 app 仍然會照故事順序排,而日期欄位保持真實。
     items = []
-    for ep in episodes:
+    for n, ep in enumerate(episodes, start=1):
         items.append(f"""  <item>
     <title>{esc(ep["title"])}</title>
     <link>{esc(ep["page_url"])}</link>
@@ -551,6 +554,7 @@ def render_podcast_feed(channel, episodes):
     <pubDate>{esc(ep["pub_date"])}</pubDate>
     <description>{esc(ep["summary"])}</description>
     <itunes:title>{esc(ep["title"])}</itunes:title>
+    <itunes:episode>{n}</itunes:episode>
     <itunes:summary>{esc(ep["summary"])}</itunes:summary>
     <itunes:image href="{esc(ep["cover_url"])}"/>
     <itunes:explicit>false</itunes:explicit>
@@ -567,6 +571,7 @@ def render_podcast_feed(channel, episodes):
   <link>{esc(channel["link"])}</link>
   <atom:link href="{esc(channel["feed_url"])}" rel="self" type="application/rss+xml"/>
   <description>{esc(channel["description"])}</description>
+  <lastBuildDate>{esc(channel["last_build_date"])}</lastBuildDate>
   <language>zh-TW</language>
   <itunes:author>{esc(channel["author"])}</itunes:author>
   <itunes:summary>{esc(channel["description"])}</itunes:summary>

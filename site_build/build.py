@@ -12,6 +12,7 @@ import sys
 import shutil
 import hashlib
 import json
+import subprocess                    # 只用來問 git 每首配樂最後一次被提交的時間
 from email.utils import formatdate   # RFC 2822 日期,給 Podcast feed 的 pubDate 用
 import markdown as md_lib
 from PIL import Image, ImageOps
@@ -78,13 +79,16 @@ RESIZE_ALGO_VERSION = 1
 # 拿到的只有一份 XML,沒有「當前頁面」可以讓相對路徑接上去。
 SITE_URL = "https://xofred.github.io/lis-dual-saved-ending"
 
-# Podcast feed 每集的發布日期:不能用建置當下的時間,否則每次 build 產出的
-# feed.xml 都不一樣(破壞 determinism),訂閱的 app 也會每次都以為全部是新集數。
-# 改成從一個固定起點、按章節順序每首歌往後推一天 —— 永遠可重現,而且新加的
-# 配樂一定落在最後(日期最新)。中間插入新歌會讓後面整批往後挪一天,但每集的
-# <guid> 用的是 slug 不是日期,app 不會因此重抓已經下載過的檔案。
-FEED_EPOCH_TS = 1577836800     # 2020-01-01 00:00:00 UTC
-FEED_STEP_SECONDS = 86400      # 一首歌往後一天
+# Podcast feed 每集的發布日期:用「這首歌最後一次被 commit 進 docs/songs/ 的
+# 時間」,也就是它在現實世界裡真正被加進來/更新的那一刻。
+#
+# 不能用建置當下的時間:那樣每次 build 產出的 feed.xml 都不一樣(破壞
+# determinism),訂閱的 app 也會每次都以為全部是新集數。
+# 也不適合用合成日期(例如從某個固定起點每首往後推一天):那種日期既不是故事
+# 時間線也不是現實時間線,在 app 裡看起來只會莫名其妙。
+# git 的 commit 時間剛好三個條件都滿足 —— 是真實時間、每首歌各自獨立(之後在
+# 中間插入新歌不會害後面整批位移)、而且任何一份帶完整歷史的 clone 都算得出
+# 一模一樣的值。
 FEED_COVER_DIM = 1400          # podcast 封面規格:正方形,Apple 要求最小 1400px
 FEED_COVER_SLUG = "dual_saved_ending_family_reunion"   # 拿來當封面的那一章插圖
 AUDIO_MIME = {
@@ -165,6 +169,33 @@ def resize_image(src_path, dst_path, max_dim, quality=JPEG_QUALITY):
                 img = img.convert("RGB")
             save_kwargs["quality"] = quality
         img.save(dst_path, **save_kwargs)
+
+
+def git_last_commit_times(rel_dir):
+    """回傳 {檔名: unix 時間戳},值是該檔案最後一次被 commit 的時間。
+    一次 git log 把整個資料夾掃完(86 首歌逐一問 git 要跑 86 次子程序,太慢)。
+    log 預設就是由新到舊,所以每個檔名第一次出現時記下的就是「最後一次」。
+    不是 git 倉庫、git 不在 PATH、或這個資料夾還沒有任何提交紀錄時回傳空 dict,
+    由呼叫端退回檔案 mtime。"""
+    try:
+        out = subprocess.run(
+            ["git", "log", "--pretty=format:C %ct", "--name-only", "--", rel_dir],
+            cwd=PROJECT_ROOT, capture_output=True, text=True, timeout=60,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return {}
+    if out.returncode != 0:
+        return {}
+
+    times = {}
+    current = None
+    for line in out.stdout.splitlines():
+        if line.startswith("C "):
+            current = int(line[2:])
+        elif line.strip() and current is not None:
+            name = os.path.basename(line.strip())
+            times.setdefault(name, current)   # 只認第一次(= 最新的那次)
+    return times
 
 
 def make_square_cover(src_path, dst_path, dim=FEED_COVER_DIM, quality=JPEG_QUALITY):
@@ -1054,8 +1085,24 @@ if __name__ == "__main__":
         else:
             channel_cover_url = ""
 
+        # 每首歌的發布時間 = 它最後一次被 commit 進 docs/songs/ 的時間。
+        # 還沒進過版控的新歌(剛丟進 songs/、這次才第一次建置)git 問不到,
+        # 退回用來源檔案的 mtime —— 用 docs/songs/ 裡那份複本的 mtime 不行,
+        # 那是每次建置複製出來的時間,會讓 feed 每次 build 都不一樣。
+        song_commit_times = git_last_commit_times("docs/songs")
+
+        def song_pub_ts(filename):
+            if filename in song_commit_times:
+                return song_commit_times[filename]
+            for base in (songs_src, SONGS_DIR):
+                if base:
+                    path = os.path.join(base, filename)
+                    if os.path.isfile(path):
+                        return int(os.path.getmtime(path))
+            return 0
+
         feed_episodes = []
-        for i, track in enumerate(playlist):
+        for track in playlist:
             ext = os.path.splitext(track["file"])[1].lower()
             feed_episodes.append({
                 "title": track["title"],
@@ -1063,7 +1110,7 @@ if __name__ == "__main__":
                 "page_url": f"{SITE_URL}/chapters/{track['slug']}.html",
                 "guid": track["slug"],   # 用 slug 不用網址:之後換網域也不會讓 app 以為是新集數
                 "cover_url": f"{SITE_URL}/{track['cover']}" if track["cover"] else channel_cover_url,
-                "pub_date": formatdate(FEED_EPOCH_TS + i * FEED_STEP_SECONDS, usegmt=True),
+                "pub_date": formatdate(song_pub_ts(track["file"]), usegmt=True),
                 "size": os.path.getsize(os.path.join(SONGS_DIR, track["file"])),
                 "mime": AUDIO_MIME.get(ext, "audio/mpeg"),
                 "summary": track["section"],
@@ -1077,6 +1124,10 @@ if __name__ == "__main__":
                            "依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。",
             "author": "雙保結局 · 拍立得檔案",
             "cover_url": channel_cover_url,
+            # 節目層級的「最後更新時間」= 最新一首配樂的時間,不是建置當下的
+            # 時間:同樣是為了 determinism,沒有真的新增東西就不該有新的時間戳
+            "last_build_date": formatdate(
+                max(song_pub_ts(t["file"]) for t in playlist), usegmt=True),
         }
         with open(os.path.join(OUT_DIR, "feed.xml"), "w", encoding="utf-8") as out:
             out.write(render_podcast_feed(channel, feed_episodes))
