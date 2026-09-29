@@ -8,7 +8,7 @@
   <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
   <atom:link href="https://xofred.github.io/lis-dual-saved-ending/feed.xml" rel="self" type="application/rss+xml"/>
   <description>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</description>
-  <lastBuildDate>Tue, 29 Sep 2026 08:47:44 GMT</lastBuildDate>
+  <lastBuildDate>Tue, 29 Sep 2026 11:41:14 GMT</lastBuildDate>
   <language>zh-TW</language>
   <itunes:author>雙保結局 · 拍立得檔案</itunes:author>
   <itunes:summary>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</itunes:summary>
@@ -1177,6 +1177,32 @@
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/those_who_held_funerals.jpg"/>
     <itunes:explicit>false</itunes:explicit>
     <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/those_who_held_funerals.mp3" length="5052566" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>公路混音帶</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/road_mixtape.html</link>
+    <guid isPermaLink="false">road_mixtape</guid>
+    <pubDate>Tue, 29 Sep 2026 11:41:14 GMT</pubDate>
+    <description>美債崩盤與零預算地下游擊展</description>
+    <itunes:title>公路混音帶</itunes:title>
+    <itunes:episode>90</itunes:episode>
+    <itunes:summary>美債崩盤與零預算地下游擊展</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/road_mixtape.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/road_mixtape.mp3" length="4302383" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>成熟的手信</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/mature_souvenirs.html</link>
+    <guid isPermaLink="false">mature_souvenirs</guid>
+    <pubDate>Mon, 28 Sep 2026 13:51:07 GMT</pubDate>
+    <description>美債崩盤與零預算地下游擊展</description>
+    <itunes:title>成熟的手信</itunes:title>
+    <itunes:episode>91</itunes:episode>
+    <itunes:summary>美債崩盤與零預算地下游擊展</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/mature_souvenirs.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/mature_souvenirs.mp3" length="5899400" type="audio/mpeg"/>
   </item>
 </channel>
 </rss>

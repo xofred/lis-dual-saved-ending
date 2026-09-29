@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>門外的戰場 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站441篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 223 章 · 美債崩盤與零預算地下游擊展</div>
+  <h1>門外的戰場</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/battlefields_outside.jpg" alt="門外的戰場" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <p>二號車廂雖然是個完美的避難所，但它總給人一種「大家都是超級宅女」的錯覺。</p>
+<p>事實上，在這個由五個女孩組成的微型社會裡，真正能夠做到大門不出、二門不邁，完全靠網路和行政指令就能活下去的終極阿宅，只有 Lily 一個人。</p>
+<p>Chloe 和 Max 還在加州的公路上揮霍那筆一萬兩千美元。而另外兩個留在車廂的傢伙，每週有三天左右，清晨就得推開車廂那扇厚重的門，開車到港口，搭上那班開往西雅圖的渡輪，走進那個充滿泥濘與消耗的現實世界裡去肉搏。</p>
+<p>Victoria 的招租談判、市政審批和酒會應酬都得親自到場，其他日子她就窩在車廂裡，對著筆電回郵件、開視訊會議；Kate 在危機干預中心排的是每週三個固定班次，剩下的時間才屬於她的烤箱和多肉植物。</p>
+<p>以 Victoria 的出身，旁人大概會以為她進城搭的是私人直升機。但一來，車廂周圍全是冷杉林和泥地，根本沒有能讓直升機降落的平地，上次那台野戰廚房，也是直升機懸停在半空、用纜繩吊下來的；二來，Chase 家有錢，不代表她自己的錢包沒有底。自從決定不再伸手向家族要錢，又剛在國債上交了七十五萬美元的學費，她比任何時候都清楚，包一趟直升機的錢，夠她搭好幾個月的渡輪。</p>
+<p>進城的那幾天裡，渡輪上的一個小時，是她們唯一安靜的時間。Victoria 會對著隨身鏡補完最後一層口紅；Kate 則靠著窗，看著灰藍色的普吉特海灣一點一點退到船尾。</p>
+<h2>一、Victoria 的戰場</h2>
+<p>西雅圖市中心，某高級商業地產的招商酒會。</p>
+<p>Victoria 穿著一身剪裁利落的黑色女士西裝，手裡端著一杯香檳，正對著面前一個大腹便便、滿嘴雪茄味的房地產投資大佬，露出一個完美、得體、卻讓她胃部痙攣的微笑。</p>
+<p>「所以，Chase 小姐，妳想在那個地段做獨立藝術空間？」大佬傲慢地晃著酒杯，「藝術是個賠錢貨。妳不如把那層樓租給連鎖健身房，我保證妳的租金回報率能翻倍。妳父親當年可是個精明的商人，妳怎麼沒遺傳到呢？」</p>
+<p>Victoria 握著香檳杯的手指因為用力而骨節泛白。</p>
+<p>如果是以前那個驕縱的大小姐，她現在已經把整杯香檳潑在這個人的臉上了。</p>
+<p>但她不能。</p>
+<p>自從辦完那場廢棄倉庫裡的零預算遊擊展之後，她的畫廊名聲大噪，但這也意味著，她需要實打實的現金流來撐住後續的營運。為了不再伸手向家族要錢，她接手了幾處 Chase 家族手裡沒人想管的邊緣商業地產，自己招租、自己經營。</p>
+<p>這是一場極其殘酷的成年人遊戲。</p>
+<p>她必須陪笑臉，必須應付那些滿嘴說教的投資人，必須在市政規劃局的辦公室裡低聲下氣地申請消防許可，必須跟難纏的租戶一分一分地討價還價。</p>
+<p>「您說得對，先生。」Victoria 強忍著噁心，用一種專業而謙和的語氣周旋，「但藝術空間帶來的地標效應，能提升周邊店面的價值。」</p>
+<p>「是嗎？」大佬嗤笑了一聲，「數據呢？」</p>
+<p>Victoria 張了張嘴。她知道這是真的，她在紐約和倫敦見過太多次。但此刻，她手上沒有任何一個數字可以甩到他臉上。</p>
+<p>一場酒會下來，她覺得自己的臉部肌肉已經因為假笑而僵硬，靈魂彷彿被抽乾了一半。那種不得不向世俗資本低頭的屈辱感，比讓她去幫 Chloe 修車還要累。</p>
+<h2>二、Kate 的戰場</h2>
+<p>而城市另一頭，Kate 的消耗，則是完全不同的另一種。</p>
+<p>西雅圖某青少年危機干預中心。</p>
+<p>Kate 穿著樸素的毛衣，蹲在一個因為家暴而離家出走的十四歲女孩面前，緊緊握著她發抖的手。</p>
+<p>「沒事的，妳現在安全了。我在這裡。」Kate 溫柔地注視著女孩的眼睛，一遍又一遍地安撫著。</p>
+<p>社工的薪水不多，但車廂裡的開銷大家分攤，Kate 從來不用為生活發愁。在這裡工作，也確實讓她找到了生命的意義。</p>
+<p>但很多人忽略了，善良是一項極度消耗體力的重活。</p>
+<p>在心理學上，這叫作共情疲勞。</p>
+<p>每個班次都要面對那些破碎的靈魂、絕望的眼淚、原生家庭的傷口……Kate 就像一塊巨大的人形海綿，無條件地吸收著這個世界的苦難。她不僅要陪伴、要傾聽，還要幫忙搬運捐贈物資、打掃庇護所、處理一疊又一疊的醫療和轉介表格。</p>
+<p>到了傍晚，當 Kate 走出干預中心時，她覺得自己的雙腿像灌了鉛一樣沉重，腦子裡嗡嗡作響，胸口彷彿壓著一塊看不見的石頭。</p>
+<p>那個總是用微笑溫暖別人的天使，在回程的渡輪上，累得連一句話都說不出來。</p>
+<h2>三、不需要監控</h2>
+<p>晚上八點。</p>
+<p>二號車廂的門被推開。</p>
+<p>Victoria 踩著那雙一千美元的高跟鞋，像一具行屍走肉般走了進來。她連一句抱怨的力氣都沒有了，直接踢掉鞋子，把自己摔進沙發裡，發出一聲極度痛苦的呻吟。</p>
+<p>緊接著，Kate 也推門進來。她臉色蒼白、腳步虛浮，朝著 Victoria 勉強擠出一個微笑，然後也一頭栽倒在沙發的另一頭。</p>
+<p>車廂裡很安靜。</p>
+<p>Lily 坐在她的多螢幕工作站前，回頭看了她們一眼。</p>
+<p>她不需要任何數據。光看 Victoria 連高跟鞋都懶得擺好、Kate 連圍巾都沒解開，她就知道，今天外面的世界把這兩個人啃得很慘。</p>
+<p>她也知道，在這種時候，任何安慰的話都是多餘的，甚至是吵鬧的。</p>
+<p>Lily 站起身，沒有說話。</p>
+<p>她把車廂的溫度調高了兩度，把頂燈調暗成暖橘色。她走進浴室，替 Victoria 放好一缸熱水，滴了幾滴她最喜歡的薰衣草精油。她熱了兩杯牛奶，拿了幾塊黑巧克力，想了想，把它們放在掃地機器人的背上，按下啟動鍵，讓它慢吞吞地把托盤送到沙發邊。</p>
+<p>Victoria 閉著眼睛，摸索著拿起一塊巧克力咬了一口。溫暖的空氣和甜味一起慢慢滲進身體，她緊繃了一整天的胃，終於一點點鬆開了。</p>
+<h2>四、一頁數據</h2>
+<p>「Lily……」Victoria 氣若游絲地說，「今天那個想租我店面的投資大佬，我真的很想把他的頭塞進馬桶裡……」</p>
+<p>「我聽到了，Victoria 學姐。」</p>
+<p>Lily 回到工作站，敲了一會兒鍵盤。十五分鐘後，印表機吐出了一張紙。她把那張紙放在 Victoria 的熱牛奶旁邊。</p>
+<p>「這是西雅圖、波特蘭和紐約幾個街區的公開資料。」她說，「藝術空間進駐前後，周邊店面的租金變化、步行人流，還有空置率。全部來自市政府的公開報告和已發表的研究，每一個數字都附了出處。」</p>
+<p>Victoria 睜開一隻眼睛，拿起那張紙。上面是一張乾淨俐落的對照表，最底下用紅筆圈出了一行數字。</p>
+<p>「下次他再問妳數據，」Lily 推了推圓框眼鏡，「您就把這張紙放在他的香檳杯旁邊。」</p>
+<p>沙發上的 Victoria 愣了一下，然後，嘴角緩緩勾起了一抹真正發自內心的、屬於老錢名媛的殘忍微笑。</p>
+<p>「我就知道……」她把那張紙小心地摺好，收進西裝口袋，「我愛死妳了，實習生。」</p>
+<p>沙發另一頭的 Kate 捧著熱牛奶，感受著手心傳來的溫度。那個吸收了一整天苦難而冰冷的身體，終於一點點回暖。</p>
+<p>「謝謝妳，Lily。」Kate 輕聲說。</p>
+<p>「這只是營地的基礎設施維護，Kate 學姐。」Lily 坐回螢幕前，語氣一如既往地平靜，「請確保您明天早上起床時，至少有八成的電量。」</p>
+<p>外面是殘酷的商業絞肉機，和令人窒息的人間疾苦。</p>
+<p>但只要推開二號車廂的門，這裡就有剛好的溫度、熱騰騰的牛奶，和一個不太會說好聽話、卻總是知道該做什麼的阿宅室友。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="angels_aggro.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="mature_souvenirs.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>
