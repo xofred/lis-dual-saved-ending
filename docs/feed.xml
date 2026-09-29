@@ -1052,5 +1052,41 @@
     <itunes:explicit>false</itunes:explicit>
     <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/symbiotic_heat_exchange.mp3" length="4321218" type="audio/mpeg"/>
   </item>
+  <item>
+    <title>語義盲區</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/semantic_blindspot.html</link>
+    <guid isPermaLink="false">semantic_blindspot</guid>
+    <pubDate>Fri, 27 Mar 2020 00:00:00 GMT</pubDate>
+    <description>美債崩盤與零預算地下游擊展</description>
+    <itunes:title>語義盲區</itunes:title>
+    <itunes:summary>美債崩盤與零預算地下游擊展</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/semantic_blindspot.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/semantic_blindspot.mp3" length="4886185" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>蜘蛛網與冰淇淋</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/spider_web_and_ice_cream.html</link>
+    <guid isPermaLink="false">spider_web_and_ice_cream</guid>
+    <pubDate>Sat, 28 Mar 2020 00:00:00 GMT</pubDate>
+    <description>美債崩盤與零預算地下游擊展</description>
+    <itunes:title>蜘蛛網與冰淇淋</itunes:title>
+    <itunes:summary>美債崩盤與零預算地下游擊展</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/spider_web_and_ice_cream.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/spider_web_and_ice_cream.mp3" length="5245117" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>辦過葬禮的人</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/those_who_held_funerals.html</link>
+    <guid isPermaLink="false">those_who_held_funerals</guid>
+    <pubDate>Sun, 29 Mar 2020 00:00:00 GMT</pubDate>
+    <description>美債崩盤與零預算地下游擊展</description>
+    <itunes:title>辦過葬禮的人</itunes:title>
+    <itunes:summary>美債崩盤與零預算地下游擊展</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/those_who_held_funerals.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/those_who_held_funerals.mp3" length="5052566" type="audio/mpeg"/>
+  </item>
 </channel>
 </rss>
