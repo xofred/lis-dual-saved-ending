@@ -8,7 +8,7 @@
   <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
   <atom:link href="https://xofred.github.io/lis-dual-saved-ending/feed.xml" rel="self" type="application/rss+xml"/>
   <description>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</description>
-  <lastBuildDate>Tue, 29 Sep 2026 13:12:15 GMT</lastBuildDate>
+  <lastBuildDate>Tue, 29 Sep 2026 15:43:51 GMT</lastBuildDate>
   <language>zh-TW</language>
   <itunes:author>雙保結局 · 拍立得檔案</itunes:author>
   <itunes:summary>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</itunes:summary>
@@ -1195,7 +1195,7 @@
     <title>成熟的手信</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/mature_souvenirs.html</link>
     <guid isPermaLink="false">mature_souvenirs</guid>
-    <pubDate>Tue, 29 Sep 2026 13:12:15 GMT</pubDate>
+    <pubDate>Tue, 29 Sep 2026 13:28:03 GMT</pubDate>
     <description>回程、見家長與重工業三大傳統</description>
     <itunes:title>成熟的手信</itunes:title>
     <itunes:episode>91</itunes:episode>
@@ -1203,6 +1203,19 @@
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/mature_souvenirs.jpg"/>
     <itunes:explicit>false</itunes:explicit>
     <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/mature_souvenirs.mp3" length="4886185" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>無歌詞的歌</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/song_without_words.html</link>
+    <guid isPermaLink="false">song_without_words</guid>
+    <pubDate>Tue, 29 Sep 2026 15:43:51 GMT</pubDate>
+    <description>回程、見家長與重工業三大傳統</description>
+    <itunes:title>無歌詞的歌</itunes:title>
+    <itunes:episode>92</itunes:episode>
+    <itunes:summary>回程、見家長與重工業三大傳統</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/song_without_words.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/song_without_words.mp3" length="4751110" type="audio/mpeg"/>
   </item>
 </channel>
 </rss>
