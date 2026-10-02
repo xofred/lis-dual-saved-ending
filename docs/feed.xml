@@ -8,7 +8,7 @@
   <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
   <atom:link href="https://xofred.github.io/lis-dual-saved-ending/feed.xml" rel="self" type="application/rss+xml"/>
   <description>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</description>
-  <lastBuildDate>Wed, 30 Sep 2026 08:12:44 GMT</lastBuildDate>
+  <lastBuildDate>Fri, 02 Oct 2026 07:03:13 GMT</lastBuildDate>
   <language>zh-TW</language>
   <itunes:author>雙保結局 · 拍立得檔案</itunes:author>
   <itunes:summary>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</itunes:summary>
@@ -1208,7 +1208,7 @@
     <title>無歌詞的歌</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/song_without_words.html</link>
     <guid isPermaLink="false">song_without_words</guid>
-    <pubDate>Wed, 30 Sep 2026 08:12:44 GMT</pubDate>
+    <pubDate>Thu, 01 Oct 2026 22:13:06 GMT</pubDate>
     <description>回程、見家長與重工業三大傳統</description>
     <itunes:title>無歌詞的歌</itunes:title>
     <itunes:episode>92</itunes:episode>
@@ -1216,6 +1216,19 @@
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/song_without_words.jpg"/>
     <itunes:explicit>false</itunes:explicit>
     <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/song_without_words.mp3" length="4602517" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>光之羽翼</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/wings_of_light.html</link>
+    <guid isPermaLink="false">wings_of_light</guid>
+    <pubDate>Fri, 02 Oct 2026 07:03:13 GMT</pubDate>
+    <description>回程、見家長與重工業三大傳統</description>
+    <itunes:title>光之羽翼</itunes:title>
+    <itunes:episode>93</itunes:episode>
+    <itunes:summary>回程、見家長與重工業三大傳統</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/wings_of_light.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/wings_of_light.mp3" length="4658238" type="audio/mpeg"/>
   </item>
 </channel>
 </rss>
