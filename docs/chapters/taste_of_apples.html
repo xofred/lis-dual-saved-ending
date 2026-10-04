@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蘋果的味道 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站462篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 246 章 · 回程、見家長與重工業三大傳統</div>
+  <h1>蘋果的味道</h1>
+
+  <div class="media-slot"><div class="media-item media-audio"><span class="slot-label">♪ 配樂</span><audio controls preload="none" src="../songs/taste_of_apples.mp3"></audio></div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/taste_of_apples.jpg" alt="蘋果的味道" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/taste_of_apples.jpg" data-full="../polaroids/taste_of_apples.jpg" alt="蘋果的味道 拍立得照片" loading="lazy"></div></div></div></div>
+
+  <div class="chapter-body">
+    <p>這是一個在二號車廂的午後，由一個烤箱裡的蘋果派引發的討論。</p>
+<p>Kate 戴著隔熱手套，將一個烤得金黃酥脆的蘋果派從烤箱裡端了出來。香氣瞬間瀰漫了整個車廂。但在切下一小塊品嚐後，Kate 卻微微皺起了眉頭，發出了一聲帶著失落的嘆息。</p>
+<p>「怎麼了，Kate？沒烤熟嗎？」Max 湊了過來。</p>
+<p>「不是……」Kate 放下叉子，看著盤子裡的蘋果，眼神裡有一種說不出的悵然，「只是覺得，它沒有蘋果的味道了。我記得小時候在祖母家的果園裡，隨便摘下一個蘋果咬一口，那種酸甜的香氣能一直衝到腦門裡。可是現在，無論我買多貴的有機蘋果，吃起來都只有一種……甜甜的塑膠感。食物好像都沒有食物的味道了。」</p>
+<p>躺在沙發上敷著眼膜的 Victoria 冷哼了一聲：「親愛的，這不是蘋果的問題。長大本來就是一個失去味覺的過程。我十歲的時候吃第一口白松露，覺得那是人間美味；現在？那東西對我來說就是一塊標價五百美元、用來在社交晚宴上裝腔作勢的真菌。」</p>
+<p>「所以，到底是食物變了，還是我們變了？」Max 忍不住陷入了沉思。</p>
+<h2>一、排除法</h2>
+<p>工作站後面的 Lily 轉過了身，推了推圓框眼鏡。</p>
+<p>「Max 學姐，這個問題可以用排除法來回答。我們先檢查兩個最常被拿來解釋的變量。」</p>
+<p>「第一，生理硬體。很多人以為長大之後味蕾會大量萎縮，所以吃什麼都沒味道。」她搖了搖頭，「但這是個誤會。味蕾大約每兩週就會整批更新一次，真正明顯減少，要到四五十歲以後。我們現在才二十五歲左右，硬體幾乎沒有任何折舊。」</p>
+<p>Victoria 拿下眼膜，挑了挑眉：「所以不是我的舌頭老了？」</p>
+<p>「不是。您的舌頭非常年輕，Victoria 學姐。」</p>
+<p>Lily 拿起桌上的一顆蘋果，在手裡轉了轉。</p>
+<p>「第二，食物本身。這一點倒是真的。現在超市裡的大部分商業品種，在選育的時候，優先考慮的是耐運輸、耐儲存、外皮夠硬、顏色夠紅。風味，往往排在這些指標後面。所以這顆蘋果確實沒有祖母果園裡的那麼香，Kate 學姐沒有吃錯。」</p>
+<p>她把蘋果放回桌上：</p>
+<p>「但即使是這樣，也只能解釋一部分。如果只是品種的問題，那麼 Victoria 學姐吃的白松露、還有其他很多東西，不應該也一起變得沒味道。所以，還剩下一個變量，我還沒找到。」</p>
+<h2>二、雙鯨魚</h2>
+<p>「我知道剩下的那個是什麼。」</p>
+<p>Chloe 靠在冰箱旁，手裡拿著一罐啤酒，眼神罕見地飄向了窗外的遠方。</p>
+<p>「我同意 Victoria 說的，食物的味道跟經歷有關。但我懷念的，不是高檔餐廳。」</p>
+<p>她喝了一口啤酒，嘴角勾起一抹苦澀的笑：</p>
+<p>「小時候，我爸常常帶我去雙鯨魚餐廳吃起司漢堡。那時候的漢堡，是我吃過全宇宙最美味的東西，肉汁能流滿整個盤子。那是一種絕對安全的味道。」</p>
+<p>「後來他出了車禍。我再去同一家餐廳，點同一個漢堡，卻覺得它又乾、又柴，甚至帶著一股悲傷的餿味。不是 Joyce 改了配方，而是坐在我對面那個會給我講冷笑話的男人，不見了。」</p>
+<p>車廂裡安靜了下來。</p>
+<p>「長大後食物沒有味道，」Chloe 低聲說，「是因為我們失去了小時候那種無憂無慮、被人好好保護著的安全感。我們現在吃東西，是為了交房租、為了活下去、為了對抗這個操蛋的世界。焦慮，是會把味道吃掉的。」</p>
+<p>Lily 看著她，輕輕點了點頭。「……這是剩下的那個變量。」</p>
+<h2>三、各自的失去</h2>
+<p>這句話，精準地擊中了車廂裡每一個人。</p>
+<p>Kate 低下了頭。她懷念祖母的蘋果，其實是懷念那個在她經歷那段影片之前、還沒被流言和家人的失望壓得喘不過氣的童年。那時候，她只是一個在果園裡跑來跑去、被祖母叫回家吃派的小女孩。</p>
+<p>Victoria 重新躺回沙發上，沒有再說話。十歲那口白松露好吃，也許只是因為那天她父親難得地誇了她一句。</p>
+<p>而 Lily 看著自己手裡的馬克杯，很久沒有出聲。</p>
+<p>她不是沒有吃過好吃的東西。小時候坐在父親肩上舔的那支冰淇淋，是她記得的、最後一個純粹好吃的味道。後來她長大了，餐桌上就只剩下水煮雞胸肉、無糖燕麥和魚油膠囊。父母說，那是為了讓她保持大腦清醒。從那以後，吃東西對她來說，就只是一項維持生命體徵的行政任務。</p>
+<p>「所以……」Kate 有些難過地看著那個蘋果派，「我們這輩子，都吃不到真正美味的東西了嗎？」</p>
+<h2>四、新的味道</h2>
+<p>Max 靜靜地看著她們。</p>
+<p>老錢的麻木、龐克的失去、天使的懷念、黑魔法師的那支冰淇淋。長大確實是一場剝奪。</p>
+<p>但 Max 走上前，拿起了那把切派的刀。</p>
+<p>「也許我們找不回小時候的味道了。」Max 切下一大塊蘋果派，遞給 Chloe，又切了一塊，放在 Lily 的辦公桌上。</p>
+<p>「但我們現在有新的。」</p>
+<p>Chloe 毫不客氣地把一大塊派塞進嘴裡。Lily 小心翼翼地用叉子戳下一小塊。Victoria 嘴上嫌棄，還是默默伸手拿了一個盤子。</p>
+<p>「Chloe，我們在加州路邊攤吃的那個塔可，妳敢說它不好吃嗎？」Max 笑著說，「Kate，妳上次烤糊的那塊巧克力餅乾，Lily 不是連渣都吃乾淨了嗎？」</p>
+<p>她的眼神溫柔而堅定：</p>
+<p>「小時候的東西好吃，是因為有人保護我們。現在，我們有彼此。這輛充滿機油味、吵吵鬧鬧的二號車廂，就是我們新的安全區。十年後，當我們回憶起今天這個沒什麼蘋果味的蘋果派時，它大概會變成我們這輩子最想再吃一次的東西。」</p>
+<p>Chloe 嚼著蘋果派，愣了一下，然後咧開嘴，露出了一個狂野的笑容，一把攬住 Max 的肩膀：「說得好，超級麥克斯！這破蘋果派簡直天下第一好吃！」</p>
+<p>Lily 默默咀嚼著嘴裡的甜味。</p>
+<p>這是那支冰淇淋之後，她為數不多的、不是為了攝取熱量，而是為了跟別人分享而吃下的東西。</p>
+<p>她推了推眼鏡，輕輕點了點頭：「從變量分析來看，Max 學姐的結論是成立的。」</p>
+<p>Max 舉起寶麗來相機。</p>
+<p>鏡頭裡，沒有昂貴的法國大餐，沒有關於品種和味蕾的爭論，只有幾個在成人世界裡抱團取暖的女孩，正在分食一個普通的蘋果派。</p>
+<p>「喀嚓。」</p>
+<p>照片吐出。Max 在背面寫下：</p>
+<p>『規則第九十四條：長大後，食物確實會失去一些魔法。但沒關係，只要對面坐著對的人，就算是一顆超市裡的普通蘋果，我們也能嚼出新的味道。』</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="bunny_with_nuclear_button.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="whose_it_is.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>

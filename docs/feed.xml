@@ -8,7 +8,7 @@
   <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
   <atom:link href="https://xofred.github.io/lis-dual-saved-ending/feed.xml" rel="self" type="application/rss+xml"/>
   <description>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</description>
-  <lastBuildDate>Fri, 02 Oct 2026 07:03:13 GMT</lastBuildDate>
+  <lastBuildDate>Sun, 04 Oct 2026 04:22:02 GMT</lastBuildDate>
   <language>zh-TW</language>
   <itunes:author>雙保結局 · 拍立得檔案</itunes:author>
   <itunes:summary>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</itunes:summary>
@@ -1221,7 +1221,7 @@
     <title>光之羽翼</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/wings_of_light.html</link>
     <guid isPermaLink="false">wings_of_light</guid>
-    <pubDate>Fri, 02 Oct 2026 07:03:13 GMT</pubDate>
+    <pubDate>Fri, 02 Oct 2026 17:46:36 GMT</pubDate>
     <description>回程、見家長與重工業三大傳統</description>
     <itunes:title>光之羽翼</itunes:title>
     <itunes:episode>93</itunes:episode>
@@ -1229,6 +1229,32 @@
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/wings_of_light.jpg"/>
     <itunes:explicit>false</itunes:explicit>
     <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/wings_of_light.mp3" length="4658238" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>雙重護甲</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/double_armor.html</link>
+    <guid isPermaLink="false">double_armor</guid>
+    <pubDate>Sun, 04 Oct 2026 04:22:02 GMT</pubDate>
+    <description>回程、見家長與重工業三大傳統</description>
+    <itunes:title>雙重護甲</itunes:title>
+    <itunes:episode>94</itunes:episode>
+    <itunes:summary>回程、見家長與重工業三大傳統</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/double_armor.jpeg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/double_armor.mp3" length="4512750" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>蘋果的味道</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/taste_of_apples.html</link>
+    <guid isPermaLink="false">taste_of_apples</guid>
+    <pubDate>Fri, 02 Oct 2026 08:25:54 GMT</pubDate>
+    <description>回程、見家長與重工業三大傳統</description>
+    <itunes:title>蘋果的味道</itunes:title>
+    <itunes:episode>95</itunes:episode>
+    <itunes:summary>回程、見家長與重工業三大傳統</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/taste_of_apples.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/taste_of_apples.mp3" length="4152310" type="audio/mpeg"/>
   </item>
 </channel>
 </rss>

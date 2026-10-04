@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>做給誰的 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站462篇故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 247 章 · 回程、見家長與重工業三大傳統</div>
+  <h1>做給誰的</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/whose_it_is.jpg" alt="做給誰的" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <p>「所以，這幫有錢人就是一群無可救藥的受虐狂和冤大頭，對吧？」</p>
+<p>晚餐後，Chloe 雙手枕在腦後，雙腳翹在茶几上。她剛剛在手機上刷到了一篇財經新聞，講的是世界工廠憑藉極致的供應鏈，把實驗室培育鑽石（Lab-Grown Diamonds）的價格壓得越來越低，讓傳統的天然鑽石巨頭坐立難安。</p>
+<p>Chloe 轉過頭，一臉挑釁地看著正在給手指塗護手霜的 Victoria。</p>
+<p>「大小姐，妳們那個圈子到底在堅持什麼？中國的工廠現在能造出分子結構 100% 相同、甚至純淨度更高的培育鑽石，價格只要天然鑽的十分之一；廣州的流水線能做出連原廠鑑定師都得拿放大鏡看半天的頂級平替包包。既然物理屬性和使用價值已經被『世界工廠』卷到了極致、甚至超越了原版，為什麼妳們這些老錢（Old Money）還非要花 300 刀買一瓶酸澀的香檳，花 500 刀買一塊帶著泥巴的白松露？」</p>
+<p>Chloe 嗤笑了一聲：「這難道僅僅是因為，那個 Logo 是妳們裝逼俱樂部的入場券？」</p>
+<p>Victoria 停下了塗護手霜的動作。她沒有像往常那樣暴跳如雷，而是用一種看著單細胞生物的悲憫眼神看著 Chloe。</p>
+<p>「Chloe，妳對『奢侈』這兩個字的理解，還停留在藍領階級的『性價比』和『物理實用性』上。」Victoria 慢條斯理地將護手霜蓋子擰緊，「當一個東西可以被流水線完美複製的時候，它在我們眼裡，就已經死了。」</p>
+<p>「但它更完美了啊！」Chloe 不服氣。</p>
+<p>「『完美』，恰恰是工業時代最廉價的屬性。」</p>
+<p>接話的是 Lily。她端著永遠喝不完的熱牛奶，從工作站的螢幕後探出頭來。對於這種涉及宏觀經濟、階級壁壘與系統運作邏輯的問題，行政黑魔法師有著絕對的發言權。</p>
+<p>Lily 走到白板前，沒有畫報表，而是寫下了三個冰冷的詞彙：<strong>低效、共識、血統。</strong></p>
+<p>「Chloe 學姐，世界工廠的底層邏輯是『極致的效率與規模化』。他們試圖用技術消除所有的誤差、瑕疵和稀缺性。」Lily 推了推圓框眼鏡，語氣冷酷地解剖著資本主義的頂層邏輯：</p>
+<p>「但老錢家族購買的，從來不是商品本身。他們購買的，正是『極致的低效與不可複製的誤差』。」</p>
+<p>Lily 指著白板上的第一個詞。</p>
+<p>「以 500 刀的阿爾巴（Alba）白松露為例。它的價值不在於它比實驗室裡人工培育的蘑菇好吃多少。它的價值在於：它『必須』在義大利皮埃蒙特大區、某個充滿霧氣的清晨，由一隻經過訓練的獵犬，在特定的橡樹根部用鼻子嗅出來。以前人們用豬，但豬找到松露會直接吃掉，還會把土地刨得一塌糊塗，所以義大利早在 1985 年就禁止了。</p>
+<p>它無法被大棚量產，產量完全看老天爺的臉色。老錢們支付那 500 刀，買的不是那股奇特的瓦斯味，而是『這個星球上有一小撮人，為了滿足我的一口食慾，在泥地裡進行了極度低效且昂貴的勞動』。世界工廠能複製松露的分子，但無法複製這種『對他人時間與勞動的絕對支配權』。」</p>
+<p>Chloe 愣住了。這種充滿了階級壓迫感的解釋，讓她這個底層龐克感到一陣不寒而慄。</p>
+<p>「至於品牌和包包，」Lily 轉向第二個詞，<strong>共識</strong>。</p>
+<p>「在金融學裡，這叫作『凡勃倫效應（Veblen Effect）』，但我更喜歡稱之為『社會學的密碼學（Sociological Cryptography）』。</p>
+<p>當廣州的流水線把愛馬仕（Hermès）的平替做到物理層面 100% 完美時，那個實體包包就已經失去了意義。老錢們真正在意的，是那個包背後的『購買資格』。妳必須在特定的店裡，忍受櫃姐的冷眼，購買幾萬美金妳根本不需要的垃圾配貨，熬過漫長的等待名單（Waitlist），才能拿到那個包。」</p>
+<p>Lily 的聲音軟糯，卻像刀子一樣鋒利：</p>
+<p>「這是一種『燒錢證明（Proof of Burn）』。老錢們通過這種極度浪費時間、浪費金錢、甚至帶有屈辱性的購買過程，向同階級的人發送加密信號：『我擁有足夠的冗餘資產去陪這個系統玩無聊的遊戲』。平替包包能複製物理外觀，但它無法偽造妳在這個權力遊戲中支付的『沉沒成本』。在他們的俱樂部裡，沒有經過配貨折磨的包，就像沒有區塊鏈確認的假幣，一文不值。」</p>
+<p>「太瘋狂了……」Max 聽得目瞪口呆，「所以，他們花幾十倍的錢，買的其實是一種『我比你更有資格浪費』的優越感？」</p>
+<p>「完全正確，Max。」</p>
+<p>Victoria 終於開口了。她優雅地靠在沙發上，接過了 Lily 的話頭，為這場老錢解剖課進行最後的總結。</p>
+<p>「當這個世界的科技和製造業強大到能讓所有人都用上完美無瑕的培育鑽石時，『完美』就成了窮人的標籤。」</p>
+<p>Victoria 眼神裡透著一種與生俱來的傲慢與殘酷的清醒：</p>
+<p>「因為窮人需要『性價比』，需要用一顆無瑕的鑽石來證明愛，需要用一個看不出破綻的平替包來偽裝身分。</p>
+<p>但在我們那個圈子裡，沒有人會在意妳的鑽石是不是最閃的。他們在意的是這顆鑽石的<strong>血統（Provenance）</strong>。這顆鑽石是不是妳曾祖母在 1920 年的巴黎拍賣會上買下的？它是不是見證過某個已經沒落的歐洲王室的婚禮？</p>
+<p>世界工廠能把物理參數卷到宇宙第一，但他們永遠無法製造出『時間』。他們無法製造出『歷史的灰塵』。」</p>
+<p>Victoria 拿起桌上的一個廉價玻璃杯，輕輕搖晃著裡面的直飲水，彷彿那是一杯頂級的羅曼尼·康帝（Romanée-Conti）：</p>
+<p>「老錢俱樂部之所以沒有被平替卷爆，是因為當你們在追求『實用與完美』的終點時，我們早就換了賽道。我們把戰場轉移到了『歷史、特權、低效與壟斷』上。這是一場永遠不公平的遊戲。」</p>
+<p>車廂裡安靜極了。</p>
+<p>Chloe 沒有馬上說話。</p>
+<p>她把翹在茶几上的腳放了下來，盯著自己指甲縫裡怎麼也洗不乾淨的機油，沉默了好一會兒。</p>
+<p>「不對。」她慢慢開口，「妳們說的那個，老娘懂一半。」</p>
+<p>Victoria 挑了挑眉。</p>
+<p>「在波特蘭工坊的時候，對街那個老太太拿來一台收音機，說是她老公留下的，音量旋鈕早就裂了。」Chloe 說，「我本來可以換一個新的塑膠鈕，十塊錢，五金行就有，一模一樣。但我沒換。我把舊的那個拆下來，用環氧樹脂一點一點補好，再磨平，裝回去。」</p>
+<p>「她拿回去的時候哭了。不是因為收音機變好了，而是因為那還是她老公每天早上轉的那一個。」</p>
+<p>車廂裡安靜了下來。</p>
+<p>Chloe 抬起下巴，朝 Max 脖子上掛著的那個鈦合金相機鐵殼指了指。</p>
+<p>「那個矽谷佬出五萬要買這個，我不賣。不是因為它稀有，也不是因為它能證明老娘是什麼階級。是因為它是給 Max 做的。上面每一道刮痕，都是她摔下去、我再把它焊回來的痕跡。」</p>
+<p>她看著 Lily 寫在白板上的那三個詞，又看了看 Victoria。</p>
+<p>「工廠能做出一模一樣的東西。妳們那個圈子，拿稀有和麻煩去把人擋在門外。但有一種東西，兩邊都做不出來。」</p>
+<p>她頓了頓，聲音放低了一點：</p>
+<p>「動手做的那個人，心裡清楚它是做給誰的。」</p>
+<p>Lily 看著她，推了推眼鏡，在白板的三個詞旁邊，安靜地補上了第四個：<strong>歸屬。</strong></p>
+<p>「不過……」Kate 溫柔的聲音打破了這令人窒息的階級沉默。</p>
+<p>她看著 Victoria，眼神裡沒有對老錢的羨慕，只有一種深深的悲憫：「如果妳吃的每一口松露、喝的每一口香檳、背的每一個包，都必須承載著『證明階級』、『篩選同類』和『防禦平民』的沉重任務……那妳真的能嚐出食物的味道嗎？妳真的會因為得到一個包而感到純粹的快樂嗎？」</p>
+<p>Victoria 握著玻璃杯的手，微微一僵。</p>
+<p>她看著杯子裡的直飲水。在那個充滿了 300 刀香檳和 500 刀白松露的西雅圖豪宅裡，她從來沒有覺得輕鬆過。每一頓晚宴都是戰場，每一件衣服都是盔甲。她必須時刻保持無懈可擊，才能不被同類踢出那個用「共識」和「血統」打造的黃金牢籠。</p>
+<p>「不。」</p>
+<p>Victoria 垂下眼眸，聲音裡那種傲慢的刺甲褪去了，取而代之的是一絲疲憊的真實：</p>
+<p>「那種生活，其實無聊透頂。它就像一個永遠沒有盡頭的跑步機，妳必須不斷地用更稀缺、更荒謬的東西，來填補內心的空洞。」</p>
+<p>Victoria 抬起頭，環視著這間充滿了機油味、牆上貼著寶麗來照片、桌上放著廉價薯條的二號車廂。</p>
+<p>「這也是為什麼，我會選擇留在這輛破車裡。」</p>
+<p>她看了一眼 Max 胸前那個鐵殼，又看了一眼 Chloe。</p>
+<p>Victoria 嘴角勾起一抹釋然的笑意：「因為在這裡，我不需要用『燒錢證明』來換取你們的認可。這裡沒有凡勃倫效應，沒有階級密碼學。在這裡，如果我喝了一杯 2 塊錢的可樂還打個嗝，Chloe 只會嘲笑我像個土包子，而不會把我踢出車廂。」</p>
+<p>「那是因為妳打嗝的聲音真的很像一隻受驚的鴨子，大小姐。」Chloe 毫不留情地補了一刀，但眼底卻帶著溫暖的笑意。</p>
+<p>Max 忍不住笑了出來。她舉起寶麗來相機。</p>
+<p>鏡頭裡，沒有頂級的鑽石，沒有血統高貴的老錢。只有一個終於卸下黃金盔甲、穿著皺巴巴睡衣的名媛，正在和一個藍領太妹互相翻著白眼。</p>
+<p>「喀嚓。」</p>
+<p>照片吐出。Max 在背面寫下：</p>
+<p><em>『規則第 95 條：世界工廠能複製一切，老錢圈子能壟斷時間。但在二號車廂，最貴的東西兩邊都做不出來：動手的人心裡清楚，它是做給誰的。』</em></p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="taste_of_apples.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a class="disabled">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>
