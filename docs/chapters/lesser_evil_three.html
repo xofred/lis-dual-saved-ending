@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>較小的惡（下）：倒數計時 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 252 章 · 電焊教學與車廂裡的時代感想</div>
+  <h1>較小的惡（下）：倒數計時</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/lesser_evil_three.jpg" alt="較小的惡（下）：倒數計時" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <p>電影的片尾字幕在電視螢幕上緩緩滾動，伴隨著那令人窒息的第四顆髒彈倒數歸零的滴答聲。</p>
+<p>二號車廂裡的空氣彷彿凝固了。沒有人說話，只有暖爐發出微弱的嗡嗡聲。</p>
+<p>「我發誓……」Chloe 瞪著螢幕，手裡的爆米花已經完全冷透，她猛地把遙控器砸在沙發墊上，「我只是想搜一部 Samuel L. Jackson 拿著槍大罵『Motherfucker』的無腦爽片，為什麼點開了這部見鬼的《戰略特勤組》（Unthinkable）？這他媽是什麼操蛋的結局？！」</p>
+<p>沒有人回答她。這部電影將「電車難題」推向了最殘酷、最挑戰人類道德底線的極端。</p>
+<p>Kate 把自己深深埋進毛毯裡，臉色蒼白。電影裡 H（Samuel L. Jackson 飾）準備對那兩個無辜孩子動手的畫面，即使最終只是關上燈的「假折磨」，依然讓她感到生理上的反胃。</p>
+<p>「這是不對的……」Kate 聲音顫抖，「那是孩子。如果我們為了解除炸彈而變成剝奪無辜兒童人權的野獸，那我們拯救下來的這個世界，還值得拯救嗎？」</p>
+<p>「但如果不變成野獸，那個隱藏在 FBI 慶功宴附近的第四顆炸彈就會把所有人炸成灰。」</p>
+<p>Victoria 放下手中的咖啡杯，語氣冷得像冰塊。作為車廂裡最奉行實用主義的人，她毫不避諱地直視這個血淋淋的邏輯： 「H 的數學簡單又完美：18公斤核原料，每個炸彈4.5公斤，18除以4.5等於4。事實證明他是對的。Brody（女主角）的道德潔癖在最後一刻害死了所有人。如果妳已經跨過了折磨恐怖份子的底線，卻在最後一關為了所謂的『良知』停手，這不叫高尚，這叫偽善的半途而廢。」</p>
+<p>「妳怎麼能這麼冷血，Victoria？」Chloe 煩躁地抓著頭髮，「那是兩個甚至連發生了什麼都不知道的小孩！電影就是在故意噁心人，它把妳逼到一個死角，讓妳必須在『當個虐童變態』和『讓幾百萬人去死』之間選一個。這是一個被操縱的爛局！」</p>
+<p>一直沉默的 Max 輕輕抱住了自己的膝蓋。</p>
+<p>她是這裡唯一真正做過這種選擇的人。在那個狂風暴雨的燈塔上，她曾在「犧牲 Chloe」和「毀滅阿卡迪亞灣」之間做過抉擇。</p>
+<p>「當你真的站在那個位置上時，」Max 的聲音很輕，卻帶著一種令人心碎的沉重，「數學是不管用的，Victoria。18除以4.5當然等於4，但在按下開關的那一刻，你腦子裡只有那兩個孩子的哭聲。選擇了『Greater Good』，你這輩子就只能在噩夢裡活著。Brody 不是蠢，她只是崩潰了。」</p>
+<p>爭論陷入了僵局。幾天前，她們才剛剛在駭客事件中達成共識，唾棄了情報局長那種用平民當誘餌的「Lesser Evil（較小的惡）」。但現在，這部電影用最極端的倒數計時，狠狠扇了她們一巴掌。</p>
+<p>所有人的目光不由自主地轉向了坐在螢幕前的 Lily。</p>
+<p>Lily 依然保持著平靜。她推了推圓框眼鏡，目光越過眾人，看著螢幕上已經靜止的畫面。她的腦海中正在進行一場高速的邏輯重組。</p>
+<p>「我們之前的結論並沒有錯，」Lily 開口了，她的聲音像一把精準的手術刀，切開了電影帶來的感性迷霧，「但我們必須區分『系統性的常態』與『崩潰邊緣的奇異點（Singularity）』。」</p>
+<p>她站起身，走到白板前，拿起麥克筆畫了一條線。</p>
+<p>「NSA 為了放長線釣大魚而容忍醫院被勒索，那是<strong>常態下的系統性作惡</strong>。政客和我的父母一樣，他們擁有資源、時間和權力，卻選擇將『Lesser Evil』當作一種行政工具，去榨取別人的價值，美其名曰『為了未來』。這種情況下，惡就是惡，絕不能妥協。」</p>
+<p>接著，Lily 在線的盡頭畫了一個重重的黑點，代表炸彈倒數歸零的瞬間。</p>
+<p>「但《Unthinkable》的場景不同。它不是政策，它是系統徹底失效後的絕境。當倒數計時只剩幾分鐘，當 18 除以 4.5 的物理現實擺在面前時，這已經不再是道德哲學的討論範疇，而是<strong>純粹的生存博弈</strong>。」</p>
+<p>Lily 轉過身，看著震驚的眾人。</p>
+<p>「在這種極端絕境下，H 關上燈假裝折磨孩子，本質上已經超越了『惡』的定義，這是一種將痛苦量化到極致的求生演算。Brody 的失敗，在於她用『常態下的道德』，去衡量『末日下的生存』。」</p>
+<p>「所以……妳覺得 H 是對的？」Chloe 嚥了一口唾沫。</p>
+<p>「不，我覺得這是一個死局。」Lily 放下麥克筆，眼神裡閃過一絲無奈的悲哀，「如果世界真的把我們逼到了必須折磨孩子才能活下去的地步，那就證明人類的防禦系統、情報網路和社會結構已經爛透了。這時候再討論誰更道德，就像在沉沒的鐵達尼號上爭論誰該洗碗一樣毫無意義。」</p>
+<p>車廂裡再次安靜下來。</p>
+<p>她們並沒有推翻幾天前的結論。她們依然痛恨那些西裝革履、將無辜者當作棋子的高位者。但這部電影讓她們深刻地意識到：這個操蛋的世界，有時候真的會把人逼進一個沒有任何正確答案的屠宰場。</p>
+<p>「好了，夠了。」Chloe 突然站起來，一把搶過遙控器，飛快地按著按鈕，「我受夠這些沉重的狗屁哲學了。我現在需要高強度的化學糖分和絕對的弱智內容來洗刷我的大腦。」</p>
+<p>螢幕畫面一閃，切換到了 Nickelodeon 頻道。黃色的海綿寶寶正尖叫著在海底追逐一個水母。</p>
+<p>Kate 鬆了一口氣，默默去廚房泡了五杯熱可可；Victoria 雖然翻了個白眼，但並沒有抱怨電視裡的兒童節目；Max 則靠在 Chloe 肩膀上，緊繃的肌肉終於放鬆下來。</p>
+<p>而 Lily 坐在自己的工作站前，看著螢幕上無憂無慮的卡通水母。她知道「電車難題」永遠沒有標準答案，但在這個小小的、偏離軌道的二號車廂裡，她們至少可以選擇在炸彈還未倒數的日子裡，拼盡全力不去成為那個推桿的人。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="lesser_evil_two.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="lesser_evil_four.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>
