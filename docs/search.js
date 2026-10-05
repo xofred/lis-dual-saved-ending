@@ -14,7 +14,7 @@
   var loading = null;     // 載入中的 promise,避免重複抓取
   // 全站篇數由建置時填進這裡,不寫進每頁的 HTML(理由見 SEARCH_WIDGET 上方註解)。
   // HTML 裡那句不含數字的版本是 JS 失效時的退路,載進來之後就換成帶數字的完整句。
-  var defaultStatus = '輸入關鍵字,搜遍全站462篇故事的正文。';
+  var defaultStatus = '輸入關鍵字,搜遍全站464篇故事的正文。';
   statusEl.textContent = defaultStatus;
   var debounceTimer = null;
 

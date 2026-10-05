@@ -8,7 +8,7 @@
   <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
   <atom:link href="https://xofred.github.io/lis-dual-saved-ending/feed.xml" rel="self" type="application/rss+xml"/>
   <description>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</description>
-  <lastBuildDate>Sun, 04 Oct 2026 07:14:47 GMT</lastBuildDate>
+  <lastBuildDate>Mon, 05 Oct 2026 16:36:34 GMT</lastBuildDate>
   <language>zh-TW</language>
   <itunes:author>雙保結局 · 拍立得檔案</itunes:author>
   <itunes:summary>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</itunes:summary>
@@ -1255,6 +1255,19 @@
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/taste_of_apples.jpg"/>
     <itunes:explicit>false</itunes:explicit>
     <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/taste_of_apples.mp3" length="4152310" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>鹹魚的午後</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/salted_fish_afternoon.html</link>
+    <guid isPermaLink="false">salted_fish_afternoon</guid>
+    <pubDate>Mon, 05 Oct 2026 16:36:34 GMT</pubDate>
+    <description>電焊教學與車廂裡的時代感想</description>
+    <itunes:title>鹹魚的午後</itunes:title>
+    <itunes:episode>96</itunes:episode>
+    <itunes:summary>電焊教學與車廂裡的時代感想</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/salted_fish_afternoon.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/salted_fish_afternoon.mp3" length="4630453" type="audio/mpeg"/>
   </item>
 </channel>
 </rss>
