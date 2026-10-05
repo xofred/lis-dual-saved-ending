@@ -871,7 +871,7 @@ if __name__ == "__main__":
             butterfly=BUTTERFLY_SVG,
             header=HEADER.format(root="../"),
             player=render_player("../"),
-            search=render_search("../", len(chapters)),
+            search=render_search("../"),
             content=content,
             footer=FOOTER,
             lightbox=LIGHTBOX,
@@ -971,7 +971,7 @@ if __name__ == "__main__":
         butterfly=BUTTERFLY_SVG,
         header=HEADER.format(root=""),
         player=render_player(""),
-        search=render_search("", len(chapters)),
+        search=render_search(""),
         content=index_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
@@ -1013,7 +1013,7 @@ if __name__ == "__main__":
         butterfly=BUTTERFLY_SVG,
         header=HEADER.format(root=""),
         player=render_player(""),
-        search=render_search("", len(chapters)),
+        search=render_search(""),
         content=gallery_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
@@ -1055,7 +1055,7 @@ if __name__ == "__main__":
         butterfly=BUTTERFLY_SVG,
         header=HEADER.format(root=""),
         player=render_player(""),
-        search=render_search("", len(chapters)),
+        search=render_search(""),
         content=journal_content,
         footer=FOOTER,
         lightbox=LIGHTBOX,
@@ -1148,7 +1148,7 @@ if __name__ == "__main__":
     # ---------- 產生全文搜尋(search.js + search-index.json) ----------
     # 邏輯跟索引資料分開:加一篇故事只會動到 search-index.json,search.js 不變
     with open(os.path.join(OUT_DIR, "search.js"), "w", encoding="utf-8") as out:
-        out.write(render_search_js())
+        out.write(render_search_js(len(search_entries)))
     with open(os.path.join(OUT_DIR, "search-index.json"), "w", encoding="utf-8") as out:
         out.write(render_search_index(search_entries))
     print(f"全文搜尋已產生:search.js + search-index.json({len(search_entries)} 篇)")

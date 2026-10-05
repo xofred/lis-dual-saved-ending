@@ -341,6 +341,12 @@ def render_player_js(playlist):
 
 # 每頁都放的搜尋面板(靜態,不含資料)。索引資料在 docs/search-index.json,
 # 邏輯在 docs/search.js,所以加一篇故事只會動到那份 JSON,不會讓全站頁面重產生。
+#
+# 注意這裡的提示文字**刻意不含全站篇數**:篇數是全域狀態,一旦寫進這段每頁
+# 都會嵌入的 HTML,每加一篇故事就會讓全站幾百個章節頁全部產生一行 diff,真正
+# 的改動會被雜訊完全淹沒(git log 也就跟著失去意義)。篇數改由 search.js 在
+# 初始化時填上 —— 那支檔案本來就每次建置重新產生,動它不會波及任何章節頁。
+# 這跟 player.js 把歌單資料抽出來不寫進每頁,是同一個理由。
 SEARCH_WIDGET = """
 <div class="search-overlay" id="searchOverlay" data-root="{root}" hidden>
   <div class="search-panel">
@@ -348,7 +354,7 @@ SEARCH_WIDGET = """
       <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
       <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
     </div>
-    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站{count}篇故事的正文。</div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站故事的正文。</div>
     <ul class="search-results" id="searchResults"></ul>
   </div>
 </div>
@@ -371,7 +377,10 @@ SEARCH_JS = """/* 由 build.py 產生:全站全文搜尋邏輯,索引資料另�
 
   var index = null;       // 載入後的索引陣列
   var loading = null;     // 載入中的 promise,避免重複抓取
-  var defaultStatus = statusEl.textContent;
+  // 全站篇數由建置時填進這裡,不寫進每頁的 HTML(理由見 SEARCH_WIDGET 上方註解)。
+  // HTML 裡那句不含數字的版本是 JS 失效時的退路,載進來之後就換成帶數字的完整句。
+  var defaultStatus = '輸入關鍵字,搜遍全站__TOTAL_CHAPTERS__篇故事的正文。';
+  statusEl.textContent = defaultStatus;
   var debounceTimer = null;
 
   function loadIndex() {
@@ -505,14 +514,17 @@ SEARCH_JS = """/* 由 build.py 產生:全站全文搜尋邏輯,索引資料另�
 """
 
 
-def render_search(root, count):
-    """每頁都放的搜尋面板(靜態片段,不含索引資料)。"""
-    return SEARCH_WIDGET.replace("{root}", root).replace("{count}", str(count))
+def render_search(root):
+    """每頁都放的搜尋面板(靜態片段,不含索引資料、也不含全站篇數)。
+    刻意不吃 count 參數:篇數是全域狀態,寫進每頁 HTML 會害每加一篇故事就
+    讓全站章節頁全部產生 diff。篇數交給 render_search_js() 填。"""
+    return SEARCH_WIDGET.replace("{root}", root)
 
 
-def render_search_js():
-    """docs/search.js 的內容:全文搜尋邏輯,索引資料另外放 search-index.json。"""
-    return SEARCH_JS
+def render_search_js(count):
+    """docs/search.js 的內容:全文搜尋邏輯,索引資料另外放 search-index.json。
+    全站篇數在這裡填 —— 這支檔案每次建置都重新產生,動它不波及任何章節頁。"""
+    return SEARCH_JS.replace("__TOTAL_CHAPTERS__", str(count))
 
 
 def render_search_index(entries):
