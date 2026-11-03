@@ -6,12 +6,14 @@
 markdown 章節,轉成統一風格的靜態閱讀站台。輸出到專案根目錄的 docs/(給 GitHub Pages 用)
 """
 
+import io
 import os
 import re
 import sys
 import shutil
 import hashlib
 import json
+import struct                     # 手寫 ID3v2.3 標籤用,不另外拉 mutagen 進來
 import subprocess                    # 只用來問 git 每首配樂最後一次被提交的時間
 from email.utils import formatdate   # RFC 2822 日期,給 Podcast feed 的 pubDate 用
 import markdown as md_lib
@@ -91,6 +93,19 @@ SITE_URL = "https://xofred.github.io/lis-dual-saved-ending"
 # 一模一樣的值。
 FEED_COVER_DIM = 1400          # podcast 封面規格:正方形,Apple 要求最小 1400px
 FEED_COVER_SLUG = "dual_saved_ending_family_reunion"   # 拿來當封面的那一章插圖
+# ---- 配樂的 ID3 標籤 ----
+# Suno 匯出的 mp3 幾乎沒有可用的中繼資料:97 首全部沒有專輯標籤、半數沒有藝人、
+# 十八首連曲名都沒有,有曲名的也多半是生成時的提示詞(「四個女仔嘅盛夏 daughter
+# epic」這種)。這樣丟進 Music.app 會散成一堆無法歸類的單曲,只能一首一首手動補。
+# build.py 手上的資料好得多 —— 它知道每首歌對應哪一章、章名、第幾季、第幾章、
+# 封面圖是哪張(podcast feed 就是拿這些生出來的)—— 所以建置時直接把正確的標籤
+# 寫進 docs/songs/ 的那份複本。來源 songs/ 完全不動,原始標籤留在那邊當存證。
+MUSIC_ARTIST = "HiuMann"
+MUSIC_ALBUM = "雙保結局 · 拍立得檔案"
+MUSIC_GENRE = "Soundtrack"
+EMBED_COVER_DIM = 600          # 內嵌封面:手機上顯示綽綽有餘,又不會讓每首歌胖太多
+EMBED_COVER_QUALITY = 80
+
 AUDIO_MIME = {
     ".mp3": "audio/mpeg", ".m4a": "audio/mp4",
     ".ogg": "audio/ogg", ".wav": "audio/wav",
@@ -196,6 +211,58 @@ def git_last_commit_times(rel_dir):
             name = os.path.basename(line.strip())
             times.setdefault(name, current)   # 只認第一次(= 最新的那次)
     return times
+
+
+def _id3_frame(frame_id, payload):
+    """ID3v2.3 的框:4 bytes 框名 + 4 bytes 長度(一般大端序,不是 synchsafe)+ 2 bytes 旗標。"""
+    return frame_id.encode("latin-1") + struct.pack(">I", len(payload)) + b"\x00\x00" + payload
+
+
+def _id3_text_frame(frame_id, text):
+    """文字框。ID3v2.3 官方只認 ISO-8859-1 與 UTF-16,中文一律走 UTF-16(編碼位元組
+    0x01,Python 的 'utf-16' 會自己加上 BOM),這也是 Music.app 相容性最好的組合。"""
+    return _id3_frame(frame_id, b"\x01" + text.encode("utf-16"))
+
+
+def _id3_apic_frame(jpeg_bytes):
+    """封面圖框:編碼 + MIME(latin-1,null 結尾)+ 圖片類型 + 描述(null 結尾)+ 圖檔。
+    類型 0x03 是「封面正面」;描述留空,用 ISO-8859-1 所以單一個 0x00 就結束。"""
+    return _id3_frame("APIC", b"\x00" + b"image/jpeg\x00" + b"\x03" + b"\x00" + jpeg_bytes)
+
+
+def build_id3_tag(frames):
+    """把一組框包成完整的 ID3v2.3 標籤。標籤總長要用 synchsafe 編碼(每個位元組只
+    用低 7 bits),這是 ID3 為了不跟 mp3 的同步字元撞號而訂的規矩。"""
+    body = b"".join(frames)
+    n = len(body)
+    size = bytes(((n >> 21) & 0x7F, (n >> 14) & 0x7F, (n >> 7) & 0x7F, n & 0x7F))
+    return b"ID3" + b"\x03\x00" + b"\x00" + size + body
+
+
+def strip_id3(data):
+    """回傳去掉開頭 ID3v2 標籤之後的純音訊,沒有標籤就原樣回傳。"""
+    if len(data) < 10 or data[:3] != b"ID3":
+        return data
+    b = data[6:10]
+    return data[10 + ((b[0] << 21) | (b[1] << 14) | (b[2] << 7) | b[3]):]
+
+
+def square_cover_bytes(src_path, dim=EMBED_COVER_DIM, quality=EMBED_COVER_QUALITY):
+    """把一張圖置中裁成正方形、縮到 dim,回傳 JPEG 的 bytes(不落地成檔案)。
+    專輯封面一律是正方形,塞長方形圖進去會被播放器裁掉兩側或加黑邊。"""
+    buf = io.BytesIO()
+    with Image.open(src_path) as img:
+        img = ImageOps.exif_transpose(img)
+        side = min(img.size)
+        left = (img.width - side) // 2
+        top = (img.height - side) // 2
+        img = img.crop((left, top, left + side, top + side))
+        if side != dim:
+            img = img.resize((dim, dim), Image.LANCZOS)
+        if img.mode not in ("RGB", "L"):
+            img = img.convert("RGB")
+        img.save(buf, "JPEG", quality=quality, optimize=True)
+    return buf.getvalue()
 
 
 def make_square_cover(src_path, dst_path, dim=FEED_COVER_DIM, quality=JPEG_QUALITY):
@@ -801,10 +868,48 @@ if __name__ == "__main__":
         {
             "title": c["title"], "file": c["audio_file"], "section": c["section"],
             "slug": c["slug"], "cover": chapter_cover(c),
+            "season": c["season"], "num": c["num"],   # 寫 ID3 的碟號/音軌號用
         }
         for c in chapters if c["audio_file"]
     ]
     print(f"播放清單共 {len(playlist)} 首歌")
+
+    # ---------- 把正確的 ID3 標籤寫進 docs/songs/ 的複本 ----------
+    # 為什麼碟號用季、音軌號用章節編號,而不是直接 1..N 的順位:順位會在中間插入
+    # 新配樂時讓後面整批位移,等於每次都要重寫一輪 mp3(還會讓 git 多出一堆無意義
+    # 的大檔 diff)。季與章節編號是綁在那一章身上的,永遠不會因為別處新增而改變,
+    # 排序出來的結果也一樣正確(第一季 → 第二季 → 第三季,各自照章節編號排)。
+    retagged = 0
+    for track in playlist:
+        dst = os.path.join(SONGS_DIR, track["file"])
+        frames = [
+            _id3_text_frame("TIT2", track["title"]),
+            _id3_text_frame("TPE1", MUSIC_ARTIST),
+            # 專輯藝人(TPE2)一定要寫:少了它,Music.app 會因為各首的藝人不一致而
+            # 把同一張專輯拆成好幾張,正是原本那堆 mp3 散掉的原因之一
+            _id3_text_frame("TPE2", MUSIC_ARTIST),
+            _id3_text_frame("TALB", MUSIC_ALBUM),
+            _id3_text_frame("TCON", MUSIC_GENRE),
+            _id3_text_frame("TPOS", str(track["season"])),
+            _id3_text_frame("TRCK", str(track["num"])),
+        ]
+        cover_path = os.path.join(OUT_DIR, track["cover"]) if track["cover"] else None
+        if cover_path and os.path.isfile(cover_path):
+            frames.append(_id3_apic_frame(square_cover_bytes(cover_path)))
+        tag = build_id3_tag(frames)
+
+        with open(dst, "rb") as fh:
+            current = fh.read()
+        wanted = tag + strip_id3(current)
+        # 內容相同就不重寫。SONGS_DIR 目前每次建置都整批清掉重複製,所以實務上
+        # 這個比對不會命中(複製進來的永遠是來源的原始標籤);留著是因為成本是零
+        # ——反正上面已經把整個檔案讀進記憶體了——而且哪天把 SONGS_DIR 改成跨次
+        # 建置保留(像 IMAGES_DIR 那樣),它立刻就會開始發揮作用。
+        if wanted != current:
+            with open(dst, "wb") as fh:
+                fh.write(wanted)
+            retagged += 1
+    print(f"配樂標籤已寫入:{retagged} 首(專輯「{MUSIC_ALBUM}」,碟號=季,音軌號=章節編號)")
 
     # 全站拍立得相簿:按章節順序,收錄每章的每一張拍立得照片
     all_polaroids = [
