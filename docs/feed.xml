@@ -8,7 +8,7 @@
   <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
   <atom:link href="https://xofred.github.io/lis-dual-saved-ending/feed.xml" rel="self" type="application/rss+xml"/>
   <description>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</description>
-  <lastBuildDate>Mon, 05 Oct 2026 22:52:02 GMT</lastBuildDate>
+  <lastBuildDate>Tue, 06 Oct 2026 15:43:27 GMT</lastBuildDate>
   <language>zh-TW</language>
   <itunes:author>雙保結局 · 拍立得檔案</itunes:author>
   <itunes:summary>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</itunes:summary>
@@ -1247,7 +1247,7 @@
     <title>蘋果的味道</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/taste_of_apples.html</link>
     <guid isPermaLink="false">taste_of_apples</guid>
-    <pubDate>Sun, 04 Oct 2026 07:14:47 GMT</pubDate>
+    <pubDate>Tue, 06 Oct 2026 15:43:27 GMT</pubDate>
     <description>電焊教學與車廂裡的時代感想</description>
     <itunes:title>蘋果的味道</itunes:title>
     <itunes:episode>95</itunes:episode>
@@ -1274,10 +1274,10 @@
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/lesser_evil_four.html</link>
     <guid isPermaLink="false">lesser_evil_four</guid>
     <pubDate>Mon, 05 Oct 2026 22:52:02 GMT</pubDate>
-    <description>電焊教學與車廂裡的時代感想</description>
+    <description>較小的惡(四部曲)</description>
     <itunes:title>較小的惡（終）：交託</itunes:title>
     <itunes:episode>97</itunes:episode>
-    <itunes:summary>電焊教學與車廂裡的時代感想</itunes:summary>
+    <itunes:summary>較小的惡(四部曲)</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/lesser_evil_four.jpg"/>
     <itunes:explicit>false</itunes:explicit>
     <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/lesser_evil_four.mp3" length="5301507" type="audio/mpeg"/>

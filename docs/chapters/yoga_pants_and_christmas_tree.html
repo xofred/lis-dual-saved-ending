@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>瑜伽褲與聖誕樹 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 258 章 · 入秋的茶、瑜伽褲與沙沙聲</div>
+  <h1>瑜伽褲與聖誕樹</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/yoga_pants_and_christmas_tree.jpg" alt="瑜伽褲與聖誕樹" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/yoga_pants_and_christmas_tree.jpg" data-full="../polaroids/yoga_pants_and_christmas_tree.jpg" alt="瑜伽褲與聖誕樹 拍立得照片" loading="lazy"></div><div class="polaroid-card" style="--rot: -2deg"><img src="../thumbs/polaroids/yoga_pants_and_christmas_tree_2.jpg" data-full="../polaroids/yoga_pants_and_christmas_tree_2.jpg" alt="瑜伽褲與聖誕樹 拍立得照片" loading="lazy"></div></div></div></div>
+
+  <div class="chapter-body">
+    <h2>一、瑜伽褲</h2>
+<p>隔天早晨，二號車廂的公共區飄著烤麵包的香氣。Max 坐在吧台前，手裡翻著一本從鎮上超市順手買來的《名利場》雜誌。雜誌的跨頁專題是一群穿著 Lululemon 瑜伽褲的矽谷新貴與好萊塢明星，標題用粗體字寫著：「大流行時期的居家新制服」。</p>
+<p>「一百二十美金。」Max 咬了一口塗滿奶油的吐司，指著雜誌上那條緊繃的黑色萊卡纖維褲子，「就為了買一條在視訊會議下半身穿的彈性緊身褲。這個世界在疫情這幾年是不是徹底瘋了？」</p>
+<p>剛從車底鑽出來、滿手油污的 Chloe 走進廚房，瞥了一眼雜誌，發出一聲極度嫌棄的冷哼。</p>
+<p>「這就是一塊把駱駝趾勒得一覽無遺的塑膠布。」Chloe 從冰箱裡抽出兩顆雞蛋，「我花二十塊美金在二手店買的工裝褲，不僅能裝下三把扳手，還能讓我在地上打滾。花一百二買這個的人，腦子裡裝的絕對都是燕麥奶。」</p>
+<p>正端著一杯黑咖啡從套房走出來的 Victoria，罕見地對 Chloe 的粗俗發言表示了贊同。她甚至停下腳步，用一種看著某種視覺污染的眼神，嫌惡地盯著雜誌上的照片。</p>
+<p>「這不是瘋了，Max，這是中產階級在隔離期間最精準的『智商稅』。」Victoria 優雅地在單人沙發上坐下，「從老錢（Old Money）的著裝禮儀來看，穿著瑜伽褲出現在健身房以外的任何公共場合——無論是去買咖啡還是遛狗——都是一種無可救藥的粗鄙。這就跟穿著睡衣參加晚宴一樣，是對社交邊界的嚴重冒犯。」</p>
+<p>Victoria 輕輕攪拌著咖啡，語氣裡透著絕對的階級傲慢：「真正的老錢，打獵時穿粗花呢，居家時穿蘇格蘭羊絨，晚宴穿高定。我們不需要把『我很健康、我有時間運動』這件事穿在身上到處昭告天下。因為我們的整個生活方式本身就是休閒（Leisure）。而那些把 Lululemon 當成日常制服的中產階級，本質上是因為他們的休閒時間太過匱乏，所以必須靠著一條印著小 Logo 的緊身褲，來向外界『表演』自己的自律和從容。」</p>
+<p>「非常精準的階級消費心理學分析。」</p>
+<p>Lily 坐在工作站前，一邊敲擊著鍵盤更新營地的物資清單，一邊用她那毫無起伏的軟糯聲音加入了討論。作為團隊裡最懂得看穿商業邏輯的大腦，她甚至不需要查閱報表，那些數據早就印在她的腦子裡。</p>
+<p>「如果我們把視角從美學切換到商業邏輯，這家公司的財務模型堪稱教科書級別的完美。它的毛利率常年維持在驚人的高位。他們沒有花天價去請好萊塢明星代言，而是把當地的瑜伽教練發展成『品牌大使』。這在行政和行銷成本上是極度高效的。他們賣的根本不是尼龍和萊卡，他們賣的是一種名為『正念（Mindfulness）』和『社群歸屬感』的世俗宗教。大流行期間，人們被困在家裡，極度渴望社群連結和健康焦慮的出口，Lululemon 就是那個精準收割這種焦慮的莊家。」</p>
+<p>「所以，」Max 眨了眨眼，試圖理清這其中的邏輯，「Victoria 覺得這牌子很 Low，而 Lily 覺得它是一個偉大的商業騙局？」</p>
+<p>「不，Max。」Victoria 放下咖啡杯，嘴角勾起一抹屬於資本家的冷酷微笑，「我只說穿著它出門很 Low。但在我的投資組合裡，它是一家非常優秀的成長型消費股。我在它股價剛起飛的時候就建倉了。因為我具備資本邏輯，我深知永遠不要低估中產階級為了緩解焦慮而花錢的愚蠢程度。老錢或許看不起瑜伽褲，但老錢絕對看得起那驚人的利潤率。」</p>
+<p>Chloe 翻了個巨大的白眼，把煎好的雞蛋粗暴地倒進盤子裡：「這就是我討厭你們這些資本家的原因。一邊嫌棄這東西辣眼睛，一邊靠它賺得盆滿缽滿。」</p>
+<p>「這叫資本的客觀性，Chloe。」Victoria 揚起下巴，「就像妳昨天嘲笑我買不到法蘭絨，但我今早依然能用投資瑜伽褲賺來的分紅，付清這節車廂下半年的星鏈網路費。妳可以繼續穿妳那條二十塊的破爛工裝褲，但我建議妳對我的投資眼光保持起碼的尊重。」</p>
+<p>「是是是，感謝女皇陛下的恩賜。」Chloe 嬉皮笑臉地端著盤子走到 Max 身邊，一屁股擠進同一個懶骨頭裡，順手把 Max 手裡的雜誌合上，扔到一邊。</p>
+<p>「其實仔細想想，」Max 靠在 Chloe 結實的肩膀上，看著眼前這幅充滿煙火氣的畫面，輕輕笑了起來，「我們這節車廂，才是最不符合 Lululemon 目標客群的地方。我們沒有身材焦慮，不追求中產階級的精緻，每天最大的運動量就是 Chloe 和 Victoria 為了誰該去倒垃圾而鬥嘴。」</p>
+<p>「因為我們有彼此就夠了。」Chloe 咬了一大口煎蛋，含糊不清地說道，「不需要一條一百二的褲子來告訴別人我們過得有多好。」</p>
+<p>Lily 在螢幕前滿意地推了推眼鏡。在她的風險評估矩陣裡，「中產階級消費陷阱」對二號車廂的威脅指數，已經被永久標記為零。而 Victoria 則假裝沒聽到 Chloe 那句肉麻的告白，只是默默喝了一口咖啡，心安理得地繼續做她那個一邊嫌棄瑜伽褲、一邊靠瑜伽褲賺錢的優雅老錢。</p>
+<h2>二、優衣庫特價款</h2>
+<p>「說到中產階級的消費陷阱，」Victoria 放下咖啡杯，目光緩緩轉向坐在工作站前的 Lily，從上到下打量了一遍，「我們這裡倒是有一位，完全免疫的。」</p>
+<p>Lily 今天穿的，依然是那件米色的 V 領針織衫，和一條深藍色的直筒裙。跟昨天一樣，跟前天一樣，大概也跟明天一樣。</p>
+<p>「從我第一次在波特蘭那間 Loft 的沙發上看到妳那天起，我就說過了，」Victoria 嘆了一口氣，「妳看起來就像一個優衣庫特價區的 NPC。」</p>
+<p>「謝謝學姐。」Lily 頭也沒抬，繼續敲著鍵盤，「這件針織衫十九塊九，一模一樣的我有五件。每天早上，我不需要花任何一秒鐘去決定要穿什麼。」</p>
+<p>「那叫沒品味。」</p>
+<p>「那叫省下來的決策額度。」Lily 平靜地說，「我每天要決定的事情已經夠多了。至少早上這一件，我可以不用想。」</p>
+<p>Victoria 張了張嘴，竟然找不到什麼漂亮的話來反駁。</p>
+<h2>三、聖誕樹</h2>
+<p>但是，咖啡因終於在 Victoria 的血液裡發揮了作用。</p>
+<p>她的眼睛危險地瞇了起來。</p>
+<p>「等等。」她站起身，端著咖啡繞到 Lily 身後，用一種抓到把柄的得勝姿態，指著 Lily 的頭頂，「妳說妳的衣服是為了不引人注目、不用動腦，對吧？」</p>
+<p>Lily 的手指停在了鍵盤上。</p>
+<p>「那妳怎麼解釋這顆頭？！」</p>
+<p>Lily 那頭齊肩的短髮，從正中間一分為二：一半是櫻桃紅，一半是森林綠。在暖黃色的燈光下，兩種顏色鮮豔得像是剛染上去的。</p>
+<p>「妳那身衣服確實像個無聊的稅務局實習生，」Victoria 得意地揚起下巴，「但妳的腦袋，看起來就像一棵被龐克搖滾閃電劈中的聖誕樹！妳的『不用想』理論，根本就不成立！」</p>
+<p>沙發上的 Max 忍不住笑了出來。她從茶几底下的寶麗來相冊裡翻了幾頁，抽出一張邊緣有些泛黃的照片，遞了過去。</p>
+<p>照片上是 PNCA 宿舍的門口，底部的留白處用麥克筆寫著：「適度叛逆 v2.0」。</p>
+<p>照片裡，Chloe 穿著牛仔夾克，叼著菸，一臉不耐煩地對著鏡頭；站在她旁邊的 Lily，剛滿十八歲，頂著一頭明顯是自己在浴室裡染、邊緣還有點不均勻的紅綠陰陽頭，米色針織衫裡面，生硬地內搭著一件 Chloe 借給她的黑色骷髏 T 恤，整個人僵得像一根電線桿。</p>
+<p>「那是她認識我們之後的第三個禮拜。」Max 笑著說，「她穿得太像教育局派來查帳的審計員了，Chloe 看不下去，硬拉著她去藥妝店買了兩盒最便宜的染髮劑。」</p>
+<p>「她在浴室裡抖了整整半個小時，」Chloe 靠在 Max 肩膀上，咧嘴大笑，「一邊抹一邊唸，說這樣做違反了宿舍的衛生管理條例第幾條第幾款。」</p>
+<p>Victoria 低頭看著那張照片，又抬頭看了看 Lily 那顆鮮豔的腦袋，嘴角慢慢勾起一抹勝利的微笑。</p>
+<p>「所以，」她把照片輕輕拍在桌上，「這根本不是什麼行政理論。妳只是當年被 Chloe 拐去染了頭髮，然後一直懶得洗掉而已。承認吧，Lily。我扳回一城了。」</p>
+<h2>四、補色</h2>
+<p>Lily 沒有馬上回答。</p>
+<p>她低頭看著桌上那張照片，看了很久。</p>
+<p>「……不是懶得洗掉，學姐。」她終於開口，聲音很輕，「頭髮會長，顏色也會褪。如果放著不管，三個月之後，它就會變回原本的黑色。」</p>
+<p>Victoria 愣了一下。</p>
+<p>「所以我每隔六個禮拜，就會補一次色。」Lily 推了推圓框眼鏡，「同一個牌子，同一個色號，鎮上那家藥妝店最便宜的那一種。」</p>
+<p>車廂裡安靜了下來。</p>
+<p>「為什麼？」Victoria 問。這一次，她的語氣裡沒有任何嘲諷。</p>
+<p>Lily 想了想。</p>
+<p>「因為那是我第一次，被人拉著去做一件不合規的事。」她說，「那天晚上我嚇得半死，覺得自己在犯罪。但 Chloe 學姐一邊罵我一邊替我抹染髮劑，Max 學姐在旁邊笑到連照片都拍不穩。那是我第一次覺得，就算做錯了一件小事，也不會有人因此不要我。」</p>
+<p>她摸了摸自己那縷紅色的髮尾。</p>
+<p>「我不想讓它褪回去。」</p>
+<p>Victoria 張了張嘴，那句準備好的「我贏了」，卡在了喉嚨裡。</p>
+<p>她確實贏了。Lily 承認了，那顆頭跟任何行政理論都沒有關係。但她贏完之後，竟然一個字都說不出來。</p>
+<p>「……幹嘛啦。」Chloe 抓了抓頭，假裝要去倒咖啡，起身的時候卻順手揉亂了 Lily 的頭髮，「下次要補色的時候，記得叫我。妳自己染，後腦勺那塊每次都塗不均勻。」</p>
+<p>「我知道。」Lily 乖巧地說，「所以上次和上上次，我都叫您了。」</p>
+<p>「……喔，對。」</p>
+<p>Max 舉起寶麗來，對著那顆紅綠相間、被 Chloe 揉得一團亂的腦袋，按下了快門。</p>
+<p>「咔嚓。」</p>
+<p>那張新的照片，後來被她貼在了那張「適度叛逆 v2.0」的旁邊。中間隔了好幾年，同一顆頭，顏色一點都沒有褪。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="high_tea_low_tea.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="three_colored_heads.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>
