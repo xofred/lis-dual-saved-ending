@@ -215,6 +215,59 @@ def make_square_cover(src_path, dst_path, dim=FEED_COVER_DIM, quality=JPEG_QUALI
         img.save(dst_path, "JPEG", quality=quality, optimize=True)
 
 
+def find_duplicate_media_exts(src_dir, exts, in_use):
+    """找出同一個檔名主幹同時存在多種副檔名的素材,例如 foo.jpeg 與 foo.jpg 並存。
+
+    這件事的後果分兩種,取決於該類素材是「挑一個」還是「全部收」:
+
+    - 插圖與配樂走 find_media(),照 exts 順序挑第一個命中的,所以只有優先序最前面
+      那個會被頁面引用;另一個完全用不到,卻照樣被壓縮、複製進 docs/、提交進版控、
+      被 Service Worker 快取,白佔空間與流量。
+    - 拍立得與手帳是把所有符合的檔案全部收進來當成不同張照片,所以兩個都會被顯示
+      出來。這有兩種可能,得自己看一眼才知道是哪種:同一張圖匯出了兩次(頁面上就
+      會重複出現同一張),或者其實是不同的照片、只是編號手滑(第三張被命名成 _2
+      而不是 _3),這種要改名而不是刪掉。
+
+    既不報錯也不會讓建置失敗,所以得主動提醒。
+
+    只收真的會被採用的主幹(in_use 判定),資料夾裡其他不相干的檔案本來就另外
+    統計成「跟章節對不上的」,不在這裡湊熱鬧。
+    回傳 {主幹: [檔名, ...]},list 已按 exts 優先序排好,第一個就是實際被用的那個。
+    """
+    order = {e: i for i, e in enumerate(exts)}
+    by_stem = {}
+    for fname in os.listdir(src_dir):
+        stem, ext = os.path.splitext(fname)
+        if ext.lower() in order and in_use(stem):
+            by_stem.setdefault(stem, []).append(fname)
+    return {
+        stem: sorted(fs, key=lambda f: order[os.path.splitext(f)[1].lower()])
+        for stem, fs in by_stem.items() if len(fs) > 1
+    }
+
+
+def warn_duplicate_media_exts(label, src_dir, exts, in_use, picks_one):
+    """把 find_duplicate_media_exts() 的結果印成高亮警告。跟重複章節編號警告一樣,
+    不影響建置成功與否,只是提醒去處理掉多出來的那個檔案。
+    picks_one 區分兩種後果(詳見 find_duplicate_media_exts 的說明):True 是挑一個、
+    其餘變死檔(插圖、配樂);False 是全部收、同一張圖會重複顯示(拍立得、手帳)。"""
+    if not src_dir:
+        return
+    dupes = find_duplicate_media_exts(src_dir, exts, in_use)
+    if not dupes:
+        return
+    headline = ("只有第一個會被引用,其餘是白佔空間的死檔"
+                if picks_one else
+                "兩個都會被當成不同張照片顯示出來,請確認是同圖匯出兩次(該刪)"
+                "還是編號手滑(該改名成下一個號碼)")
+    print(f'{WARN}\u26a0 警告:{label}有同名但不同副檔名的素材,{headline}:{RESET}')
+    for stem, fs in sorted(dupes.items()):
+        detail = (f'採用 {fs[0]},沒用到 {"、".join(fs[1:])}'
+                  if picks_one else
+                  f'同時存在 {"、".join(fs)}')
+        print(f'{WARN}    {stem}:{detail}{RESET}')
+
+
 def find_media(slug, media_dir, exts):
     """在 media_dir 底下尋找 slug + 任一副檔名的檔案,回傳找到的檔名(不含路徑),找不到回傳 None"""
     if not os.path.isdir(media_dir):
@@ -607,6 +660,16 @@ if __name__ == "__main__":
     polaroids_src = find_source_dir(POLAROIDS_SOURCE_CANDIDATES)
 
     journal_src = find_source_dir(JOURNAL_SOURCE_CANDIDATES)
+
+    # 同名不同副檔名的素材警告(例如 foo.jpeg 與 foo.jpg 並存,只有前者會被引用)
+    warn_duplicate_media_exts("插圖", images_src, IMAGE_EXTS,
+                              lambda st: st in slugs, picks_one=True)
+    warn_duplicate_media_exts("配樂", songs_src, AUDIO_EXTS,
+                              lambda st: st in slugs, picks_one=True)
+    warn_duplicate_media_exts("拍立得", polaroids_src, IMAGE_EXTS,
+                              lambda st: polaroid_matches_any_slug(st, slugs), picks_one=False)
+    warn_duplicate_media_exts("手帳", journal_src, IMAGE_EXTS,
+                              lambda st: polaroid_matches_any_slug(st, slugs), picks_one=False)
 
     image_cache_old = load_image_cache()
     image_cache_new = {}
