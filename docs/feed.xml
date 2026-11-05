@@ -8,7 +8,7 @@
   <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
   <atom:link href="https://xofred.github.io/lis-dual-saved-ending/feed.xml" rel="self" type="application/rss+xml"/>
   <description>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</description>
-  <lastBuildDate>Tue, 03 Nov 2026 04:14:47 GMT</lastBuildDate>
+  <lastBuildDate>Thu, 05 Nov 2026 08:19:36 GMT</lastBuildDate>
   <language>zh-TW</language>
   <itunes:author>雙保結局 · 拍立得檔案</itunes:author>
   <itunes:summary>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</itunes:summary>
@@ -1247,7 +1247,7 @@
     <title>一個家的施工圖（倒敘）</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/blueprint_of_a_home.html</link>
     <guid isPermaLink="false">blueprint_of_a_home</guid>
-    <pubDate>Mon, 02 Nov 2026 16:42:29 GMT</pubDate>
+    <pubDate>Tue, 03 Nov 2026 07:55:45 GMT</pubDate>
     <description>一個家的施工圖(倒敘)</description>
     <itunes:title>一個家的施工圖（倒敘）</itunes:title>
     <itunes:episode>95</itunes:episode>
@@ -1260,7 +1260,7 @@
     <title>四週施工日誌（倒敘）</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/four_week_build_log.html</link>
     <guid isPermaLink="false">four_week_build_log</guid>
-    <pubDate>Mon, 02 Nov 2026 16:44:59 GMT</pubDate>
+    <pubDate>Tue, 03 Nov 2026 07:55:45 GMT</pubDate>
     <description>一個家的施工圖(倒敘)</description>
     <itunes:title>四週施工日誌（倒敘）</itunes:title>
     <itunes:episode>96</itunes:episode>
@@ -1270,13 +1270,26 @@
     <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/four_week_build_log.mp3" length="5079216" type="audio/mpeg"/>
   </item>
   <item>
+    <title>被中產階級化的網際網路</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/gentrification_of_the_internet.html</link>
+    <guid isPermaLink="false">gentrification_of_the_internet</guid>
+    <pubDate>Thu, 05 Nov 2026 08:19:36 GMT</pubDate>
+    <description>電焊教學與車廂裡的時代感想</description>
+    <itunes:title>被中產階級化的網際網路</itunes:title>
+    <itunes:episode>97</itunes:episode>
+    <itunes:summary>電焊教學與車廂裡的時代感想</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/gentrification_of_the_internet.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/gentrification_of_the_internet.mp3" length="4222369" type="audio/mpeg"/>
+  </item>
+  <item>
     <title>蘋果的味道</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/taste_of_apples.html</link>
     <guid isPermaLink="false">taste_of_apples</guid>
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>電焊教學與車廂裡的時代感想</description>
     <itunes:title>蘋果的味道</itunes:title>
-    <itunes:episode>97</itunes:episode>
+    <itunes:episode>98</itunes:episode>
     <itunes:summary>電焊教學與車廂裡的時代感想</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/taste_of_apples.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1289,7 +1302,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>電焊教學與車廂裡的時代感想</description>
     <itunes:title>鹹魚的午後</itunes:title>
-    <itunes:episode>98</itunes:episode>
+    <itunes:episode>99</itunes:episode>
     <itunes:summary>電焊教學與車廂裡的時代感想</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/salted_fish_afternoon.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1302,7 +1315,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>較小的惡(四部曲)</description>
     <itunes:title>較小的惡（終）：交託</itunes:title>
-    <itunes:episode>99</itunes:episode>
+    <itunes:episode>100</itunes:episode>
     <itunes:summary>較小的惡(四部曲)</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/lesser_evil_four.jpg"/>
     <itunes:explicit>false</itunes:explicit>
