@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大地色系 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 261 章 · 入秋的茶、瑜伽褲與沙沙聲</div>
+  <h1>大地色系</h1>
+
+  <div class="media-slot"><div class="media-item media-audio"><span class="slot-label">♪ 配樂</span><audio controls preload="none" src="../songs/earth_tones.mp3"></audio></div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/earth_tones.jpg" alt="大地色系" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、剛好路過</h2>
+<p>二〇一九年十一月，西雅圖國會山莊。</p>
+<p>一輛深灰色的保時捷 Panamera 停在社區圖書館對面的路邊，車頭剛好壓在消防栓前面那段紅線上。</p>
+<p>Victoria 戴著一副寬框墨鏡，靠在車門上，手裡拿著一杯冷壓羽衣甘藍汁，姿態放鬆，彷彿她只是在這條滿是手工皂店和二手黑膠行的街上迷了路，剛好停下來喝口東西。</p>
+<p>那杯羽衣甘藍汁她只喝了兩口。她已經在這裡站了四十分鐘。</p>
+<p>圖書館的玻璃門開了。Kate 抱著一疊精裝童書走出來——她每週四下午在這間分館的兒童區做說故事志工——一抬頭，就看見了街對面那輛車。</p>
+<p>Victoria 立刻站直，把那杯綠色的東西準確地丟進旁邊的分類回收桶，摘下墨鏡。</p>
+<p>「Marsh。真巧。」她的語氣拿捏得剛剛好，不熱情，也不刻意，「我剛好在附近看一個展。這一帶計程車難叫得要命。上車吧，順路載妳回去。」</p>
+<p>Kate 看了看她那件一塵不染的駝色羊絨大衣，又看了看這條街。整條街上，除了獨立咖啡館就是二手衣店，最近的畫廊在三個街區以外，而且週四不開門。</p>
+<p>她溫柔地笑了笑，什麼都沒戳破。</p>
+<p>「謝謝妳，Victoria。真是幫了大忙。」</p>
+<hr />
+<p>兩人正要上車，一個穿著粗麻布連帽衫、背著「反對消費主義」帆布袋的年輕男人經過。他的目光在那輛擦得發亮的保時捷和 Victoria 的大衣之間來回掃了兩遍，發出一聲很響的冷笑。</p>
+<p>「漂亮的碳排放啊，公主。」他故意提高音量，對身邊的同伴說，「信託基金大概夠買下整條街的碳權了吧。」</p>
+<p>Victoria 的眼神一下子冷了。</p>
+<p>她往前邁了半步，腦子裡已經排好了三段反擊，第一段的開頭是「你這件有機棉連帽衫的產地」——</p>
+<p>一隻柔軟的手搭上了她的手腕。</p>
+<p>Kate 上前半步，剛好擋在兩人中間，臉上帶著那種曾經在無數個糟糕日子裡安撫過別人的、毫無破綻的微笑。</p>
+<p>「抱歉，這輛車讓你不舒服了。」她說，語氣真誠得讓人生不起氣來，「你這麼在乎環境，真的很好。」</p>
+<p>男人準備好的下一句話卡在了喉嚨裡。</p>
+<p>「不過，」Kate 繼續說，「我們等一下要去買二十套睡袋和冬衣，送去 SoDo 那邊的庇護所。這輛車的後車廂比較大，我的車大概連五套都塞不下。」她看了看他的帆布袋，眼神裡甚至帶著點欽佩，「你也一定很關心這些事吧？庇護所晚上六點需要志工幫忙發熱湯，我們可以順路載你過去。」</p>
+<p>男人的臉紅一陣白一陣。他看了看 Kate，又看了看她身後那個正在努力控制嘴角肌肉的女人。</p>
+<p>「呃……不用了。」他含糊地說，「我等一下還有個集會。」</p>
+<p>他拉著同伴快步過了馬路。</p>
+<hr />
+<p>Panamera 的車門關上。真皮座椅散發著淡淡的皮革香，Victoria 握著方向盤，轉頭看著正在繫安全帶的 Kate。</p>
+<p>「Marsh，」她說，「我們什麼時候說要去買睡袋了？」</p>
+<p>「我說的是『我們』。」Kate 把童書疊好放在膝蓋上，「我這週本來就約好了要去庇護所送東西。只是今天剛好多了一個司機。」</p>
+<p>Victoria 張了張嘴。</p>
+<p>「……妳從一開始就知道我不是剛好路過。」</p>
+<p>「下一個路口右轉。」Kate 對她露出一個無辜的微笑，「然後上 I-5 往南。」</p>
+<p>「往南？」</p>
+<p>「西雅圖市區裡，」Kate 說，「一間沃爾瑪都沒有。最近的在倫頓。」</p>
+<p>Victoria 沉默了兩秒。</p>
+<p>「這座城市，」她發動引擎，「連沃爾瑪都嫌棄。我開始有點尊敬它了。」</p>
+<hr />
+<h2>二、品管模式</h2>
+<p>倫頓沃爾瑪的冷白色螢光燈，打在那件手工訂製的羊絨大衣上，怎麼看都不對勁。</p>
+<p>一開始，Victoria 確實保持著她預想中的姿態。她站在戶外用品區的走道正中間，雙臂抱胸，手裡拿著手機，螢幕上是某個巴黎品牌的私人預覽會。她跟兩邊的貨架保持著至少半公尺的距離，彷彿那些標價二十九塊九毛九的東西會傳染什麼。</p>
+<p>Kate 推著一輛輪子有點卡的購物車，在一整排睡袋前面認真比對標籤。</p>
+<p>「Victoria，妳覺得這個怎麼樣？」她拿起一個深藍色的睡袋，「標籤上寫耐寒到零下五度，三個一起買有折扣。」</p>
+<p>Victoria 從手機上抬起眼睛，只看了半秒，眉頭就皺成了死結。</p>
+<p>她把手機塞回口袋，走過去，兩根手指捏住睡袋的邊緣，搓了搓布料，又拉了拉拉鍊。</p>
+<p>「這個拉鍊，」她說，「連我的化妝包都不如。妳把這個送出去，他們不會變暖，只會在翻身的時候被靜電電醒。」</p>
+<p>「可是……這已經是這排最厚的了。」</p>
+<p>「因為這排是給在自家後院搭帳篷的人買的。」</p>
+<p>Victoria 伸手接過了購物車。剛才那副「我只是被綁架進來的」姿態消失了，取而代之的是 Chase 家的人走進談判桌時的那種銳利。</p>
+<p>「跟我來。」她推著車往走道深處走，一邊走一邊掃視最上層的貨架，像在檢閱一排不合格的新進員工，「看縫線，看填充物回彈的速度，看拉鍊頭是金屬還是塑膠。」</p>
+<p>她在一排睡袋前停下來，一個接一個捏過去，最後抽出三種，在手裡掂了掂重量。</p>
+<p>然後她抬起頭，看著整面貨架，表情忽然變得非常困惑。</p>
+<p>「為什麼，」她說，「這裡的東西全都是螢光橘色和螢光綠？」</p>
+<p>Kate 愣了一下：「……可能比較顯眼？」</p>
+<p>「難道窮人就不配擁有大地色系嗎？」</p>
+<p>Kate 沒忍住，笑出了聲。</p>
+<p>接下來的四十分鐘，Victoria 進入了某種接近強迫症的品管模式。她把 Kate 挑的幾件特價防風外套全部掛回架上，換成角落裡沒有打折、但領口有防風片的款式；她在保溫瓶的貨架前，對三個牌子的瓶蓋密封圈批評了整整五分鐘；她拒絕了所有印著卡通圖案的毛毯，只挑深灰、墨綠和藏青。</p>
+<p>Kate 跟在推車旁邊，聽著 Victoria 一邊抱怨這裡的燈光讓她偏頭痛，一邊毫不猶豫地把一條又一條毛毯丟進推車，嘴角的笑意越來越深。</p>
+<p>收銀台前，滿滿兩車東西。收銀員嚼著口香糖，看了看那一車深色系的冬衣，又看了看 Victoria。</p>
+<p>「八百四十二塊七毛五。刷卡還付現？」</p>
+<p>Kate 剛拉開帆布包，一張黑色的卡已經帶著一陣香水味拍在了櫃台上。</p>
+<p>「毛毯和保溫瓶分開裝，」Victoria 用指尖點了點櫃台，「然後麻煩快一點。我這件大衣再吸五分鐘這裡的空氣，就可以直接報廢了。」</p>
+<hr />
+<h2>三、市容</h2>
+<p>SoDo 那間庇護所在一棟外牆斑駁的紅磚建築裡。負責人是個穿著磨邊法蘭絨襯衫、眼袋很深的中年社工，叫 Dennis。</p>
+<p>他幫著把東西從後車廂搬下來，拎起一個深灰色的睡袋，愣了一下：「這顏色……挺低調的。我們平常收到的都是那種亮到刺眼的。」</p>
+<p>「那些螢光色，」Victoria 把墨鏡戴回去，「會嚴重破壞這座城市的市容。」</p>
+<p>她從包裡抽出那張長長的收據，用兩根手指夾著遞給他。</p>
+<p>「我的會計需要一份捐贈收據。照總額開，謝謝。」</p>
+<p>Dennis 接過收據，掃了一眼總額，忽然笑了一聲，笑得有點苦。</p>
+<p>「八百四十二塊，二十套。」他說，「一套四十出頭。」他把收據折好，「市府資助的那幾個過夜營地，去年的預算表公開了。我看了一下，攤下來，一頂帳篷一年要好幾萬。」</p>
+<p>「帳篷本身呢？」Victoria 問。</p>
+<p>「跟妳剛買的差不多。」Dennis 聳聳肩，「剩下的是場地、保全、管理費、顧問費……還有一堆我看不懂的項目。」</p>
+<p>Victoria 沒有再說話。</p>
+<p>她站在庇護所門口，墨鏡後面的眼睛沒在看任何人。Kate 認得那個表情——每次 Victoria 在腦子裡跑試算表的時候，都是這副樣子。</p>
+<p>她名下那兩棟商辦大樓，每年的房產稅帳單她都親自看過。那筆錢是怎麼來的，她比誰都清楚：每一個月追租、每一次半夜被叫去處理漏水的電梯、每一個為了續約陪笑的下午。帳單上其中有一行，是撥給市府這類專案的。</p>
+<p>她在心裡把那個數字，除以 Dennis 剛才說的那個「好幾萬」。</p>
+<p>然後她的下巴，很慢很慢地，往下掉了一點。</p>
+<p>「……所以，」她終於開口，聲音很平，「我今年等於買了兩次帳篷。一次用房產稅，一次用黑卡。」她頓了頓，「而黑卡那一次，便宜了一千倍。」</p>
+<p>Dennis 沒有接話，只是苦笑著搖了搖頭。</p>
+<p>Kate 一直很安靜。她看著車廂裡最後幾條深灰色的毛毯被搬進門，抱著童書的手指，不知不覺收緊了。</p>
+<p>「那第一次的錢，」她輕聲說，「有多少，真的變成了一條毯子？」</p>
+<p>沒有人回答她。</p>
+<p>過了一會兒，Victoria 把墨鏡推上頭頂，從包裡掏出手機，按了幾下。</p>
+<p>「Lily。」她對著手機說，「回去以後，把我這三年的房產稅單全部調出來。對，全部。我要看每一行的去向。」</p>
+<p>她掛了電話，把收據重新塞回 Dennis 手裡。</p>
+<p>「收據照開。」她說，「既然我要買兩次，至少其中一次，得是我自己挑的顏色。」</p>
+<p>Dennis 愣了一下，然後第一次真正地笑了。</p>
+<p>Kate 鬆開手指，輕輕拍了拍他的手臂，小聲說：「別介意。她只是不習慣別人看見她做好事。」</p>
+<hr />
+<h2>四、氣壓懸吊</h2>
+<p>回程的路上，Panamera 的車廂裡流淌著坂本龍一的鋼琴。十幾支揚聲器把每一個琴鍵都放得乾乾淨淨，像是有人坐在後座彈。</p>
+<p>Chloe 開車的時候，猛禽的音響永遠在試圖用破音的吉他震碎車窗；輪到 Max 搶到副駕駛座的音響控制權，車裡就會換成那種讓人想把頭靠在窗上看雨的獨立民謠。Victoria 的車裡，只有秩序。</p>
+<p>Kate 窩在副駕駛座上，隨著旋律輕輕點頭。Victoria 的目光始終直視前方，但等紅燈的時候，她伸手把暖氣往上調了半度，又把副駕駛座那邊的出風口往下撥了一點，讓暖風吹到 Kate 的膝蓋上。</p>
+<p>天快黑的時候，她們排進了西雅圖碼頭的渡輪車道。</p>
+<p>綠白相間的華盛頓州立渡輪停在碼頭邊，船艙底部張著一個黑洞洞的大口。前面的車一輛接一輛開上金屬跳板，輪胎碾過接縫，發出「哐噹、哐噹」的巨響。</p>
+<p>Victoria 盯著那塊跳板，眉頭越皺越緊。</p>
+<p>「每次開上這東西，」她說，「我都覺得我的氣壓懸吊在無聲地尖叫。」</p>
+<p>輪到她們的時候，她把車速降到幾乎是在蠕動，小心翼翼地爬上跳板。穿著螢光背心的工作人員揮著指揮棒，示意她把車緊緊貼著停在一輛滿是泥巴的福特皮卡後面。</p>
+<p>Victoria 看著那輛皮卡車斗上掛著的泥塊，閉了閉眼睛，熄了火。</p>
+<p>「妳要待在車裡，還是上去？」</p>
+<p>「上去吧。」Kate 已經解開了安全帶，「坐渡輪最好的部分，就是可以吹風。」</p>
+<p>Victoria 低頭看了一眼自己身上那件不能沾水、更不能沾海鹽的大衣，絕望地嘆了口氣。</p>
+<hr />
+<h2>五、甲板</h2>
+<p>最上層的露天甲板上，風大得驚人。</p>
+<p>渡輪還沒開，靠在碼頭邊微微起伏。暮色裡，西雅圖的天際線一點一點亮起燈來，太空針塔的頂端閃著紅光，海鷗在船尾上空盤旋。</p>
+<p>Kate 趴在白色的欄杆上，看得很開心。</p>
+<p>Victoria 雙手抱胸，整個人縮在大衣裡，精心整理過的頭髮被吹得四處亂飛。她看起來像一隻被強行抱出溫室的波斯貓。</p>
+<p>「謝謝妳今天陪我跑這一趟。」Kate 轉過頭，被風吹亂的金髮拂過臉頰，「Dennis 剛才傳訊息來，說那些睡袋今晚就會發下去。」</p>
+<p>Victoria 哼了一聲，試圖用手指把一撮打結的頭髮理順，失敗了。</p>
+<p>「別誤會，Marsh。我只是沒辦法忍受有人在我眼前做出錯誤的消費決策。」</p>
+<p>她轉過身，背靠著欄杆躲風。</p>
+<p>「而且，」她說，「如果妳再不請我去船艙裡喝一杯熱茶，這件大衣的主人，就要在這裡凍成冰雕了。」</p>
+<p>Kate 笑著挽住她的手臂，把她從風口拉走。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="scratching_sound.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="chowder_and_shrimp_eggs.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蛤蜊濃湯與蝦仁滑蛋 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 262 章 · 入秋的茶、瑜伽褲與沙沙聲</div>
+  <h1>蛤蜊濃湯與蝦仁滑蛋</h1>
+
+  <div class="media-slot"><div class="media-item media-audio"><span class="slot-label">♪ 配樂</span><audio controls preload="none" src="../songs/chowder_and_shrimp_eggs.mp3"></audio></div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/chowder_and_shrimp_eggs.jpg" alt="蛤蜊濃湯與蝦仁滑蛋" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、立頓</h2>
+<p>華盛頓州立渡輪的客艙，有一種極度務實的通勤感。</p>
+<p>一排排乙烯基塑膠卡座，冷白色的日光燈，靠窗的位置坐滿了剛下班、一臉疲憊的通勤族。船艙中段有一個小小的餐飲吧台：玻璃冰櫃裡擺著三明治和瓶裝水，保溫鍋裡是蛤蜊濃湯，旁邊一台熱狗滾輪慢悠悠地轉著。收銀機後面站著一個大學生，正在打一個很長的哈欠。</p>
+<p>Victoria 低頭看著手裡紙杯上垂下來的那張黃色立頓標籤，眉頭抽了一下。</p>
+<p>「這就是熱茶？」她用兩根手指捏著杯緣，「沒有伯爵，沒有大吉嶺。就只是一包泡在滾水裡的黃色小紙袋。」</p>
+<p>「要糖包嗎？」大學生面無表情地指了指旁邊一盒皺巴巴的糖包。</p>
+<p>Victoria 深吸一口氣，決定為了 Chase 家的體面，不跟一個大學生爭論茶葉產地。她付了錢，走向靠窗的卡座。</p>
+<p>窗外已經全黑了。海面什麼都看不見，玻璃窗變成了一面鏡子，映著船艙裡的日光燈，和坐在對面的兩個人。</p>
+<p>Victoria 一坐下，幾乎是出於肌肉記憶，就掏出了手機，點開一個巴黎設計師的私人預覽頁面。Kate 沒有拿手機，只是捧著紙杯，看著窗上的倒影。</p>
+<p>「那是一件斗篷嗎？」</p>
+<p>Victoria 的手指停了。她抬起頭，發現 Kate 正好奇地看著她的螢幕——上面是一個模特兒，穿著一件結構誇張到幾乎像建築物的不對稱黑色外套。</p>
+<p>「這叫解構主義剪裁，Marsh。」Victoria 下意識帶上了一點說教的語氣，把螢幕往 Kate 那邊斜了斜，「設計師故意破壞傳統的肩線和下擺，探討布料和人體之間的空間。」她停了一下，「不過這個笨蛋把配重搞砸了。模特兒走起來，像一隻右半邊中風的蝙蝠。」</p>
+<p>Kate 端詳了一會兒，輕輕笑了。</p>
+<p>「我剛才在想，」她說，「如果穿著這件去沃爾瑪買睡袋，會不會卡在貨架中間。」</p>
+<p>Victoria 愣住了。</p>
+<p>她腦子裡瞬間浮現出那個畫面：巴黎最新一季的解構主義高訂，在一整排螢光橘色的睡袋之間艱難地側身移動，最後被自己的下擺絆倒在特價區。</p>
+<p>她死死咬住下唇，想把那聲笑憋回去，失敗了。一聲短促的、帶著鼻音的笑漏了出來。</p>
+<p>然後她按下手機的鎖定鍵，把手機翻過來，扣在桌面上。</p>
+<p>「所以，」她雙手交疊，身體往前傾了一點，「妳剛才抱著的那本童書，講的是什麼？別告訴我是『只要善良就能拯救世界』那種。我今天在那個社工面前，已經用掉一整年份的善良配額了。」</p>
+<p>「不是拯救世界。」Kate 用指尖敲了敲紙杯，「是一個很挑剔的公主，最後發現自己其實很喜歡在下雨天踩水坑。」她頓了頓，「我覺得妳可能會有共鳴。」</p>
+<hr />
+<h2>二、滾輪熱狗</h2>
+<p>就在這時候，一陣狂風猛地撞上了渡輪的鋼鐵外殼。</p>
+<p>緊接著，像是天上有人拉開了一道水閘，雨水變成一整面灰白色的牆，狠狠地砸在客艙的玻璃上。船身晃了一下，頭頂的廣播響起船長帶著雜音的聲音：因為強風，本班次延後開航，請旅客留在客艙內。</p>
+<p>然後，一個非常不名媛、完全不受大腦控制的聲音，從她的羊絨大衣底下傳了出來。</p>
+<p>她的肚子叫了。</p>
+<p>Kate 眨了眨眼，目光從窗外收回來，落在 Victoria 微微僵硬的肩膀上。她什麼也沒說，只是嘴角往上翹了一點。</p>
+<p>「別用那種眼神看我，Marsh。」Victoria 閉上眼睛，「我的新陳代謝只是在如實反映這悲慘的一天。」</p>
+<p>她站起來，帶著一種走上斷頭台的悲壯，走向了剛才被她貶得一文不值的吧台。</p>
+<p>五分鐘後，她端著一個橘色的塑膠托盤回來。托盤上有兩碗裝在紙碗裡的蛤蜊濃湯、幾包蘇打餅乾，和一根在滾輪上不知道轉了幾個小時、外皮已經微微起皺的熱狗。</p>
+<p>「這是我這輩子刷過最屈辱的一筆帳。」她把托盤放在桌上，「黑卡碰到那台油膩刷卡機的時候，我好像聽見了 Chase 家列祖列宗在嘆氣。」</p>
+<p>Kate 拿起一包蘇打餅乾，捏碎了撒進濃湯裡，舀了一口。</p>
+<p>「其實還不錯。」她說，「這種天氣能喝到熱湯，已經很幸福了。」</p>
+<p>Victoria 盯著面前那碗可疑的白色糊狀物，用兩根手指捏著塑膠湯匙攪了兩下，終於鼓起勇氣舀了一小口。</p>
+<p>她的眉頭立刻擰成一團。</p>
+<p>「這不是蛤蜊濃湯。」她抓起立頓紅茶灌了一大口，「這是一碗加了馬鈴薯的液態鹽。還有這塊蛤蜊肉——」她用湯匙撥了一下，「口感像在嚼一塊泡過海水的橡皮擦。這隻蛤蜊死得毫無尊嚴。」</p>
+<p>但她沒有放下湯匙。</p>
+<hr />
+<h2>三、二號車廂</h2>
+<p>與此同時，奧林匹亞半島。</p>
+<p>二號車廂的鐵皮屋頂被暴雨砸得噼啪作響。Max 盤腿坐在沙發上，看著手機，噗哧一聲笑了出來。</p>
+<p>「Kate 傳訊息來，說渡輪因為強風延後開航。」她說，「她們被困在船艙裡。Victoria 正在吃滾輪熱狗和蛤蜊濃湯。」</p>
+<p>「我願意出五十塊買一張大小姐現在的臉。」Chloe 大笑著站起來，拉開廚房的儲物櫃，「不過這代表今晚沒有 Kate 的晚餐了。Max，妳要吃什麼？我們有起司通心粉，或者——加了雙倍培根的起司通心粉。」</p>
+<p>「雙倍培根。」Max 毫不猶豫地舉手，眼睛都亮了。兩隻浣熊正準備開工，一隻手從旁邊伸過來，輕輕把儲物櫃的門推上了。</p>
+<p>是 Lily。她不知道什麼時候已經闔上了筆電，正在把襯衫袖子往上捲。</p>
+<p>「這週的鈉攝取量已經超標了，Chloe 學姐。」她說，「請把餐桌清出來。給我二十分鐘。」</p>
+<p>Chloe 和 Max 面面相覷，臉色同時白了一點。</p>
+<p>她們當然知道 Lily 會做飯。自從廚房變成 Kate 的地盤以後，Lily 就很少下廚了，但她上一次認真掌勺的那個晚上，兩個人到現在都還記得：一鍋熬了六個小時、好喝到讓人說不出話的蓮藕豬骨湯，以及緊跟在後面的那一盤——</p>
+<p>「……不會又是苦瓜吧？」Max 小心翼翼地問，身體已經本能地往後退了半步。</p>
+<p>「老娘現在就可以去五金行買螺絲。」Chloe 說。</p>
+<p>「今天沒有苦瓜。」Lily 從冷凍庫裡拿出一包好市多的急凍蝦仁，泡進水盆裡解凍，「冰箱裡沒有。而且外面在下暴雨，五金行已經關門了。」</p>
+<p>兩個人對看了一眼，謹慎地留了下來。</p>
+<p>接下來的二十分鐘，Chloe 和 Max 靠在流理台邊，看著 Lily 做了一場高精度的實驗。旁邊一口深鍋裡，薑絲肉片菜心已經滾成了一鍋清湯。</p>
+<p>真正的重頭戲在旁邊的平底鍋。</p>
+<p>Lily 往鍋裡倒了多到讓人心驚肉跳的油。</p>
+<p>「呃，Lily，」Chloe 說，「妳是在炒菜，還是在幫我的猛禽換機油？」</p>
+<p>Lily 沒有回答。她把擦乾的蝦仁滑進熱油裡，大火炒到剛變色就撈出來，直接倒進旁邊打散的六顆蛋液裡。鍋子擦乾，重新燒熱，再倒一次油。等油面冒起一絲輕煙，整碗混著蝦仁的蛋液傾倒下去——</p>
+<p>「刺啦」一聲，蛋液邊緣瞬間膨起一圈金黃色的泡。</p>
+<p>Lily 手裡的鍋鏟只往中心推了四五下。蛋液表面還有將近一半是濕的、在流動的。</p>
+<p>然後她關了火，手腕一翻，把整鍋東西滑進了盤子裡。</p>
+<p>「等等等等！」Chloe 指著盤子，「那還是生的！我們會得沙門氏菌！」</p>
+<p>「請看。」Lily 說。</p>
+<p>她把盤子放在桌上，轉身去炒最後一盤蒜蓉菜心。</p>
+<p>就在這十幾秒裡，盤子裡那些還在微微流動的蛋液，靠著熱油和瓷盤的餘溫，一點一點凝結成了一層絲綢一樣發亮的鵝黃色，粉紅色的蝦仁嵌在裡面，邊緣還在輕輕冒著熱氣。</p>
+<p>「如果等到在鍋裡全熟才起鍋，」Lily 把菜心端上桌，「蛋白質會過度凝固，口感就會老得像……」她想了一下，「像 Victoria 學姐現在在吃的那塊蛤蜊。」</p>
+<p>蝦仁滑蛋，蒜蓉菜心，一碟用老抽和冰糖收汁的煎豆腐，一鍋薑絲肉片滾湯。前後不到二十五分鐘。</p>
+<p>Chloe 叉起一塊裹著蛋的蝦仁放進嘴裡。</p>
+<p>下一秒，她的眼睛睜大了。</p>
+<p>那蛋嫩得幾乎不用咀嚼，順著舌頭就滑了下去，蛋香、油香和蝦仁的脆口一起在嘴裡炸開。跟她這輩子吃過的任何一盤美式炒蛋，根本不是同一個次元的東西。</p>
+<p>「Holy shit……」她含糊地罵了一聲，叉子已經伸向了菜心，「這是什麼巫術？妳在裡面加了什麼？」</p>
+<p>「鹽，和油。」Lily 說，「主要是油。」</p>
+<p>Max 喝了一口湯，溫熱的湯順著喉嚨滑下去，把窗外暴雨帶進來的寒氣一下子驅散了。她放下湯匙，看著 Lily 的眼神裡，第一次完全沒有對苦瓜的戒備。</p>
+<p>「那只是最基本的家常菜。」Lily 慢條斯理地夾了一塊豆腐。</p>
+<p>Max 掏出手機，對著那盤已經被 Chloe 消滅了三分之一的蝦仁滑蛋，拍了一張特寫。</p>
+<p>「妳要幹嘛？」Chloe 嘴裡塞得鼓鼓的。</p>
+<p>「給被困在渡輪上的某人一點精神支持。」Max 露出一個帶著點小惡魔的笑容，按下傳送，「附言：『祝妳的滾輪熱狗用餐愉快。』」</p>
+<hr />
+<h2>四、不羨慕</h2>
+<p>渡輪上，Victoria 的手機在塑膠桌面上亮了起來，響了兩聲。</p>
+<p>她正捏著那根表皮起皺的熱狗，認真考慮要不要為了生存再咬第二口。她順手滑開螢幕。</p>
+<p>二號車廂溫暖的燈光下，一盤剛起鍋的蝦仁滑蛋，鵝黃的蛋液泛著油亮的光，粉嫩的蝦仁半埋其中，旁邊是翠綠的菜心和一碗冒著熱氣的清湯。</p>
+<p>下面一行字：<em>祝妳的滾輪熱狗用餐愉快。</em></p>
+<p>Victoria 看著那盤滑蛋，再低頭看看自己面前那碗已經結了一層白膜的濃湯，和手裡那根像風乾標本一樣的熱狗。</p>
+<p>她的表情扭曲了整整一秒。</p>
+<p>「怎麼了？」Kate 注意到她周圍的氣壓驟降，探過頭來，「營地那邊傳訊息嗎？」</p>
+<p>Victoria 在零點一秒內收回了表情，重新掛上那副無懈可擊的冷漠。</p>
+<p>「沒什麼。Caulfield 的無聊炫耀。」她把手機往桌上一放，端起立頓紅茶喝了一口，「Lily 給她們隨便弄了點亞洲家常菜。妳知道的，那種高油、高膽固醇、毫無擺盤美學可言的炒蛋。」她頓了頓，又仔細看了一眼照片，確認盤子裡沒有任何綠色的、表面有顆粒的東西，「……至少這次不是那個化學武器。」</p>
+<p>Kate 低頭看了一眼螢幕，眼睛一下子亮了：「哇，這蛋看起來好滑！Lily 好久沒下廚了。」</p>
+<p>「那只是因為放了過量的油，Marsh。」Victoria 雙手抱胸，下巴微揚，語氣酸得可以直接拿去醃黃瓜，「一個碳水加油脂的炸彈而已。我一點都不羨慕。真的。誰會在晚上八點把那麼多油往肚子裡塞？對皮膚簡直是災難。」</p>
+<p>話音剛落，她的肚子極不給面子地，又發出了一聲悠長而空洞的轟鳴。</p>
+<p>卡座裡安靜了。只有暴雨打在玻璃上的聲音。</p>
+<p>Kate 眨了眨眼，非常體貼地移開視線，假裝什麼都沒聽到。她從帆布包裡翻出一小包還沒拆封的杏仁，悄悄推到 Victoria 面前。</p>
+<p>「我想也是。」她溫柔地順著說，眼底全是笑意，「那種菜看起來很容易吃撐。不過在開船之前，我們還是先補充一點健康的油脂吧，Chase 小姐？」</p>
+<p>Victoria 盯著那包杏仁看了兩秒，然後一把抓過來，撕開。</p>
+<p>「……如果妳敢把剛才聽到的聲音告訴 Price，」她說，「我就把妳那些童書，全部換成財經雜誌。」</p>
+<hr />
+<h2>五、米色毛衣</h2>
+<p>風勢稍微減弱了。廣播裡傳來船長的聲音：二十分鐘後開航。</p>
+<p>Victoria 嚼著杏仁，目光百無聊賴地掃過周圍的卡座，開始了今晚的第二輪毒舌。第一輪的受害者是那隻蛤蜊。</p>
+<p>「左邊那個男人頭上的 Carhartt 毛帽。」她壓低聲音，「Price 也有一頂一模一樣的。她以為自己戴起來像個反體制的油漬搖滾明星，實際上看起來就像剛修完下水道。」</p>
+<p>「可是那種帽子真的很保暖。」Kate 說，「Chloe 上次在鋼棚修車，戴了一整天呢。」</p>
+<p>「還有 Lily。」Victoria 自動忽略了辯護，語氣裡帶著一絲沒吃到蝦仁滑蛋的怨念，「她是另一個層次的災難。Costco 的 Kirkland 連帽衫，軟體公司免費送的馬克杯，然後跟妳討論性價比。在她的世界裡，只要參數達標，設計感這種東西可以直接從地球上抹除。」</p>
+<p>然後她的目光，落回了對面的 Kate 身上。</p>
+<p>Kate 今天穿著一件淡米色的粗針織開襟毛衣，袖口已經有點起球了。那是那種在 Target 或者教會義賣會上就能買到的衣服，版型毫無銳利度可言，甚至有一點鄉下味。</p>
+<p>照 Victoria 平常的火力，這是下一個再明顯不過的靶子。</p>
+<p>但她看著 Kate 把雙手縮在寬大的毛衣袖子裡、捧著紙杯對她笑的樣子，那些已經到了嘴邊的詞，好像撞上了一面看不見的牆，一個都沒說出來。</p>
+<p>「……那我呢？」Kate 眨了眨眼，像是看穿了她的停頓，輕聲問，「我這件毛衣，還有我用了四年的帆布包，在 Chase 小姐眼裡，是哪一個等級的災難？」</p>
+<p>Victoria 的喉嚨好像被杏仁卡住了。她迅速把視線移向窗外漆黑的海面，端起那杯早就涼了的立頓，喝了一口。</p>
+<p>「妳那不叫災難，Marsh。」她的聲音低了一個八度，帶著一種很生硬的、強行挽尊的別扭，「妳那叫……田園復古。材質有待加強，但至少顏色乾淨，沒有那些愚蠢的大 Logo。」</p>
+<p>她的手指在桌面上敲了兩下，又小聲補了一句：</p>
+<p>「……而且這種米色，很襯妳的膚色。總之，跟 Price 她們那種亂穿完全是兩回事。」</p>
+<p>Kate 看著她那張「這是客觀的美學分析，絕對不是偏心」的側臉，終於笑出了聲。</p>
+<p>腳下傳來引擎低沉的轟鳴。船身輕輕一晃，渡輪終於緩緩駛離了碼頭。</p>
+<p>Kate 從帆布包裡拿出一條格紋羊絨圍巾——去年聖誕節，有人把它匿名塞進了她掛在床頭的襪子裡，標籤早就被剪掉了——探過身，越過塑膠桌面，輕輕繞在 Victoria 的脖子上。</p>
+<p>「謝謝妳的客觀評價，Chase 小姐。」她幫她理了理圍巾的流蘇，聲音比船艙裡的暖氣還軟，「船開了。我們回家吧。」</p>
+<p>Victoria 抬手按住脖子上那塊還帶著 Kate 體溫的布料。她張了張嘴，像是還想說兩句場面話，最後只是低下頭，輕輕「嗯」了一聲。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="earth_tones.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a class="disabled">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>

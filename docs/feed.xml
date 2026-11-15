@@ -8,7 +8,7 @@
   <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
   <atom:link href="https://xofred.github.io/lis-dual-saved-ending/feed.xml" rel="self" type="application/rss+xml"/>
   <description>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</description>
-  <lastBuildDate>Wed, 11 Nov 2026 13:32:25 GMT</lastBuildDate>
+  <lastBuildDate>Sun, 15 Nov 2026 09:21:13 GMT</lastBuildDate>
   <language>zh-TW</language>
   <itunes:author>雙保結局 · 拍立得檔案</itunes:author>
   <itunes:summary>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</itunes:summary>
@@ -1286,7 +1286,7 @@
     <title>不可取代的雙手</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/irreplaceable_hands.html</link>
     <guid isPermaLink="false">irreplaceable_hands</guid>
-    <pubDate>Wed, 11 Nov 2026 13:32:25 GMT</pubDate>
+    <pubDate>Wed, 11 Nov 2026 13:35:39 GMT</pubDate>
     <description>電焊教學與車廂裡的時代感想</description>
     <itunes:title>不可取代的雙手</itunes:title>
     <itunes:episode>98</itunes:episode>
@@ -1333,6 +1333,32 @@
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/lesser_evil_four.jpg"/>
     <itunes:explicit>false</itunes:explicit>
     <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/lesser_evil_four.mp3" length="5371427" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>大地色系</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/earth_tones.html</link>
+    <guid isPermaLink="false">earth_tones</guid>
+    <pubDate>Sat, 14 Nov 2026 11:06:04 GMT</pubDate>
+    <description>入秋的茶、瑜伽褲與沙沙聲</description>
+    <itunes:title>大地色系</itunes:title>
+    <itunes:episode>102</itunes:episode>
+    <itunes:summary>入秋的茶、瑜伽褲與沙沙聲</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/earth_tones.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/earth_tones.mp3" length="5583045" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>蛤蜊濃湯與蝦仁滑蛋</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/chowder_and_shrimp_eggs.html</link>
+    <guid isPermaLink="false">chowder_and_shrimp_eggs</guid>
+    <pubDate>Sun, 15 Nov 2026 09:21:13 GMT</pubDate>
+    <description>入秋的茶、瑜伽褲與沙沙聲</description>
+    <itunes:title>蛤蜊濃湯與蝦仁滑蛋</itunes:title>
+    <itunes:episode>103</itunes:episode>
+    <itunes:summary>入秋的茶、瑜伽褲與沙沙聲</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/chowder_and_shrimp_eggs.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/chowder_and_shrimp_eggs.mp3" length="5603580" type="audio/mpeg"/>
   </item>
 </channel>
 </rss>
