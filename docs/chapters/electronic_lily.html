@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>電子 Lily · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 264 章 · 入秋的茶、瑜伽褲與沙沙聲</div>
+  <h1>電子 Lily</h1>
+
+  <div class="media-slot"><div class="media-item media-audio"><span class="slot-label">♪ 配樂</span><audio controls preload="none" src="../songs/electronic_lily.mp3"></audio></div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/electronic_lily.jpg" alt="電子 Lily" loading="lazy"></div><div class="media-item media-polaroids"><span class="slot-label">🖼 拍立得</span><div class="polaroid-strip"><div class="polaroid-card" style="--rot: -4deg"><img src="../thumbs/polaroids/electronic_lily.jpg" data-full="../polaroids/electronic_lily.jpg" alt="電子 Lily 拍立得照片" loading="lazy"></div></div></div></div>
+
+  <div class="chapter-body">
+    <h2>一、九點和三點</h2>
+<p>逃出國會山莊以後，墨綠色的 Outback 開上了 I-5 南向。</p>
+<p>從西雅圖回營地有兩條路：搭渡輪過海灣，或者一路往南繞過塔科馬，再從海峽大橋開上半島。Chloe 選了後者——她剛剛付了一百三十五塊，暫時不想再付任何一張船票。</p>
+<p>「說起來，」Max 從攝影集上抬起頭，「妳剛才怎麼沒跟 Lily 討價還價？」</p>
+<p>「什麼？」</p>
+<p>「洗碗加五成啊。」Max 說，「以前妳闖禍，不是都會跟她談條件嗎？幫她跑個外勤，換一筆勾銷。」</p>
+<p>Chloe 盯著前方，沉默了兩秒。</p>
+<p>「上次跟她談條件，」她說，「我去氣象站搬了一百磅的電池，在屋頂上接線接到半夜。」</p>
+<p>「……嗯。」</p>
+<p>「上上次，屋頂的落葉，掃了一整個下午。」Chloe 打了個方向燈，換到右邊車道，「每次都是我以為自己賺到了，最後發現她開的價比原來的懲罰還大。」</p>
+<p>「所以這次認了？」</p>
+<p>「洗碗加五成，就是洗碗加五成。」Chloe 說，「沒有附加條款，沒有外勤，沒有半夜的山頂。」她嘆了口氣，「大概是被妳的鹹魚傳染了吧。不想折騰了。」</p>
+<p>Max 笑了一聲，又低頭翻她的攝影集。</p>
+<p>「而且，」Chloe 補了一句，「每次我去跟她談，最後掉進坑裡的都是我們兩個。」</p>
+<p>Max 翻頁的手停住了。</p>
+<p>「……我們兩個？」</p>
+<p>「妳以為氣象站那天晚上，」Chloe 瞥了她一眼，「是誰抱著相機在山頂的大風裡抖了三個小時？」</p>
+<p>Max 想了想，默默把攝影集舉高了一點，擋住半張臉。</p>
+<p>「……洗碗加五成很好。」她說，「我陪妳洗。」</p>
+<p>下午的陽光從雲縫裡漏下來，路上車不多。照理說，這正是把車窗搖下來、音響開到最大、手肘搭在窗框上的時候。</p>
+<p>但 Chloe 現在雙手握在方向盤的九點和三點鐘位置，背挺得筆直，表情比當年考路考時還要僵。</p>
+<p>「我發誓，」她咬著牙，眼睛盯著前方，「這台車被 Lily 下了降頭。」</p>
+<p>「別誇張，它開起來很穩啊。」Max 縮在副駕駛座上，雙腿蜷著，膝蓋上攤著剛拿到的攝影集，「而且座椅有加熱。比妳那台冬天像冰窖一樣的猛禽好多了。」</p>
+<p>「穩？它是一台帶輪子的老媽子！」Chloe 下意識鬆開右手，轉頭看向 Max，「妳剛才有沒有看到那個拖車司機的臉？當 Lily 說出他車門上的編號的時候，他的表情就像——」</p>
+<p>車子的右前輪，輕輕壓上了車道邊的白線。</p>
+<p>下一秒，方向盤裡傳來一股明顯的、不屬於 Chloe 的力量，像一隻看不見的手，不急不徐地把方向盤往左帶了一點，把車子推回車道正中央。</p>
+<p>儀表板上亮起一個小小的綠色圖示。</p>
+<p>Chloe 整個人僵住了。</p>
+<p>「……它剛剛，」她慢慢地說，「搶了我的方向盤。」</p>
+<p>「那叫車道維持輔助。」Max 指了指擋風玻璃上緣那兩個小小的鏡頭，「EyeSight。它一直在看路上的線。」</p>
+<p>「這是我開的車還是它開的車？！」</p>
+<p>「妳打方向燈它就不會管妳了。」Max 忍著笑，「它只是覺得妳在恍神。」</p>
+<p>「我沒有恍神！我現在腎上腺素爆表！」</p>
+<p>為了證明自己才是這台車的主人，Chloe 看了一眼後照鏡，確認前後都沒有車，然後慢慢地把雙手從方向盤上拿開，抱在胸前。</p>
+<p>「Chloe，別鬧。」</p>
+<p>「我倒要看看它能拿我怎樣。」</p>
+<p>車子自己沿著車道開了幾秒。</p>
+<p>「嗶——嗶——」</p>
+<p>儀表板上跳出一行字：<em>請手握方向盤。</em></p>
+<p>Chloe 沒理它，嘴角掛著叛逆的笑。</p>
+<p>「嗶嗶嗶嗶——」</p>
+<p>聲音越來越急，字變成了閃爍的。</p>
+<p>Max 看著那行閃爍的字，若無其事地補了一句：「對了，妳知道這台車有緊急通報系統吧？出事的時候會自動打電話。」她頓了頓，「緊急聯絡人那一欄，填的是 Lily。」</p>
+<p>Chloe 用她這輩子最快的速度撲回了方向盤。</p>
+<p>雙手死死握住，九點，三點。</p>
+<p>警告聲停了。</p>
+<p>車廂裡安靜了大概五秒鐘。</p>
+<p>然後 Max 把臉埋進攝影集裡，肩膀劇烈地抖了起來。</p>
+<p>「很好笑嗎，Caulfield？」Chloe 目不轉睛地盯著前方，脖子僵得像打了石膏，「這不是兜風。這是一場由電腦監督的押運。我就是那個被押送的犯人。」</p>
+<p>「它不會因為妳放開手就打電話啦。」Max 笑到眼淚都出來了，「要撞車才會。」</p>
+<p>「……那妳剛才為什麼要說？」</p>
+<p>「因為妳撲過去的樣子太好笑了。」</p>
+<p>Max 探過身，在 Chloe 的臉頰上飛快地親了一下，然後坐回去，瞄了一眼擋風玻璃上那兩個小鏡頭。</p>
+<p>「看來副駕駛座不歸它管。」</p>
+<p>「別高興得太早。」Chloe 從牙縫裡說，「等一下要是它敢自己幫我踩煞車，我就把它的鏡頭用膠帶貼起來。」</p>
+<hr />
+<h2>二、路怒症休假</h2>
+<p>烏鴉嘴從不遲到。</p>
+<p>十分鐘後，前方三線道因為道路養護，硬生生縮成了一條。紅色的煞車燈連成一片看不到盡頭的燈海。</p>
+<p>一輛沒打方向燈的破舊喜美，從右邊路肩斜斜地插了進來，差點擦到 Outback 的前保險桿。</p>
+<p>Chloe 的眉毛瞬間倒豎，右手已經摸上了喇叭，左手按住了車門上的車窗開關，準備把窗戶降下來，向對方輸出她累積了二十年的奧勒岡街頭詞彙。</p>
+<p>「別。」Max 伸出一根手指，按下了方向盤右側一個印著小車圖示的按鈕，「交給電子 Lily。」</p>
+<p>儀表板上亮起綠色的跟車巡航圖示。</p>
+<p>前面那輛喜美又一次急煞的時候，Outback 比 Chloe 的右腳反應得還快——平穩、線性地減速，停在一個不遠不近、剛好讓人生不起氣來的距離上。前車蠕動，它就跟著蠕動。不用踩油門，也不用踩煞車。電腦用一種毫無情緒的冷靜，接管了這場讓人窒息的塞車。</p>
+<p>Chloe 懸在喇叭上的手，僵了兩秒，最後訕訕地收了回來。</p>
+<p>「……好吧。」她看著前面那個還在一下一下狂踩煞車的蠢蛋，忽然覺得衝上腦門的血壓降了一點，「看在它幫我省了一串髒話的份上，這功能還有點人道主義精神。」她靠回椅背，「路怒症今天休假。」</p>
+<p>Max 舒服地往座椅裡陷了陷，把座椅加熱轉到最高的那一格。</p>
+<p>「而且妳得承認，」她說，「這台車至少不會跟妳要訂閱費。前兩年有個德國車廠，連手機連車用的 CarPlay 都要按年收錢。妳買了車，功能明明就在裡面，不交年費就不給用。」</p>
+<p>「資本主義的終極無恥。」Chloe 嗤了一聲，「這台要是敢跟我收訂閱費，我今晚就拿烙鐵拆了它的中控台。」</p>
+<p>「放心。」Max 回頭看了一眼後車廂，「Lily 收鑰匙那天就把整本手冊讀完了。這台沒有。」</p>
+<hr />
+<h2>三、兩公尺</h2>
+<p>她們身後，後排座椅已經全部放平。</p>
+<p>這台名義上是五人座的 Outback，車身長度幾乎跟一台三排座的休旅車差不多。座椅放平以後，從後車廂門到前座椅背，是一片將近兩公尺長的平整空間。</p>
+<p>現在那裡塞著：Max 從書店抱回來的三箱精裝攝影集，順路幫 Kate 去園藝中心買的四大袋有機培養土，以及一台老式立式鑽床。</p>
+<p>那台鑽床，是 Chloe 在西雅圖南邊一家二手五金行門口看見的。標價四十塊，老闆說是一個退休機械師留下來的，馬達還很順。老闆只收現金。兩人在店門口把口袋翻了一遍：Chloe 那張皺巴巴的二十塊，加上 Max 錢包裡的二十塊，剛好四十。剛才在拖車面前派不上用場的現金，最後全花在了這台鑽床上。</p>
+<p>「如果開的是猛禽，」Max 說，「這台鑽床現在應該躺在車斗裡淋雨。」</p>
+<p>Chloe 沒說話。</p>
+<p>窗外，雨開始一點一點落下來。</p>
+<p>她從後照鏡裡看了一眼那台安安穩穩躺在乾燥車廂裡、跟攝影集和培養土擠在一起的老鑽床，又看了一眼擋風玻璃上越來越密的雨點，嘴唇抿成了一條線。</p>
+<hr />
+<h2>四、最後一哩</h2>
+<p>車子終於離開柏油路，拐進通往營地的林間土路時，雨已經下了快一個小時。</p>
+<p>前幾天的暴雨加上今天這一場，原本的碎石路變成了一條滿是水坑、爛泥和濕落葉的上下坡。</p>
+<p>「坐穩了。」Chloe 握緊方向盤，「前面那個坡全是泥。」</p>
+<p>她伸手按下中控台上一個印著山形圖示的按鈕。儀表板上亮起綠色的「X-MODE」。</p>
+<p>車輪碾進那片深到腳踝的泥坑時，Chloe 預想中的打滑和空轉並沒有發生。電腦在一瞬間就把打滑那幾個輪子的力氣收了回來，送去給還抓得住地的輪子。下陡坡的時候，陡坡緩降自己介入，車速穩穩地壓在一個步行的速度，四個輪子像是長了眼睛，一步一步咬住濕滑的泥地。</p>
+<p>猛禽走這條路，從來不怕。它有更大的輪胎、更高的底盤、更兇的引擎，Chloe 開著它衝這個坡，可以一路吼上去。</p>
+<p>但開猛禽衝坡的時候，車斗裡的東西會跳，車廂裡的人會被顛得撞到車頂，Max 每次都要抓著扶手。</p>
+<p>而現在，Outback 的車廂裡，晃動輕得像是一條小船浮在一片沒有風的湖面上，只有一點溫柔的起伏。</p>
+<p>後車廂裡，那台沉甸甸的鑽床，連一點滑動的聲音都沒有發出。</p>
+<p>Max 把攝影集闔上，抬起頭，看著窗外那片在雨裡往後退的杉樹林，一臉安詳。</p>
+<p>五分鐘後，墨綠色的 Outback 駛進了二號車廂前的空地，穩穩停住。</p>
+<hr />
+<h2>五、又愛又恨</h2>
+<p>Chloe 推入 P 檔，熄火。</p>
+<p>她沒有馬上下車。她坐在駕駛座上，雙手還搭在方向盤上，看著儀表板上的燈一格一格暗下去。</p>
+<p>「怎麼了？」Max 解開安全帶，「還在氣它搶妳的方向盤？」</p>
+<p>「不是。」Chloe 嘆了口氣，伸手拍了拍擋風玻璃上緣那兩個小鏡頭，表情混合著機械控的佩服，和叛逆者的不甘心，「我只是在想，這玩意跟車廂裡那個本尊，簡直一模一樣。」</p>
+<p>「怎麼說？」</p>
+<p>「妳想亂來的時候，它用一百條規矩煩死妳。」Chloe 說，「但等妳真的遇到爛攤子——塞車、要載一台破鑽床、要爬一條全是爛泥的坡——它又可靠得讓妳一點毛病都挑不出來。」</p>
+<p>她推開車門，跳進雨裡。</p>
+<p>中節車廂的門開了。Lily 撐著一把傘走出來，另一隻手拿著那本線圈筆記本，顯然是出來驗收車輛的。</p>
+<p>Chloe 把鑰匙朝她拋了過去。</p>
+<p>Lily 一手撐著傘，一手拿著筆記本，根本沒有空手。她慌忙把筆記本往胸口一夾，用兩隻手掌加一本筆記本，手忙腳亂地把鑰匙兜住。</p>
+<p>「嗶嗶。」</p>
+<p>Outback 的方向燈閃了兩下，車門應聲上鎖。她不知道按到了哪一顆鈕。傘歪到一邊，雨水順著傘沿滴在她肩膀上，眼鏡也滑到了鼻尖。</p>
+<p>Lily 沉默地把眼鏡推回去，把傘扶正，表情恢復了平靜，彷彿剛才那三秒什麼都沒發生過。</p>
+<p>「嘿，表格大師。」Chloe 露出一個又愛又恨的笑，「妳的分身把我們安全押送回來了。一顆螺絲都沒少。」</p>
+<p>Lily 繞著車子走了一圈，看了看輪拱上的泥，又低頭看了看後車廂裡那台鑽床，翻開筆記本。</p>
+<p>「車況良好。」她寫了一行，「後車廂載重，超出預期。」</p>
+<p>然後她抬起頭。</p>
+<p>「下次借車，」她說，「請直接說您想開它。不用先讓猛禽生病。」</p>
+<p>Chloe 張了張嘴。</p>
+<p>Max 已經抱著攝影集，笑著跑進車廂裡了。</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="awd_do_not_tow.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a class="disabled">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>

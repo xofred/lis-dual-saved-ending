@@ -8,7 +8,7 @@
   <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
   <atom:link href="https://xofred.github.io/lis-dual-saved-ending/feed.xml" rel="self" type="application/rss+xml"/>
   <description>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</description>
-  <lastBuildDate>Sun, 15 Nov 2026 09:21:13 GMT</lastBuildDate>
+  <lastBuildDate>Sun, 15 Nov 2026 17:15:27 GMT</lastBuildDate>
   <language>zh-TW</language>
   <itunes:author>雙保結局 · 拍立得檔案</itunes:author>
   <itunes:summary>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</itunes:summary>
@@ -1338,7 +1338,7 @@
     <title>大地色系</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/earth_tones.html</link>
     <guid isPermaLink="false">earth_tones</guid>
-    <pubDate>Sat, 14 Nov 2026 11:06:04 GMT</pubDate>
+    <pubDate>Sun, 15 Nov 2026 09:22:19 GMT</pubDate>
     <description>入秋的茶、瑜伽褲與沙沙聲</description>
     <itunes:title>大地色系</itunes:title>
     <itunes:episode>102</itunes:episode>
@@ -1351,7 +1351,7 @@
     <title>蛤蜊濃湯與蝦仁滑蛋</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/chowder_and_shrimp_eggs.html</link>
     <guid isPermaLink="false">chowder_and_shrimp_eggs</guid>
-    <pubDate>Sun, 15 Nov 2026 09:21:13 GMT</pubDate>
+    <pubDate>Sun, 15 Nov 2026 09:22:19 GMT</pubDate>
     <description>入秋的茶、瑜伽褲與沙沙聲</description>
     <itunes:title>蛤蜊濃湯與蝦仁滑蛋</itunes:title>
     <itunes:episode>103</itunes:episode>
@@ -1359,6 +1359,19 @@
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/chowder_and_shrimp_eggs.jpg"/>
     <itunes:explicit>false</itunes:explicit>
     <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/chowder_and_shrimp_eggs.mp3" length="5603580" type="audio/mpeg"/>
+  </item>
+  <item>
+    <title>電子 Lily</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/electronic_lily.html</link>
+    <guid isPermaLink="false">electronic_lily</guid>
+    <pubDate>Sun, 15 Nov 2026 17:15:27 GMT</pubDate>
+    <description>入秋的茶、瑜伽褲與沙沙聲</description>
+    <itunes:title>電子 Lily</itunes:title>
+    <itunes:episode>104</itunes:episode>
+    <itunes:summary>入秋的茶、瑜伽褲與沙沙聲</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/electronic_lily.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/electronic_lily.mp3" length="4234946" type="audio/mpeg"/>
   </item>
 </channel>
 </rss>
