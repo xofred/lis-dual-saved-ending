@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多巴胺斷食 · 雙保結局同人合集</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<div class="butterfly" id="butterfly" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <g transform="translate(50,50)">
+      <path class="wing left" d="M0,-4 C-18,-30 -45,-25 -42,-2 C-45,18 -20,22 0,4 Z" />
+      <path class="wing right" d="M0,-4 C18,-30 45,-25 42,-2 C45,18 20,22 0,4 Z" />
+      <ellipse cx="0" cy="0" rx="2.2" ry="10" fill="#26313F"/>
+    </g>
+  </svg>
+</div>
+<script>
+  // 蝴蝶跟隨捲動的位置,緩慢地在頁面右側遊走
+  (function() {
+    const b = document.getElementById('butterfly');
+    if (!b) return;
+    let ticking = false;
+    function place() {
+      const scrollFrac = window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight);
+      const top = 80 + scrollFrac * (window.innerHeight - 160);
+      b.style.top = top + 'px';
+      b.style.right = (18 + Math.sin(scrollFrac * 8) * 10) + 'px';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(place); ticking = true; }
+    });
+    place();
+  })();
+</script>
+
+
+<header class="site-header">
+  <a href="../index.html" class="brand">雙保結局 · 拍立得檔案</a>
+  <nav>
+    <a href="../index.html">目錄</a>
+    <a href="../polaroids.html">拍立得相簿</a>
+    <a href="../journal.html">Max 的手帳</a>
+    <button type="button" id="searchToggle" class="nav-search-toggle" aria-label="搜尋全站故事">🔍</button>
+  </nav>
+</header>
+
+
+<div class="player-widget" id="playerWidget" data-root="../">
+  <button class="player-toggle" id="playerToggle" type="button" aria-expanded="false">♪ 歌單</button>
+  <div class="player-panel" id="playerPanel" hidden>
+    <div class="player-now" id="nowPlayingTitle">尚未播放</div>
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="player-controls">
+      <button id="playerPrev" type="button" title="上一首">⏮</button>
+      <button id="playerPlay" type="button" title="播放/暫停">▶</button>
+      <button id="playerNext" type="button" title="下一首">⏭</button>
+    </div>
+    <ul class="playlist" id="playlistItems"></ul>
+  </div>
+</div>
+<script src="../player.js" defer></script>
+
+
+<div class="search-overlay" id="searchOverlay" data-root="../" hidden>
+  <div class="search-panel">
+    <div class="search-panel-head">
+      <input type="text" id="searchInput" class="search-input" placeholder="搜尋全站故事……" autocomplete="off" spellcheck="false">
+      <button type="button" id="searchClose" class="search-close" aria-label="關閉搜尋">✕</button>
+    </div>
+    <div class="search-status" id="searchStatus">輸入關鍵字,搜遍全站故事的正文。</div>
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+<script src="../search.js" defer></script>
+
+
+<main class="chapter-page">
+  <div class="chapter-meta">第三季 · 第 266 章 · 入秋的茶、瑜伽褲與沙沙聲</div>
+  <h1>多巴胺斷食</h1>
+
+  <div class="media-slot"><div class="media-item media-placeholder"><span class="slot-label">♪ 配樂</span>尚未配樂</div><div class="media-item media-image"><span class="slot-label">📷 插圖</span><img src="../images/dopamine_fast.jpg" alt="多巴胺斷食" loading="lazy"></div></div>
+
+  <div class="chapter-body">
+    <h2>一、週五晚上七點半</h2>
+<p>中節車廂的餐桌上，鋪著一條漿洗得筆挺的亞麻桌布。</p>
+<p>Victoria 站在穿衣鏡前，調整了一下身上那件深酒紅色的絲質洋裝——低調，貴得驚人。桌上只擺著一張列印出來的菜單，是她花了三天跟湯森港一位私廚敲定的：黑松露燉飯，香煎干貝。菜還沒開始做。她跟私廚說好了，等視訊一接通，她傳一則訊息過去，對方才開火——干貝必須在上桌前幾分鐘才下鍋，從湯森港開過來二十分鐘，剛好。桌上唯一已經準備好的，是旁邊那瓶醒了一個小時的勃艮第。</p>
+<p>今晚原本是一場線上晚餐會。她打算一邊在鏡頭前優雅地切干貝，一邊說服舊金山那位科技新貴，投資她和 Max 正在籌備的新銳藝術家基金。</p>
+<p>桌上的平板響起視訊來電的聲音。</p>
+<p>Victoria 深吸一口氣，臉上瞬間掛起一個無懈可擊的社交微笑，按下接聽。</p>
+<p>「嗨，Victoria！」螢幕那頭是一個穿著連帽衫、坐在私人飛機機艙裡的禿頂男人，「真的非常抱歉——我的健康教練剛剛提醒我，今晚開始要進行三天的『多巴胺斷食』，配合液體排毒。所以今晚的晚餐恐怕得取消了。下個月再讓我的助理跟妳約，好嗎？」</p>
+<p>Victoria 臉上的笑容，連一毫米都沒有動。</p>
+<p>「當然，Richard，我完全理解。」她的聲音甜美而得體，「健康永遠是第一位的。祝您排毒順利，我們下個月再聊。」</p>
+<p>通話切斷的那零點一秒，她的笑容消失了。</p>
+<p>那個眼神，大概跟白雪公主的後母聽見魔鏡說出別人名字的時候差不多。如果她手上有一顆毒蘋果，她會毫不猶豫地順著 Starlink 的訊號，把它塞進那個男人嘴裡。</p>
+<p>「多巴胺斷食。」</p>
+<p>她把平板往沙發上一摔，雙手叉腰，開始在車廂裡來回踱步。</p>
+<p>「一個連勃艮第跟波爾多都分不出來的暴發戶。三年前還在車庫裡吃泡麵，現在居然敢放 Chase 家的鴿子？」她停下腳步，「他需要斷食的不是多巴胺。是他腦子裡那些不知道從哪裡灌進去的廢水。」</p>
+<p>她抓起手機，打給私廚，冷冷地取消了那份還沒開火的晚餐。沒有生意要談，她才不會在一個沒有觀眾的週五晚上，一個人對著空氣吃一份四百美元的松露燉飯。</p>
+<p>掛掉電話，車廂一下子安靜了。</p>
+<p>Chloe 和 Max 去波特蘭看一場地下樂團的演出了。Lily 去了西雅圖一個開源軟體的聚會。Kate 去了隔壁棚子餵兔子。整節車廂，只剩下她一個人，和一張鋪著亞麻桌布的空桌子。</p>
+<hr />
+<h2>二、兔子的味道</h2>
+<p>門開了。</p>
+<p>Kate 從外面走進來，外套上沾著幾根乾草，手裡還拿著一個空了的飼料碗。她剛去隔壁棚子餵完兔子。</p>
+<p>她看見 Victoria 站在空蕩蕩的餐桌旁，周圍的空氣冷得能結霜。</p>
+<p>「那位投資人取消了？」</p>
+<p>「他去喝他的有機泥巴水了。」Victoria 扯下脖子上的珍珠項鍊，隨手扔在桌上，整個人重重地跌進沙發裡，「更糟的是，我剛才連晚餐也一起取消了。現在我又餓又火大。」</p>
+<p>Kate 脫下外套，走過來。</p>
+<p>Victoria 立刻往沙發另一頭縮了縮，皺起鼻子：「妳身上有兔子的味道。」</p>
+<p>「我剛餵完牠們。」</p>
+<p>「哪一隻？」Victoria 瞇起眼睛，「是不是那隻棕色的？耳朵有一邊比較塌的那隻？」</p>
+<p>Kate 想了一下：「Cinnamon？」</p>
+<p>「就是牠。」Victoria 的語氣陰沉下來，「牠看我的眼神不對。跟當年 Blackwell 天台溫室裡那隻一模一樣。」</p>
+<p>Kate 愣了一秒，然後忍不住笑出聲來。</p>
+<p>那是很多年前的事了。Victoria 為了討好她，穿著一身設計師工裝和小羊皮手套跑上天台溫室，往她的秋海棠裡灌了半瓶頂級蘭花營養液，被一條蚯蚓嚇得摔碎了花盆，最後被一隻巴掌大的兔子追著繞了溫室整整兩圈，一屁股坐進泥地裡。</p>
+<p>「Cinnamon 就是牠的孫女。」Kate 說。</p>
+<p>Victoria 的臉色變了。</p>
+<p>「……我就知道。」她咬著牙，「那個家族對我有世仇。」</p>
+<p>「牠們只是想聞聞妳身上的香水。」</p>
+<p>「那天我身上是蘭花營養液。」</p>
+<p>「對，」Kate 笑著說，「牠們很喜歡。」</p>
+<p>Victoria 沒再說話，只是把自己往沙發深處埋得更深了一點。</p>
+<p>她的目光掃過茶几，然後停住了。</p>
+<p>茶几正中間，放著一個極度刺眼的物體：一包吃了一半的家庭號起司味多力多滋。袋口整整齊齊地折了三折，上面夾著一個木頭夾子——Max 暗房裡夾底片用的那種。</p>
+<p>Chloe 和 Max 出門前留下的。</p>
+<hr />
+<h2>三、咔嚓</h2>
+<p>Victoria 盯著那個印著俗氣火焰圖案的鋁箔袋。</p>
+<p>平常，這種充滿了人工色素、味精和起司粉的「浣熊飼料」，光是出現在她的視線範圍裡，就足以讓她皺眉。</p>
+<p>但現在，她穿著一件三千美元的絲質洋裝，肚子餓得發疼，剛剛被一個要去斷食多巴胺的暴發戶放了鴿子。</p>
+<p>去他的卡路里。去他的體面。</p>
+<p>她伸手，一把扯掉了那個木頭夾子。</p>
+<p>她用兩根塗著裸色指甲油的手指，像捏著某種生化樣本一樣，從袋子裡拈出一片橘紅色的三角形，帶著一種壯士斷腕的表情，塞進嘴裡，狠狠一咬。</p>
+<p>「咔嚓。」</p>
+<p>極其響亮的碎裂聲，在安靜的車廂裡迴盪。</p>
+<p>鹽、味精、人工起司粉，一起在舌頭上炸開，非常粗暴地敲打著大腦。</p>
+<p>Victoria 咀嚼的動作停了一秒，眉毛微微一挑。</p>
+<p>她一言不發地再次把手伸進袋子。這次抓了兩片。塞進嘴裡，用一種彷彿在咬碎某位投資人頭骨的力道，咔嚓咔嚓地嚼了起來。</p>
+<p>Kate 站在旁邊，看著這位平常連喝水都要挑礦物質含量的大小姐，穿著高訂洋裝，一臉兇狠地跟一包多力多滋搏鬥，嘴角還沾著一點非常破壞氣氛的橘色粉末。</p>
+<p>她忍住笑，轉身走到吧台邊。</p>
+<p>她拿起那瓶勃艮第，倒了一杯，又從冰箱裡拿出一瓶氣泡葡萄汁，給自己倒了一杯。然後走回沙發，坐下，把那杯紅酒遞給 Victoria。</p>
+<p>「聽說，」她自己也從袋子裡拿了一片，「勃艮第配起司味玉米片，是絕配。」</p>
+<p>Victoria 看著那杯紅寶石色的酒，又看了看 Kate 手裡那杯冒著細小氣泡的淡金色液體。</p>
+<p>「妳那杯是什麼？」</p>
+<p>「葡萄汁。」Kate 舉起杯子，「也是葡萄。」</p>
+<p>Victoria 緊繃了一整晚的肩膀，終於垮了下來。</p>
+<p>她沒有去拿紙巾，直接用那隻乾淨的左手接過酒杯，和 Kate 的杯子輕輕碰了一下。</p>
+<p>「要是讓勃艮第的酒莊主人知道，我們拿這瓶酒配垃圾食品，」她喝了一大口，「他會當場心臟病發作。」</p>
+<p>她把雙腿毫無形象地蜷進沙發裡，把那包多力多滋往 Kate 懷裡塞了一半。</p>
+<p>「吃快一點，Marsh。我們得在 Price 回來之前把這包東西處理掉。」她說，「我死都不會讓她知道，我吃了她的存糧。」</p>
+<p>「那她問起來怎麼辦？」</p>
+<p>Victoria 想了想。</p>
+<p>「就說是兔子吃的。」</p>
+<p>「兔子不吃多力多滋。」</p>
+<p>「Cinnamon 會。」Victoria 面無表情地又塞了一片進嘴裡，「那個家族，什麼事都幹得出來。」</p>
+<hr />
+<h2>四、凌晨一點</h2>
+<p>Chloe 和 Max 回到營地的時候，車廂裡已經沒有人了。</p>
+<p>茶几上，那包多力多滋還在原位。袋口整整齊齊地折了三折，木頭夾子嚴絲合縫地夾在上面，跟她們出門前一模一樣。</p>
+<p>Chloe 打了個哈欠，順手拿起來，想抓一把當宵夜。</p>
+<p>袋子輕得像是裡面只裝了空氣。</p>
+<p>她拆下夾子，往裡面看了一眼。</p>
+<p>空的。連碎渣都沒剩。</p>
+<p>「……Max。」</p>
+<p>「嗯？」</p>
+<p>「我們出門前，這包還剩一半，對吧？」</p>
+<p>Max 湊過來看了一眼，又看了看那個夾得一絲不苟、比她自己夾得還整齊的木頭夾子。</p>
+<p>然後她的目光落在茶几的玻璃桌面上。</p>
+<p>那裡有一圈很淡很淡的紅色酒漬，顯然被人用紙巾擦過，但沒擦乾淨。酒漬旁邊，還有一個小小的、橘紅色的指紋。</p>
+<p>Max 什麼都沒說，只是默默地轉頭，看向通往尾節車廂的那扇門。</p>
+<p>「……Chase。」Chloe 說。</p>
+<p>「要叫醒她嗎？」</p>
+<p>Chloe 低頭看了看手裡那個空袋子，和那個被夾得一絲不苟的木頭夾子。</p>
+<p>「不用了。」她把夾子取下來，還給 Max，咧嘴笑了，「她連夾子都幫我們夾回去了。這是我見過最有禮貌的小偷。」</p>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="how_to_open_a_bag.html">← 上一章</a>
+    <a href="../index.html" class="to-index">目錄</a>
+    <a href="creative_pairing.html">下一章 →</a>
+  </nav>
+</main>
+
+
+<footer class="site-footer">
+  <div class="disclaimer">
+    這是一部基於《奇異人生》（Life is Strange）的非營利同人創作合集，<br>
+    設定前提為「雙保結局」——小鎮與 Chloe 皆倖存的另一條時間線。<br>
+    原作版權歸 Dontnod Entertainment / Square Enix 所有，本作不涉及任何商業用途。
+  </div>
+</footer>
+
+
+<div class="lightbox" id="lightbox" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="放大檢視">
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="關閉">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="上一張">&lsaquo;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="下一張">&rsaquo;</button>
+  <figure class="lightbox-figure" id="lightboxFigure">
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+<script>
+(function() {
+  var box = document.getElementById('lightbox');
+  if (!box) return;
+  var figure = document.getElementById('lightboxFigure');
+  var imgEl = document.getElementById('lightboxImg');
+  var capEl = document.getElementById('lightboxCaption');
+  var closeBtn = document.getElementById('lightboxClose');
+  var prevBtn = document.getElementById('lightboxPrev');
+  var nextBtn = document.getElementById('lightboxNext');
+
+  var idx = 0;
+  var lastFocus = null;
+  var groups = { polaroid: [], journal: [] };
+  var slides = [];          // 目前作用中的那一組
+  var kind = 'polaroid';    // polaroid = 顯影;journal = 翻頁
+  var animTimer = null;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ANIM_CLASSES = ['developing', 'developing-quick', 'flipping', 'flipping-quick', 'flip-back'];
+  var ANIM = {
+    polaroid: { open: 'developing', step: 'developing-quick', clearAfter: 1200 },
+    journal:  { open: 'flipping',   step: 'flipping-quick',   clearAfter: 900 }
+  };
+
+  // 拍立得:打開時完整顯影,左右切換只做快速淡入。
+  // 手帳:打開時整頁翻入,左右切換做快速翻頁(往回翻時鉸鏈換到右側)。
+  function playAnim(mode, back) {
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    if (reduceMotion || !mode) return;
+    void imgEl.offsetWidth;  // 強制 reflow,讓同一元素能重新觸發動畫
+    var cfg = ANIM[kind];
+    imgEl.classList.add(mode === 'open' ? cfg.open : cfg.step);
+    if (kind === 'journal' && mode === 'step' && back) imgEl.classList.add('flip-back');
+    clearTimeout(animTimer);
+    animTimer = setTimeout(function() {
+      ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    }, cfg.clearAfter);
+  }
+
+  // 收集頁面上兩種可放大的素材(各自獨立導覽,不會互相翻到):
+  //   .polaroid-card               章節頁的拍立得小卡 + 相簿頁包在 <a> 裡的大卡
+  //   .journal-page-card / .journal-card  章節頁的手帳頁 + 手帳頁包在 <a> 裡的整頁
+  // (章節插圖 .media-image 不放大,那是給讀者順順讀的配圖)
+  function collect(selector, k, capSel) {
+    [].forEach.call(document.querySelectorAll(selector), function(card) {
+      var img = card.querySelector('img');
+      if (!img) return;
+      var capNode = capSel ? card.querySelector(capSel) : null;
+      var link = card.closest ? card.closest('a') : null;
+      var group = groups[k];
+      var slideIndex = group.length;
+      group.push({
+        // 小卡本身載入的是縮圖(data-full 沒有就退回 src);燈箱放大永遠讀原始全解析度圖
+        src: img.getAttribute('data-full') || img.getAttribute('src'),
+        caption: capNode ? capNode.textContent.trim() : '',
+        href: link ? link.getAttribute('href') : ''
+      });
+      var openThis = function(e) { if (e) e.preventDefault(); open(k, slideIndex); };
+      img.addEventListener('click', openThis);
+      // 相簿/手帳頁:整張卡是連往章節的連結,改成先開燈箱,燈箱裡再提供「回到章節」
+      if (link) link.addEventListener('click', openThis);
+    });
+  }
+
+  collect('.polaroid-card', 'polaroid', '.polaroid-caption');
+  collect('.journal-page-card, .journal-card', 'journal', '.journal-caption');
+
+  if (!groups.polaroid.length && !groups.journal.length) return;
+
+  function render(mode, back) {
+    var s = slides[idx];
+    if (imgEl.getAttribute('src') !== s.src) imgEl.src = s.src;
+    figure.classList.toggle('is-journal', kind === 'journal');
+    if (imgEl.complete && imgEl.naturalWidth) {
+      playAnim(mode, back);
+    } else {
+      imgEl.onload = function() { playAnim(mode, back); };
+    }
+    var parts = [];
+    if (s.caption) parts.push('<span class="lightbox-title"></span>');
+    if (slides.length > 1) parts.push('<span class="lightbox-count">' + (idx + 1) + ' / ' + slides.length + '</span>');
+    capEl.innerHTML = parts.join('');
+    var titleSpan = capEl.querySelector('.lightbox-title');
+    if (titleSpan) titleSpan.textContent = s.caption;
+    if (s.href) {
+      var a = document.createElement('a');
+      a.className = 'lightbox-link';
+      a.href = s.href;
+      a.textContent = '回到章節 →';
+      capEl.appendChild(a);
+    }
+    var multi = slides.length > 1;
+    prevBtn.hidden = !multi;
+    nextBtn.hidden = !multi;
+  }
+
+  function open(k, i) {
+    kind = k;
+    slides = groups[k];
+    idx = i;
+    lastFocus = document.activeElement;
+    box.setAttribute('aria-label', k === 'journal' ? '手帳放大檢視' : '拍立得放大檢視');
+    render('open', false);
+    box.removeAttribute('hidden');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+    document.addEventListener('keydown', onKey);
+  }
+
+  function close() {
+    box.setAttribute('hidden', '');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    clearTimeout(animTimer);
+    ANIM_CLASSES.forEach(function(c) { imgEl.classList.remove(c); });
+    imgEl.onload = null;
+    imgEl.removeAttribute('src');
+    document.removeEventListener('keydown', onKey);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  function step(d) {
+    idx = (idx + d + slides.length) % slides.length;
+    render('step', d < 0);
+  }
+
+  function onKey(e) {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  }
+
+  closeBtn.addEventListener('click', close);
+  prevBtn.addEventListener('click', function() { step(-1); });
+  nextBtn.addEventListener('click', function() { step(1); });
+  box.addEventListener('click', function(e) {
+    if (e.target === box || e.target === figure) close();
+  });
+
+  // 手機:左右滑動切換,下滑關閉
+  var sx = 0, sy = 0;
+  box.addEventListener('touchstart', function(e) {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY;
+  }, { passive: true });
+  box.addEventListener('touchend', function(e) {
+    var dx = e.changedTouches[0].clientX - sx;
+    var dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  }, { passive: true });
+})();
+</script>
+
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('../sw.js', { updateViaCache: 'none' }).catch(function() {});
+  });
+}
+</script>
+
+</body>
+</html>
