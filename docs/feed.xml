@@ -8,7 +8,7 @@
   <link>https://xofred.github.io/lis-dual-saved-ending/index.html</link>
   <atom:link href="https://xofred.github.io/lis-dual-saved-ending/feed.xml" rel="self" type="application/rss+xml"/>
   <description>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</description>
-  <lastBuildDate>Tue, 17 Nov 2026 17:24:14 GMT</lastBuildDate>
+  <lastBuildDate>Sat, 21 Nov 2026 16:46:14 GMT</lastBuildDate>
   <language>zh-TW</language>
   <itunes:author>雙保結局 · 拍立得檔案</itunes:author>
   <itunes:summary>《奇異人生》非營利同人合集〈雙保結局〉的全站配樂,依章節順序排列。每一集對應一章故事,點開集數說明可以回到原章節。</itunes:summary>
@@ -129,7 +129,7 @@
     <title>鳩佔鵲巢</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/rooftop_occupation.html</link>
     <guid isPermaLink="false">rooftop_occupation</guid>
-    <pubDate>Tue, 17 Nov 2026 17:24:14 GMT</pubDate>
+    <pubDate>Tue, 17 Nov 2026 17:26:34 GMT</pubDate>
     <description>校園與衰退</description>
     <itunes:title>鳩佔鵲巢</itunes:title>
     <itunes:episode>9</itunes:episode>
@@ -1179,13 +1179,26 @@
     <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/window_on_42nd_floor.mp3" length="6922325" type="audio/mpeg"/>
   </item>
   <item>
+    <title>崩塌與重構</title>
+    <link>https://xofred.github.io/lis-dual-saved-ending/chapters/collapse_and_rebuild.html</link>
+    <guid isPermaLink="false">collapse_and_rebuild</guid>
+    <pubDate>Sat, 21 Nov 2026 16:46:14 GMT</pubDate>
+    <description>美債崩盤與零預算地下游擊展</description>
+    <itunes:title>崩塌與重構</itunes:title>
+    <itunes:episode>90</itunes:episode>
+    <itunes:summary>美債崩盤與零預算地下游擊展</itunes:summary>
+    <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/collapse_and_rebuild.jpg"/>
+    <itunes:explicit>false</itunes:explicit>
+    <enclosure url="https://xofred.github.io/lis-dual-saved-ending/songs/collapse_and_rebuild.mp3" length="5865631" type="audio/mpeg"/>
+  </item>
+  <item>
     <title>語義盲區</title>
     <link>https://xofred.github.io/lis-dual-saved-ending/chapters/semantic_blindspot.html</link>
     <guid isPermaLink="false">semantic_blindspot</guid>
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>脫網公路旅行:追蹤攻防與加州的卡路里</description>
     <itunes:title>語義盲區</itunes:title>
-    <itunes:episode>90</itunes:episode>
+    <itunes:episode>91</itunes:episode>
     <itunes:summary>脫網公路旅行:追蹤攻防與加州的卡路里</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/semantic_blindspot.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1198,7 +1211,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>Lily 的舊照片與沙漠地契</description>
     <itunes:title>蜘蛛網與冰淇淋</itunes:title>
-    <itunes:episode>91</itunes:episode>
+    <itunes:episode>92</itunes:episode>
     <itunes:summary>Lily 的舊照片與沙漠地契</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/spider_web_and_ice_cream.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1211,7 +1224,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>Lily 的舊照片與沙漠地契</description>
     <itunes:title>辦過葬禮的人</itunes:title>
-    <itunes:episode>92</itunes:episode>
+    <itunes:episode>93</itunes:episode>
     <itunes:summary>Lily 的舊照片與沙漠地契</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/those_who_held_funerals.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1224,7 +1237,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>混音帶、熱浪與門外的戰場</description>
     <itunes:title>公路混音帶</itunes:title>
-    <itunes:episode>93</itunes:episode>
+    <itunes:episode>94</itunes:episode>
     <itunes:summary>混音帶、熱浪與門外的戰場</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/road_mixtape.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1237,7 +1250,7 @@
     <pubDate>Tue, 17 Nov 2026 16:41:09 GMT</pubDate>
     <description>混音帶、熱浪與門外的戰場</description>
     <itunes:title>撐不住的窮遊</itunes:title>
-    <itunes:episode>94</itunes:episode>
+    <itunes:episode>95</itunes:episode>
     <itunes:summary>混音帶、熱浪與門外的戰場</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/heatwave_betrayal.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1250,7 +1263,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>回程、見家長與重工業三大傳統</description>
     <itunes:title>成熟的手信</itunes:title>
-    <itunes:episode>95</itunes:episode>
+    <itunes:episode>96</itunes:episode>
     <itunes:summary>回程、見家長與重工業三大傳統</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/mature_souvenirs.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1263,7 +1276,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>和平的小白兔、黑熊來襲與泥地車神</description>
     <itunes:title>無歌詞的歌</itunes:title>
-    <itunes:episode>96</itunes:episode>
+    <itunes:episode>97</itunes:episode>
     <itunes:summary>和平的小白兔、黑熊來襲與泥地車神</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/song_without_words.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1276,7 +1289,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>和平的小白兔、黑熊來襲與泥地車神</description>
     <itunes:title>光之羽翼</itunes:title>
-    <itunes:episode>97</itunes:episode>
+    <itunes:episode>98</itunes:episode>
     <itunes:summary>和平的小白兔、黑熊來襲與泥地車神</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/wings_of_light.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1289,7 +1302,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>短命的網紅生涯</description>
     <itunes:title>雙重護甲</itunes:title>
-    <itunes:episode>98</itunes:episode>
+    <itunes:episode>99</itunes:episode>
     <itunes:summary>短命的網紅生涯</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/double_armor.jpeg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1302,7 +1315,7 @@
     <pubDate>Tue, 03 Nov 2026 07:55:45 GMT</pubDate>
     <description>一個家的施工圖(倒敘)</description>
     <itunes:title>一個家的施工圖（倒敘）</itunes:title>
-    <itunes:episode>99</itunes:episode>
+    <itunes:episode>100</itunes:episode>
     <itunes:summary>一個家的施工圖(倒敘)</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/blueprint_of_a_home.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1315,7 +1328,7 @@
     <pubDate>Tue, 03 Nov 2026 07:55:45 GMT</pubDate>
     <description>一個家的施工圖(倒敘)</description>
     <itunes:title>四週施工日誌（倒敘）</itunes:title>
-    <itunes:episode>100</itunes:episode>
+    <itunes:episode>101</itunes:episode>
     <itunes:summary>一個家的施工圖(倒敘)</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/four_week_build_log.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1328,7 +1341,7 @@
     <pubDate>Thu, 05 Nov 2026 08:21:30 GMT</pubDate>
     <description>電焊教學與車廂裡的時代感想</description>
     <itunes:title>被中產階級化的網際網路</itunes:title>
-    <itunes:episode>101</itunes:episode>
+    <itunes:episode>102</itunes:episode>
     <itunes:summary>電焊教學與車廂裡的時代感想</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/gentrification_of_the_internet.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1341,7 +1354,7 @@
     <pubDate>Wed, 11 Nov 2026 13:35:39 GMT</pubDate>
     <description>電焊教學與車廂裡的時代感想</description>
     <itunes:title>不可取代的雙手</itunes:title>
-    <itunes:episode>102</itunes:episode>
+    <itunes:episode>103</itunes:episode>
     <itunes:summary>電焊教學與車廂裡的時代感想</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/irreplaceable_hands.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1354,7 +1367,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>電焊教學與車廂裡的時代感想</description>
     <itunes:title>蘋果的味道</itunes:title>
-    <itunes:episode>103</itunes:episode>
+    <itunes:episode>104</itunes:episode>
     <itunes:summary>電焊教學與車廂裡的時代感想</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/taste_of_apples.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1367,7 +1380,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>電焊教學與車廂裡的時代感想</description>
     <itunes:title>鹹魚的午後</itunes:title>
-    <itunes:episode>104</itunes:episode>
+    <itunes:episode>105</itunes:episode>
     <itunes:summary>電焊教學與車廂裡的時代感想</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/salted_fish_afternoon.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1380,7 +1393,7 @@
     <pubDate>Tue, 03 Nov 2026 04:14:47 GMT</pubDate>
     <description>較小的惡(四部曲)</description>
     <itunes:title>較小的惡（終）：交託</itunes:title>
-    <itunes:episode>105</itunes:episode>
+    <itunes:episode>106</itunes:episode>
     <itunes:summary>較小的惡(四部曲)</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/lesser_evil_four.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1393,7 +1406,7 @@
     <pubDate>Sun, 15 Nov 2026 09:22:19 GMT</pubDate>
     <description>入秋的茶、瑜伽褲與沙沙聲</description>
     <itunes:title>大地色系</itunes:title>
-    <itunes:episode>106</itunes:episode>
+    <itunes:episode>107</itunes:episode>
     <itunes:summary>入秋的茶、瑜伽褲與沙沙聲</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/earth_tones.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1406,7 +1419,7 @@
     <pubDate>Sun, 15 Nov 2026 09:22:19 GMT</pubDate>
     <description>入秋的茶、瑜伽褲與沙沙聲</description>
     <itunes:title>蛤蜊濃湯與蝦仁滑蛋</itunes:title>
-    <itunes:episode>107</itunes:episode>
+    <itunes:episode>108</itunes:episode>
     <itunes:summary>入秋的茶、瑜伽褲與沙沙聲</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/images/chowder_and_shrimp_eggs.jpg"/>
     <itunes:explicit>false</itunes:explicit>
@@ -1419,7 +1432,7 @@
     <pubDate>Sun, 15 Nov 2026 17:16:21 GMT</pubDate>
     <description>入秋的茶、瑜伽褲與沙沙聲</description>
     <itunes:title>電子 Lily</itunes:title>
-    <itunes:episode>108</itunes:episode>
+    <itunes:episode>109</itunes:episode>
     <itunes:summary>入秋的茶、瑜伽褲與沙沙聲</itunes:summary>
     <itunes:image href="https://xofred.github.io/lis-dual-saved-ending/thumbs/polaroids/electronic_lily.jpg"/>
     <itunes:explicit>false</itunes:explicit>
