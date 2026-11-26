@@ -1,6 +1,8 @@
 #EXTM3U
 #EXTINF:-1,雙保結局
 https://xofred.github.io/lis-dual-saved-ending/songs/dual_saved_ending_family_reunion.mp3
+#EXTINF:-1,審訊室(倒敘)
+https://xofred.github.io/lis-dual-saved-ending/songs/interrogation_flashback.mp3
 #EXTINF:-1,罪與贖(倒敘)
 https://xofred.github.io/lis-dual-saved-ending/songs/sin_and_redemption.mp3
 #EXTINF:-1,故人
@@ -109,6 +111,8 @@ https://xofred.github.io/lis-dual-saved-ending/songs/vegas_travel.mp3
 https://xofred.github.io/lis-dual-saved-ending/songs/holy_wrath.mp3
 #EXTINF:-1,一級行政休眠狀態令
 https://xofred.github.io/lis-dual-saved-ending/songs/level_one_hibernation.mp3
+#EXTINF:-1,飲茶危機
+https://xofred.github.io/lis-dual-saved-ending/songs/dim_sum_crisis.mp3
 #EXTINF:-1,敵意建築
 https://xofred.github.io/lis-dual-saved-ending/songs/hostile_architecture.mp3
 #EXTINF:-1,數位結界
